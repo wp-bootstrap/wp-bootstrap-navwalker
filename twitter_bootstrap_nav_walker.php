@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Class Name: twitter_bootstrap_navbar_walker
+ * Class Name: twitter_bootstrap_nav_walker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
  * Description: A custom Wordpress nav walker to implement the Twitter Bootstrap 2 (https://github.com/twitter/bootstrap/) dropdown navigation using the Wordpress built in menu manager.
- * Version: 1.1
+ * Version: 1.2
  * Author: Edward McIntyre - @twittem
  * Licence: WTFPL 2.0 (http://sam.zoy.org/wtfpl/COPYING)
  */
 
-class twitter_bootstrap_navbar_walker extends Walker_Nav_Menu {
+class twitter_bootstrap_nav_walker extends Walker_Nav_Menu {
 	
 	/**
 	 * @see Walker::start_lvl()
@@ -21,18 +21,6 @@ class twitter_bootstrap_navbar_walker extends Walker_Nav_Menu {
 	function start_lvl( &$output, $depth ) {
 		$indent = str_repeat( "\t", $depth );
 		$output	   .= "\n$indent<ul class=\"dropdown-menu\">\n";		
-	}
-
-	/**
-	 * @see Walker::end_lvl()
-	 * @since 3.0.0
-	 *
-	 * @param string $output Passed by reference. Used to append additional content.
-	 * @param int $depth Depth of page. Used for padding.
-	 */
-	function end_lvl( &$output, $depth = 0, $args = array() ) {
-		$indent = str_repeat("\t", $depth);
-		$output .= "$indent</ul>\n";
 	}
 
 	/**
@@ -50,36 +38,42 @@ class twitter_bootstrap_navbar_walker extends Walker_Nav_Menu {
 		global $wp_query;
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
-		$class_names = $value = '';
+		if (strcasecmp($item->title, 'divider')) {
+			$class_names = $value = '';
+			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
+			$classes[] = ($item->current) ? 'active' : '';
+			$classes[] = 'menu-item-' . $item->ID;
+			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
 
-		$classes = empty( $item->classes ) ? array() : (array) $item->classes;
-		$classes[] = ($args->has_children) ? 'dropdown-toggle' : '';
-		$classes[] = ($item->current) ? 'active' : '';
-		$classes[] = 'menu-item-' . $item->ID;
+			if ($args->has_children && $depth > 0) {
+				$class_names .= ' dropdown-submenu';
+			} else if($args->has_children && $depth === 0) {
+				$class_names .= ' dropdown';
+			}
 
-		$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
-		$class_names .= ($args->has_children) ? ' dropdown' : '';
-		$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
+			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
-		$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args );
-		$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
+			$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args );
+			$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
 
-		$output .= $indent . '<li' . $id . $value . $class_names .'>';
+			$output .= $indent . '<li' . $id . $value . $class_names .'>';
 
-		$attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
-		$attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
-		$attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
-		$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
-		$attributes .= ($args->has_children) 	    ? ' data-toggle="dropdown"' : '';
-		$attributes .= ($args->has_children) 	    ? ' data-target="#"' : '';
+			$attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
+			$attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
+			$attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
+			$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
+			$attributes .= ($args->has_children) 	    ? ' data-toggle="dropdown" data-target="#" class="dropdown-toggle"' : '';
 
-		$item_output = $args->before;
-		$item_output .= '<a'. $attributes .'>';
-		$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-		$item_output .= ($args->has_children) ? ' <span class="caret"></span></a>' : '</a>';
-		$item_output .= $args->after;
+			$item_output = $args->before;
+			$item_output .= '<a'. $attributes .'>';
+			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
+			$item_output .= ($args->has_children) ? ' <span class="caret"></span></a>' : '</a>';
+			$item_output .= $args->after;
 
-		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+		} else {
+			$output .= $indent . '<li class="divider"></li>';
+		}
 	}
 
 
@@ -88,8 +82,7 @@ class twitter_bootstrap_navbar_walker extends Walker_Nav_Menu {
 	 *
 	 * Display one element if the element doesn't have any children otherwise,
 	 * display the element and its children. Will only traverse up to the max
-	 * depth and no ignore elements under that depth. It is possible to set the
-	 * max depth to include all depths, see walk() method.
+	 * depth and no ignore elements under that depth. 
 	 *
 	 * This method shouldn't be called directly, use the walk() method instead.
 	 *
