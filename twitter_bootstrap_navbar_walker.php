@@ -1,38 +1,77 @@
 <?php
+
+/**
+ * Class Name: twitter_bootstrap_navbar_walker
+ * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
+ * Description: A custom Wordpress nav walker to implement the Twitter Bootstrap 2 (https://github.com/twitter/bootstrap/) dropdown navigation using the Wordpress built in menu manager.
+ * Version: 1.1
+ * Author: Edward McIntyre - @twittem
+ * Licence: WTFPL 2.0 (http://sam.zoy.org/wtfpl/COPYING)
+ */
+
+class twitter_bootstrap_navbar_walker extends Walker_Nav_Menu {
 	
-class twitter_bootstrap_nav_walker extends Walker_Nav_Menu {
-		
+	/**
+	 * @see Walker::start_lvl()
+	 * @since 3.0.0
+	 *
+	 * @param string $output Passed by reference. Used to append additional content.
+	 * @param int $depth Depth of page. Used for padding.
+	 */
 	function start_lvl( &$output, $depth ) {
 		$indent = str_repeat( "\t", $depth );
 		$output	   .= "\n$indent<ul class=\"dropdown-menu\">\n";		
 	}
 
+	/**
+	 * @see Walker::end_lvl()
+	 * @since 3.0.0
+	 *
+	 * @param string $output Passed by reference. Used to append additional content.
+	 * @param int $depth Depth of page. Used for padding.
+	 */
+	function end_lvl( &$output, $depth = 0, $args = array() ) {
+		$indent = str_repeat("\t", $depth);
+		$output .= "$indent</ul>\n";
+	}
+
+	/**
+	 * @see Walker::start_el()
+	 * @since 3.0.0
+	 *
+	 * @param string $output Passed by reference. Used to append additional content.
+	 * @param object $item Menu item data object.
+	 * @param int $depth Depth of menu item. Used for padding.
+	 * @param int $current_page Menu item ID.
+	 * @param object $args
+	 */
+
 	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
-			
+		global $wp_query;
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
-		$li_attributes = '';
 		$class_names = $value = '';
 
 		$classes = empty( $item->classes ) ? array() : (array) $item->classes;
-		$classes[] = ($args->has_children) ? 'dropdown' : '';
+		$classes[] = ($args->has_children) ? 'dropdown-toggle' : '';
 		$classes[] = ($item->current) ? 'active' : '';
 		$classes[] = 'menu-item-' . $item->ID;
 
-
 		$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
-		$class_names = ' class="' . esc_attr( $class_names ) . '"';
+		$class_names .= ($args->has_children) ? ' dropdown' : '';
+		$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
 		$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args );
-		$id = strlen( $id ) ? ' id="' . esc_attr( $id ) . '"' : '';
+		$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
 
-		$output .= $indent . '<li' . $id . $value . $class_names . $li_attributes . '>';
+		$output .= $indent . '<li' . $id . $value . $class_names .'>';
 
 		$attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
 		$attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
 		$attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
 		$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
-		$attributes .= ($args->has_children) 	    ? ' class="dropdown-toggle" data-toggle="dropdown"' : '';
+		$attributes .= ($args->has_children) 	    ? ' data-toggle="dropdown"' : '';
+		$attributes .= ($args->has_children) 	    ? ' data-target="#"' : '';
 
 		$item_output = $args->before;
 		$item_output .= '<a'. $attributes .'>';
@@ -43,10 +82,34 @@ class twitter_bootstrap_nav_walker extends Walker_Nav_Menu {
 		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 	}
 
+
+	/**
+	 * Traverse elements to create list from elements.
+	 *
+	 * Display one element if the element doesn't have any children otherwise,
+	 * display the element and its children. Will only traverse up to the max
+	 * depth and no ignore elements under that depth. It is possible to set the
+	 * max depth to include all depths, see walk() method.
+	 *
+	 * This method shouldn't be called directly, use the walk() method instead.
+	 *
+	 * @see Walker::start_el()
+	 * @since 2.5.0
+	 *
+	 * @param object $element Data object
+	 * @param array $children_elements List of elements to continue traversing.
+	 * @param int $max_depth Max depth to traverse.
+	 * @param int $depth Depth of current element.
+	 * @param array $args
+	 * @param string $output Passed by reference. Used to append additional content.
+	 * @return null Null on failure with no changes to parameters.
+	 */
+
 	function display_element( $element, &$children_elements, $max_depth, $depth=0, $args, &$output ) {
 		
-		if ( !$element )
+		if ( !$element ) {
 			return;
+		}
 		
 		$id_field = $this->db_fields['id'];
 
@@ -85,7 +148,6 @@ class twitter_bootstrap_nav_walker extends Walker_Nav_Menu {
 		//end this element
 		$cb_args = array_merge( array(&$output, $element, $depth), $args);
 		call_user_func_array(array(&$this, 'end_el'), $cb_args);
-		
 	}
 }
 
