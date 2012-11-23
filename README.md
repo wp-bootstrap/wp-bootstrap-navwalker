@@ -54,7 +54,7 @@ To change your menu style add Bootstrap nav class names to the `menu_class` decl
 Review options in the Bootstrap docs for more information on nav classes
 http://twitter.github.com/bootstrap/components.html#navs
 
-To add a dropdown menu divider simply add a menu item with the lable `divider` (case-Insensitive so ‘divider’ or  ‘Divider’ will both work ) and the class will do the rest. 
+To add a dropdown menu divider simply add a menu item with the label `divider` (case-Insensitive so ‘divider’ or ‘Divider’ will both work ) and the class will do the rest. 
 
 Changelog
 ------------
@@ -62,7 +62,7 @@ Changelog
 + Updated the class to work for all Bootstrap menu types. nav-tabs, nav-pills, nav-stacked, nav-list, navbar and dropdowns are all supported.
 + Added ability to add dividers to dropdown menus by adding a menu item with the label of “divider” (case-insensitive) 
 + Added support for multiple dropdown levels (thanks to a Pull Requests from @jmz)
-+ Moved dropdown-toggle class declaration from parent <li> to <a> to match Bootstraps official documentation
++ Moved dropdown-toggle class declaration from parent `<li>` to `<a>` to match Bootstraps official documentation
 
 **1.1:**
 + Added WordPress Core refrence comments to help understand what functions are overridden
