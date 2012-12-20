@@ -1,7 +1,7 @@
 wp-bootstrap-navwalker
 ======================
 
-A custom Wordpress nav walker class to implement the Twitter Bootstrap 2 (https://github.com/twitter/bootstrap/) navigation style in your custom theme using the Wordpress built in menu manager.
+A custom Wordpress nav walker class to implement the Twitter Bootstrap 2.2 (https://github.com/twitter/bootstrap/) navigation style in your custom theme using the Wordpress built in menu manager.
 
 NOTE
 ----
@@ -58,6 +58,9 @@ To add a dropdown menu divider simply add a menu item with the label `divider` (
 
 Changelog
 ------------
+**1.2.1:**
++ Updated caret output logic for Bootstrap 2.2 CSS changes.
+
 **1.2:**
 + Updated the class to work for all Bootstrap menu types. nav-tabs, nav-pills, nav-stacked, nav-list, navbar and dropdowns are all supported.
 + Added ability to add dividers to dropdown menus by adding a menu item with the label of “divider” (case-insensitive) 
