@@ -1,65 +1,133 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Wp-bootstrap-navwalker by twittem</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Wp-bootstrap-navwalker : A custom Wordpress walker to implement the Twitter Bootstrap dropdown navigation using the Wordpress built in menu manager." />
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <title>Wp-bootstrap-navwalker</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Wp-bootstrap-navwalker</h1>
-        <p>A custom Wordpress walker to implement the Twitter Bootstrap dropdown navigation using the Wordpress built in menu manager.</p>
-        <p class="view"><a href="https://github.com/twittem/wp-bootstrap-navwalker">View the Project on GitHub <small>twittem/wp-bootstrap-navwalker</small></a></p>
-        <ul>
-          <li><a href="https://github.com/twittem/wp-bootstrap-navwalker/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/twittem/wp-bootstrap-navwalker/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/twittem/wp-bootstrap-navwalker">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h3>Welcome to GitHub Pages.</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/twittem/wp-bootstrap-navwalker">View on GitHub</a>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+          <h1 id="project_title">Wp-bootstrap-navwalker</h1>
+          <h2 id="project_tagline">A custom Wordpress walker to implement the Twitter Bootstrap dropdown navigation using the Wordpress built in menu manager.</h2>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/twittem/wp-bootstrap-navwalker/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/twittem/wp-bootstrap-navwalker/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
 
-<h3>Designer Templates</h3>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>wp-bootstrap-navwalker</h1>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>A custom Wordpress nav walker class to implement the Twitter Bootstrap 2.2 (<a href="https://github.com/twitter/bootstrap/">https://github.com/twitter/bootstrap/</a>) navigation style in your custom theme using the Wordpress built in menu manager.</p>
 
-<h3>Rather Drive Stick?</h3>
+<h2>NOTE</h2>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>This is a utility class is intended to format your Wordpress theme menu with the correct syntax and classes to utilize the Twitter Bootstrap 2 dropdown navigation, and does not include the dependant Bootstrap JS files You will have to install include them manually. </p>
 
-<h3>Authors and Contributors</h3>
+<h2>Installation</h2>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>Place <strong>twitter_bootstrap_nav_walker.php</strong> in your Wordpress theme folder <code>/wp-content/your-theme/</code></p>
 
-<h3>Support or Contact</h3>
+<p>Open your Wordpress themes <strong>functions.php</strong> file  <code>/wp-content/your-theme/functions.php</code> and add the following code:</p>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<div class="highlight"><pre><span class="c1">// Register Custom Navigation Walker</span>
+<span class="k">require_once</span><span class="p">(</span><span class="s1">'twitter_bootstrap_nav_walker.php'</span><span class="p">);</span>
+</pre></div>
+
+<h2>Useage</h2>
+
+<p>Update your <code>wp_nav_menu()</code> function to use our new walker by adding a "walker" item to the wp_nav_menu array.</p>
+
+<div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span> 
+    <span class="nx">wp_nav_menu</span><span class="p">(</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'menu'</span>       <span class="o">=&gt;</span> <span class="s1">'top_menu'</span><span class="p">,</span>
+        <span class="s1">'depth'</span>      <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s1">'container'</span>  <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+        <span class="s1">'menu_class'</span> <span class="o">=&gt;</span> <span class="s1">'nav'</span><span class="p">,</span>
+        <span class="c1">//Process nav menu using our custom nav walker</span>
+        <span class="s1">'walker'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">twitter_bootstrap_nav_walker</span><span class="p">())</span>
+    <span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+<p>Your menu will now be formatted with the correct syntax and classes to implement Twitter Bootstrap 2 dropdown navigation. </p>
+
+<p>To change your menu style add Bootstrap nav class names to the <code>menu_class</code> declaration.</p>
+
+<div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span> 
+    <span class="nx">wp_nav_menu</span><span class="p">(</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'menu'</span>       <span class="o">=&gt;</span> <span class="s1">'side_menu'</span><span class="p">,</span>
+        <span class="s1">'depth'</span>      <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">'container'</span>  <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+        <span class="s1">'menu_class'</span> <span class="o">=&gt;</span> <span class="s1">'nav nav-tabs nav-stacked'</span><span class="p">,</span>
+        <span class="c1">//Process nav menu using our custom nav walker</span>
+        <span class="s1">'walker'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">twitter_bootstrap_nav_walker</span><span class="p">())</span>
+    <span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+<p>Review options in the Bootstrap docs for more information on nav classes
+<a href="http://twitter.github.com/bootstrap/components.html#navs">http://twitter.github.com/bootstrap/components.html#navs</a></p>
+
+<p>To add a dropdown menu divider simply add a menu item with the label <code>divider</code> (case-Insensitive so ‘divider’ or ‘Divider’ will both work ) and the class will do the rest. </p>
+
+<h2>Changelog</h2>
+
+<p><strong>1.2.1:</strong></p>
+
+<ul>
+<li>Updated caret output logic for Bootstrap 2.2 CSS changes.</li>
+</ul><p><strong>1.2:</strong></p>
+
+<ul>
+<li>Updated the class to work for all Bootstrap menu types. nav-tabs, nav-pills, nav-stacked, nav-list, navbar and dropdowns are all supported.</li>
+<li>Added ability to add dividers to dropdown menus by adding a menu item with the label of “divider” (case-insensitive) </li>
+<li>Added support for multiple dropdown levels (thanks to a Pull Requests from <a href="https://github.com/jmz" class="user-mention">@jmz</a>)</li>
+<li>Moved dropdown-toggle class declaration from parent <code>&lt;li&gt;</code> to <code>&lt;a&gt;</code> to match Bootstraps official documentation</li>
+</ul><p><strong>1.1:</strong></p>
+
+<ul>
+<li>Added WordPress Core refrence comments to help understand what functions are overridden</li>
+<li>Fixed double class declaration on dropdown parents</li>
+<li>Moved dropdown class declaration from a to parent li</li>
+</ul><p><strong>1.0:</strong></p>
+
+<ul>
+<li>Initial Commit </li>
+</ul><h2>Todo</h2>
+
+<ul>
+<li>Integrate bootstrap accessibility declarations</li>
+<li>Build demo &amp; tutorial page</li>
+<li>Build custome widgets/shortcodes for affix menus and page subnav</li>
+</ul>
       </section>
     </div>
-    <footer>
-      <p>Project maintained by <a href="https://github.com/twittem">twittem</a></p>
-      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
-    </footer>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Wp-bootstrap-navwalker maintained by <a href="https://github.com/twittem">twittem</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
     
+
   </body>
 </html>
