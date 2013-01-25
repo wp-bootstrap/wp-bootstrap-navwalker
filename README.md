@@ -58,6 +58,9 @@ To add a dropdown menu divider simply add a menu item with the label `divider` (
 
 Changelog
 ------------
+**1.2.2:**
++ Fixed double </li></li> issue on divider rows (thanks to @wzub for submitting the issue)
+
 **1.2.1:**
 + Updated caret output logic for Bootstrap 2.2 CSS changes.
 
