@@ -29,6 +29,7 @@ Update your `wp_nav_menu()` function to use our new walker by adding a "walker" 
 		'depth'		 => 2,
 		'container'	 => false,
 		'menu_class' => 'nav',
+		'fallback_cb' => 'wp_page_menu',
 		//Process nav menu using our custom nav walker
 		'walker' => new twitter_bootstrap_nav_walker())
 	);
@@ -46,6 +47,7 @@ To change your menu style add Bootstrap nav class names to the `menu_class` decl
 		'depth'		 => 1,
 		'container'	 => false,
 		'menu_class' => 'nav nav-tabs nav-stacked',
+		'fallback_cb' => 'wp_page_menu',
 		//Process nav menu using our custom nav walker
 		'walker' => new twitter_bootstrap_nav_walker())
 	);
@@ -59,7 +61,7 @@ To add a dropdown menu divider simply add a menu item with the label `divider` (
 Changelog
 ------------
 **1.2.2:**
-+ Fixed double </li></li> issue on divider rows (thanks to @wzub for submitting the issue)
++ Fixed double `</li>` issue on divider rows (thanks to @wzub for submitting the issue)
 
 **1.2.1:**
 + Updated caret output logic for Bootstrap 2.2 CSS changes.
