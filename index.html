@@ -59,6 +59,7 @@
         <span class="s1">'depth'</span>      <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
         <span class="s1">'container'</span>  <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
         <span class="s1">'menu_class'</span> <span class="o">=&gt;</span> <span class="s1">'nav'</span><span class="p">,</span>
+        <span class="s1">'fallback_cb'</span> <span class="o">=&gt;</span> <span class="s1">'wp_page_menu'</span><span class="p">,</span>
         <span class="c1">//Process nav menu using our custom nav walker</span>
         <span class="s1">'walker'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">twitter_bootstrap_nav_walker</span><span class="p">())</span>
     <span class="p">);</span>
@@ -75,6 +76,7 @@
         <span class="s1">'depth'</span>      <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
         <span class="s1">'container'</span>  <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
         <span class="s1">'menu_class'</span> <span class="o">=&gt;</span> <span class="s1">'nav nav-tabs nav-stacked'</span><span class="p">,</span>
+        <span class="s1">'fallback_cb'</span> <span class="o">=&gt;</span> <span class="s1">'wp_page_menu'</span><span class="p">,</span>
         <span class="c1">//Process nav menu using our custom nav walker</span>
         <span class="s1">'walker'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">twitter_bootstrap_nav_walker</span><span class="p">())</span>
     <span class="p">);</span>
@@ -88,7 +90,11 @@
 
 <h2>Changelog</h2>
 
-<p><strong>1.2.1:</strong></p>
+<p><strong>1.2.2:</strong></p>
+
+<ul>
+<li>Fixed double <code>&lt;/li&gt;</code> issue on divider rows (thanks to <a href="https://github.com/wzub" class="user-mention">@wzub</a> for submitting the issue)</li>
+</ul><p><strong>1.2.1:</strong></p>
 
 <ul>
 <li>Updated caret output logic for Bootstrap 2.2 CSS changes.</li>
@@ -127,7 +133,17 @@
       </footer>
     </div>
 
-    
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-39327681-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
 
   </body>
 </html>
