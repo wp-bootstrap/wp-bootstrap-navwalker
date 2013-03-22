@@ -1,26 +1,26 @@
 wp-bootstrap-navwalker
 ======================
 
-A custom Wordpress nav walker class to implement the Twitter Bootstrap 2.2 (https://github.com/twitter/bootstrap/) navigation style in your custom theme using the Wordpress built in menu manager.
+A custom WordPress nav walker class to implement the Twitter Bootstrap 2.2 (https://github.com/twitter/bootstrap/) navigation style in a custom theme using the WordPress built in menu manager.
 
 NOTE
 ----
-This is a utility class is intended to format your Wordpress theme menu with the correct syntax and classes to utilize the Twitter Bootstrap 2 dropdown navigation, and does not include the dependant Bootstrap JS files You will have to install include them manually. 
+This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Twitter Bootstrap 2 dropdown navigation, and does not include the required Bootstrap JS files. You will have to include them manually. 
 
 Installation
 ------------
-Place **twitter_bootstrap_nav_walker.php** in your Wordpress theme folder `/wp-content/your-theme/`
+Place **twitter_bootstrap_nav_walker.php** in your WordPress theme folder `/wp-content/your-theme/`
 
-Open your Wordpress themes **functions.php** file  `/wp-content/your-theme/functions.php` and add the following code:
+Open your WordPress themes **functions.php** file  `/wp-content/your-theme/functions.php` and add the following code:
 
 ```php
 // Register Custom Navigation Walker
 require_once('twitter_bootstrap_nav_walker.php');
 ```
 
-Useage
+Usage
 ------------
-Update your `wp_nav_menu()` function to use our new walker by adding a "walker" item to the wp_nav_menu array.
+Update your `wp_nav_menu()` function to use the new walker by adding a "walker" item to the wp_nav_menu array.
 
 ```php
 <?php 
@@ -56,7 +56,7 @@ To change your menu style add Bootstrap nav class names to the `menu_class` decl
 Review options in the Bootstrap docs for more information on nav classes
 http://twitter.github.com/bootstrap/components.html#navs
 
-To add a dropdown menu divider simply add a menu item with the label `divider` (case-Insensitive so ‘divider’ or ‘Divider’ will both work ) and the class will do the rest. 
+To add a dropdown menu divider simply add a menu item with the label `divider` (case-insensitive so ‘divider’ or ‘Divider’ will both work ) and the class will do the rest. 
 
 Changelog
 ------------
