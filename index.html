@@ -1,57 +1,58 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Wp-bootstrap-navwalker : A custom Wordpress walker to implement the Twitter Bootstrap dropdown navigation using the Wordpress built in menu manager." />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Wp-bootstrap-navwalker by twittem</title>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Wp-bootstrap-navwalker</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
-
   <body>
+    <div class="wrapper">
+      <header>
+        <h1>Wp-bootstrap-navwalker</h1>
+        <p>A custom Wordpress walker to implement the Twitter Bootstrap dropdown navigation using the Wordpress built in menu manager.</p>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/twittem/wp-bootstrap-navwalker">View on GitHub</a>
+        <p class="view"><a href="https://github.com/twittem/wp-bootstrap-navwalker">View the Project on GitHub <small>twittem/wp-bootstrap-navwalker</small></a></p>
 
-          <h1 id="project_title">Wp-bootstrap-navwalker</h1>
-          <h2 id="project_tagline">A custom Wordpress walker to implement the Twitter Bootstrap dropdown navigation using the Wordpress built in menu manager.</h2>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/twittem/wp-bootstrap-navwalker/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/twittem/wp-bootstrap-navwalker/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+        <ul>
+          <li><a href="https://github.com/twittem/wp-bootstrap-navwalker/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/twittem/wp-bootstrap-navwalker/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/twittem/wp-bootstrap-navwalker">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="wp-bootstrap-navwalker" class="anchor" href="#wp-bootstrap-navwalker"><span class="octicon octicon-link"></span></a>wp-bootstrap-navwalker</h1>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>wp-bootstrap-navwalker</h1>
+<p>A custom WordPress nav walker class to implement the Twitter Bootstrap 2.3.2 (<a href="https://github.com/twitter/bootstrap/">https://github.com/twitter/bootstrap/</a>) navigation style in a custom theme using the WordPress built in menu manager.</p>
 
-<p>A custom Wordpress nav walker class to implement the Twitter Bootstrap 2.2 (<a href="https://github.com/twitter/bootstrap/">https://github.com/twitter/bootstrap/</a>) navigation style in your custom theme using the Wordpress built in menu manager.</p>
+<h2>
+<a name="note" class="anchor" href="#note"><span class="octicon octicon-link"></span></a>NOTE</h2>
 
-<h2>NOTE</h2>
+<p>This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Twitter Bootstrap dropdown navigation, and does not include the required Bootstrap JS files. You will have to include them manually. </p>
 
-<p>This is a utility class is intended to format your Wordpress theme menu with the correct syntax and classes to utilize the Twitter Bootstrap 2 dropdown navigation, and does not include the dependant Bootstrap JS files You will have to install include them manually. </p>
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<h2>Installation</h2>
+<p>Place <strong>twitter_bootstrap_nav_walker.php</strong> in your WordPress theme folder <code>/wp-content/your-theme/</code></p>
 
-<p>Place <strong>twitter_bootstrap_nav_walker.php</strong> in your Wordpress theme folder <code>/wp-content/your-theme/</code></p>
-
-<p>Open your Wordpress themes <strong>functions.php</strong> file  <code>/wp-content/your-theme/functions.php</code> and add the following code:</p>
+<p>Open your WordPress themes <strong>functions.php</strong> file  <code>/wp-content/your-theme/functions.php</code> and add the following code:</p>
 
 <div class="highlight"><pre><span class="c1">// Register Custom Navigation Walker</span>
 <span class="k">require_once</span><span class="p">(</span><span class="s1">'twitter_bootstrap_nav_walker.php'</span><span class="p">);</span>
 </pre></div>
 
-<h2>Useage</h2>
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<p>Update your <code>wp_nav_menu()</code> function to use our new walker by adding a "walker" item to the wp_nav_menu array.</p>
+<p>Update your <code>wp_nav_menu()</code> function to use the new walker by adding a "walker" item to the wp_nav_menu array.</p>
 
 <div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span> 
     <span class="nx">wp_nav_menu</span><span class="p">(</span> <span class="k">array</span><span class="p">(</span>
@@ -66,7 +67,7 @@
 <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<p>Your menu will now be formatted with the correct syntax and classes to implement Twitter Bootstrap 2 dropdown navigation. </p>
+<p>Your menu will now be formatted with the correct syntax and classes to implement Twitter Bootstrap dropdown navigation. </p>
 
 <p>To change your menu style add Bootstrap nav class names to the <code>menu_class</code> declaration.</p>
 
@@ -86,11 +87,35 @@
 <p>Review options in the Bootstrap docs for more information on nav classes
 <a href="http://twitter.github.com/bootstrap/components.html#navs">http://twitter.github.com/bootstrap/components.html#navs</a></p>
 
-<p>To add a dropdown menu divider simply add a menu item with the label <code>divider</code> (case-Insensitive so ‘divider’ or ‘Divider’ will both work ) and the class will do the rest. </p>
+<h2>
+<a name="extras" class="anchor" href="#extras"><span class="octicon octicon-link"></span></a>Extras</h2>
 
-<h2>Changelog</h2>
+<p><img src="http://edwardmcintyre.com/pub/github/navwalker-extras.jpg" alt="Extras"></p>
 
-<p><strong>1.2.2:</strong></p>
+<p>This script included the ability to add Bootstrap dividers and Nav Headers to your menus through the WordPress menu UI. </p>
+
+<h6>
+<a name="dividers" class="anchor" href="#dividers"><span class="octicon octicon-link"></span></a>Dividers</h6>
+
+<p>Simply add a Link menu item with a <strong>URL</strong> of <code>#</code> and a <strong>Link Text</strong> of <code>divider</code> (case-insensitive so ‘divider’ or ‘Divider’ will both work ) and the class will do the rest.</p>
+
+<p><img src="http://edwardmcintyre.com/pub/github/navwalker-divider.jpg" alt="Divider Example"></p>
+
+<h6>
+<a name="navigation-headers" class="anchor" href="#navigation-headers"><span class="octicon octicon-link"></span></a>Navigation Headers</h6>
+
+<p>Adding a navigation header is very similar, add a new link with a <strong>URL</strong> of <code>#</code> and a <strong>Link Text</strong> of <code>nav-header</code> (it matches the Bootstrap CSS class so it's easy to remember). When the item is added use the <strong>Title Attribute</strong> field to set your header text and the class will do the rest.</p>
+
+<p><img src="http://edwardmcintyre.com/pub/github/navwalker-header.jpg" alt="Header Example"></p>
+
+<h2>
+<a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>Changelog</h2>
+
+<p><strong>1.3:</strong></p>
+
+<ul>
+<li>Added support for nav-header's (Thank you <a href="https://github.com/nerdworker" class="user-mention">@nerdworker</a> for the suggestion)</li>
+</ul><p><strong>1.2.2:</strong></p>
 
 <ul>
 <li>Fixed double <code>&lt;/li&gt;</code> issue on divider rows (thanks to <a href="https://github.com/wzub" class="user-mention">@wzub</a> for submitting the issue)</li>
@@ -115,24 +140,14 @@
 
 <ul>
 <li>Initial Commit </li>
-</ul><h2>Todo</h2>
-
-<ul>
-<li>Integrate bootstrap accessibility declarations</li>
-<li>Build demo &amp; tutorial page</li>
-<li>Build custome widgets/shortcodes for affix menus and page subnav</li>
 </ul>
       </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Wp-bootstrap-navwalker maintained by <a href="https://github.com/twittem">twittem</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/twittem">twittem</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
-
+    <script src="javascripts/scale.fix.js"></script>
               <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -143,7 +158,6 @@
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
-
 
   </body>
 </html>
