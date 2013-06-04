@@ -59,17 +59,17 @@ http://twitter.github.com/bootstrap/components.html#navs
 Extras
 ------------
 
-![Extras](https://e-vs-k.com/pub/github/navwalker-extras.jpg)
+![Extras](http://edwardmcintyre.com/pub/github/navwalker-extras.jpg)
 
 This script included the ability to add Bootstrap dividers and Nav Headers to your menus through the WordPress menu UI. 
 
 **Dividers**
 Simply add a Link menu item with a **URL** of `#` and a **Link Text** of `divider` (case-insensitive so ‘divider’ or ‘Divider’ will both work ) and the class will do the rest.
-![Divider Example](https://e-vs-k.com/pub/github/navwalker-divider.jpg)
+![Divider Example](http://edwardmcintyre.com/pub/github/navwalker-divider.jpg)
 
 **Navigation Headers**
 Adding a navigation header is very similar, add a new link with a **URL** of `#` and a **Link Text** of `nav-header` (it matches the Bootstrap CSS class so it's easy to remember). When the item is added use the **Title Attribute** field to set your header text and the class will do the rest.
-![Header Example](https://e-vs-k.com/pub/github/navwalker-header.jpg)
+![Header Example](http://edwardmcintyre.com/pub/github/navwalker-header.jpg)
 
 Changelog
 ------------
