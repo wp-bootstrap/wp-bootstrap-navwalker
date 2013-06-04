@@ -4,7 +4,7 @@
  * Class Name: twitter_bootstrap_nav_walker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
  * Description: A custom Wordpress nav walker to implement the Twitter Bootstrap 2 (https://github.com/twitter/bootstrap/) dropdown navigation using the Wordpress built in menu manager.
- * Version: 1.2.2
+ * Version: 1.3
  * Author: Edward McIntyre - @twittem
  * Licence: WTFPL 2.0 (http://sam.zoy.org/wtfpl/COPYING)
  */
@@ -38,7 +38,11 @@ class twitter_bootstrap_nav_walker extends Walker_Nav_Menu {
 		global $wp_query;
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
-		if (strcasecmp($item->title, 'divider')) {
+		if (strcasecmp($item->title, 'divider') == 0) {
+			$output .= $indent . '<li class="divider">';
+		} else if (strcasecmp($item->title, 'nav-header') == 0) {
+			$output .= $indent . '<li class="nav-header">' . esc_attr( $item->attr_title );
+		} else {
 			$class_names = $value = '';
 			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 			$classes[] = ($item->current) ? 'active' : '';
@@ -71,8 +75,6 @@ class twitter_bootstrap_nav_walker extends Walker_Nav_Menu {
 			$item_output .= $args->after;
 
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
-		} else {
-			$output .= $indent . '<li class="divider">';
 		}
 	}
 
