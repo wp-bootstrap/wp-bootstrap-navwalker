@@ -3,6 +3,8 @@ wp-bootstrap-navwalker
 
 A custom WordPress nav walker class to implement the Twitter Bootstrap 2.3.2 (https://github.com/twitter/bootstrap/) navigation style in a custom theme using the WordPress built in menu manager.
 
+![Extras](http://edwardmcintyre.com/pub/github/navwalker-extras-two.jpg)
+
 NOTE
 ----
 This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Twitter Bootstrap dropdown navigation, and does not include the required Bootstrap JS files. You will have to include them manually. 
@@ -59,9 +61,12 @@ http://twitter.github.com/bootstrap/components.html#navs
 Extras
 ------------
 
-![Extras](http://edwardmcintyre.com/pub/github/navwalker-extras.jpg)
+![Extras](http://edwardmcintyre.com/pub/github/navwalker-extras-two.jpg)
 
 This script included the ability to add Bootstrap dividers and Nav Headers to your menus through the WordPress menu UI. 
+
+######Icons
+To add an Icon to your link simple place the full Glyphicon class name in the links **Title Attribute** field and the class will do the rest.
 
 ######Dividers
 Simply add a Link menu item with a **URL** of `#` and a **Link Text** of `divider` (case-insensitive so ‘divider’ or ‘Divider’ will both work ) and the class will do the rest.
@@ -75,6 +80,9 @@ Adding a navigation header is very similar, add a new link with a **URL** of `#`
 
 Changelog
 ------------
+**1.4:**
++ Added support Glyphicons
+
 **1.3:**
 + Added support for nav-header's (Thank you @nerdworker for the suggestion)
 

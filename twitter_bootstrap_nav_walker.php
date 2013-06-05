@@ -4,7 +4,7 @@
  * Class Name: twitter_bootstrap_nav_walker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
  * Description: A custom Wordpress nav walker to implement the Twitter Bootstrap 2 (https://github.com/twitter/bootstrap/) dropdown navigation using the Wordpress built in menu manager.
- * Version: 1.3
+ * Version: 1.4
  * Author: Edward McIntyre - @twittem
  * Licence: WTFPL 2.0 (http://sam.zoy.org/wtfpl/COPYING)
  */
@@ -43,6 +43,7 @@ class twitter_bootstrap_nav_walker extends Walker_Nav_Menu {
 		} else if (strcasecmp($item->title, 'nav-header') == 0) {
 			$output .= $indent . '<li class="nav-header">' . esc_attr( $item->attr_title );
 		} else {
+
 			$class_names = $value = '';
 			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 			$classes[] = ($item->current) ? 'active' : '';
@@ -62,14 +63,19 @@ class twitter_bootstrap_nav_walker extends Walker_Nav_Menu {
 
 			$output .= $indent . '<li' . $id . $value . $class_names .'>';
 
-			$attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
-			$attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
+			$attributes = ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
 			$attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
 			$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
 			$attributes .= ($args->has_children) 	    ? ' data-toggle="dropdown" data-target="#" class="dropdown-toggle"' : '';
 
 			$item_output = $args->before;
-			$item_output .= '<a'. $attributes .'>';
+			
+			if(! empty( $item->attr_title )){
+				$item_output .= '<a'. $attributes .'><i class="' . esc_attr( $item->attr_title ) . '"></i>&nbsp;';
+			} else {
+				$item_output .= '<a'. $attributes .'>';
+			}
+			
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
 			$item_output .= ($args->has_children && $depth == 0) ? ' <span class="caret"></span></a>' : '</a>';
 			$item_output .= $args->after;
