@@ -43,12 +43,12 @@
 <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<p>Place <strong>twitter_bootstrap_nav_walker.php</strong> in your WordPress theme folder <code>/wp-content/your-theme/</code></p>
+<p>Place <strong>wp_bootstrap_navwalker.php</strong> in your WordPress theme folder <code>/wp-content/your-theme/</code></p>
 
 <p>Open your WordPress themes <strong>functions.php</strong> file  <code>/wp-content/your-theme/functions.php</code> and add the following code:</p>
 
 <div class="highlight"><pre><span class="c1">// Register Custom Navigation Walker</span>
-<span class="k">require_once</span><span class="p">(</span><span class="s1">'twitter_bootstrap_nav_walker.php'</span><span class="p">);</span>
+<span class="k">require_once</span><span class="p">(</span><span class="s1">'wp_bootstrap_navwalker.php'</span><span class="p">);</span>
 </pre></div>
 
 <h2>
@@ -64,7 +64,7 @@
         <span class="s1">'menu_class'</span> <span class="o">=&gt;</span> <span class="s1">'nav'</span><span class="p">,</span>
         <span class="s1">'fallback_cb'</span> <span class="o">=&gt;</span> <span class="s1">'wp_page_menu'</span><span class="p">,</span>
         <span class="c1">//Process nav menu using our custom nav walker</span>
-        <span class="s1">'walker'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">twitter_bootstrap_nav_walker</span><span class="p">())</span>
+        <span class="s1">'walker'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">wp_bootstrap_navwalker</span><span class="p">())</span>
     <span class="p">);</span>
 <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
@@ -81,7 +81,7 @@
         <span class="s1">'menu_class'</span> <span class="o">=&gt;</span> <span class="s1">'nav nav-tabs nav-stacked'</span><span class="p">,</span>
         <span class="s1">'fallback_cb'</span> <span class="o">=&gt;</span> <span class="s1">'wp_page_menu'</span><span class="p">,</span>
         <span class="c1">//Process nav menu using our custom nav walker</span>
-        <span class="s1">'walker'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">twitter_bootstrap_nav_walker</span><span class="p">())</span>
+        <span class="s1">'walker'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">wp_bootstrap_navwalker</span><span class="p">())</span>
     <span class="p">);</span>
 <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
@@ -118,7 +118,14 @@
 <h2>
 <a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>Changelog</h2>
 
-<p><strong>1.4:</strong></p>
+<p><strong>1.4.1:</strong></p>
+
+<ul>
+<li>Updated class &amp; file names from twitter_bootstrap_nav_walker to wp_bootstrap_navwalker match repository.</li>
+<li>Licence now GPL-2.0+ to match WordPress.</li>
+<li>Added a copy of the GPL-2.0+ Licence.</li>
+<li>Added additional code comments to explain how the extras are processed.</li>
+</ul><p><strong>1.4:</strong></p>
 
 <ul>
 <li>Added support Glyphicons</li>
