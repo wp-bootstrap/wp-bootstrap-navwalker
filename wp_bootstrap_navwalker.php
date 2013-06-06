@@ -1,15 +1,16 @@
 <?php
 
 /**
- * Class Name: twitter_bootstrap_nav_walker
+ * Class Name: wp_bootstrap_navwalker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
- * Description: A custom Wordpress nav walker to implement the Twitter Bootstrap 2 (https://github.com/twitter/bootstrap/) dropdown navigation using the Wordpress built in menu manager.
+ * Description: A custom WordPress nav walker class to implement the Twitter Bootstrap 2.3.2 navigation style in a custom theme using the WordPress built in menu manager.
  * Version: 1.4
  * Author: Edward McIntyre - @twittem
- * Licence: WTFPL 2.0 (http://sam.zoy.org/wtfpl/COPYING)
+ * License: GPL-2.0+
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-class twitter_bootstrap_nav_walker extends Walker_Nav_Menu {
+class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 	
 	/**
 	 * @see Walker::start_lvl()
@@ -38,9 +39,19 @@ class twitter_bootstrap_nav_walker extends Walker_Nav_Menu {
 		global $wp_query;
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
+		/**
+		 * Dividers & Headers
+	     * ==================
+		 * Determine whether the item is a Divider, Header, or regular menu item.
+		 * To prevent errors we use the strcasecmp() function to so a comparison
+		 * that is not case sensitive. The strcasecmp() function returns a 0 if 
+		 * the strings are equal.
+		 */
 		if (strcasecmp($item->title, 'divider') == 0) {
+			// Item is a Divider
 			$output .= $indent . '<li class="divider">';
 		} else if (strcasecmp($item->title, 'nav-header') == 0) {
+			// Item is a Header
 			$output .= $indent . '<li class="nav-header">' . esc_attr( $item->attr_title );
 		} else {
 
@@ -70,6 +81,13 @@ class twitter_bootstrap_nav_walker extends Walker_Nav_Menu {
 
 			$item_output = $args->before;
 			
+			/**
+			 * Glyphicons
+			 * ===========
+			 * Since the the menu item is NOT a Divider or Header we check the see
+			 * if there is a value in the attr_title property. If the attr_title
+			 * property is NOT null we apply it as the class name for the glyphicon.
+			 */
 			if(! empty( $item->attr_title )){
 				$item_output .= '<a'. $attributes .'><i class="' . esc_attr( $item->attr_title ) . '"></i>&nbsp;';
 			} else {

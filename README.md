@@ -11,13 +11,13 @@ This is a utility class that is intended to format your WordPress theme menu wit
 
 Installation
 ------------
-Place **twitter_bootstrap_nav_walker.php** in your WordPress theme folder `/wp-content/your-theme/`
+Place **wp_bootstrap_navwalker.php** in your WordPress theme folder `/wp-content/your-theme/`
 
 Open your WordPress themes **functions.php** file  `/wp-content/your-theme/functions.php` and add the following code:
 
 ```php
 // Register Custom Navigation Walker
-require_once('twitter_bootstrap_nav_walker.php');
+require_once('wp_bootstrap_navwalker.php');
 ```
 
 Usage
@@ -33,7 +33,7 @@ Update your `wp_nav_menu()` function to use the new walker by adding a "walker" 
 		'menu_class' => 'nav',
 		'fallback_cb' => 'wp_page_menu',
 		//Process nav menu using our custom nav walker
-		'walker' => new twitter_bootstrap_nav_walker())
+		'walker' => new wp_bootstrap_navwalker())
 	);
 ?>
 ```
@@ -51,7 +51,7 @@ To change your menu style add Bootstrap nav class names to the `menu_class` decl
 		'menu_class' => 'nav nav-tabs nav-stacked',
 		'fallback_cb' => 'wp_page_menu',
 		//Process nav menu using our custom nav walker
-		'walker' => new twitter_bootstrap_nav_walker())
+		'walker' => new wp_bootstrap_navwalker())
 	);
 ?>
 ```
@@ -80,6 +80,12 @@ Adding a navigation header is very similar, add a new link with a **URL** of `#`
 
 Changelog
 ------------
+**1.4.1:**
++ Updated class & file names from twitter_bootstrap_nav_walker to wp_bootstrap_navwalker match repository.
++ Licence now GPL-2.0+ to match WordPress.
++ Added a copy of the GPL-2.0+ Licence.
++ Added additional code comments to explain how the extras are processed.
+
 **1.4:**
 + Added support Glyphicons
 
