@@ -80,6 +80,9 @@ Adding a navigation header is very similar, add a new link with a **URL** of `#`
 
 Changelog
 ------------
+**1.4.2:**
++ Removed redundant code from display_element by using function from parent class (Thanks to @sebakerckhof for the suggestion)
+
 **1.4.1:**
 + Updated class & file names from twitter_bootstrap_nav_walker to wp_bootstrap_navwalker match repository.
 + Licence now GPL-2.0+ to match WordPress.
@@ -90,7 +93,7 @@ Changelog
 + Added support Glyphicons
 
 **1.3:**
-+ Added support for nav-header's (Thank you @nerdworker for the suggestion)
++ Added support for nav-header's (Thanks to @nerdworker for the suggestion)
 
 **1.2.2:**
 + Fixed double `</li>` issue on divider rows (thanks to @wzub for submitting the issue)
