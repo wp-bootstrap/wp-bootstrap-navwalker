@@ -1,7 +1,7 @@
 wp-bootstrap-navwalker
 ======================
 
-A custom WordPress nav walker class to implement the Twitter Bootstrap 2.3.2 (https://github.com/twitter/bootstrap/) navigation style in a custom theme using the WordPress built in menu manager.
+A custom WordPress nav walker class to implement the Twitter Bootstrap 2.3.2 (and now 3.0 RC1) (https://github.com/twitter/bootstrap/) navigation style in a custom theme using the WordPress built in menu manager.
 
 ![Extras](http://edwardmcintyre.com/pub/github/navwalker-extras-two.jpg)
 
