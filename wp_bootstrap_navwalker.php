@@ -4,7 +4,7 @@
  * Class Name: wp_bootstrap_navwalker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
  * Description: A custom WordPress nav walker class to implement the Twitter Bootstrap 2.3.2 navigation style in a custom theme using the WordPress built in menu manager.
- * Version: 1.4.2
+ * Version: 1.4.3
  * Author: Edward McIntyre - @twittem
  * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -50,9 +50,15 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 		if (strcasecmp($item->title, 'divider') == 0) {
 			// Item is a Divider
 			$output .= $indent . '<li class="divider">';
-		} else if (strcasecmp($item->title, 'nav-header') == 0) {
+		} else if (strcasecmp($item->title, 'divider-vertical') == 0) {
+			// Item is a Vertical Divider
+			$output .= $indent . '<li class="divider-vertical">';
+		} else if (strcasecmp($item->title, 'nav-header') == 0) /* this is contingency for backward compatibility - TOBEREMOVED  */ {
 			// Item is a Header
-			$output .= $indent . '<li class="nav-header">' . esc_attr( $item->attr_title );
+			$output .= $indent . '<li class="dropdown-header">' . esc_attr( $item->attr_title );
+		} else if (strcasecmp($item->title, 'dropdown-header') == 0) /* new dropdown header markup in BS3  */ {
+			// Item is a Header
+			$output .= $indent . '<li class="dropdown-header">' . esc_attr( $item->attr_title );
 		} else {
 
 			$class_names = $value = '';

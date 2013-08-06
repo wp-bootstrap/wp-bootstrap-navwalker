@@ -1,7 +1,7 @@
 wp-bootstrap-navwalker
 ======================
 
-A custom WordPress nav walker class to implement the Twitter Bootstrap 2.3.2 (https://github.com/twitter/bootstrap/) navigation style in a custom theme using the WordPress built in menu manager.
+A custom WordPress nav walker class to implement the Twitter Bootstrap 2.3.2 (and now 3.0 RC1) (https://github.com/twitter/bootstrap/) navigation style in a custom theme using the WordPress built in menu manager.
 
 ![Extras](http://edwardmcintyre.com/pub/github/navwalker-extras-two.jpg)
 
@@ -55,6 +55,23 @@ To change your menu style add Bootstrap nav class names to the `menu_class` decl
 	);
 ?>
 ```
+
+Boostrap 3 Navbar uses `nav navbar-nav`.
+
+```php
+<?php 
+	wp_nav_menu( array(
+		'menu'		 => 'top_menu',
+		'depth'		 => 1,
+		'container'	 => false,
+		'menu_class' => 'nav navbar-nav',
+		'fallback_cb' => 'wp_page_menu',
+		//Process nav menu using our custom nav walker
+		'walker' => new wp_bootstrap_navwalker())
+	);
+?>
+```
+
 Review options in the Bootstrap docs for more information on nav classes
 http://twitter.github.com/bootstrap/components.html#navs
 
@@ -67,19 +84,27 @@ This script included the ability to add Bootstrap dividers and Nav Headers to yo
 
 ######Icons
 To add an Icon to your link simple place the full Glyphicon class name in the links **Title Attribute** field and the class will do the rest.
+* glyphicons needs to be incuded seporately now
 
 ######Dividers
 Simply add a Link menu item with a **URL** of `#` and a **Link Text** of `divider` (case-insensitive so ‘divider’ or ‘Divider’ will both work ) and the class will do the rest.
 
 ![Divider Example](http://edwardmcintyre.com/pub/github/navwalker-divider.jpg)
 
+You can also add a vertical divider by adding a Link menu item with a **URL** of `#` and a **Link Text** of `divider-vertical`
+
 ######Navigation Headers
-Adding a navigation header is very similar, add a new link with a **URL** of `#` and a **Link Text** of `nav-header` (it matches the Bootstrap CSS class so it's easy to remember). When the item is added use the **Title Attribute** field to set your header text and the class will do the rest.
+Adding a navigation header is very similar, add a new link with a **URL** of `#` and a **Link Text** of `nav-header` (it matches the Bootstrap CSS class so it's easy to remember). When the item is added use the **Title Attribute** field to set your header text and the class will do the rest. Boostrap 3 uses a new class name `dropdown-header`. 
+
+Bootstrap 3 uses a new classname `dropdown-headers` for the headers. Currently you can use either or but backwards compatibility will be removed once Bootstrap 3 officially launches.
 
 ![Header Example](http://edwardmcintyre.com/pub/github/navwalker-header.jpg)
 
 Changelog
 ------------
+**1.4.3:**
++ Added support for vertical dividers (Thanks to @pattonwebz for the suggestion)
+
 **1.4.2:**
 + Removed redundant code from display_element by using function from parent class (Thanks to @sebakerckhof for the suggestion)
 
