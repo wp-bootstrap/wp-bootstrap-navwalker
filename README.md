@@ -73,6 +73,8 @@ Simply add a Link menu item with a **URL** of `#` and a **Link Text** of `divide
 
 ![Divider Example](http://edwardmcintyre.com/pub/github/navwalker-divider.jpg)
 
+You can also add a vertical divider by adding a Link menu item with a **URL** of `#` and a **Link Text** of `divider-vertical`
+
 ######Navigation Headers
 Adding a navigation header is very similar, add a new link with a **URL** of `#` and a **Link Text** of `nav-header` (it matches the Bootstrap CSS class so it's easy to remember). When the item is added use the **Title Attribute** field to set your header text and the class will do the rest.
 
@@ -80,6 +82,9 @@ Adding a navigation header is very similar, add a new link with a **URL** of `#`
 
 Changelog
 ------------
+**1.4.3:**
++ Added support for vertical dividers (Thanks to @pattonwebz for the suggestion)
+
 **1.4.2:**
 + Removed redundant code from display_element by using function from parent class (Thanks to @sebakerckhof for the suggestion)
 
