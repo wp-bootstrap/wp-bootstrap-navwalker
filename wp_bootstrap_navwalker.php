@@ -20,13 +20,8 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 	 * @param int $depth Depth of page. Used for padding.
 	 */
 	function start_lvl( &$output, $depth = 0, $args = array() ) {
-<<<<<<< HEAD
-		$indent = str_repeat( "\t", $depth );
-		$output	   .= "\n$indent<ul class=\"dropdown-menu\">\n";		
-=======
 		$indent = str_repeat("\t", $depth);
 		$output .= "\n$indent<ul role=\"menu\" class=\" dropdown-menu\">\n";
->>>>>>> origin/Bootstrap-3.0+
 	}
 
 	/**
