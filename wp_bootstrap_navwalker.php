@@ -3,8 +3,8 @@
 /**
  * Class Name: wp_bootstrap_navwalker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
- * Description: A custom WordPress nav walker class to implement the Twitter Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager.
- * Version: 2.0
+ * Description: A custom WordPress nav walker class to implement the Twitter Bootstrap 2.3.2 navigation style in a custom theme using the WordPress built in menu manager.
+ * Version: 2.0.1
  * Author: Edward McIntyre - @twittem
  * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -48,8 +48,6 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 		 */
 		if (strcasecmp($item->attr_title, 'divider') == 0 && $depth === 1) {
 			$output .= $indent . '<li role="presentation" class="divider">';
-		} else if (strcasecmp($item->title, 'divider') == 0 && $depth === 1) {
-			$output .= $indent . '<li role="presentation" class="divider">';
 		} else if (strcasecmp($item->attr_title, 'dropdown-header') == 0 && $depth === 1) {
 			$output .= $indent . '<li role="presentation" class="dropdown-header">' . esc_attr( $item->title );
 		} else if (strcasecmp($item->attr_title, 'disabled') == 0) {
@@ -63,10 +61,8 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
 			
-			//If item has_children add dropdown class to li
-			if($args->has_children) {
-				$class_names .= ' dropdown';
-			}
+			if($args->has_children) {	$class_names .= ' dropdown'; }
+			if(in_array('current-menu-item', $classes)) { $class_names .= ' active'; }
 
 			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 

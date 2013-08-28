@@ -122,10 +122,12 @@ To set a disabled link simoly set the **Title Attribute** to `disabled` and the 
 
 Changelog
 ------------
+**2.0.1**
++ Added missing `active` class to active menu items.
+
 **2.0**
 + Class was completly re-written using the latest Wordpress 3.6 walker class.
 + Now full supports Bootstrap 3.0+
 + Tested with wp_debug & the Theme Check plugin.
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/twittem/wp-bootstrap-navwalker/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
