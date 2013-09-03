@@ -28,7 +28,7 @@ require_once('wp_bootstrap_navwalker.php');
 
 Usage
 ------------
-Update your `wp_nav_menu()` function to use the new walker by adding a "walker" item to the wp_nav_menu array.
+Update your `wp_nav_menu()` function in `header.php` to use the new walker by adding a "walker" item to the wp_nav_menu array.
 
 ```php
 <?php
@@ -45,6 +45,14 @@ Update your `wp_nav_menu()` function to use the new walker by adding a "walker" 
 ```
 
 Your menu will now be formatted with the correct syntax and classes to implement Twitter Bootstrap dropdown navigation. 
+
+You will also want to declare your new menu in your `functions.php` file.
+
+```php
+register_nav_menus( array(
+	'primary' => __( 'Primary Menu', 'THEMENAME' ),
+) );
+```
 
 Typically the menu is wrapped with additional markup, here is an example of a ` navbar-fixed-top` menu that collapse for responsive navigation.
 
@@ -75,7 +83,7 @@ Typically the menu is wrapped with additional markup, here is an example of a ` 
 						'depth'      => 2,
 						'container'  => false,
 						'menu_class' => 'nav navbar-nav',
-						'fallback_cb' => 'wp_page_menu',
+						'fallback_cb' => '',
 						'walker' => new wp_bootstrap_navwalker())
 					);		  
 				?>
@@ -88,6 +96,10 @@ To change your menu style add Bootstrap nav class names to the `menu_class` decl
 
 Review options in the Bootstrap docs for more information on nav classes
 http://getbootstrap.com/components/#nav
+
+Displaying the Menu 
+------------
+To display the menu you must associate your menu with your theme location. You can do this by selecting your them location in the *Theme Locations* list wile editing your menu in the WordPress admin.
 
 Extras
 ------------
