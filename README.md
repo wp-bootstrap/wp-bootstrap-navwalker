@@ -122,6 +122,9 @@ To set a disabled link simoly set the **Title Attribute** to `disabled` and the 
 
 Changelog
 ------------
+**2.0.2**
++ Small tweak to ensure carets are only displayed on top level dropdowns.
+
 **2.0.1**
 + Added missing `active` class to active menu items.
 
