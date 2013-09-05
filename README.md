@@ -57,40 +57,38 @@ register_nav_menus( array(
 Typically the menu is wrapped with additional markup, here is an example of a ` navbar-fixed-top` menu that collapse for responsive navigation.
 
 ```php
-<?php 
-	<nav class="navbar navbar-default navbar-fixed-top navbar-turquoise" role="navigation">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-
-				<a class="navbar-brand" href="<?php bloginfo('url'); ?>">
-					<?php bloginfo('name'); ?>
-				</a>
-			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse navbar-ex1-collapse">
-				<?php
-					wp_nav_menu( array(
-						'menu'       => 'primary',
-						'theme_location' => 'primary',
-						'depth'      => 2,
-						'container'  => false,
-						'menu_class' => 'nav navbar-nav',
-						'fallback_cb' => '',
-						'walker' => new wp_bootstrap_navwalker())
-					);		  
-				?>
-			</div><!-- /.navbar-collapse -->
-		</div><!-- /.container -->
-	</nav>
-?>
+<nav class="navbar navbar-default navbar-fixed-top navbar-turquoise" role="navigation">
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+	
+			<a class="navbar-brand" href="<?php bloginfo('url'); ?>">
+				<?php bloginfo('name'); ?>
+			</a>
+		</div>
+	
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<?php
+				wp_nav_menu( array(
+					'menu'       => 'primary',
+					'theme_location' => 'primary',
+					'depth'      => 2,
+					'container'  => false,
+					'menu_class' => 'nav navbar-nav',
+					'fallback_cb' => '',
+					'walker' => new wp_bootstrap_navwalker())
+				);		  
+			?>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container -->
+</nav>
 ```
 To change your menu style add Bootstrap nav class names to the `menu_class` declaration.
 
