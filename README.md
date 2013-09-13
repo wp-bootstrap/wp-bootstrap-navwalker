@@ -11,6 +11,8 @@ There are many changes Bootstrap 2.x & Bootstrap 3.0 that affect both how the na
 
 The most noticeable functionality change im Bootstrap 3.0.0+ is that it only supports a signal dropdown level. This script in intended implement the Bootstrap 3.0 menu structure without adding additional features, additional dropdown levels will not be supported.
 
+If you would like to use **Bootstrap 2.x** you can find the legacy version of the walker class here https://github.com/twittem/wp-bootstrap-navwalker/tree/For-Bootstrap-2.3.2
+
 NOTE
 ----
 This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Twitter Bootstrap dropdown navigation, and does not include the required Bootstrap JS files. You will have to include them manually. 
