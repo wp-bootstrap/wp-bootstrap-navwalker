@@ -4,14 +4,14 @@
  * Class Name: wp_bootstrap_navwalker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
  * Description: A custom WordPress nav walker class to implement the Twitter Bootstrap 2.3.2 navigation style in a custom theme using the WordPress built in menu manager.
- * Version: 2.0.2
+ * Version: 1.4.4
  * Author: Edward McIntyre - @twittem
  * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
 class wp_bootstrap_navwalker extends Walker_Nav_Menu {
-	
+  
 	/**
 	 * @see Walker::start_lvl()
 	 * @since 3.0.0
@@ -21,7 +21,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 	 */
 	function start_lvl( &$output, $depth = 0, $args = array() ) {
 		$indent = str_repeat("\t", $depth);
-		$output .= "\n$indent<ul role=\"menu\" class=\" dropdown-menu\">\n";
+		$output .= "\n$indent<ul class=\" dropdown-menu\">\n";
 	}
 
 	/**
@@ -39,19 +39,22 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
 		/**
-		 * Dividers, Headers or Disabled
-	     * =============================
-		 * Determine whether the item is a Divider, Header, Disabled or regular
-		 * menu item. To prevent errors we use the strcasecmp() function to so a
-		 * comparison that is not case sensitive. The strcasecmp() function returns
-		 * a 0 if the strings are equal.
+		 * Dividers & Headers
+	     * ==================
+		 * Determine whether the item is a Divider, Header, or regular menu item.
+		 * To prevent errors we use the strcasecmp() function to so a comparison
+		 * that is not case sensitive. The strcasecmp() function returns a 0 if 
+		 * the strings are equal.
 		 */
-		if (strcasecmp($item->attr_title, 'divider') == 0 && $depth === 1) {
-			$output .= $indent . '<li role="presentation" class="divider">';
-		} else if (strcasecmp($item->attr_title, 'dropdown-header') == 0 && $depth === 1) {
-			$output .= $indent . '<li role="presentation" class="dropdown-header">' . esc_attr( $item->title );
-		} else if (strcasecmp($item->attr_title, 'disabled') == 0) {
-			$output .= $indent . '<li role="presentation" class="disabled"><a href="#">' . esc_attr( $item->title ) . '</a>';
+		if (strcasecmp($item->title, 'divider') == 0) {
+			// Item is a Divider
+			$output .= $indent . '<li class="divider">';
+		} else if (strcasecmp($item->title, 'divider-vertical') == 0) {
+			// Item is a Vertical Divider
+			$output .= $indent . '<li class="divider-vertical">';
+		} else if (strcasecmp($item->title, 'nav-header') == 0) {
+			// Item is a Header
+			$output .= $indent . '<li class="nav-header">' . esc_attr( $item->attr_title );
 		} else {
 
 			$class_names = $value = '';
@@ -61,8 +64,10 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
 			
-			if($args->has_children) {	$class_names .= ' dropdown'; }
-			if(in_array('current-menu-item', $classes)) { $class_names .= ' active'; }
+			//If item has_children add dropdown class to li
+			if($args->has_children) {
+				$class_names .= ' dropdown';
+			}
 
 			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
@@ -77,9 +82,8 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			$atts['rel']    = ! empty( $item->xfn )        ? $item->xfn        : '';
 
 			//If item has_children add atts to a
-			if($args->has_children && $depth === 0) {
+			if($args->has_children) {
 				$atts['href']   		= '#';
-				$atts['data-toggle']	= 'dropdown';
 				$atts['class']			= 'dropdown-toggle';
 			} else {
 				$atts['href'] = ! empty( $item->url ) ? $item->url : '';
@@ -96,7 +100,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			}
 
 			$item_output = $args->before;
-
+		
 			/*
 			 * Glyphicons
 			 * ===========
@@ -106,13 +110,13 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			 */
 
 			if(! empty( $item->attr_title )){
-				$item_output .= '<a'. $attributes .'><span class="glyphicon ' . esc_attr( $item->attr_title ) . '"></span>&nbsp;';
+				$item_output .= '<a'. $attributes .'><i class="' . esc_attr( $item->attr_title ) . '"></i>&nbsp;';
 			} else {
 				$item_output .= '<a'. $attributes .'>';
 			}
 			
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-			$item_output .= ($args->has_children && $depth === 0) ? ' <span class="caret"></span></a>' : '</a>';
+			$item_output .= ($args->has_children) ? ' <span class="caret"></span></a>' : '</a>';
 			$item_output .= $args->after;
 
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
