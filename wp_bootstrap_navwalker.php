@@ -4,7 +4,7 @@
  * Class Name: wp_bootstrap_navwalker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
  * Description: A custom WordPress nav walker class to implement the Twitter Bootstrap 2.3.2 navigation style in a custom theme using the WordPress built in menu manager.
- * Version: 1.4.4
+ * Version: 1.4.5
  * Author: Edward McIntyre - @twittem
  * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -85,6 +85,8 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			if($args->has_children) {
 				$atts['href']   		= '#';
 				$atts['class']			= 'dropdown-toggle';
+				$atts['data-toggle'] = 'dropdown';
+				$atts['data-target'] = '#';
 			} else {
 				$atts['href'] = ! empty( $item->url ) ? $item->url : '';
 			}
