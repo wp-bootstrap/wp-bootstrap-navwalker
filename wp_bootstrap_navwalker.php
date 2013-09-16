@@ -40,13 +40,15 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 
 		/**
 		 * Dividers, Headers or Disabled
-	     * =============================
+	         * =============================
 		 * Determine whether the item is a Divider, Header, Disabled or regular
 		 * menu item. To prevent errors we use the strcasecmp() function to so a
 		 * comparison that is not case sensitive. The strcasecmp() function returns
 		 * a 0 if the strings are equal.
 		 */
 		if (strcasecmp($item->attr_title, 'divider') == 0 && $depth === 1) {
+			$output .= $indent . '<li role="presentation" class="divider">';
+		} else if (strcasecmp($item->title, 'divider') == 0 && $depth === 1) {
 			$output .= $indent . '<li role="presentation" class="divider">';
 		} else if (strcasecmp($item->attr_title, 'dropdown-header') == 0 && $depth === 1) {
 			$output .= $indent . '<li role="presentation" class="dropdown-header">' . esc_attr( $item->title );
