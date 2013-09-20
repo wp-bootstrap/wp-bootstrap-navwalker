@@ -1,7 +1,7 @@
 wp-bootstrap-navwalker
 ======================
 
-**A custom WordPress nav walker class to fully implement the Twitter Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager.**
+**A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager.**
 
 ![Extras](http://edwardmcintyre.com/pub/github/navwalker-3-menu.jpg)
 
@@ -15,7 +15,7 @@ If you would like to use **Bootstrap 2.x** you can find the legacy version of th
 
 NOTE
 ----
-This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Twitter Bootstrap dropdown navigation, and does not include the required Bootstrap JS files. You will have to include them manually. 
+This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Bootstrap dropdown navigation, and does not include the required Bootstrap JS files. You will have to include them manually. 
 
 Installation
 ------------
@@ -46,7 +46,7 @@ Update your `wp_nav_menu()` function in `header.php` to use the new walker by ad
 ?>
 ```
 
-Your menu will now be formatted with the correct syntax and classes to implement Twitter Bootstrap dropdown navigation. 
+Your menu will now be formatted with the correct syntax and classes to implement Bootstrap dropdown navigation. 
 
 You will also want to declare your new menu in your `functions.php` file.
 
