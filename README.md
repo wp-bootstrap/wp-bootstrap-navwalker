@@ -40,7 +40,7 @@ Update your `wp_nav_menu()` function in `header.php` to use the new walker by ad
 		'depth'      => 2,
 		'container'  => false,
 		'menu_class' => 'nav navbar-nav',
-		'fallback_cb' => 'wp_page_menu',
+		'fallback_cb' => 'wp_bootstrap_navwalker::fallback',
 		'walker' => new wp_bootstrap_navwalker())
 	);		  
 ?>
@@ -59,7 +59,7 @@ register_nav_menus( array(
 Typically the menu is wrapped with additional markup, here is an example of a ` navbar-fixed-top` menu that collapse for responsive navigation.
 
 ```php
-<nav class="navbar navbar-default navbar-fixed-top navbar-turquoise" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<!-- Brand and toggle get grouped for better mobile display -->
 	<div class="container">
 		<div class="navbar-header">
@@ -69,12 +69,12 @@ Typically the menu is wrapped with additional markup, here is an example of a ` 
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-	
+
 			<a class="navbar-brand" href="<?php bloginfo('url'); ?>">
 				<?php bloginfo('name'); ?>
 			</a>
 		</div>
-	
+
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<?php
@@ -84,22 +84,23 @@ Typically the menu is wrapped with additional markup, here is an example of a ` 
 					'depth'      => 2,
 					'container'  => false,
 					'menu_class' => 'nav navbar-nav',
-					'fallback_cb' => '',
+					'fallback_cb' => 'wp_bootstrap_navwalker::fallback',
 					'walker' => new wp_bootstrap_navwalker())
-				);		  
+				);
 			?>
-		</div><!-- /.navbar-collapse -->
-	</div><!-- /.container -->
+		</div>
+	</div>
 </nav>
 ```
+
 To change your menu style add Bootstrap nav class names to the `menu_class` declaration.
 
 Review options in the Bootstrap docs for more information on nav classes
 http://getbootstrap.com/components/#nav
 
 Displaying the Menu 
-------------
-To display the menu you must associate your menu with your theme location. You can do this by selecting your them location in the *Theme Locations* list wile editing your menu in the WordPress admin.
+-------------------
+To display the menu you must associate your menu with your theme location. You can do this by selecting your theme location in the *Theme Locations* list wile editing a menu in the WordPress menu manager.
 
 Extras
 ------------
@@ -134,6 +135,9 @@ To set a disabled link simoly set the **Title Attribute** to `disabled` and the 
 
 Changelog
 ------------
+**2.0.3**
++ Included a fallback function that adds a link to the WordPress menu manager if no menu has been assigned to the theme location.
+
 **2.0.2**
 + Small tweak to ensure carets are only displayed on top level dropdowns.
 
