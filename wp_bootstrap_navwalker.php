@@ -171,6 +171,9 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 
 	function fallback( $args ) {
 		if ( current_user_can( 'manage_options' ) ) {
+
+			extract( $args );
+
 			$fb_output = null;
 
 			if ( $container ) {
