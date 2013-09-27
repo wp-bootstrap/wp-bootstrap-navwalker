@@ -3,15 +3,15 @@
 /**
  * Class Name: wp_bootstrap_navwalker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
- * Description: A custom WordPress nav walker class to implement the Twitter Bootstrap 2.3.2 navigation style in a custom theme using the WordPress built in menu manager.
- * Version: 2.0.3
+ * Description: A custom WordPress nav walker class to implement the Bootstrap 3 navigation style in a custom theme using the WordPress built in menu manager.
+ * Version: 2.0.4
  * Author: Edward McIntyre - @twittem
  * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
 class wp_bootstrap_navwalker extends Walker_Nav_Menu {
-	
+
 	/**
 	 * @see Walker::start_lvl()
 	 * @since 3.0.0
@@ -40,11 +40,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 
 		/**
 		 * Dividers, Headers or Disabled
-<<<<<<< HEAD
-	         * =============================
-=======
 		 * =============================
->>>>>>> Added a fallback function when no menu assigned
 		 * Determine whether the item is a Divider, Header, Disabled or regular
 		 * menu item. To prevent errors we use the strcasecmp() function to so a
 		 * comparison that is not case sensitive. The strcasecmp() function returns
@@ -147,19 +143,19 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 	 */
 
 	function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
-		if ( !$element ) {
-			return;
-		}
+        if ( !$element ) {
+            return;
+        }
 
-		$id_field = $this->db_fields['id'];
+        $id_field = $this->db_fields['id'];
 
-		//display this element
-		if ( is_object( $args[0] ) ) {
-		   $args[0]->has_children = ! empty( $children_elements[$element->$id_field] );
-		}
+        //display this element
+        if ( is_object( $args[0] ) ) {
+           $args[0]->has_children = ! empty( $children_elements[$element->$id_field] );
+        }
 
-		parent::display_element($element, $children_elements, $max_depth, $depth, $args, $output);
-	}
+        parent::display_element($element, $children_elements, $max_depth, $depth, $args, $output);
+    }
 
 	/**
 	 * Menu Fallback
@@ -168,11 +164,48 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 	 * and a manu has not been assigned to the theme location in the WordPress
 	 * menu manager the function with display nothing to a non-logged in user,
 	 * and will add a link to the WordPress menu manager if logged in as an admin.
+	 *
+	 * @param array $args passed from the wp_nav_menu function
+	 *
 	 */
 
-	function fallback() {
-		if( current_user_can( 'manage_options' ) ) {
-			echo '<li><a href="' . admin_url( 'nav-menus.php' ) . '">Add a menu</a></li>';
+	function fallback( $args ) {
+		if ( current_user_can( 'manage_options' ) ) {
+			$fb_output = null;
+
+			if ( $container ) {
+				$fb_output = '<' . $container;
+
+				if ( $container_id ) {
+					$fb_output .= ' id="' . $container_id . '"';
+				}
+
+				if ( $container_class ) {
+					$fb_output .= ' class="' . $container_class . '"';
+				}
+
+				$fb_output .= '>';
+			}
+			
+			$fb_output .= '<ul';
+
+			if ( $menu_id ) {
+				$fb_output .= ' id="' . $menu_id . '"';
+			}
+
+			if ( $menu_class ) {
+				$fb_output .= ' class="' . $menu_class . '"';
+			}
+
+			$fb_output .= '>';
+			$fb_output .= '<li><a href="' . admin_url( 'nav-menus.php' ) . '">Add a menu</a></li>';
+			$fb_output .= '</ul>';
+
+			if ( $container ) {
+				$fb_output .= '</' . $container . '>';
+			}
+
+			echo $fb_output;
 		}
 	}
 }

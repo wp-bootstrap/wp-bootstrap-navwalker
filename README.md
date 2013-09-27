@@ -35,14 +35,15 @@ Update your `wp_nav_menu()` function in `header.php` to use the new walker by ad
 ```php
 <?php
 	wp_nav_menu( array(
-		'menu'       => 'primary',
-		'theme_location' => 'primary',
-		'depth'      => 2,
-		'container'  => false,
-		'menu_class' => 'nav navbar-nav',
-		'fallback_cb' => 'wp_bootstrap_navwalker::fallback',
-		'walker' => new wp_bootstrap_navwalker())
-	);		  
+		'menu'				=> 'primary',
+		'theme_location'	=> 'primary',
+		'depth'				=> 2,
+		'container'			=> 'div',
+		'container_class'	=> 'collapse navbar-collapse navbar-ex1-collapse',
+		'menu_class'		=> 'nav navbar-nav',
+		'fallback_cb'		=> 'wp_bootstrap_navwalker::fallback',
+		'walker'			=> new wp_bootstrap_navwalker())
+	);
 ?>
 ```
 
@@ -75,20 +76,18 @@ Typically the menu is wrapped with additional markup, here is an example of a ` 
 			</a>
 		</div>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse navbar-ex1-collapse">
-			<?php
-				wp_nav_menu( array(
-					'menu'       => 'primary',
-					'theme_location' => 'primary',
-					'depth'      => 2,
-					'container'  => false,
-					'menu_class' => 'nav navbar-nav',
-					'fallback_cb' => 'wp_bootstrap_navwalker::fallback',
-					'walker' => new wp_bootstrap_navwalker())
-				);
-			?>
-		</div>
+		<?php
+			wp_nav_menu( array(
+				'menu'				=> 'primary',
+				'theme_location'	=> 'primary',
+				'depth'				=> 2,
+				'container'			=> 'div',
+				'container_class'	=> 'collapse navbar-collapse navbar-ex1-collapse',
+				'menu_class'		=> 'nav navbar-nav',
+				'fallback_cb'		=> 'wp_bootstrap_navwalker::fallback',
+				'walker'			=> new wp_bootstrap_navwalker())
+			);
+		?>
 	</div>
 </nav>
 ```
@@ -135,6 +134,9 @@ To set a disabled link simoly set the **Title Attribute** to `disabled` and the 
 
 Changelog
 ------------
+**2.0.4**
++ Updated fallback function to accept args array from wp_nav_menu
+
 **2.0.3**
 + Included a fallback function that adds a link to the WordPress menu manager if no menu has been assigned to the theme location.
 
