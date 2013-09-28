@@ -3,8 +3,8 @@
 /**
  * Class Name: wp_bootstrap_navwalker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
- * Description: A custom WordPress nav walker class to implement the Twitter Bootstrap 2.3.2 navigation style in a custom theme using the WordPress built in menu manager.
- * Version: 2.0.3
+ * Description: A custom WordPress nav walker class to implement the Bootstrap 3 navigation style in a custom theme using the WordPress built in menu manager.
+ * Version: 2.0.4
  * Author: Edward McIntyre - @twittem
  * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -145,7 +145,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 	 */
 
 	function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
-		if ( !$element ) {
+		if ( ! $element ) {
 			return;
 		}
 
@@ -166,11 +166,51 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 	 * and a manu has not been assigned to the theme location in the WordPress
 	 * menu manager the function with display nothing to a non-logged in user,
 	 * and will add a link to the WordPress menu manager if logged in as an admin.
+	 *
+	 * @param array $args passed from the wp_nav_menu function
+	 *
 	 */
 
-	function fallback() {
+	function fallback( $args ) {
 		if ( current_user_can( 'manage_options' ) ) {
-			echo '<p class="navbar-text"><a href="' . admin_url( 'nav-menus.php' ) . '">Add a menu</a></p>';
+
+			extract( $args );
+
+			$fb_output = null;
+
+			if ( $container ) {
+				$fb_output = '<' . $container;
+
+				if ( $container_id ) {
+					$fb_output .= ' id="' . $container_id . '"';
+				}
+
+				if ( $container_class ) {
+					$fb_output .= ' class="' . $container_class . '"';
+				}
+
+				$fb_output .= '>';
+			}
+
+			$fb_output .= '<ul';
+
+			if ( $menu_id ) {
+				$fb_output .= ' id="' . $menu_id . '"';
+			}
+
+			if ( $menu_class ) {
+				$fb_output .= ' class="' . $menu_class . '"';
+			}
+
+			$fb_output .= '>';
+			$fb_output .= '<li><a href="' . admin_url( 'nav-menus.php' ) . '">Add a menu</a></li>';
+			$fb_output .= '</ul>';
+
+			if ( $container ) {
+				$fb_output .= '</' . $container . '>';
+			}
+
+			echo $fb_output;
 		}
 	}
 
