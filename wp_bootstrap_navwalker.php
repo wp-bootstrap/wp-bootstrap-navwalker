@@ -19,7 +19,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 	 * @param string $output Passed by reference. Used to append additional content.
 	 * @param int $depth Depth of page. Used for padding.
 	 */
-	function start_lvl( &$output, $depth = 0, $args = array() ) {
+	public function start_lvl( &$output, $depth = 0, $args = array() ) {
 		$indent = str_repeat("\t", $depth);
 		$output .= "\n$indent<ul role=\"menu\" class=\" dropdown-menu\">\n";
 	}
@@ -34,7 +34,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 	 * @param int $current_page Menu item ID.
 	 * @param object $args
 	 */
-	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
 		/**
@@ -141,7 +141,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 	 * @param string $output Passed by reference. Used to append additional content.
 	 * @return null Null on failure with no changes to parameters.
 	 */
-	function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
+	public function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
         if ( ! $element )
             return;
 
@@ -165,7 +165,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 	 * @param array $args passed from the wp_nav_menu function.
 	 *
 	 */
-	function fallback( $args ) {
+	public static function fallback( $args ) {
 		if ( current_user_can( 'manage_options' ) ) {
 
 			extract( $args );
