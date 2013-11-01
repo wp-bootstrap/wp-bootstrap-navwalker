@@ -31,7 +31,7 @@
         <h1>
 <a name="wp-bootstrap-navwalker" class="anchor" href="#wp-bootstrap-navwalker"><span class="octicon octicon-link"></span></a>wp-bootstrap-navwalker</h1>
 
-<p><strong>A custom WordPress nav walker class to fully implement the Twitter Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager.</strong></p>
+<p><strong>A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager.</strong></p>
 
 <p><img src="http://edwardmcintyre.com/pub/github/navwalker-3-menu.jpg" alt="Extras"></p>
 
@@ -40,12 +40,14 @@
 
 <p>There are many changes Bootstrap 2.x &amp; Bootstrap 3.0 that affect both how the nav walker class is used and what the walker supports. For CSS changes I recommend reading the Migrating from 2.x to 3.0 in the official Bootstrap docs <a href="http://getbootstrap.com/getting-started/#migration">http://getbootstrap.com/getting-started/#migration</a></p>
 
-<p>The most noticeable functionality change im Bootstrap 3.0.0+ is that it only supports a signal dropdown level. This script in intended implement the Bootstrap 3.0 menu structure without adding additional features, additional dropdown levels will not be supported.</p>
+<p>The most noticeable functionality change in Bootstrap 3.0.0+ is that it only supports a single dropdown level. This script is intended to implement the Bootstrap 3.0 menu structure without adding additional features, so additional dropdown levels will not be supported.</p>
+
+<p>If you would like to use <strong>Bootstrap 2.x</strong> you can find the legacy version of the walker class here <a href="https://github.com/twittem/wp-bootstrap-navwalker/tree/For-Bootstrap-2.3.2">https://github.com/twittem/wp-bootstrap-navwalker/tree/For-Bootstrap-2.3.2</a></p>
 
 <h2>
 <a name="note" class="anchor" href="#note"><span class="octicon octicon-link"></span></a>NOTE</h2>
 
-<p>This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Twitter Bootstrap dropdown navigation, and does not include the required Bootstrap JS files. You will have to include them manually. </p>
+<p>This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Bootstrap dropdown navigation, and does not include the required Bootstrap JS files. You will have to include them manually. </p>
 
 <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
@@ -54,72 +56,81 @@
 
 <p>Open your WordPress themes <strong>functions.php</strong> file  <code>/wp-content/your-theme/functions.php</code> and add the following code:</p>
 
-<div class="highlight"><pre><span class="c1">// Register Custom Navigation Walker</span>
+<div class="highlight highlight-php"><pre><span class="c1">// Register Custom Navigation Walker</span>
 <span class="k">require_once</span><span class="p">(</span><span class="s1">'wp_bootstrap_navwalker.php'</span><span class="p">);</span>
 </pre></div>
 
 <h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<p>Update your <code>wp_nav_menu()</code> function to use the new walker by adding a "walker" item to the wp_nav_menu array.</p>
+<p>Update your <code>wp_nav_menu()</code> function in <code>header.php</code> to use the new walker by adding a "walker" item to the wp_nav_menu array.</p>
 
-<div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre><span class="o">&lt;?</span><span class="nx">php</span>
     <span class="nx">wp_nav_menu</span><span class="p">(</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'menu'</span>       <span class="o">=&gt;</span> <span class="s1">'primary'</span><span class="p">,</span>
-        <span class="s1">'theme_location'</span> <span class="o">=&gt;</span> <span class="s1">'primary'</span><span class="p">,</span>
-        <span class="s1">'depth'</span>      <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="s1">'container'</span>  <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
-        <span class="s1">'menu_class'</span> <span class="o">=&gt;</span> <span class="s1">'nav navbar-nav'</span><span class="p">,</span>
-        <span class="s1">'fallback_cb'</span> <span class="o">=&gt;</span> <span class="s1">'wp_page_menu'</span><span class="p">,</span>
-        <span class="s1">'walker'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">wp_bootstrap_navwalker</span><span class="p">())</span>
-    <span class="p">);</span>        
+        <span class="s1">'menu'</span>              <span class="o">=&gt;</span> <span class="s1">'primary'</span><span class="p">,</span>
+        <span class="s1">'theme_location'</span>    <span class="o">=&gt;</span> <span class="s1">'primary'</span><span class="p">,</span>
+        <span class="s1">'depth'</span>             <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s1">'container'</span>         <span class="o">=&gt;</span> <span class="s1">'div'</span><span class="p">,</span>
+        <span class="s1">'container_class'</span>   <span class="o">=&gt;</span> <span class="s1">'collapse navbar-collapse navbar-ex1-collapse'</span><span class="p">,</span>
+        <span class="s1">'menu_class'</span>        <span class="o">=&gt;</span> <span class="s1">'nav navbar-nav'</span><span class="p">,</span>
+        <span class="s1">'fallback_cb'</span>       <span class="o">=&gt;</span> <span class="s1">'wp_bootstrap_navwalker::fallback'</span><span class="p">,</span>
+        <span class="s1">'walker'</span>            <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">wp_bootstrap_navwalker</span><span class="p">())</span>
+    <span class="p">);</span>
 <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<p>Your menu will now be formatted with the correct syntax and classes to implement Twitter Bootstrap dropdown navigation. </p>
+<p>Your menu will now be formatted with the correct syntax and classes to implement Bootstrap dropdown navigation. </p>
+
+<p>You will also want to declare your new menu in your <code>functions.php</code> file.</p>
+
+<div class="highlight highlight-php"><pre><span class="nx">register_nav_menus</span><span class="p">(</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'primary'</span> <span class="o">=&gt;</span> <span class="nx">__</span><span class="p">(</span> <span class="s1">'Primary Menu'</span><span class="p">,</span> <span class="s1">'THEMENAME'</span> <span class="p">),</span>
+<span class="p">)</span> <span class="p">);</span>
+</pre></div>
 
 <p>Typically the menu is wrapped with additional markup, here is an example of a <code>navbar-fixed-top</code> menu that collapse for responsive navigation.</p>
 
-<div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span> 
-    <span class="o">&lt;</span><span class="nx">nav</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"navbar navbar-default navbar-fixed-top navbar-turquoise"</span> <span class="nx">role</span><span class="o">=</span><span class="s2">"navigation"</span><span class="o">&gt;</span>
-        <span class="o">&lt;!--</span> <span class="nx">Brand</span> <span class="k">and</span> <span class="nx">toggle</span> <span class="nx">get</span> <span class="nx">grouped</span> <span class="k">for</span> <span class="nx">better</span> <span class="nx">mobile</span> <span class="nx">display</span> <span class="o">--&gt;</span>
-        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"container"</span><span class="o">&gt;</span>
-            <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"navbar-header"</span><span class="o">&gt;</span>
-                <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"button"</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"navbar-toggle"</span> <span class="nx">data</span><span class="o">-</span><span class="nx">toggle</span><span class="o">=</span><span class="s2">"collapse"</span> <span class="nx">data</span><span class="o">-</span><span class="nx">target</span><span class="o">=</span><span class="s2">".navbar-ex1-collapse"</span><span class="o">&gt;</span>
-                    <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"sr-only"</span><span class="o">&gt;</span><span class="nx">Toggle</span> <span class="nx">navigation</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;</span>
-                    <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"icon-bar"</span><span class="o">&gt;&lt;/</span><span class="nx">span</span><span class="o">&gt;</span>
-                    <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"icon-bar"</span><span class="o">&gt;&lt;/</span><span class="nx">span</span><span class="o">&gt;</span>
-                    <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"icon-bar"</span><span class="o">&gt;&lt;/</span><span class="nx">span</span><span class="o">&gt;</span>
-                <span class="o">&lt;/</span><span class="nx">button</span><span class="o">&gt;</span>
+<div class="highlight highlight-php"><pre><span class="o">&lt;</span><span class="nx">nav</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"navbar navbar-default navbar-fixed-top"</span> <span class="nx">role</span><span class="o">=</span><span class="s2">"navigation"</span><span class="o">&gt;</span>
+    <span class="o">&lt;!--</span> <span class="nx">Brand</span> <span class="k">and</span> <span class="nx">toggle</span> <span class="nx">get</span> <span class="nx">grouped</span> <span class="k">for</span> <span class="nx">better</span> <span class="nx">mobile</span> <span class="nx">display</span> <span class="o">--&gt;</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"container"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"navbar-header"</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"button"</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"navbar-toggle"</span> <span class="nx">data</span><span class="o">-</span><span class="nx">toggle</span><span class="o">=</span><span class="s2">"collapse"</span> <span class="nx">data</span><span class="o">-</span><span class="nx">target</span><span class="o">=</span><span class="s2">".navbar-ex1-collapse"</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"sr-only"</span><span class="o">&gt;</span><span class="nx">Toggle</span> <span class="nx">navigation</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"icon-bar"</span><span class="o">&gt;&lt;/</span><span class="nx">span</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"icon-bar"</span><span class="o">&gt;&lt;/</span><span class="nx">span</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"icon-bar"</span><span class="o">&gt;&lt;/</span><span class="nx">span</span><span class="o">&gt;</span>
+            <span class="o">&lt;/</span><span class="nx">button</span><span class="o">&gt;</span>
 
-                <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"navbar-brand"</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"&lt;?php bloginfo('url'); ?&gt;"</span><span class="o">&gt;</span>
-                    <span class="o">&lt;?</span><span class="nx">php</span> <span class="nx">bloginfo</span><span class="p">(</span><span class="s1">'name'</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
-<span class="x">                &lt;/a&gt;</span>
-<span class="x">            &lt;/div&gt;</span>
+            <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"navbar-brand"</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"&lt;?php bloginfo('url'); ?&gt;"</span><span class="o">&gt;</span>
+                <span class="o">&lt;?</span><span class="nx">php</span> <span class="nx">bloginfo</span><span class="p">(</span><span class="s1">'name'</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">            &lt;/a&gt;</span>
+<span class="x">        &lt;/div&gt;</span>
 
-<span class="x">            &lt;!-- Collect the nav links, forms, and other content for toggling --&gt;</span>
-<span class="x">            &lt;div class="collapse navbar-collapse navbar-ex1-collapse"&gt;</span>
-<span class="x">                </span><span class="cp">&lt;?php</span>
-                    <span class="nx">wp_nav_menu</span><span class="p">(</span> <span class="k">array</span><span class="p">(</span>
-                        <span class="s1">'menu'</span>       <span class="o">=&gt;</span> <span class="s1">'primary'</span><span class="p">,</span>
-                        <span class="s1">'theme_location'</span> <span class="o">=&gt;</span> <span class="s1">'primary'</span><span class="p">,</span>
-                        <span class="s1">'depth'</span>      <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
-                        <span class="s1">'container'</span>  <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
-                        <span class="s1">'menu_class'</span> <span class="o">=&gt;</span> <span class="s1">'nav navbar-nav'</span><span class="p">,</span>
-                        <span class="s1">'fallback_cb'</span> <span class="o">=&gt;</span> <span class="s1">'wp_page_menu'</span><span class="p">,</span>
-                        <span class="s1">'walker'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">wp_bootstrap_navwalker</span><span class="p">())</span>
-                    <span class="p">);</span>        
-                <span class="cp">?&gt;</span><span class="x"></span>
-<span class="x">            &lt;/div&gt;&lt;!-- /.navbar-collapse --&gt;</span>
-<span class="x">        &lt;/div&gt;&lt;!-- /.container --&gt;</span>
-<span class="x">    &lt;/nav&gt;</span>
-<span class="x">?&gt;</span>
+<span class="x">        </span><span class="cp">&lt;?php</span>
+            <span class="nx">wp_nav_menu</span><span class="p">(</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">'menu'</span>              <span class="o">=&gt;</span> <span class="s1">'primary'</span><span class="p">,</span>
+                <span class="s1">'theme_location'</span>    <span class="o">=&gt;</span> <span class="s1">'primary'</span><span class="p">,</span>
+                <span class="s1">'depth'</span>             <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="s1">'container'</span>         <span class="o">=&gt;</span> <span class="s1">'div'</span><span class="p">,</span>
+                <span class="s1">'container_class'</span>   <span class="o">=&gt;</span> <span class="s1">'collapse navbar-collapse navbar-ex1-collapse'</span><span class="p">,</span>
+                <span class="s1">'menu_class'</span>        <span class="o">=&gt;</span> <span class="s1">'nav navbar-nav'</span><span class="p">,</span>
+                <span class="s1">'fallback_cb'</span>       <span class="o">=&gt;</span> <span class="s1">'wp_bootstrap_navwalker::fallback'</span><span class="p">,</span>
+                <span class="s1">'walker'</span>            <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">wp_bootstrap_navwalker</span><span class="p">())</span>
+            <span class="p">);</span>
+        <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;/div&gt;</span>
+<span class="x">&lt;/nav&gt;</span>
 </pre></div>
 
 <p>To change your menu style add Bootstrap nav class names to the <code>menu_class</code> declaration.</p>
 
 <p>Review options in the Bootstrap docs for more information on nav classes
 <a href="http://getbootstrap.com/components/#nav">http://getbootstrap.com/components/#nav</a></p>
+
+<h2>
+<a name="displaying-the-menu-" class="anchor" href="#displaying-the-menu-"><span class="octicon octicon-link"></span></a>Displaying the Menu </h2>
+
+<p>To display the menu you must associate your menu with your theme location. You can do this by selecting your theme location in the <em>Theme Locations</em> list wile editing a menu in the WordPress menu manager.</p>
 
 <h2>
 <a name="extras" class="anchor" href="#extras"><span class="octicon octicon-link"></span></a>Extras</h2>
@@ -159,7 +170,19 @@
 <h2>
 <a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>Changelog</h2>
 
-<p><strong>2.0.1</strong></p>
+<p><strong>2.0.4</strong></p>
+
+<ul>
+<li>Updated fallback function to accept args array from wp_nav_menu</li>
+</ul><p><strong>2.0.3</strong></p>
+
+<ul>
+<li>Included a fallback function that adds a link to the WordPress menu manager if no menu has been assigned to the theme location.</li>
+</ul><p><strong>2.0.2</strong></p>
+
+<ul>
+<li>Small tweak to ensure carets are only displayed on top level dropdowns.</li>
+</ul><p><strong>2.0.1</strong></p>
 
 <ul>
 <li>Added missing <code>active</code> class to active menu items.</li>
