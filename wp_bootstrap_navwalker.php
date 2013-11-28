@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Class Name: wp_bootstrap_navwalker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
@@ -62,8 +61,11 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
 
-			if ( $args->has_children )
+			if ( $args->has_children && $depth ==  0 )
 				$class_names .= ' dropdown';
+
+			if ( $args->has_children && $depth >= 1 )
+				$class_names .= ' dropdown-submenu';
 
 			if ( in_array( 'current-menu-item', $classes ) )
 				$class_names .= ' active';
