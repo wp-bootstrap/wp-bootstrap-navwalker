@@ -128,7 +128,7 @@ Adding a dropdown header is very similar, add a new link with a **URL** of `#` a
 
 Disabled Links
 ------------
-To set a disabled link simoly set the **Title Attribute** to `disabled` and the class will do the rest. 
+To set a disabled link simply set the **Title Attribute** to `disabled` and the class will do the rest. 
 
 ![Header Example](http://edwardmcintyre.com/pub/github/navwalker-3-disabled.jpg)
 
