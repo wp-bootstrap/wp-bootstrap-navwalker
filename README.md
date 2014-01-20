@@ -71,7 +71,7 @@ Typically the menu is wrapped with additional markup, here is an example of a ` 
 				<span class="icon-bar"></span>
 			</button>
 
-			<a class="navbar-brand" href="<?php bloginfo('url'); ?>">
+			<a class="navbar-brand" href="<?php echo home_url(); ?>">
 				<?php bloginfo('name'); ?>
 			</a>
 		</div>
