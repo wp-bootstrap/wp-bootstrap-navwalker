@@ -69,6 +69,11 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 				$class_names .= ' dropdown';
 			}
 
+			//If item is current add active class to li
+			if($item->current) {
+				$class_names .= ' active';
+			}
+
 			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
 			$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args );
