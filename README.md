@@ -33,18 +33,19 @@ Usage
 Update your `wp_nav_menu()` function in `header.php` to use the new walker by adding a "walker" item to the wp_nav_menu array.
 
 ```php
-<?php
-	wp_nav_menu( array(
-		'menu'				=> 'primary',
-		'theme_location'	=> 'primary',
-		'depth'				=> 2,
-		'container'			=> 'div',
-		'container_class'	=> 'collapse navbar-collapse navbar-ex1-collapse',
-		'menu_class'		=> 'nav navbar-nav',
-		'fallback_cb'		=> 'wp_bootstrap_navwalker::fallback',
-		'walker'			=> new wp_bootstrap_navwalker())
-	);
-?>
+ <?php
+            wp_nav_menu( array(
+                'menu'              => 'primary',
+                'theme_location'    => 'primary',
+                'depth'             => 2,
+                'container'         => 'div',
+                'container_class'   => 'collapse navbar-collapse',
+		'container_id'      => 'bs-example-navbar-collapse-1',
+                'menu_class'        => 'nav navbar-nav',
+                'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
+                'walker'            => new wp_bootstrap_navwalker())
+            );
+        ?>
 ```
 
 Your menu will now be formatted with the correct syntax and classes to implement Bootstrap dropdown navigation. 
@@ -60,35 +61,35 @@ register_nav_menus( array(
 Typically the menu is wrapped with additional markup, here is an example of a ` navbar-fixed-top` menu that collapse for responsive navigation.
 
 ```php
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<!-- Brand and toggle get grouped for better mobile display -->
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="<?php echo home_url(); ?>">
+                <?php bloginfo('name'); ?>
+            </a>
+    </div>
 
-			<a class="navbar-brand" href="<?php bloginfo('url'); ?>">
-				<?php bloginfo('name'); ?>
-			</a>
-		</div>
-
-		<?php
-			wp_nav_menu( array(
-				'menu'				=> 'primary',
-				'theme_location'	=> 'primary',
-				'depth'				=> 2,
-				'container'			=> 'div',
-				'container_class'	=> 'collapse navbar-collapse navbar-ex1-collapse',
-				'menu_class'		=> 'nav navbar-nav',
-				'fallback_cb'		=> 'wp_bootstrap_navwalker::fallback',
-				'walker'			=> new wp_bootstrap_navwalker())
-			);
-		?>
-	</div>
+        <?php
+            wp_nav_menu( array(
+                'menu'              => 'primary',
+                'theme_location'    => 'primary',
+                'depth'             => 2,
+                'container'         => 'div',
+                'container_class'   => 'collapse navbar-collapse',
+		'container_id'      => 'bs-example-navbar-collapse-1',
+                'menu_class'        => 'nav navbar-nav',
+                'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
+                'walker'            => new wp_bootstrap_navwalker())
+            );
+        ?>
+    </div>
 </nav>
 ```
 
@@ -122,13 +123,13 @@ To add an Icon to your link simple place the Glyphicon class name in the links *
 
 Dropdown Headers
 ------------
-Adding a dropdown header is very similar, add a new link with a **URL** of `#` and a **Title Attribute** of `dropdown-header` (it matches the Bootstrap CSS class so it's easy to remember).  set the **Navigation Label** to your header text and the class will do the rest. 
+Adding a dropdown header is very similar, add a new link with a **URL** of `#` and a **Title Attribute** of `dropdown-header` (it matches the Bootstrap CSS class so it's easy to remember).  set the **Navigation Label** to your header text and the class will do the rest.
 
 ![Header Example](http://edwardmcintyre.com/pub/github/navwalker-3-header.jpg)
 
 Disabled Links
 ------------
-To set a disabled link simoly set the **Title Attribute** to `disabled` and the class will do the rest. 
+To set a disabled link simply set the **Title Attribute** to `disabled` and the class will do the rest. 
 
 ![Header Example](http://edwardmcintyre.com/pub/github/navwalker-3-disabled.jpg)
 
