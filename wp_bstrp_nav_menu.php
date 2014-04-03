@@ -23,7 +23,9 @@
 add_filter( 'wp_setup_nav_menu_item', 'wp_bstrp_icon_field' );	
 	/**
 	 * Save menu custom fields
-	 *
+	 * Added wp_kses validation, leaves database clean when empty
+	 * Allowed icon font tags: <span></span>, <i></i> and 'class' attribute
+	 * 
 	 * @access      public
 	 * @since       1.0 
 	 * @return      void
@@ -32,8 +34,20 @@ add_filter( 'wp_setup_nav_menu_item', 'wp_bstrp_icon_field' );
 	
 	    // Check if element is properly sent
 	    if ( is_array( $_REQUEST['menu-item-icon']) ) {
-	        $icon_value = $_REQUEST['menu-item-icon'][$menu_item_db_id];
-	        update_post_meta( $menu_item_db_id, '_menu_item_icon', $icon_value );
+	        $allowed_tags = array(
+				'span' => array( 'class' => array()),
+				'i' => array( 'class' => array())
+				);
+			$icon_value_unfiltered = $_REQUEST['menu-item-icon'][$menu_item_db_id];
+			$icon_value = wp_kses($icon_value_unfiltered, $allowed_tags);
+			
+			if ( !empty($icon_value) ) {
+	        		update_post_meta( $menu_item_db_id, '_menu_item_icon', $icon_value );
+			
+			} else {
+			
+			delete_post_meta( $menu_item_db_id, '_menu_item_icon');
+			}
 	    }
 	    
 	}
