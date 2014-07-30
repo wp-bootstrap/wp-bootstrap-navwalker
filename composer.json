@@ -1,4 +1,5 @@
 {
-  "name" : "prionkor/wp-bootstrap-navwalker",
-  "require" : "twittem/wp-bootstrap-navwalker"
+  "version": "2.0.4",
+  "type": "library",
+  "name" : "prionkor/wp-bootstrap-navwalker"
 }
