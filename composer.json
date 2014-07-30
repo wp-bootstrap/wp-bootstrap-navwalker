@@ -1,3 +1,4 @@
 {
-  "require" : ""
+  "name" : "prionkor/wp-bootstrap-navwalker",
+  "require" : "twittem/wp-bootstrap-navwalker"
 }
