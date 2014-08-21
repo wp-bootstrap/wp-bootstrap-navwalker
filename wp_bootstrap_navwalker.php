@@ -128,7 +128,7 @@ add_filter('nav_menu_css_class', function($classes, $item, $args) {
    *  dashboard as a class. Ignore glyphicons which are appended
    *  inside another element such as a <span/> or <i/>
    */
-    $classes[] = $item->attr_title;
+    $classes[] = strtolower($item->attr_title);
   }
   return $classes;
 },10, 3); # $priority, $accepted_args
