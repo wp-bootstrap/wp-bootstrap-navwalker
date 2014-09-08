@@ -35,7 +35,6 @@ Update your `wp_nav_menu()` function in `header.php` to use the new walker by ad
 ```php
  <?php
             wp_nav_menu( array(
-                'menu'              => 'primary',
                 'theme_location'    => 'primary',
                 'depth'             => 2,
                 'container'         => 'div',
@@ -78,7 +77,6 @@ Typically the menu is wrapped with additional markup, here is an example of a ` 
 
         <?php
             wp_nav_menu( array(
-                'menu'              => 'primary',
                 'theme_location'    => 'primary',
                 'depth'             => 2,
                 'container'         => 'div',
