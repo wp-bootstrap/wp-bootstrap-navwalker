@@ -40,8 +40,10 @@ Update your `wp_nav_menu()` function in `header.php` to use the new walker by ad
                 'depth'             => 2,
                 'container'         => 'div',
                 'container_class'   => 'collapse navbar-collapse',
-		'container_id'      => 'bs-example-navbar-collapse-1',
+                'container_id'      => 'bs-example-navbar-collapse-1',
                 'menu_class'        => 'nav navbar-nav',
+                'dropdown_class'    => 'dropdown-menu',
+                'depth_class_prefix' => 'd',
                 'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
                 'walker'            => new wp_bootstrap_navwalker())
             );
@@ -83,7 +85,7 @@ Typically the menu is wrapped with additional markup, here is an example of a ` 
                 'depth'             => 2,
                 'container'         => 'div',
                 'container_class'   => 'collapse navbar-collapse',
-		'container_id'      => 'bs-example-navbar-collapse-1',
+                'container_id'      => 'bs-example-navbar-collapse-1',
                 'menu_class'        => 'nav navbar-nav',
                 'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
                 'walker'            => new wp_bootstrap_navwalker())
@@ -98,6 +100,27 @@ To change your menu style add Bootstrap nav class names to the `menu_class` decl
 Review options in the Bootstrap docs for more information on nav classes
 http://getbootstrap.com/components/#nav
 
+## Deep menus
+
+Bootstrap does not display more than one level of menus, so if your menu is deeper,
+it will be flattened: all items at depth > 0 will be listed at same level.
+You can set the option `depth_class_prefix` so that all items get assigned a
+depth-based class, and define proper indentation in your css files:
+
+```php
+...
+                'depth_class_prefix' => 'd',
+...
+```css
+.d1 {
+    margin-left: 15px;
+}
+.d2 {
+    margin-left: 30px;
+}
+
+```
+
 Displaying the Menu 
 -------------------
 To display the menu you must associate your menu with your theme location. You can do this by selecting your theme location in the *Theme Locations* list wile editing a menu in the WordPress menu manager.
@@ -107,28 +130,29 @@ Extras
 
 ![Extras](http://edwardmcintyre.com/pub/github/navwalker-3-menu.jpg)
 
-This script included the ability to add Bootstrap dividers, dropdown headers, glyphicons and disables links to your menus through the WordPress menu UI. 
+This script included the ability to add dividers, dropdown headers, glyphicons,
+ and disable links, all through the WordPress menu UI.
 
-Dividers
-------------
+## Dividers
+
 Simply add a Link menu item with a **URL** of `#` and a **Link Text** or **Title Attribute** of `divider` (case-insensitive so ‘divider’ or ‘Divider’ will both work ) and the class will do the rest.
 
 ![Divider Example](http://edwardmcintyre.com/pub/github/navwalker-divider.jpg)
 
-Glyphicons
-------------
+## Glyphicons
+
 To add an Icon to your link simple place the Glyphicon class name in the links **Title Attribute** field and the class will do the rest. IE `glyphicon-bullhorn`
 
 ![Header Example](http://edwardmcintyre.com/pub/github/navwalker-3-glyphicons.jpg)
 
-Dropdown Headers
-------------
+## Dropdown Headers
+
 Adding a dropdown header is very similar, add a new link with a **URL** of `#` and a **Title Attribute** of `dropdown-header` (it matches the Bootstrap CSS class so it's easy to remember).  set the **Navigation Label** to your header text and the class will do the rest.
 
 ![Header Example](http://edwardmcintyre.com/pub/github/navwalker-3-header.jpg)
 
-Disabled Links
-------------
+## Disabled Links
+
 To set a disabled link simply set the **Title Attribute** to `disabled` and the class will do the rest. 
 
 ![Header Example](http://edwardmcintyre.com/pub/github/navwalker-3-disabled.jpg)
