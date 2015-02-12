@@ -1,7 +1,7 @@
 {
   "version": "2.0.4",
   "type": "library",
-  "name" : "twittem/wp-bootstrap-navwalker",
+  "name" : "prionkor/wp-bootstrap-navwalker",
   "autoload" : {
     "files":[
         "wp_bootstrap_navwalker.php"
