@@ -38,14 +38,50 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
 		/**
-		 * Dividers, Headers or Disabled
+		 * Search Form, Dividers, Headers or Disabled
 		 * =============================
 		 * Determine whether the item is a Divider, Header, Disabled or regular
 		 * menu item. To prevent errors we use the strcasecmp() function to so a
 		 * comparison that is not case sensitive. The strcasecmp() function returns
 		 * a 0 if the strings are equal.
 		 */
-		if ( strcasecmp( $item->attr_title, 'divider' ) == 0 && $depth === 1 ) {
+		if ( strcasecmp( $item->attr_title, 'search_form' ) == 0 && $depth === 0 ) {
+			$output .= $indent . '
+			</ul>
+			<form class="nav navbar-form navbar-left input-group" role="search" action="'.home_url("/").'">
+				<div class="form-group">
+					<input type="search" name="s" class="form-control" placeholder="Search...">
+				</div><button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+			</form>
+			<ul class="nav navbar-nav"><li class="hidden">
+			';
+			
+		} elseif ( strcasecmp( $item->attr_title, 'search_form_right' ) == 0 && $depth === 0 ) {
+			$output .= $indent . '
+			</ul>
+			<form class="nav navbar-form navbar-right input-group" role="search" action="'.home_url("/").'">
+				<div class="form-group">
+					<input type="search" name="s" class="form-control" placeholder="Search...">
+				</div><button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+			</form>
+			<ul class="nav navbar-nav navbar-right"><li class="hidden">
+			';
+			
+		} elseif ( strcasecmp( $item->attr_title, 'search_form_full' ) == 0 && $depth === 0 ) {
+			$output .= $indent . '
+			</ul>
+			<form class="nav navbar-form navbar-full" role="search" action="'.home_url("/").'">
+				<div class="input-group">
+					<input type="search" name="s" class="form-control" placeholder="Search...">
+					<div class="input-group-btn">
+						<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+					</div>
+				</div>
+			</form>
+			<ul class="nav navbar-nav navbar-right"><li class="hidden">
+			';
+			
+		} elseif ( strcasecmp( $item->attr_title, 'divider' ) == 0 && $depth === 1 ) {
 			$output .= $indent . '<li role="presentation" class="divider">';
 		} else if ( strcasecmp( $item->title, 'divider') == 0 && $depth === 1 ) {
 			$output .= $indent . '<li role="presentation" class="divider">';
