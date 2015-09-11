@@ -167,7 +167,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 	 *
 	 */
 	public static function fallback( $args ) {
-		if ( current_user_can( 'manage_options' ) ) {
+		if ( current_user_can( 'edit_theme_options' ) ) {
 
 			extract( $args );
 
