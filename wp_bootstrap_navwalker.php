@@ -55,7 +55,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 	 */
 	public function end_el( &$output, $item, $depth = 0, $args = array() ) {
 		if($depth === 1){
-			if(strcasecmp( $item->attr_title, 'divider' ) == 0 || strcasecmp( $item->title, 'divider') == 0)) {
+			if(strcasecmp( $item->attr_title, 'divider' ) == 0 || strcasecmp( $item->title, 'divider') == 0) {
 				$output .= '</div>';
 			}else if ($depth === 1 && (strcasecmp( $item->attr_title, 'header') == 0 && $depth === 1)) {
 				$output .= '</h6>';
