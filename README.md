@@ -131,8 +131,6 @@ Dropdown Headers
 ------------
 Adding a dropdown header is very similar, add a new link with a **URL** of `#` and a **Title Attribute** of `dropdown-header` (it matches the Bootstrap CSS class so it's easy to remember).  set the **Navigation Label** to your header text and the class will do the rest.
 
-![Header Example](http://edwardmcintyre.com/pub/github/navwalker-3-header.jpg)
-
 Disabled Links
 ------------
 To set a disabled link simply set the **Title Attribute** to `disabled` and the class will do the rest. 
