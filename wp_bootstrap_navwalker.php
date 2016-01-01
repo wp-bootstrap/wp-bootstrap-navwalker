@@ -124,10 +124,10 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			 * The 'fa-2x' class makes the font a little bigger and it fits better on the navbar.
 			 */
 			 
-			 $font_awesome_class = 'fa';
-			 $show_title_class = 'fa-show-title';
-			 // we're going to show the title of the link by default
-			 $show_title = true;
+			$font_awesome_class = 'fa';
+			$show_title_class = 'fa-show-title';
+			// we're going to show the title of the link by default
+			$show_title = true;
 			 
 			if ( ! empty( $item->attr_title ) ) {
 				/* see if we have a font awesome font in the attr_title */
