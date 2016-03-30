@@ -3,7 +3,7 @@ wp-bootstrap-navwalker
 
 **A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager.**
 
-![Extras](http://edwardmcintyre.com/pub/github/navwalker-3-menu.jpg)
+![Extras](navbar-walker.png)
 
 Bootstrap 2.x vs Bootstrap 3.0
 ------------
@@ -15,7 +15,7 @@ If you would like to use **Bootstrap 2.x** you can find the legacy version of th
 
 NOTE
 ----
-This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Bootstrap dropdown navigation, and does not include the required Bootstrap JS files. You will have to include them manually. 
+This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Bootstrap dropdown navigation, and does not include the required Bootstrap JS files. You will have to include them manually.
 
 Installation
 ------------
@@ -40,7 +40,7 @@ Update your `wp_nav_menu()` function in `header.php` to use the new walker by ad
                 'depth'             => 2,
                 'container'         => 'div',
                 'container_class'   => 'collapse navbar-collapse',
-		'container_id'      => 'bs-example-navbar-collapse-1',
+		        'container_id'      => 'myNavbar',
                 'menu_class'        => 'nav navbar-nav',
                 'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
                 'walker'            => new wp_bootstrap_navwalker())
@@ -48,7 +48,7 @@ Update your `wp_nav_menu()` function in `header.php` to use the new walker by ad
         ?>
 ```
 
-Your menu will now be formatted with the correct syntax and classes to implement Bootstrap dropdown navigation. 
+Your menu will now be formatted with the correct syntax and classes to implement Bootstrap dropdown navigation.
 
 You will also want to declare your new menu in your `functions.php` file.
 
@@ -61,35 +61,37 @@ register_nav_menus( array(
 Typically the menu is wrapped with additional markup, here is an example of a ` navbar-fixed-top` menu that collapse for responsive navigation.
 
 ```php
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-inverse" role="navigation">
   <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="<?php echo home_url(); ?>">
-                <?php bloginfo('name'); ?>
-            </a>
-    </div>
+ <p class="site-title">
+	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="navbar-brand" rel="home"><?php bloginfo( 'name' ); ?></a>
+ </p>
 
-        <?php
+</div>
+
+<?php
             wp_nav_menu( array(
                 'menu'              => 'primary',
                 'theme_location'    => 'primary',
                 'depth'             => 2,
                 'container'         => 'div',
                 'container_class'   => 'collapse navbar-collapse',
-		'container_id'      => 'bs-example-navbar-collapse-1',
-                'menu_class'        => 'nav navbar-nav',
+        		'container_id'      => 'myNavbar',
+                'menu_class'        => 'nav navbar-nav navbar-right',
                 'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
                 'walker'            => new wp_bootstrap_navwalker())
             );
-        ?>
+        ?>			
+
+
     </div>
+  </div>
 </nav>
 ```
 
@@ -98,40 +100,37 @@ To change your menu style add Bootstrap nav class names to the `menu_class` decl
 Review options in the Bootstrap docs for more information on nav classes
 http://getbootstrap.com/components/#nav
 
-Displaying the Menu 
+Displaying the Menu
 -------------------
 To display the menu you must associate your menu with your theme location. You can do this by selecting your theme location in the *Theme Locations* list wile editing a menu in the WordPress menu manager.
 
 Extras
 ------------
 
-![Extras](http://edwardmcintyre.com/pub/github/navwalker-3-menu.jpg)
+![Extras](navbar-walker.png)
 
-This script included the ability to add Bootstrap dividers, dropdown headers, glyphicons and disables links to your menus through the WordPress menu UI. 
+This script included the ability to add Bootstrap dividers, dropdown headers, glyphicons and disables links to your menus through the WordPress menu UI.
 
 Dividers
 ------------
 Simply add a Link menu item with a **URL** of `#` and a **Link Text** or **Title Attribute** of `divider` (case-insensitive so ‘divider’ or ‘Divider’ will both work ) and the class will do the rest.
 
-![Divider Example](http://edwardmcintyre.com/pub/github/navwalker-divider.jpg)
+![Divider Example](navbar-walker.png)
 
 Glyphicons
 ------------
 To add an Icon to your link simple place the Glyphicon class name in the links **Title Attribute** field and the class will do the rest. IE `glyphicon-bullhorn`
 
-![Header Example](http://edwardmcintyre.com/pub/github/navwalker-3-glyphicons.jpg)
 
 Dropdown Headers
 ------------
 Adding a dropdown header is very similar, add a new link with a **URL** of `#` and a **Title Attribute** of `dropdown-header` (it matches the Bootstrap CSS class so it's easy to remember).  set the **Navigation Label** to your header text and the class will do the rest.
 
-![Header Example](http://edwardmcintyre.com/pub/github/navwalker-3-header.jpg)
 
 Disabled Links
 ------------
-To set a disabled link simply set the **Title Attribute** to `disabled` and the class will do the rest. 
+To set a disabled link simply set the **Title Attribute** to `disabled` and the class will do the rest.
 
-![Header Example](http://edwardmcintyre.com/pub/github/navwalker-3-disabled.jpg)
 
 Changelog
 ------------
