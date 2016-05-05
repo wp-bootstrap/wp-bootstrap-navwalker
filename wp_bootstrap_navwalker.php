@@ -48,7 +48,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			$output .= $indent . '<li role="presentation" class="divider">';
 		} else if ( 0 === strcasecmp( $item->title, 'divider' ) && 1 === $depth ) {
 			$output .= $indent . '<li role="presentation" class="divider">';
-		} else if ( 0 === trcasecmp( $item->attr_title, 'dropdown-header' ) && 1 === $depth ) {
+		} else if ( 0 === strcasecmp( $item->attr_title, 'dropdown-header' ) && 1 === $depth ) {
 			$output .= $indent . '<li role="presentation" class="dropdown-header">' . esc_attr( $item->title );
 		} else if ( 0 === strcasecmp( $item->attr_title, 'disabled' ) ) {
 			$output .= $indent . '<li role="presentation" class="disabled"><a href="#">' . esc_attr( $item->title ) . '</a>';
