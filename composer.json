@@ -1,0 +1,19 @@
+{
+  "name": "twittem/wp-bootstrap-navwalker",
+  "description": "A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager.",
+  "keywords": [
+    "css",
+    "bootstrap",
+  ],
+  "homepage": "https://github.com/twittem/wp-bootstrap-navwalker",
+  "authors": [
+    {
+      "name": "Edward McIntyre",
+      "email": "edward@edwardmcintyre.com"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/twittem/wp-bootstrap-navwalker/issues"
+  },
+  "license": "GNU",
+}
