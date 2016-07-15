@@ -6,7 +6,7 @@
  */
 
 /**
- * Class Name: wp_bootstrap_navwalker
+ * Class Name: WP_Bootstrap_Navwalker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
  * Description: A custom WordPress nav walker class to implement the Bootstrap 3 navigation style in a custom theme using the WordPress built in menu manager.
  * Version: 2.0.4
@@ -17,7 +17,7 @@
 
 
 /**
- * Wp_bootstrap_navwalker class.
+ * WP_Bootstrap_Navwalker class.
  *
  * @extends Walker_Nav_Menu
  */
@@ -161,7 +161,7 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
 	 * Menu Fallback
 	 * =============
 	 * If this function is assigned to the wp_nav_menu's fallback_cb variable
-	 * and a manu has not been assigned to the theme location in the WordPress
+	 * and a menu has not been assigned to the theme location in the WordPress
 	 * menu manager the function with display nothing to a non-logged in user,
 	 * and will add a link to the WordPress menu manager if logged in as an admin.
 	 *
