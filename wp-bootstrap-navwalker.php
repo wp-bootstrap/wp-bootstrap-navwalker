@@ -1,5 +1,11 @@
 <?php
 /**
+ * WP Bootstrap Navwalker
+ *
+ * @package WP-Bootstrap-Navwalker
+ */
+
+/**
  * Class Name: wp_bootstrap_navwalker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
  * Description: A custom WordPress nav walker class to implement the Bootstrap 3 navigation style in a custom theme using the WordPress built in menu manager.
@@ -10,14 +16,24 @@
  */
 
 
-class wp_bootstrap_navwalker extends Walker_Nav_Menu {
+/**
+ * Wp_bootstrap_navwalker class.
+ *
+ * @extends Walker_Nav_Menu
+ */
+class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
 
 	/**
+	 * Start Level.
+	 *
 	 * @see Walker::start_lvl()
 	 * @since 3.0.0
 	 *
-	 * @param string $output Passed by reference. Used to append additional content.
-	 * @param int    $depth Depth of page. Used for padding.
+	 * @access public
+	 * @param mixed $output Passed by reference. Used to append additional content.
+	 * @param int   $depth (default: 0) Depth of page. Used for padding.
+	 * @param array $args (default: array()) Arguments.
+	 * @return void
 	 */
 	public function start_lvl( &$output, $depth = 0, $args = array() ) {
 		$indent = str_repeat( "\t", $depth );
@@ -25,17 +41,22 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 	}
 
 	/**
+	 * Start El.
+	 *
 	 * @see Walker::start_el()
 	 * @since 3.0.0
 	 *
-	 * @param string $output Passed by reference. Used to append additional content.
-	 * @param object $item Menu item data object.
-	 * @param int    $depth Depth of menu item. Used for padding.
-	 * @param int    $current_page Menu item ID.
-	 * @param object $args
+	 * @access public
+	 * @param mixed $output Passed by reference. Used to append additional content.
+	 * @param mixed $item Menu item data object.
+	 * @param int   $depth (default: 0) Depth of menu item. Used for padding.
+	 * @param array $args (default: array()) Arguments.
+	 * @param int   $id (default: 0) Menu item ID.
+	 * @return void
 	 */
 	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
+
 		/**
 		 * Dividers, Headers or Disabled
 		 * =============================
@@ -117,12 +138,13 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 	 * @see Walker::start_el()
 	 * @since 2.5.0
 	 *
-	 * @param object $element Data object.
-	 * @param array  $children_elements List of elements to continue traversing.
-	 * @param int    $max_depth Max depth to traverse.
-	 * @param int    $depth Depth of current element.
-	 * @param array  $args Arguments.
-	 * @param string $output Passed by reference. Used to append additional content.
+	 * @access public
+	 * @param mixed $element Data object.
+	 * @param mixed $children_elements List of elements to continue traversing.
+	 * @param mixed $max_depth Max depth to traverse.
+	 * @param mixed $depth Depth of current element.
+	 * @param mixed $args Arguments.
+	 * @param mixed $output Passed by reference. Used to append additional content.
 	 * @return null Null on failure with no changes to parameters.
 	 */
 	public function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
@@ -163,7 +185,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			if ( $menu_class ) {
 				$fb_output .= ' class="' . $menu_class . '"'; }
 			$fb_output .= '>';
-			$fb_output .= '<li><a href="' . admin_url( 'nav-menus.php' ) . '">Add a menu</a></li>';
+			$fb_output .= '<li><a href="' . admin_url( 'nav-menus.php' ) . '">'. __( 'Add a menu', '' ) .'</a></li>';
 			$fb_output .= '</ul>';
 			if ( $container ) {
 				$fb_output .= '</' . $container . '>'; }

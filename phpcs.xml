@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+	Customize the rules WP Enforcer uses by editing this file according to PHP_CodeSniffer's
+	ruleset.xml standard: https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml
+-->
+<ruleset name="WP-Enforcer">
+	<description>Coding standards from WP Enforcer.</description>
+
+	<!-- FILES -->
+
+	<exclude-pattern>*/tests/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+
+	<!--
+		Don't get angry about checking files that don't contain code
+		@link https://github.com/stevegrunwell/wp-enforcer/issues/12
+	-->
+	<rule ref="Internal.NoCodeFound">
+		<severity>0</severity>
+	</rule>
+
+	<rule ref="WordPress-Extra" />
+	<rule ref="WordPress-Docs" />
+</ruleset>
