@@ -7,7 +7,6 @@
 
 **A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager.**
 
-![Extras](http://edwardmcintyre.com/pub/github/navwalker-3-menu.jpg)
 
 Bootstrap 2.x vs Bootstrap 3.0
 ------------
@@ -109,7 +108,6 @@ To display the menu you must associate your menu with your theme location. You c
 Extras
 ------------
 
-![Extras](http://edwardmcintyre.com/pub/github/navwalker-3-menu.jpg)
 
 This script included the ability to add Bootstrap dividers, dropdown headers, glyphicons and disables links to your menus through the WordPress menu UI. 
 
@@ -117,25 +115,21 @@ Dividers
 ------------
 Simply add a Link menu item with a **URL** of `#` and a **Link Text** or **Title Attribute** of `divider` (case-insensitive so ‘divider’ or ‘Divider’ will both work ) and the class will do the rest.
 
-![Divider Example](http://edwardmcintyre.com/pub/github/navwalker-divider.jpg)
 
 Glyphicons
 ------------
 To add an Icon to your link simple place the Glyphicon class name in the links **Title Attribute** field and the class will do the rest. IE `glyphicon-bullhorn`
 
-![Header Example](http://edwardmcintyre.com/pub/github/navwalker-3-glyphicons.jpg)
 
 Dropdown Headers
 ------------
 Adding a dropdown header is very similar, add a new link with a **URL** of `#` and a **Title Attribute** of `dropdown-header` (it matches the Bootstrap CSS class so it's easy to remember).  set the **Navigation Label** to your header text and the class will do the rest.
 
-![Header Example](http://edwardmcintyre.com/pub/github/navwalker-3-header.jpg)
 
 Disabled Links
 ------------
 To set a disabled link simply set the **Title Attribute** to `disabled` and the class will do the rest. 
 
-![Header Example](http://edwardmcintyre.com/pub/github/navwalker-3-disabled.jpg)
 
 Changelog
 ------------
@@ -155,5 +149,3 @@ Changelog
 + Class was completly re-written using the latest Wordpress 3.6 walker class.
 + Now full supports Bootstrap 3.0+
 + Tested with wp_debug & the Theme Check plugin.
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/twittem/wp-bootstrap-navwalker/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
