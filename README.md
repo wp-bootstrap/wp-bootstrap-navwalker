@@ -1,4 +1,4 @@
-wp-bootstrap-navwalker
+# WP Bootstrap Navwalker
 ======================
 
 **A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager.**
@@ -19,13 +19,13 @@ This is a utility class that is intended to format your WordPress theme menu wit
 
 Installation
 ------------
-Place **wp_bootstrap_navwalker.php** in your WordPress theme folder `/wp-content/your-theme/`
+Place **wp-bootstrap-navwalker.php** in your WordPress theme folder `/wp-content/your-theme/`
 
 Open your WordPress themes **functions.php** file  `/wp-content/your-theme/functions.php` and add the following code:
 
 ```php
 // Register Custom Navigation Walker
-require_once('wp_bootstrap_navwalker.php');
+require_once('wp-bootstrap-navwalker.php');
 ```
 
 Usage
@@ -42,8 +42,8 @@ Update your `wp_nav_menu()` function in `header.php` to use the new walker by ad
                 'container_class'   => 'collapse navbar-collapse',
                 'container_id'      => 'bs-example-navbar-collapse-1',
                 'menu_class'        => 'nav navbar-nav',
-                'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
-                'walker'            => new wp_bootstrap_navwalker())
+                'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
+                'walker'            => new WP_Bootstrap_Navwalker())
             );
         ?>
 ```
@@ -85,8 +85,8 @@ Typically the menu is wrapped with additional markup, here is an example of a ` 
                 'container_class'   => 'collapse navbar-collapse',
 		'container_id'      => 'bs-example-navbar-collapse-1',
                 'menu_class'        => 'nav navbar-nav',
-                'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
-                'walker'            => new wp_bootstrap_navwalker())
+                'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
+                'walker'            => new WP_Bootstrap_Navwalker())
             );
         ?>
     </div>
