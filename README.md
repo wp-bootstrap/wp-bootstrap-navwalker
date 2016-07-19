@@ -3,7 +3,7 @@
 
 [![Code Climate](https://codeclimate.com/repos/578e618674ea5d0094008044/badges/a286fd351486e904a3ea/gpa.svg)](https://codeclimate.com/repos/578e618674ea5d0094008044/feed)
 [![Test Coverage](https://codeclimate.com/repos/578e618674ea5d0094008044/badges/a286fd351486e904a3ea/coverage.svg)](https://codeclimate.com/repos/578e618674ea5d0094008044/coverage)
-[![Test Coverage](https://codeclimate.com/repos/578e618674ea5d0094008044/badges/a286fd351486e904a3ea/coverage.svg)](https://codeclimate.com/repos/578e618674ea5d0094008044/coverage)
+<a href="https://codeclimate.com/repos/578e618674ea5d0094008044/feed"><img src="https://codeclimate.com/repos/578e618674ea5d0094008044/badges/a286fd351486e904a3ea/issue_count.svg" /></a>
 
 **A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager.**
 
