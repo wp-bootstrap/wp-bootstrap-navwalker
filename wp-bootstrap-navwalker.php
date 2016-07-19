@@ -6,11 +6,11 @@
  */
 
 /**
- * Class Name: WP_Bootstrap_Navwalker
- * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
+ * Class Name: WP-Bootstrap-Navwalker
+ * GitHub URI: https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * Description: A custom WordPress nav walker class to implement the Bootstrap 3 navigation style in a custom theme using the WordPress built in menu manager.
  * Version: 2.0.4
- * Author: Edward McIntyre - @twittem
+ * Author: Edward McIntyre - @twittem, Brandon Hubbard
  * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
