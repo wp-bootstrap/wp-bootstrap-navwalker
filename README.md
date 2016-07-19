@@ -1,5 +1,4 @@
 # WP Bootstrap Navwalker
-======================
 
 [![Code Climate](https://codeclimate.com/repos/578e618674ea5d0094008044/badges/a286fd351486e904a3ea/gpa.svg)](https://codeclimate.com/repos/578e618674ea5d0094008044/feed)
 [![Test Coverage](https://codeclimate.com/repos/578e618674ea5d0094008044/badges/a286fd351486e904a3ea/coverage.svg)](https://codeclimate.com/repos/578e618674ea5d0094008044/coverage)
