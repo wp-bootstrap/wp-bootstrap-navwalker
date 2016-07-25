@@ -85,7 +85,7 @@ Typically the menu is wrapped with additional markup, here is an example of a ` 
                 'depth'             => 2,
                 'container'         => 'div',
                 'container_class'   => 'collapse navbar-collapse',
-			'container_id'      => 'bs-example-navbar-collapse-1',
+				'container_id'      => 'bs-example-navbar-collapse-1',
                 'menu_class'        => 'nav navbar-nav',
                 'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
                 'walker'            => new WP_Bootstrap_Navwalker())
