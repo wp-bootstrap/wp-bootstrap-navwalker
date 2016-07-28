@@ -15,7 +15,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-
+if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 /**
  * WP_Bootstrap_Navwalker class.
  *
@@ -199,4 +199,5 @@ if ( ! empty( $item->attr_title ) ):
 			echo $fb_output;
 		}
 	}
+}
 }
