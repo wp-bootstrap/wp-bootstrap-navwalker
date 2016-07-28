@@ -110,15 +110,22 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
 			$item_output = $args->before;
 
 			/*
-			 * Glyphicons
+			 * Glyphicons/Font-Awesome
 			 * ===========
 			 * Since the the menu item is NOT a Divider or Header we check the see
 			 * if there is a value in the attr_title property. If the attr_title
 			 * property is NOT null we apply it as the class name for the glyphicon.
 			 */
-			if ( ! empty( $item->attr_title ) ) {
-				$item_output .= '<a'. $attributes .'><span class="glyphicon ' . esc_attr( $item->attr_title ) . '"></span>&nbsp;';
-			} else { 				$item_output .= '<a'. $attributes .'>'; }
+if ( ! empty( $item->attr_title ) ):
+				$pos = strpos(esc_attr($item->attr_title), "glyphicon");
+				if($pos !== false):
+					$item_output .= '<a'. $attributes .'><span class="glyphicon ' . esc_attr( $item->attr_title ) . '"></span>&nbsp;';
+				else:
+					$item_output .= '<a'. $attributes .'><i class="fa ' . esc_attr( $item->attr_title ) . '"></i>&nbsp;';
+				endif;
+			else:
+				$item_output .= '<a'. $attributes .'>';
+			endif;
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
 			$item_output .= ( $args->has_children && 0 === $depth ) ? ' <span class="caret"></span></a>' : '</a>';
 			$item_output .= $args->after;
