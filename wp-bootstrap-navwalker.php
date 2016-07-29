@@ -37,7 +37,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 */
 		public function start_lvl( &$output, $depth = 0, $args = array() ) {
 			$indent = str_repeat( "\t", $depth );
-			$output .= "\n$indent<ul role=\"menu\" class=\" dropdown-menu\">\n";
+			$output .= "\n$indent<ul role=\"menu\" class=\" dropdown-menu\" >\n";
 		}
 
 		/**
@@ -85,7 +85,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 				$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args );
 				$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
-				$output .= $indent . '<li' . $id . $value . $class_names .'>';
+				$output .= $indent . '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement"' . $id . $value . $class_names .'>';
 				$atts = array();
 
 				if ( empty( $item->attr_title ) ) {
@@ -124,7 +124,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				 */
 				if ( ! empty( $item->attr_title ) ) :
 								$pos = strpos( esc_attr( $item->attr_title ), 'glyphicon' );
-					if ( $pos !== false ) :
+					if ( false !== $pos ) :
 						$item_output .= '<a'. $attributes .'><span class="glyphicon ' . esc_attr( $item->attr_title ) . '"></span>&nbsp;';
 								else :
 									$item_output .= '<a'. $attributes .'><i class="fa ' . esc_attr( $item->attr_title ) . '"></i>&nbsp;';
