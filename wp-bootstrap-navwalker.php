@@ -11,8 +11,8 @@
  * Description: A custom WordPress nav walker class to implement the Bootstrap 3 navigation style in a custom theme using the WordPress built in menu manager.
  * Version: 2.0.4
  * Author: Edward McIntyre - @twittem, Brandon Hubbard
- * License: GPL-2.0+
- * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+ * License: GPL-3.0+
+ * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
