@@ -1,8 +1,8 @@
 # WP Bootstrap Navwalker
 
-[![Code Climate](https://codeclimate.com/repos/578e618674ea5d0094008044/badges/a286fd351486e904a3ea/gpa.svg)](https://codeclimate.com/repos/578e618674ea5d0094008044/feed)
-[![Test Coverage](https://codeclimate.com/repos/578e618674ea5d0094008044/badges/a286fd351486e904a3ea/coverage.svg)](https://codeclimate.com/repos/578e618674ea5d0094008044/coverage)
-[![Issue Count](https://codeclimate.com/repos/578e618674ea5d0094008044/badges/a286fd351486e904a3ea/issue_count.svg)](https://codeclimate.com/repos/578e618674ea5d0094008044/feed)
+[![Code Climate](https://codeclimate.com/github/wp-bootstrap/wp-bootstrap-navwalker/badges/gpa.svg)](https://codeclimate.com/github/wp-bootstrap/wp-bootstrap-navwalker)
+[![Test Coverage](https://codeclimate.com/github/wp-bootstrap/wp-bootstrap-navwalker/badges/coverage.svg)](https://codeclimate.com/github/wp-bootstrap/wp-bootstrap-navwalker/coverage)
+[![Issue Count](https://codeclimate.com/github/wp-bootstrap/wp-bootstrap-navwalker/badges/issue_count.svg)](https://codeclimate.com/github/wp-bootstrap/wp-bootstrap-navwalker)
 
 **A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager.**
 
