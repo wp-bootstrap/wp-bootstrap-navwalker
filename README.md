@@ -4,7 +4,7 @@
 [![Test Coverage](https://codeclimate.com/github/wp-bootstrap/wp-bootstrap-navwalker/badges/coverage.svg)](https://codeclimate.com/github/wp-bootstrap/wp-bootstrap-navwalker/coverage)
 [![Issue Count](https://codeclimate.com/github/wp-bootstrap/wp-bootstrap-navwalker/badges/issue_count.svg)](https://codeclimate.com/github/wp-bootstrap/wp-bootstrap-navwalker)
 
-**A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager.**
+A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager.
 
 ## Bootstrap 2.x vs Bootstrap 3.0
 
@@ -12,7 +12,7 @@ There are many changes Bootstrap 2.x & Bootstrap 3.0 that affect both how the na
 
 The most noticeable functionality change in Bootstrap 3.0.0+ is that it only supports a single dropdown level. This script is intended to implement the Bootstrap 3.0 menu structure without adding additional features, so additional dropdown levels will not be supported.
 
-If you would like to use **Bootstrap 2.x** you can find the legacy version of the walker class here https://github.com/twittem/wp-bootstrap-navwalker/tree/For-Bootstrap-2.3.2
+If you would like to use **Bootstrap 2.x** you can use the [legacy version](https://github.com/twittem/wp-bootstrap-navwalker/tree/For-Bootstrap-2.3.2) of the walker class. 
 
 ## NOTE
 
@@ -55,7 +55,7 @@ You will also want to declare your new menu in your `functions.php` file.
 
 ```php
 register_nav_menus( array(
-	'primary' => __( 'Primary Menu', 'THEMENAME' ),
+        'primary' => __( 'Primary Menu', 'THEMENAME' ),
 ) );
 ```
 
@@ -84,7 +84,7 @@ Typically the menu is wrapped with additional markup, here is an example of a ` 
                 'depth'             => 2,
                 'container'         => 'div',
                 'container_class'   => 'collapse navbar-collapse',
-				'container_id'      => 'bs-example-navbar-collapse-1',
+		'container_id'      => 'bs-example-navbar-collapse-1',
                 'menu_class'        => 'nav navbar-nav',
                 'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
                 'walker'            => new WP_Bootstrap_Navwalker())
