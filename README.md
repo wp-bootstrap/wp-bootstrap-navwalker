@@ -12,7 +12,7 @@ There are many changes Bootstrap 2.x & Bootstrap 3.0 that affect both how the na
 
 The most noticeable functionality change in Bootstrap 3.0.0+ is that it only supports a single dropdown level. This script is intended to implement the Bootstrap 3.0 menu structure without adding additional features, so additional dropdown levels will not be supported.
 
-If you would like to use **Bootstrap 2.x** you can use the [legacy version](https://github.com/twittem/wp-bootstrap-navwalker/tree/For-Bootstrap-2.3.2) of the walker class. 
+If you would like to use **Bootstrap 2.x** you can use the [legacy version](https://github.com/twittem/wp-bootstrap-navwalker/tree/For-Bootstrap-2.3.2) of the walker class.
 
 ## NOTE
 
@@ -84,7 +84,7 @@ Typically the menu is wrapped with additional markup, here is an example of a ` 
                 'depth'             => 2,
                 'container'         => 'div',
                 'container_class'   => 'collapse navbar-collapse',
-		'container_id'      => 'bs-example-navbar-collapse-1',
+                'container_id'      => 'bs-example-navbar-collapse-1',
                 'menu_class'        => 'nav navbar-nav',
                 'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
                 'walker'            => new WP_Bootstrap_Navwalker())
