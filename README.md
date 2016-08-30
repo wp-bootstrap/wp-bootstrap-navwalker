@@ -6,10 +6,9 @@
 
 **A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager.**
 
-
 ## Bootstrap 2.x vs Bootstrap 3.0
 
-There are many changes Bootstrap 2.x & Bootstrap 3.0 that affect both how the nav walker class is used and what the walker supports. For CSS changes I recommend reading the Migrating from 2.x to 3.0 in the official Bootstrap docs http://getbootstrap.com/getting-started/#migration
+There are many changes Bootstrap 2.x & Bootstrap 3.0 that affect both how the nav walker class is used and what the walker supports. For CSS changes I recommend reading the [Migrating from 2.x to 3.0](https://getbootstrap.com/getting-started/#migration) in the official Bootstrap docs.
 
 The most noticeable functionality change in Bootstrap 3.0.0+ is that it only supports a single dropdown level. This script is intended to implement the Bootstrap 3.0 menu structure without adding additional features, so additional dropdown levels will not be supported.
 
@@ -97,8 +96,8 @@ Typically the menu is wrapped with additional markup, here is an example of a ` 
 
 To change your menu style add Bootstrap nav class names to the `menu_class` declaration.
 
-Review options in the Bootstrap docs for more information on nav classes
-http://getbootstrap.com/components/#nav
+Review options in the Bootstrap docs for more information on [nav classes](https://getbootstrap.com/components/#nav).
+
 
 ### Displaying the Menu
 
@@ -112,37 +111,38 @@ This script included the ability to add Bootstrap dividers, dropdown headers, gl
 
 Simply add a Link menu item with a **URL** of `#` and a **Link Text** or **Title Attribute** of `divider` (case-insensitive so ‘divider’ or ‘Divider’ will both work ) and the class will do the rest.
 
-
 ### Glyphicons
 
 To add an Icon to your link simple place the Glyphicon class name in the links **Title Attribute** field and the class will do the rest. IE `glyphicon-bullhorn`
-
 
 ### Dropdown Headers
 
 Adding a dropdown header is very similar, add a new link with a **URL** of `#` and a **Title Attribute** of `dropdown-header` (it matches the Bootstrap CSS class so it's easy to remember).  set the **Navigation Label** to your header text and the class will do the rest.
 
-
 ### Disabled Links
 
 To set a disabled link simply set the **Title Attribute** to `disabled` and the class will do the rest.
 
-
 ### Changelog
 
 **2.0.4**
-+ Updated fallback function to accept args array from wp_nav_menu
+
+* Updated fallback function to accept args array from wp_nav_menu
 
 **2.0.3**
-+ Included a fallback function that adds a link to the WordPress menu manager if no menu has been assigned to the theme location.
+
+* Included a fallback function that adds a link to the WordPress menu manager if no menu has been assigned to the theme location.
 
 **2.0.2**
-+ Small tweak to ensure carets are only displayed on top level dropdowns.
+
+* Small tweak to ensure carets are only displayed on top level dropdowns.
 
 **2.0.1**
-+ Added missing `active` class to active menu items.
+
+* Added missing `active` class to active menu items.
 
 **2.0**
-+ Class was completly re-written using the latest Wordpress 3.6 walker class.
-+ Now full supports Bootstrap 3.0+
-+ Tested with wp_debug & the Theme Check plugin.
+
+* Class was completly re-written using the latest Wordpress 3.6 walker class.
+* Now full supports Bootstrap 3.0+
+* Tested with wp_debug & the Theme Check plugin.
