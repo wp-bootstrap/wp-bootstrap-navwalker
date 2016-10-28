@@ -5,16 +5,21 @@
  * @package WP-Bootstrap-Navwalker
  */
 
-/**
- * Class Name: WP-Bootstrap-Navwalker
- * GitHub URI: https://github.com/wp-bootstrap/wp-bootstrap-navwalker
+/*
+ * Class Name: WP_Bootstrap_Navwalker
+ * Plugin Name: WP Bootstrap Navwalker
+ * Plugin URI:  https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * Description: A custom WordPress nav walker class to implement the Bootstrap 3 navigation style in a custom theme using the WordPress built in menu manager.
+ * Author: Edward McIntyre - @twittem, WP Bootstrap
  * Version: 2.0.4
- * Author: Edward McIntyre - @twittem, Brandon Hubbard
+ * Author URI: https://github.com/wp-bootstrap
+ * GitHub Plugin URI: https://github.com/wp-bootstrap/wp-bootstrap-navwalker
+ * GitHub Branch: master
  * License: GPL-3.0+
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
- */
+*/
 
+/* Check if Class Exists. */
 if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 	/**
 	 * WP_Bootstrap_Navwalker class.
@@ -57,7 +62,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 			$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
-			/**
+		/**
 		 * Dividers, Headers or Disabled
 		 * =============================
 		 * Determine whether the item is a Divider, Header, Disabled or regular
