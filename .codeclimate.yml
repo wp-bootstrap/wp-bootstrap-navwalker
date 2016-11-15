@@ -16,8 +16,18 @@ engines:
       standard: "WordPress-Core,WordPress-Docs,WordPress-Extra"
   phpmd:
     enabled: true
+    checks:
+      Controversial/CamelCaseParameterName:
+        enabled: false
+      Controversial/CamelCaseMethodName:
+        enabled: false
+      Controversial/CamelCasePropertyName:
+        enabled: false
+      Controversial/CamelCaseVariableName:
+        enabled: false
   eslint:
     enabled: true
+    channel: "eslint-2"
   scss-lint:
     enabled: true
   markdownlint:
