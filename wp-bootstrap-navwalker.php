@@ -62,21 +62,21 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 			$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
-		/**
-		 * Dividers, Headers or Disabled
-		 * =============================
-		 * Determine whether the item is a Divider, Header, Disabled or regular
-		 * menu item. To prevent errors we use the strcasecmp() function to so a
-		 * comparison that is not case sensitive. The strcasecmp() function returns
-		 * a 0 if the strings are equal.
-		 */
+			/**
+			* Dividers, Headers or Disabled
+			* =============================
+			* Determine whether the item is a Divider, Header, Disabled or regular
+			* menu item. To prevent errors we use the strcasecmp() function to so a
+			* comparison that is not case sensitive. The strcasecmp() function returns
+			* a 0 if the strings are equal.
+		 	*/
 			if ( 0 === strcasecmp( $item->attr_title, 'divider' ) && 1 === $depth ) {
 				$output .= $indent . '<li role="presentation" class="divider">';
-			} else if ( 0 === strcasecmp( $item->title, 'divider' ) && 1 === $depth ) {
+			} elseif ( 0 === strcasecmp( $item->title, 'divider' ) && 1 === $depth ) {
 				$output .= $indent . '<li role="presentation" class="divider">';
-			} else if ( 0 === strcasecmp( $item->attr_title, 'dropdown-header' ) && 1 === $depth ) {
+			} elseif ( 0 === strcasecmp( $item->attr_title, 'dropdown-header' ) && 1 === $depth ) {
 				$output .= $indent . '<li role="presentation" class="dropdown-header">' . esc_attr( $item->title );
-			} else if ( 0 === strcasecmp( $item->attr_title, 'disabled' ) ) {
+			} elseif ( 0 === strcasecmp( $item->attr_title, 'disabled' ) ) {
 				$output .= $indent . '<li role="presentation" class="disabled"><a href="#">' . esc_attr( $item->title ) . '</a>';
 			} else {
 				$class_names = $value = '';
@@ -130,12 +130,12 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				if ( ! empty( $item->attr_title ) ) :
 								$pos = strpos( esc_attr( $item->attr_title ), 'glyphicon' );
 					if ( false !== $pos ) :
-						$item_output .= '<a'. $attributes .'><span class="glyphicon ' . esc_attr( $item->attr_title ) . '"></span>&nbsp;';
+						$item_output .= '<a' . $attributes . '><span class="glyphicon ' . esc_attr( $item->attr_title ) . '"></span>&nbsp;';
 								else :
-									$item_output .= '<a'. $attributes .'><i class="fa ' . esc_attr( $item->attr_title ) . '"></i>&nbsp;';
+									$item_output .= '<a' . $attributes . '><i class="fa ' . esc_attr( $item->attr_title ) . '"></i>&nbsp;';
 											endif;
 				else :
-					$item_output .= '<a'. $attributes .'>';
+					$item_output .= '<a' . $attributes . '>';
 				endif;
 				$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
 				$item_output .= ( $args->has_children && 0 === $depth ) ? ' <span class="caret"></span></a>' : '</a>';
@@ -187,27 +187,29 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 */
 		public static function fallback( $args ) {
 			if ( current_user_can( 'edit_theme_options' ) ) {
+
+				/* Get Arguments. */
 				extract( $args );
-				$fb_output = null;
+
 				if ( $container ) {
-					$fb_output = '<' . $container;
+					echo '<' . esc_attr( $container );
 					if ( $container_id ) {
-						$fb_output .= ' id="' . $container_id . '"'; }
+						echo ' id="' . esc_attr( $container_id ) . '"';
+					}
 					if ( $container_class ) {
-						$fb_output .= ' class="' . $container_class . '"'; }
-					$fb_output .= '>';
+						echo ' class="' . sanitize_html_class( $container_class ) . '"'; }
+					echo '>';
 				}
-				$fb_output .= '<ul';
+				echo '<ul';
 				if ( $menu_id ) {
-					$fb_output .= ' id="' . $menu_id . '"'; }
+					echo ' id="' . esc_attr( $menu_id ) . '"'; }
 				if ( $menu_class ) {
-					$fb_output .= ' class="' . $menu_class . '"'; }
-				$fb_output .= '>';
-				$fb_output .= '<li><a href="' . admin_url( 'nav-menus.php' ) . '">'. __( 'Add a menu', '' ) .'</a></li>';
-				$fb_output .= '</ul>';
+					echo ' class="' . esc_attr( $menu_class ) . '"'; }
+				echo '>';
+				echo '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" title="">'. esc_attr( 'Add a menu', '' ) .'</a></li>';
+				echo '</ul>';
 				if ( $container ) {
-					$fb_output .= '</' . $container . '>'; }
-				echo $fb_output;
+					echo '</' . esc_attr( $container ) . '>'; }
 			}
 		}
 	}
