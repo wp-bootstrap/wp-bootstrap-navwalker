@@ -189,7 +189,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			if ( current_user_can( 'edit_theme_options' ) ) {
 
 				/* Get Arguments. */
-				extract( $args );
+				$container = $args['container'];
+				$container_id = $args['container_id'];
+				$container_class = $args['container_class'];
+				$menu_class = $args['menu_class'];
+				$menu_id = $args['menu_id'];
 
 				if ( $container ) {
 					echo '<' . esc_attr( $container );
