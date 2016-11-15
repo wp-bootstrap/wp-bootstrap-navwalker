@@ -85,12 +85,12 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
 				if ( $args->has_children ) {
 					$class_names .= ' dropdown'; }
-				if ( in_array( 'current-menu-item', $classes ) ) {
+				if ( in_array( 'current-menu-item', $classes, true ) ) {
 					$class_names .= ' active'; }
 				$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
-				$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args );
+				$id = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args );
 				$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
-				$output .= $indent . '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement"' . $id . $value . $class_names .'>';
+				$output .= $indent . '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement"' . $id . $value . $class_names . '>';
 				$atts = array();
 
 				if ( empty( $item->attr_title ) ) {
@@ -206,7 +206,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				if ( $menu_class ) {
 					echo ' class="' . esc_attr( $menu_class ) . '"'; }
 				echo '>';
-				echo '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" title="">'. esc_attr( 'Add a menu', '' ) .'</a></li>';
+				echo '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" title="">' . esc_attr( 'Add a menu', '' ) . '</a></li>';
 				echo '</ul>';
 				if ( $container ) {
 					echo '</' . esc_attr( $container ) . '>'; }
