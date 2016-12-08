@@ -59,7 +59,9 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 
 			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 			$classes[] = 'menu-item-' . $item->ID;
-
+			// BSv4 classname - as of v4-alpha-5
+			$classes[] = 'nav-item';
+			
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
 
 			if ( $args->has_children )
