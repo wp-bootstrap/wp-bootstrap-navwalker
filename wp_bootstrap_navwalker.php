@@ -82,12 +82,24 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 
 			// If item has_children add atts to a.
 			if ( $args->has_children && $depth === 0 ) {
-				$atts['href']   		= '#';
+				$atts['href']           = '#';
 				$atts['data-toggle']	= 'dropdown';
 				$atts['class']			= 'dropdown-toggle';
 				$atts['aria-haspopup']	= 'true';
 			} else {
 				$atts['href'] = ! empty( $item->url ) ? $item->url : '';
+			}
+
+			if ($item->attr_title != '' && $item->attr_title != 'disable' && $item->attr_title != 'dropdown-header') {
+				if ( strpos($item->attr_title, 'glyphicon-') !== false ) {
+						if ( strpos($item->attr_title, ' ') !== false )
+							$glyph=substr($item->attr_title, 0, strpos($item->attr_title, ' '));
+						else
+							$glyph=substr($item->attr_title, 0); 
+						$atts['title']=str_replace($glyph, '', $item->attr_title);
+				}
+				else
+					$atts['title']=$item->attr_title;
 			}
 
 			$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args );
@@ -109,8 +121,9 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			 * if there is a value in the attr_title property. If the attr_title
 			 * property is NOT null we apply it as the class name for the glyphicon.
 			 */
-			if ( ! empty( $item->attr_title ) )
-				$item_output .= '<a'. $attributes .'><span class="glyphicon ' . esc_attr( $item->attr_title ) . '"></span>&nbsp;';
+			if ( isset($glyph) && $glyph!='' ) {
+				$item_output .= '<a'. $attributes .'><span class="glyphicon ' . esc_attr( $glyph ) . '"></span>&nbsp;';
+			}
 			else
 				$item_output .= '<a'. $attributes .'>';
 
