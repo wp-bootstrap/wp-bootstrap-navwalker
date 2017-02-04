@@ -62,7 +62,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
 
-			if ( $args->has_children )
+			if ( $this->has_children )
 				$class_names .= ' dropdown';
 
 			if ( in_array( 'current-menu-item', $classes ) )
@@ -81,7 +81,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			$atts['rel']    = ! empty( $item->xfn )		? $item->xfn	: '';
 
 			// If item has_children add atts to a.
-			if ( $args->has_children && $depth === 0 ) {
+			if ( $this->has_children && $depth === 0 ) {
 				$atts['href']   		= '#';
 				$atts['data-toggle']	= 'dropdown';
 				$atts['class']			= 'dropdown-toggle';
@@ -115,46 +115,12 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 				$item_output .= '<a'. $attributes .'>';
 
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-			$item_output .= ( $args->has_children && 0 === $depth ) ? ' <span class="caret"></span></a>' : '</a>';
+			$item_output .= ( $this->has_children && 0 === $depth ) ? ' <span class="caret"></span></a>' : '</a>';
 			$item_output .= $args->after;
 
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 		}
 	}
-
-	/**
-	 * Traverse elements to create list from elements.
-	 *
-	 * Display one element if the element doesn't have any children otherwise,
-	 * display the element and its children. Will only traverse up to the max
-	 * depth and no ignore elements under that depth.
-	 *
-	 * This method shouldn't be called directly, use the walk() method instead.
-	 *
-	 * @see Walker::start_el()
-	 * @since 2.5.0
-	 *
-	 * @param object $element Data object
-	 * @param array $children_elements List of elements to continue traversing.
-	 * @param int $max_depth Max depth to traverse.
-	 * @param int $depth Depth of current element.
-	 * @param array $args
-	 * @param string $output Passed by reference. Used to append additional content.
-	 * @return null Null on failure with no changes to parameters.
-	 */
-	public function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
-        if ( ! $element )
-            return;
-
-        $id_field = $this->db_fields['id'];
-
-        // Display this element.
-        if ( is_object( $args[0] ) )
-           $args[0]->has_children = ! empty( $children_elements[ $element->$id_field ] );
-
-        parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
-    }
-
 	/**
 	 * Menu Fallback
 	 * =============
