@@ -23,7 +23,7 @@ class WP_Test_Bootstrap_NavWalker extends WP_UnitTestCase {
 		$items = array( (object) array( 'id' => 1, 'parent' => 0 ) );
 		$output = $this->walker->walk( $items, 0 );
 		$this->assertEquals( 1, $this->walker->get_number_of_root_elements( $items ) );
-		$this->assertEquals( '<li>1</li>', $output );
+		$this->assertEquals( '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="" class=""><a title="1" href="#">1</a></li>', $output );
 	}
 	
 	function test_single_item_flat() {
