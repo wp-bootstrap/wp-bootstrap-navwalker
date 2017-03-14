@@ -1,42 +1,33 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>wp-bootstrap-navwalker by twittem</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <meta charset="UTF-8">
+    <title>wp-bootstrap-navwalker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>wp-bootstrap-navwalker</h1>
-        <p>A custom Wordpress walker to implement the Twitter Bootstrap dropdown navigation using the Wordpress built in menu manager.</p>
+    <section class="page-header">
+      <h1 class="project-name">WP Bootstrap Navwalker</h1>
+      <h2 class="project-tagline">A custom Wordpress walker to implement the Twitter Bootstrap dropdown navigation using the Wordpress built in menu manager.</h2>
+      <a href="https://github.com/wp-bootstrap/wp-bootstrap-navwalker" class="btn">View on GitHub</a>
+      <a href="https://github.com/wp-bootstrap/wp-bootstrap-navwalker/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/wp-bootstrap/wp-bootstrap-navwalker/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-        <p class="view"><a href="https://github.com/twittem/wp-bootstrap-navwalker">View the Project on GitHub <small>twittem/wp-bootstrap-navwalker</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/twittem/wp-bootstrap-navwalker/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/twittem/wp-bootstrap-navwalker/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/twittem/wp-bootstrap-navwalker">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1>
-<a name="wp-bootstrap-navwalker" class="anchor" href="#wp-bootstrap-navwalker"><span class="octicon octicon-link"></span></a>wp-bootstrap-navwalker</h1>
+    <section class="main-content">
+      <h1>
+<a id="wp-bootstrap-navwalker" class="anchor" href="#wp-bootstrap-navwalker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>wp-bootstrap-navwalker</h1>
 
 <p><strong>A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager.</strong></p>
 
 <p><img src="http://edwardmcintyre.com/pub/github/navwalker-3-menu.jpg" alt="Extras"></p>
 
 <h2>
-<a name="bootstrap-2x-vs-bootstrap-30" class="anchor" href="#bootstrap-2x-vs-bootstrap-30"><span class="octicon octicon-link"></span></a>Bootstrap 2.x vs Bootstrap 3.0</h2>
+<a id="bootstrap-2x-vs-bootstrap-30" class="anchor" href="#bootstrap-2x-vs-bootstrap-30" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Bootstrap 2.x vs Bootstrap 3.0</h2>
 
 <p>There are many changes Bootstrap 2.x &amp; Bootstrap 3.0 that affect both how the nav walker class is used and what the walker supports. For CSS changes I recommend reading the Migrating from 2.x to 3.0 in the official Bootstrap docs <a href="http://getbootstrap.com/getting-started/#migration">http://getbootstrap.com/getting-started/#migration</a></p>
 
@@ -45,82 +36,79 @@
 <p>If you would like to use <strong>Bootstrap 2.x</strong> you can find the legacy version of the walker class here <a href="https://github.com/twittem/wp-bootstrap-navwalker/tree/For-Bootstrap-2.3.2">https://github.com/twittem/wp-bootstrap-navwalker/tree/For-Bootstrap-2.3.2</a></p>
 
 <h2>
-<a name="note" class="anchor" href="#note"><span class="octicon octicon-link"></span></a>NOTE</h2>
+<a id="note" class="anchor" href="#note" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>NOTE</h2>
 
 <p>This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Bootstrap dropdown navigation, and does not include the required Bootstrap JS files. You will have to include them manually. </p>
 
 <h2>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>Place <strong>wp_bootstrap_navwalker.php</strong> in your WordPress theme folder <code>/wp-content/your-theme/</code></p>
 
 <p>Open your WordPress themes <strong>functions.php</strong> file  <code>/wp-content/your-theme/functions.php</code> and add the following code:</p>
 
-<div class="highlight highlight-php"><pre><span class="c1">// Register Custom Navigation Walker</span>
-<span class="k">require_once</span><span class="p">(</span><span class="s1">'wp_bootstrap_navwalker.php'</span><span class="p">);</span>
-</pre></div>
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-c">// Register Custom Navigation Walker</span></span>
+<span class="pl-s1"><span class="pl-k">require_once</span>(<span class="pl-s"><span class="pl-pds">'</span>wp_bootstrap_navwalker.php<span class="pl-pds">'</span></span>);</span></pre></div>
 
 <h2>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
 
 <p>Update your <code>wp_nav_menu()</code> function in <code>header.php</code> to use the new walker by adding a "walker" item to the wp_nav_menu array.</p>
 
-<div class="highlight highlight-php"><pre><span class="o">&lt;?</span><span class="nx">php</span>
-    <span class="nx">wp_nav_menu</span><span class="p">(</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'menu'</span>              <span class="o">=&gt;</span> <span class="s1">'primary'</span><span class="p">,</span>
-        <span class="s1">'theme_location'</span>    <span class="o">=&gt;</span> <span class="s1">'primary'</span><span class="p">,</span>
-        <span class="s1">'depth'</span>             <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="s1">'container'</span>         <span class="o">=&gt;</span> <span class="s1">'div'</span><span class="p">,</span>
-        <span class="s1">'container_class'</span>   <span class="o">=&gt;</span> <span class="s1">'collapse navbar-collapse navbar-ex1-collapse'</span><span class="p">,</span>
-        <span class="s1">'menu_class'</span>        <span class="o">=&gt;</span> <span class="s1">'nav navbar-nav'</span><span class="p">,</span>
-        <span class="s1">'fallback_cb'</span>       <span class="o">=&gt;</span> <span class="s1">'wp_bootstrap_navwalker::fallback'</span><span class="p">,</span>
-        <span class="s1">'walker'</span>            <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">wp_bootstrap_navwalker</span><span class="p">())</span>
-    <span class="p">);</span>
-<span class="cp">?&gt;</span><span class="x"></span>
-</pre></div>
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"> <span class="pl-k">&lt;</span>?<span class="pl-c1">php</span></span>
+<span class="pl-s1">            wp_nav_menu( <span class="pl-c1">array</span>(</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>menu<span class="pl-pds">'</span></span>              <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>primary<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>theme_location<span class="pl-pds">'</span></span>    <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>primary<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>depth<span class="pl-pds">'</span></span>             <span class="pl-k">=&gt;</span> <span class="pl-c1">2</span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>container<span class="pl-pds">'</span></span>         <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>div<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>container_class<span class="pl-pds">'</span></span>   <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>collapse navbar-collapse<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>container_id<span class="pl-pds">'</span></span>      <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>bs-example-navbar-collapse-1<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>menu_class<span class="pl-pds">'</span></span>        <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>nav navbar-nav<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>fallback_cb<span class="pl-pds">'</span></span>       <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>wp_bootstrap_navwalker::fallback<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>walker<span class="pl-pds">'</span></span>            <span class="pl-k">=&gt;</span> <span class="pl-k">new</span> <span class="pl-c1">wp_bootstrap_navwalker</span>())</span>
+<span class="pl-s1">            );</span>
+<span class="pl-s1">        </span><span class="pl-pse"><span class="pl-s1">?</span>&gt;</span></pre></div>
 
 <p>Your menu will now be formatted with the correct syntax and classes to implement Bootstrap dropdown navigation. </p>
 
 <p>You will also want to declare your new menu in your <code>functions.php</code> file.</p>
 
-<div class="highlight highlight-php"><pre><span class="nx">register_nav_menus</span><span class="p">(</span> <span class="k">array</span><span class="p">(</span>
-    <span class="s1">'primary'</span> <span class="o">=&gt;</span> <span class="nx">__</span><span class="p">(</span> <span class="s1">'Primary Menu'</span><span class="p">,</span> <span class="s1">'THEMENAME'</span> <span class="p">),</span>
-<span class="p">)</span> <span class="p">);</span>
-</pre></div>
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1">register_nav_menus( <span class="pl-c1">array</span>(</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>primary<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> __( <span class="pl-s"><span class="pl-pds">'</span>Primary Menu<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>THEMENAME<span class="pl-pds">'</span></span> ),</span>
+<span class="pl-s1">) );</span></pre></div>
 
 <p>Typically the menu is wrapped with additional markup, here is an example of a <code>navbar-fixed-top</code> menu that collapse for responsive navigation.</p>
 
-<div class="highlight highlight-php"><pre><span class="o">&lt;</span><span class="nx">nav</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"navbar navbar-default navbar-fixed-top"</span> <span class="nx">role</span><span class="o">=</span><span class="s2">"navigation"</span><span class="o">&gt;</span>
-    <span class="o">&lt;!--</span> <span class="nx">Brand</span> <span class="k">and</span> <span class="nx">toggle</span> <span class="nx">get</span> <span class="nx">grouped</span> <span class="k">for</span> <span class="nx">better</span> <span class="nx">mobile</span> <span class="nx">display</span> <span class="o">--&gt;</span>
-    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"container"</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"navbar-header"</span><span class="o">&gt;</span>
-            <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"button"</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"navbar-toggle"</span> <span class="nx">data</span><span class="o">-</span><span class="nx">toggle</span><span class="o">=</span><span class="s2">"collapse"</span> <span class="nx">data</span><span class="o">-</span><span class="nx">target</span><span class="o">=</span><span class="s2">".navbar-ex1-collapse"</span><span class="o">&gt;</span>
-                <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"sr-only"</span><span class="o">&gt;</span><span class="nx">Toggle</span> <span class="nx">navigation</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;</span>
-                <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"icon-bar"</span><span class="o">&gt;&lt;/</span><span class="nx">span</span><span class="o">&gt;</span>
-                <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"icon-bar"</span><span class="o">&gt;&lt;/</span><span class="nx">span</span><span class="o">&gt;</span>
-                <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"icon-bar"</span><span class="o">&gt;&lt;/</span><span class="nx">span</span><span class="o">&gt;</span>
-            <span class="o">&lt;/</span><span class="nx">button</span><span class="o">&gt;</span>
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">&lt;</span><span class="pl-c1">nav</span> <span class="pl-k">class</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>navbar navbar-default<span class="pl-pds">"</span></span> <span class="pl-c1">role</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>navigation<span class="pl-pds">"</span></span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">  <span class="pl-k">&lt;</span><span class="pl-c1">div</span> <span class="pl-k">class</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>container-fluid<span class="pl-pds">"</span></span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">    <span class="pl-k">&lt;</span><span class="pl-k">!</span><span class="pl-k">--</span> <span class="pl-c1">Brand</span> <span class="pl-k">and</span> <span class="pl-c1">toggle</span> <span class="pl-c1">get</span> <span class="pl-c1">grouped</span> <span class="pl-k">for</span> <span class="pl-c1">better</span> <span class="pl-c1">mobile</span> <span class="pl-c1">display</span> <span class="pl-k">--</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">    <span class="pl-k">&lt;</span><span class="pl-c1">div</span> <span class="pl-k">class</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>navbar-header<span class="pl-pds">"</span></span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">      <span class="pl-k">&lt;</span><span class="pl-c1">button</span> <span class="pl-c1">type</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-k">class</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>navbar-toggle<span class="pl-pds">"</span></span> <span class="pl-c1">data</span><span class="pl-k">-</span><span class="pl-c1">toggle</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>collapse<span class="pl-pds">"</span></span> <span class="pl-c1">data</span><span class="pl-k">-</span><span class="pl-c1">target</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>#bs-example-navbar-collapse-1<span class="pl-pds">"</span></span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">        <span class="pl-k">&lt;</span><span class="pl-c1">span</span> <span class="pl-k">class</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>sr-only<span class="pl-pds">"</span></span><span class="pl-k">&gt;</span><span class="pl-c1">Toggle</span> <span class="pl-c1">navigation</span><span class="pl-k">&lt;</span><span class="pl-k">/</span><span class="pl-c1">span</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">        <span class="pl-k">&lt;</span><span class="pl-c1">span</span> <span class="pl-k">class</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>icon-bar<span class="pl-pds">"</span></span><span class="pl-k">&gt;&lt;</span><span class="pl-k">/</span><span class="pl-c1">span</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">        <span class="pl-k">&lt;</span><span class="pl-c1">span</span> <span class="pl-k">class</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>icon-bar<span class="pl-pds">"</span></span><span class="pl-k">&gt;&lt;</span><span class="pl-k">/</span><span class="pl-c1">span</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">        <span class="pl-k">&lt;</span><span class="pl-c1">span</span> <span class="pl-k">class</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>icon-bar<span class="pl-pds">"</span></span><span class="pl-k">&gt;&lt;</span><span class="pl-k">/</span><span class="pl-c1">span</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">      <span class="pl-k">&lt;</span><span class="pl-k">/</span><span class="pl-c1">button</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">      <span class="pl-k">&lt;</span><span class="pl-c1">a</span> <span class="pl-k">class</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>navbar-brand<span class="pl-pds">"</span></span> <span class="pl-c1">href</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>&lt;?php echo home_url(); ?&gt;<span class="pl-pds">"</span></span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">                <span class="pl-k">&lt;</span>?<span class="pl-c1">php</span> bloginfo(<span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span>); </span><span class="pl-pse"><span class="pl-s1">?</span>&gt;</span>
+            &lt;/<span class="pl-ent">a</span>&gt;
+    &lt;/<span class="pl-ent">div</span>&gt;
 
-            <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">class</span><span class="o">=</span><span class="s2">"navbar-brand"</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"&lt;?php bloginfo('url'); ?&gt;"</span><span class="o">&gt;</span>
-                <span class="o">&lt;?</span><span class="nx">php</span> <span class="nx">bloginfo</span><span class="p">(</span><span class="s1">'name'</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
-<span class="x">            &lt;/a&gt;</span>
-<span class="x">        &lt;/div&gt;</span>
-
-<span class="x">        </span><span class="cp">&lt;?php</span>
-            <span class="nx">wp_nav_menu</span><span class="p">(</span> <span class="k">array</span><span class="p">(</span>
-                <span class="s1">'menu'</span>              <span class="o">=&gt;</span> <span class="s1">'primary'</span><span class="p">,</span>
-                <span class="s1">'theme_location'</span>    <span class="o">=&gt;</span> <span class="s1">'primary'</span><span class="p">,</span>
-                <span class="s1">'depth'</span>             <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
-                <span class="s1">'container'</span>         <span class="o">=&gt;</span> <span class="s1">'div'</span><span class="p">,</span>
-                <span class="s1">'container_class'</span>   <span class="o">=&gt;</span> <span class="s1">'collapse navbar-collapse navbar-ex1-collapse'</span><span class="p">,</span>
-                <span class="s1">'menu_class'</span>        <span class="o">=&gt;</span> <span class="s1">'nav navbar-nav'</span><span class="p">,</span>
-                <span class="s1">'fallback_cb'</span>       <span class="o">=&gt;</span> <span class="s1">'wp_bootstrap_navwalker::fallback'</span><span class="p">,</span>
-                <span class="s1">'walker'</span>            <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">wp_bootstrap_navwalker</span><span class="p">())</span>
-            <span class="p">);</span>
-        <span class="cp">?&gt;</span><span class="x"></span>
-<span class="x">    &lt;/div&gt;</span>
-<span class="x">&lt;/nav&gt;</span>
-</pre></div>
+        <span class="pl-pse">&lt;?php</span><span class="pl-s1"></span>
+<span class="pl-s1">            wp_nav_menu( <span class="pl-c1">array</span>(</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>menu<span class="pl-pds">'</span></span>              <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>primary<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>theme_location<span class="pl-pds">'</span></span>    <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>primary<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>depth<span class="pl-pds">'</span></span>             <span class="pl-k">=&gt;</span> <span class="pl-c1">2</span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>container<span class="pl-pds">'</span></span>         <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>div<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>container_class<span class="pl-pds">'</span></span>   <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>collapse navbar-collapse<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>container_id<span class="pl-pds">'</span></span>      <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>bs-example-navbar-collapse-1<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>menu_class<span class="pl-pds">'</span></span>        <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>nav navbar-nav<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>fallback_cb<span class="pl-pds">'</span></span>       <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>wp_bootstrap_navwalker::fallback<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>walker<span class="pl-pds">'</span></span>            <span class="pl-k">=&gt;</span> <span class="pl-k">new</span> <span class="pl-c1">wp_bootstrap_navwalker</span>())</span>
+<span class="pl-s1">            );</span>
+<span class="pl-s1">        </span><span class="pl-pse"><span class="pl-s1">?</span>&gt;</span>
+    &lt;/<span class="pl-ent">div</span>&gt;
+&lt;/<span class="pl-ent">nav</span>&gt;</pre></div>
 
 <p>To change your menu style add Bootstrap nav class names to the <code>menu_class</code> declaration.</p>
 
@@ -128,88 +116,90 @@
 <a href="http://getbootstrap.com/components/#nav">http://getbootstrap.com/components/#nav</a></p>
 
 <h2>
-<a name="displaying-the-menu-" class="anchor" href="#displaying-the-menu-"><span class="octicon octicon-link"></span></a>Displaying the Menu </h2>
+<a id="displaying-the-menu-" class="anchor" href="#displaying-the-menu-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Displaying the Menu </h2>
 
 <p>To display the menu you must associate your menu with your theme location. You can do this by selecting your theme location in the <em>Theme Locations</em> list wile editing a menu in the WordPress menu manager.</p>
 
 <h2>
-<a name="extras" class="anchor" href="#extras"><span class="octicon octicon-link"></span></a>Extras</h2>
+<a id="extras" class="anchor" href="#extras" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Extras</h2>
 
 <p><img src="http://edwardmcintyre.com/pub/github/navwalker-3-menu.jpg" alt="Extras"></p>
 
 <p>This script included the ability to add Bootstrap dividers, dropdown headers, glyphicons and disables links to your menus through the WordPress menu UI. </p>
 
 <h2>
-<a name="dividers" class="anchor" href="#dividers"><span class="octicon octicon-link"></span></a>Dividers</h2>
+<a id="dividers" class="anchor" href="#dividers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dividers</h2>
 
 <p>Simply add a Link menu item with a <strong>URL</strong> of <code>#</code> and a <strong>Link Text</strong> or <strong>Title Attribute</strong> of <code>divider</code> (case-insensitive so ‘divider’ or ‘Divider’ will both work ) and the class will do the rest.</p>
 
 <p><img src="http://edwardmcintyre.com/pub/github/navwalker-divider.jpg" alt="Divider Example"></p>
 
 <h2>
-<a name="glyphicons" class="anchor" href="#glyphicons"><span class="octicon octicon-link"></span></a>Glyphicons</h2>
+<a id="glyphicons" class="anchor" href="#glyphicons" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Glyphicons</h2>
 
 <p>To add an Icon to your link simple place the Glyphicon class name in the links <strong>Title Attribute</strong> field and the class will do the rest. IE <code>glyphicon-bullhorn</code></p>
 
 <p><img src="http://edwardmcintyre.com/pub/github/navwalker-3-glyphicons.jpg" alt="Header Example"></p>
 
 <h2>
-<a name="dropdown-headers" class="anchor" href="#dropdown-headers"><span class="octicon octicon-link"></span></a>Dropdown Headers</h2>
+<a id="dropdown-headers" class="anchor" href="#dropdown-headers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dropdown Headers</h2>
 
-<p>Adding a dropdown header is very similar, add a new link with a <strong>URL</strong> of <code>#</code> and a <strong>Title Attribute</strong> of <code>dropdown-header</code> (it matches the Bootstrap CSS class so it's easy to remember).  set the <strong>Navigation Label</strong> to your header text and the class will do the rest. </p>
+<p>Adding a dropdown header is very similar, add a new link with a <strong>URL</strong> of <code>#</code> and a <strong>Title Attribute</strong> of <code>dropdown-header</code> (it matches the Bootstrap CSS class so it's easy to remember).  set the <strong>Navigation Label</strong> to your header text and the class will do the rest.</p>
 
 <p><img src="http://edwardmcintyre.com/pub/github/navwalker-3-header.jpg" alt="Header Example"></p>
 
 <h2>
-<a name="disabled-links" class="anchor" href="#disabled-links"><span class="octicon octicon-link"></span></a>Disabled Links</h2>
+<a id="disabled-links" class="anchor" href="#disabled-links" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Disabled Links</h2>
 
-<p>To set a disabled link simoly set the <strong>Title Attribute</strong> to <code>disabled</code> and the class will do the rest. </p>
+<p>To set a disabled link simply set the <strong>Title Attribute</strong> to <code>disabled</code> and the class will do the rest. </p>
 
 <p><img src="http://edwardmcintyre.com/pub/github/navwalker-3-disabled.jpg" alt="Header Example"></p>
 
 <h2>
-<a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>Changelog</h2>
+<a id="changelog" class="anchor" href="#changelog" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Changelog</h2>
 
 <p><strong>2.0.4</strong></p>
 
 <ul>
 <li>Updated fallback function to accept args array from wp_nav_menu</li>
-</ul><p><strong>2.0.3</strong></p>
+</ul>
+
+<p><strong>2.0.3</strong></p>
 
 <ul>
 <li>Included a fallback function that adds a link to the WordPress menu manager if no menu has been assigned to the theme location.</li>
-</ul><p><strong>2.0.2</strong></p>
+</ul>
+
+<p><strong>2.0.2</strong></p>
 
 <ul>
 <li>Small tweak to ensure carets are only displayed on top level dropdowns.</li>
-</ul><p><strong>2.0.1</strong></p>
+</ul>
+
+<p><strong>2.0.1</strong></p>
 
 <ul>
 <li>Added missing <code>active</code> class to active menu items.</li>
-</ul><p><strong>2.0</strong></p>
+</ul>
+
+<p><strong>2.0</strong></p>
 
 <ul>
 <li>Class was completly re-written using the latest Wordpress 3.6 walker class.</li>
 <li>Now full supports Bootstrap 3.0+</li>
 <li>Tested with wp_debug &amp; the Theme Check plugin.</li>
-</ul><p><a href="https://bitdeli.com/free" title="Bitdeli Badge"><img src="https://d2weczhvl823v0.cloudfront.net/twittem/wp-bootstrap-navwalker/trend.png" alt="Bitdeli Badge"></a></p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/twittem">twittem</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-39327681-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
+</ul>
 
+<p><a href="https://bitdeli.com/free" title="Bitdeli Badge"><img src="https://d2weczhvl823v0.cloudfront.net/twittem/wp-bootstrap-navwalker/trend.png" alt="Bitdeli Badge"></a></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/wp-bootstrap/wp-bootstrap-navwalker">wp-bootstrap-navwalker</a> is maintained by <a href="https://github.com/wp-bootstrap">wp-bootstrap</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
   </body>
 </html>
