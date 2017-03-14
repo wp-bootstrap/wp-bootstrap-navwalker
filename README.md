@@ -1,11 +1,17 @@
 wp-bootstrap-navwalker
 ======================
 
-**A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager.**
+**A custom WordPress nav walker class to fully implement the Bootstrap 4.0+ navigation style in a custom theme using the WordPress built in menu manager.**
 
-![Extras](http://edwardmcintyre.com/pub/github/navwalker-3-menu.jpg)
+Bootstrap 3.x vs Bootstrap 4.0
+------------
+There are many changes Bootstrap 3.x & Bootstrap 4.0 that affect both how the nav walker class is used and what the walker supports. For CSS changes I recommend reading the Migrating from 3.x to 4.0 in the official Bootstrap docs http://v4-alpha.getbootstrap.com/migration/
 
-Bootstrap 2.x vs Bootstrap 3.0
+The most noticeable functionality change in Bootstrap 3.0.0+ is that it only supports a single dropdown level. This script is intended to implement the Bootstrap 3.0 menu structure without adding additional features, so additional dropdown levels will not be supported.
+
+If you would like to use **Bootstrap 3.x** you can find the legacy version of the walker class here
+
+Bootstrap 2.x vs Bootstrap 3.x
 ------------
 There are many changes Bootstrap 2.x & Bootstrap 3.0 that affect both how the nav walker class is used and what the walker supports. For CSS changes I recommend reading the Migrating from 2.x to 3.0 in the official Bootstrap docs http://getbootstrap.com/getting-started/#migration
 
