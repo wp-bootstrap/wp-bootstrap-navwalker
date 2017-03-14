@@ -78,7 +78,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			$atts = array();
 			$atts['title']  = ! empty( $item->title )	? $item->title	: '';
 			$atts['target'] = ! empty( $item->target )	? $item->target	: '';
-			$atts['rel']    = ! empty( $item->xfn )		? $item->xfn	: '';
+			$atts['rel']	= ! empty( $item->xfn )		? $item->xfn	: '';
 
 			// If item has_children add atts to a.
 			if ( $args->has_children && $depth === 0 ) {
@@ -103,18 +103,51 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			$item_output = $args->before;
 
 			/*
-			 * Glyphicons
+			 * Glyphicons and Font Awesome fonts
 			 * ===========
 			 * Since the the menu item is NOT a Divider or Header we check the see
 			 * if there is a value in the attr_title property. If the attr_title
 			 * property is NOT null we apply it as the class name for the glyphicon.
+			 * If the attr_title contains 'fa' (the font awesome CSS class),
+			 * then we omit the glyphicon and modify the link to add an <i> tag
+			 * with the remaining attributes required by Font Awesome.
+			 * If there is a css class named 'fa-show-title' in the 
+			 * attr_title field, then the title will be shown next to the 
+			 * font awesome font.
+			 * See http://fontawesome.io/examples/ for more details on how to use 
+			 * Font Awesome CSS classes.
+			 *
+			 * Here is an example of what the attr_title (Title Attribute) might look like for a Font Awesome font:
+			 * (this is for a link to Twitter)
+			 * fa fa-twitter-square fa-2x
+			 *
+			 * The 'fa-2x' class makes the font a little bigger and it fits better on the navbar.
 			 */
-			if ( ! empty( $item->attr_title ) )
-				$item_output .= '<a'. $attributes .'><span class="glyphicon ' . esc_attr( $item->attr_title ) . '"></span>&nbsp;';
+			 
+			$font_awesome_class = 'fa';
+			$show_title_class = 'fa-show-title';
+			// we're going to show the title of the link by default
+			$show_title = true;
+			 
+			if ( ! empty( $item->attr_title ) ) {
+				/* see if we have a font awesome font in the attr_title */
+				$attr_title_words = str_word_count($item->attr_title, 1);
+				if ( array_search ( $font_awesome_class , $attr_title_words) !== false ){
+					$item_output .= '<a'. $attributes .'><i class="' . esc_attr( $item->attr_title ) . '"></i>';
+					// we're not going to show the the title unless we have a 'show-title' class
+					if ( ! array_search ( $show_title_class , $attr_title_words) ){
+						$show_title = false;
+					}
+				}
+				else{
+					$item_output .= '<a'. $attributes .'><span class="glyphicon ' . esc_attr( $item->attr_title ) . '"></span>&nbsp;';   
+				}   
+			}
 			else
 				$item_output .= '<a'. $attributes .'>';
-
-			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
+			
+			$link_title = $show_title ? apply_filters( 'the_title', $item->title, $item->ID ) : '';
+			$item_output .= $args->link_before . $link_title . $args->link_after;
 			$item_output .= ( $args->has_children && 0 === $depth ) ? ' <span class="caret"></span></a>' : '</a>';
 			$item_output .= $args->after;
 
@@ -143,17 +176,17 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 	 * @return null Null on failure with no changes to parameters.
 	 */
 	public function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
-        if ( ! $element )
-            return;
+		if ( ! $element )
+			return;
 
-        $id_field = $this->db_fields['id'];
+		$id_field = $this->db_fields['id'];
 
-        // Display this element.
-        if ( is_object( $args[0] ) )
-           $args[0]->has_children = ! empty( $children_elements[ $element->$id_field ] );
+		// Display this element.
+		if ( is_object( $args[0] ) )
+		   $args[0]->has_children = ! empty( $children_elements[ $element->$id_field ] );
 
-        parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
-    }
+		parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
+	}
 
 	/**
 	 * Menu Fallback

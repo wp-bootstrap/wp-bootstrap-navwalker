@@ -121,6 +121,23 @@ To add an Icon to your link simple place the Glyphicon class name in the links *
 
 ![Header Example](http://edwardmcintyre.com/pub/github/navwalker-3-glyphicons.jpg)
 
+Font Awesome Fonts
+------------
+To add [Font Awesome](http://www.fontawesome.io) fonts, simply add the Font Awesome CSS classes for your icon.
+
+Example:
+```css
+fa fa-twitter-square fa-2x
+```
+
+The `fa` is the class that will tell the walker to add an `<i>` tag containing the required Font Awesome attributes.
+
+By default, the Link Title is not shown. To show it, simply add the following CSS class:
+
+```css
+fa-show-title
+```
+
 Dropdown Headers
 ------------
 Adding a dropdown header is very similar, add a new link with a **URL** of `#` and a **Title Attribute** of `dropdown-header` (it matches the Bootstrap CSS class so it's easy to remember).  set the **Navigation Label** to your header text and the class will do the rest.
