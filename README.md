@@ -1,24 +1,23 @@
-wp-bootstrap-navwalker
-======================
+# wp-bootstrap-navwalker
 
 **A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager.**
 
 ![Extras](http://edwardmcintyre.com/pub/github/navwalker-3-menu.jpg)
 
-Bootstrap 2.x vs Bootstrap 3.0
-------------
+## Bootstrap 2.x vs Bootstrap 3.0
+
 There are many changes Bootstrap 2.x & Bootstrap 3.0 that affect both how the nav walker class is used and what the walker supports. For CSS changes I recommend reading the Migrating from 2.x to 3.0 in the official Bootstrap docs http://getbootstrap.com/getting-started/#migration
 
 The most noticeable functionality change in Bootstrap 3.0.0+ is that it only supports a single dropdown level. This script is intended to implement the Bootstrap 3.0 menu structure without adding additional features, so additional dropdown levels will not be supported.
 
 If you would like to use **Bootstrap 2.x** you can find the legacy version of the walker class here https://github.com/twittem/wp-bootstrap-navwalker/tree/For-Bootstrap-2.3.2
 
-NOTE
-----
+## NOTE
+
 This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Bootstrap dropdown navigation, and does not include the required Bootstrap JS files. You will have to include them manually. 
 
-Installation
-------------
+## Installation
+
 Place **wp_bootstrap_navwalker.php** in your WordPress theme folder `/wp-content/your-theme/`
 
 Open your WordPress themes **functions.php** file  `/wp-content/your-theme/functions.php` and add the following code:
@@ -28,8 +27,8 @@ Open your WordPress themes **functions.php** file  `/wp-content/your-theme/funct
 require_once('wp_bootstrap_navwalker.php');
 ```
 
-Usage
-------------
+## Usage
+
 Update your `wp_nav_menu()` function in `header.php` to use the new walker by adding a "walker" item to the wp_nav_menu array.
 
 ```php
@@ -40,8 +39,10 @@ Update your `wp_nav_menu()` function in `header.php` to use the new walker by ad
                 'depth'             => 2,
                 'container'         => 'div',
                 'container_class'   => 'collapse navbar-collapse',
-		'container_id'      => 'bs-example-navbar-collapse-1',
+                'container_id'      => 'bs-example-navbar-collapse-1',
                 'menu_class'        => 'nav navbar-nav',
+                'dropdown_class'    => 'dropdown-menu',
+                'depth_class_prefix' => 'd',
                 'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
                 'walker'            => new wp_bootstrap_navwalker())
             );
@@ -83,7 +84,7 @@ Typically the menu is wrapped with additional markup, here is an example of a ` 
                 'depth'             => 2,
                 'container'         => 'div',
                 'container_class'   => 'collapse navbar-collapse',
-		'container_id'      => 'bs-example-navbar-collapse-1',
+                'container_id'      => 'bs-example-navbar-collapse-1',
                 'menu_class'        => 'nav navbar-nav',
                 'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
                 'walker'            => new wp_bootstrap_navwalker())
@@ -98,43 +99,67 @@ To change your menu style add Bootstrap nav class names to the `menu_class` decl
 Review options in the Bootstrap docs for more information on nav classes
 http://getbootstrap.com/components/#nav
 
-Displaying the Menu 
--------------------
+### Deep menus
+
+Bootstrap does not display more than one level of menus, so if your menu is deeper,
+it will be flattened: all items at depth > 0 will be listed at same level.
+You can set the option `depth_class_prefix` so that all items get assigned a
+depth-based class, and define proper indentation in your css files:
+
+```php
+...
+                'depth_class_prefix' => 'd',
+...
+```
+
+```css
+.d1 {
+    margin-left: 15px;
+}
+.d2 {
+    margin-left: 30px;
+}
+
+```
+
+## Displaying the Menu 
+
 To display the menu you must associate your menu with your theme location. You can do this by selecting your theme location in the *Theme Locations* list wile editing a menu in the WordPress menu manager.
 
-Extras
-------------
+## Extras
+
 
 ![Extras](http://edwardmcintyre.com/pub/github/navwalker-3-menu.jpg)
 
-This script included the ability to add Bootstrap dividers, dropdown headers, glyphicons and disables links to your menus through the WordPress menu UI. 
+This script included the ability to add dividers, dropdown headers, glyphicons,
+ and disable links, all through the WordPress menu UI.
 
-Dividers
-------------
+### Dividers
+
 Simply add a Link menu item with a **URL** of `#` and a **Link Text** or **Title Attribute** of `divider` (case-insensitive so ‘divider’ or ‘Divider’ will both work ) and the class will do the rest.
 
 ![Divider Example](http://edwardmcintyre.com/pub/github/navwalker-divider.jpg)
 
-Glyphicons
-------------
+### Glyphicons
+
 To add an Icon to your link simple place the Glyphicon class name in the links **Title Attribute** field and the class will do the rest. IE `glyphicon-bullhorn`
 
 ![Header Example](http://edwardmcintyre.com/pub/github/navwalker-3-glyphicons.jpg)
 
-Dropdown Headers
-------------
+### Dropdown Headers
+
 Adding a dropdown header is very similar, add a new link with a **URL** of `#` and a **Title Attribute** of `dropdown-header` (it matches the Bootstrap CSS class so it's easy to remember).  set the **Navigation Label** to your header text and the class will do the rest.
 
 ![Header Example](http://edwardmcintyre.com/pub/github/navwalker-3-header.jpg)
 
-Disabled Links
-------------
+### Disabled Links
+
 To set a disabled link simply set the **Title Attribute** to `disabled` and the class will do the rest. 
 
 ![Header Example](http://edwardmcintyre.com/pub/github/navwalker-3-disabled.jpg)
 
-Changelog
-------------
+## Changelog
+
 **2.0.4**
 + Updated fallback function to accept args array from wp_nav_menu
 
