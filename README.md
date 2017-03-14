@@ -1,3 +1,14 @@
+wp-bootstrap-navwalker - clickable top-level parent.
+======================
+
+Added a folder with various files to make the top-level parent item (with sub-menus) clickable (linkable).  This is something that is not enabled by default on boostrap due to mobile usability concerns.  By adding a new button instead of just pure css alongside the parent item mobile usability is not a concern.
+
+I'm not an expert by any means on javascript or css so any modifications are welcome.  Maybe someone out there sees it and makes something a lot simpler.  
+
+:)
+
+Original readme from here on down ;).
+
 wp-bootstrap-navwalker
 ======================
 
