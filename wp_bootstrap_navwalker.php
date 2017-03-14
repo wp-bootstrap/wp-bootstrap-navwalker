@@ -55,25 +55,21 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			$output .= $indent . '<li role="presentation" class="disabled"><a href="#">' . esc_attr( $item->title ) . '</a>';
 		} else {
 
-			$class_names = $value = '';
+			$class_names = '';
 
 			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 			$classes[] = 'menu-item-' . $item->ID;
+			$classes[] = ( $args->has_children ) ? 'dropdown' : '';
+			$classes[] = ( in_array( 'current-menu-item', $classes ) ) ? 'active' : '';
 
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
-
-			if ( $args->has_children )
-				$class_names .= ' dropdown';
-
-			if ( in_array( 'current-menu-item', $classes ) )
-				$class_names .= ' active';
 
 			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
 			$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args );
 			$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
 
-			$output .= $indent . '<li' . $id . $value . $class_names .'>';
+			$output .= $indent . '<li' . $id . $class_names .'>';
 
 			$atts = array();
 			$atts['title']  = ! empty( $item->title )	? $item->title	: '';
