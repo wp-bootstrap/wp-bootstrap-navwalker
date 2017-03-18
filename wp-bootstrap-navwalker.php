@@ -195,37 +195,26 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$menu_class = $args['menu_class'];
 				$menu_id = $args['menu_id'];
 
-        $fb_output_safe = '';
-        
 				if ( $container ) {
-					$fb_output_safe .= '<' . esc_attr( $container );
+					echo '<' . esc_attr( $container );
 					if ( $container_id ) {
-						$fb_output_safe .= ' id="' . esc_attr( $container_id ) . '"';
+						echo ' id="' . esc_attr( $container_id ) . '"';
 					}
 					if ( $container_class ) {
-						$fb_output_safe .= ' class="' . sanitize_html_class( $container_class ) . '"'; }
-					$fb_output_safe .= '>';
+						echo ' class="' . sanitize_html_class( $container_class ) . '"'; }
+					echo '>';
 				}
-				$fb_output_safe .= '<ul';
+				echo '<ul';
 				if ( $menu_id ) {
-					$fb_output_safe .= ' id="' . esc_attr( $menu_id ) . '"'; }
+					echo ' id="' . esc_attr( $menu_id ) . '"'; }
 				if ( $menu_class ) {
-					$fb_output_safe .= ' class="' . esc_attr( $menu_class ) . '"'; }
-				$fb_output_safe .= '>';
-				$fb_output_safe .= '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" title="">' . esc_attr( 'Add a menu', '' ) . '</a></li>';
-				$fb_output_safe .= '</ul>';
+					echo ' class="' . esc_attr( $menu_class ) . '"'; }
+				echo '>';
+				echo '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" title="">' . esc_attr( 'Add a menu', '' ) . '</a></li>';
+				echo '</ul>';
 				if ( $container ) {
-					$fb_output_safe .= '</' . esc_attr( $container ) . '>'; }
+					echo '</' . esc_attr( $container ) . '>'; }
 			}
-      
-      // if echo, echo, otherwise return
-      if ( $args['echo'] ):
-        echo $fb_output_safe;
-      else:
-        return $fb_output_safe;
-      endif;   
-
-
 		}
 	}
 }
