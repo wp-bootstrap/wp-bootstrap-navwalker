@@ -94,9 +94,9 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$atts = array();
 
 				if ( empty( $item->attr_title ) ) {
-		  			$atts['title']  = ! empty( $item->title )   ? strip_tags( $item->title ) : '';
+					$atts['title']  = ! empty( $item->title )   ? strip_tags( $item->title ) : '';
 				} else {
-		  			$atts['title'] = $item->attr_title;
+					$atts['title'] = $item->attr_title;
 				}
 
 				$atts['target'] = ! empty( $item->target )	? $item->target	: '';
