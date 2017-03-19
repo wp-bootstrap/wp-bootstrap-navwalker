@@ -62,6 +62,8 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 			$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
+			$args->top_level_follow = isset($args->top_level_follow) ? $args->top_level_follow : false;
+
 			/**
 			* Dividers, Headers or Disabled
 			* =============================
@@ -102,8 +104,8 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$atts['target'] = ! empty( $item->target )	? $item->target	: '';
 				$atts['rel']    = ! empty( $item->xfn )		? $item->xfn	: '';
 				// If item has_children add atts to a.
-				if ( $args->has_children && 0 === $depth ) {
-					$atts['href']   		= '#';
+				if ( $args->has_children && $depth === 0 && !$args->top_level_follow ) {
+					$atts['href']			= '#';
 					$atts['data-toggle']	= 'dropdown';
 					$atts['class']			= 'dropdown-toggle';
 					$atts['aria-haspopup']	= 'true';
