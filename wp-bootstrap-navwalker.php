@@ -131,7 +131,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				 * property is NOT null we apply it as the class name for the glyphicon.
 				 */
 				if ( ! empty( $item->attr_title ) ) {
-								$pos = strpos( esc_attr( $item->attr_title ), 'glyphicon' );
+					$pos = strpos( esc_attr( $item->attr_title ), 'glyphicon' );
 					if ( false !== $pos ) {
 						$item_output .= '<a' . $attributes . '><span class="glyphicon ' . esc_attr( $item->attr_title ) . '" aria-hidden="true"></span>&nbsp;';
 					} else {
