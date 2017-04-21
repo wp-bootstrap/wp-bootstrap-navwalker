@@ -79,7 +79,8 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			} elseif ( 0 === strcasecmp( $item->attr_title, 'disabled' ) ) {
 				$output .= $indent . '<li role="presentation" class="disabled"><a href="#">' . esc_attr( $item->title ) . '</a>';
 			} else {
-				$class_names = $value = '';
+				$value = '';
+				$class_names = $value;
 				$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 				$classes[] = 'menu-item-' . $item->ID;
 				$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
