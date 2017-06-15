@@ -1,0 +1,16 @@
+{
+  "name": "wp-bootstrap-navwalker",
+  "author": "sfgarza",
+  "description": "Gulp script for Developing the Wordpress Bootstrap Navwalker",
+  "version": "1.0.1",
+  "license": "GPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wp-bootstrap/wp-bootstrap-navwalker"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "3.9.1",
+    "gulp-zip": "3.2.0"
+  }
+}
