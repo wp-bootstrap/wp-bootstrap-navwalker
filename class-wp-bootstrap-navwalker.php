@@ -65,6 +65,17 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$value = '';
 			$class_names = $value;
 			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
+			// Loop through the array and pick out any special classes that need
+			// to be added to an element other than the main <li>.
+			$extra_link_classes = array();
+			$icon_class_string = '';
+			foreach ( $classes as $key => $class ) {
+				// test if this is a disabled link.
+				if ( 'disabled' === $class ) {
+					$extra_link_classes[] = 'disabled';
+					unset( $classes[ $key ] );
+				}
+			}
 			$classes[] = 'menu-item-' . $item->ID;
 			// BSv4 classname - as of v4-alpha.
 			$classes[] = 'nav-item';
@@ -99,6 +110,22 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			} else {
 				$atts['href'] 	= ! empty( $item->url ) ? $item->url : '';
 				$atts['class']	= 'nav-link';
+			}
+			// Loop through the array of extra link classes plucked from the
+			// parent <li>s classes array.
+			if ( ! empty( $extra_link_classes ) ) {
+				foreach ( $extra_link_classes as $link_class ) {
+					if ( ! empty( $link_class ) ) {
+						// update $atts with the extra class link.
+						$atts['class'] .= ' ' . esc_attr( $link_class );
+
+						// if the modification is a disabled class...
+						if ( 'disabled' === $link_class ) {
+							// then # the link so it doesn't point anywhere.
+							$atts['href'] = '#';
+						}
+					}
+				}
 			}
 			$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args );
 			$attributes = '';
