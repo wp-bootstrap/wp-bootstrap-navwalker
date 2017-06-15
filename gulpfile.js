@@ -1,6 +1,7 @@
 // Require all dev dependencies.
 var gulp      = require('gulp'),
-    zip       = require('gulp-zip');
+    zip       = require('gulp-zip'),
+		rmdir			= require('rmdir');
 
 var BASE_NAME = __dirname.match(/([^\/]*)\/*$/)[1];
 
@@ -38,6 +39,9 @@ gulp.task('default', function() {
 
 });
 
+gulp.task('clean', function(){
+	rmdir('./dist');
+});
 
 /**
  * Creates a zip file of the current project without any of the config and dev
