@@ -1,5 +1,14 @@
 #CHANGELOG
 
+## [3.0.0]
+
+- Update to work with Bootstrap v4.
+	- Added `.nav-item` and `.nav-link` to `<li>` and `<a>` respectively.
+- Dropped support for using title attribute to add link modifiers and icons.
+- Added support for link modifiers and icons through WP Menu Builder 'classes' input.
+	- Currently only 'disabled' link modifier is available.
+	- Icon support is for Font-Awesome and Glyphicons icons.
+
 ## [2.0.5] - 2016-011-15
 
 - Fixed all reported issues by WP Enforcer.
