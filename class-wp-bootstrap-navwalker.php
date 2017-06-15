@@ -75,6 +75,17 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					$extra_link_classes[] = 'disabled';
 					unset( $classes[ $key ] );
 				}
+				// test for icon classes - Supports Font Awesome and Glyphicons.
+				if ( 'fa' === $class || 'fa-' === substr( $class, 0, 3 ) ) {
+					// Because of the abiguity of just 'fa' at the start both
+					// 'fa' & 'fa-' are tested for with Font Awesome icons.
+					$icon_class_string .= $class . ' ';
+					unset( $classes[ $key ] );
+				} elseif ( 'glyphicons' === substr( $class, 0, 10 ) ) {
+					// This should be a glyphicon icon class.
+					$icon_class_string .= $class . ' ';
+					unset( $classes[ $key ] );
+				}
 			}
 			$classes[] = 'menu-item-' . $item->ID;
 			// BSv4 classname - as of v4-alpha.
@@ -137,6 +148,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 			$item_output = $args->before;
 			$item_output .= '<a' . $attributes . '>';
+			// if we have a string containing icon classes...
+			if ( ! empty( $icon_class_string ) ) {
+				// append an <i> with the icon classes to what is output before links.
+				$args->link_before = $args->link_before . '<i class="' . esc_attr( $icon_class_string ) . '"></i> ';
+			}
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
 			$item_output .= ( $args->has_children && 0 === $depth ) ? ' <span class="caret"></span></a>' : '</a>';
 			$item_output .= $args->after;
