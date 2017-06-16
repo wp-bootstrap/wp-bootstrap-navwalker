@@ -112,7 +112,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$atts['target'] = ! empty( $item->target )	? $item->target	: '';
 			$atts['rel']    = ! empty( $item->xfn )		? $item->xfn	: '';
 			// If item has_children add atts to a.
-			if ( $args->has_children && 0 === $depth ) {
+			if ( $args->has_children && 0 === $depth && $args->depth > 1 ) {
 				$atts['href']   		= '#';
 				$atts['data-toggle']	= 'dropdown';
 				$atts['aria-haspopup']	= 'true';
@@ -154,7 +154,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$args->link_before = $args->link_before . '<i class="' . esc_attr( $icon_class_string ) . '"></i> ';
 			}
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-			$item_output .= ( $args->has_children && 0 === $depth ) ? ' <span class="caret"></span></a>' : '</a>';
+			$item_output .= ( $args->has_children && 0 === $depth && $args->depth > 1 ) ? ' <span class="caret"></span></a>' : '</a>';
 			$item_output .= $args->after;
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 
