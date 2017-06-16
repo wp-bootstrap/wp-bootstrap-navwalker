@@ -10,6 +10,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "async": "^2.4.1",
     "colors": "^1.1.2",
     "gulp": "3.9.1",
     "gulp-git": "^2.4.0",

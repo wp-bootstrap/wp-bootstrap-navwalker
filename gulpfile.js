@@ -6,8 +6,9 @@ var gulp     = require('gulp'),
 		shell    = require('shelljs'),
 		inquirer = require('inquirer'),
 		replace  = require('gulp-replace'),
-		semver   = require('semver');
-		colors   = require('colors');
+		semver   = require('semver'), // Versioning standard - http://semver.org/
+		asynclib =  require('async'),
+		colors   = require('colors'),
 		rmdir	   = require('rmdir');
 
 const BASE_NAME = __dirname.match(/([^\/]*)\/*$/)[1];
@@ -34,9 +35,9 @@ var ZIP_OPTS = { base: '..' };
 // PHP Source.
 var PHP_SRC = '**/*.php';
 
+var current_branch;
 var current_version;
 var new_version;
-var to_replace;
 
 /*******************************************************************************
  *                                Gulp Tasks
@@ -70,40 +71,83 @@ gulp.task('zip', function(){
 
 gulp.task('tag', function(){
 	get_current_version();
+	get_current_branch();
 	console.log(('Current version: ' + current_version).green );
 	gulp.src( BASE_FILE )
     .pipe(prompt.prompt({
         type: 'list',
         name: 'bump',
-        message: 'What type of release would you like to do?',
+        message: 'What kind of release would you like to make?',
         choices: ['patch', 'minor', 'major']
     }, function(res){
-				new_version =  semver.inc( current_version, res.bump )
-				console.log(('New version: ' + new_version).green );
-        shell.sed( '-i', TAG_REGEX, '* Version: ' + new_version, BASE_FILE );
-				git.tag(new_version, 'Release' + new_version, {quiet:false}, function (err) {
-					if (err){
-						console.error( (err.message).red );
-						console.error( 'Reverting changes...'.yellow );
-						shell.sed( '-i', TAG_REGEX, '* Version: ' + current_version, BASE_FILE );
-						return;
-					}
-					else{
-						git.push('origin', '--tags', function (err) {
-							if (err){
-								console.error( (err.message).red );
-								return;
-							}
-						});
-					}
-				});
+			asynclib.waterfall([
+	      function(callback){
+	        callback(null, res.bump);
+	      },
+	      git_bump,
+				git_push,
+				git_tag
+				//git_push
+	    ], function (err, result) {
+	      if( null !== err ){
+	        console.log('ERROR: %j', err);
+	      }
+	    });
     }));
 })
 
+/*******************************************************************************
+ *                                Functions
+ ******************************************************************************/
 function get_current_version(){
-	head = shell.head( {'-n':30}, BASE_FILE );
-	found = head.match( TAG_REGEX )
-	current_version = found[1] + '.' + found[2] + '.' + found[3];
+ 	head = shell.head( {'-n':30}, BASE_FILE );
+ 	found = head.match( TAG_REGEX )
+  current_version = found[1] + '.' + found[2] + '.' + found[3];
 }
 
-gulp.task('release', ['bump','tag']);
+function get_current_branch(){
+	git.revParse({args:'--abbrev-ref HEAD'}, function (err, hash) {
+		if (err){
+			console.error( (err.message).red );
+		}
+		else{
+			current_branch = hash;
+		}
+	});
+}
+
+function git_bump(bump,callback){
+	new_version = semver.inc( current_version, bump )
+	shell.sed( '-i', TAG_REGEX, '* Version: ' + new_version, BASE_FILE );
+	console.log(('New version: ' + new_version).green );
+	gulp.src( '.' )
+		.pipe(git.add({args: '--all'}))
+		.pipe(git.commit('Testing gulp script'));
+	return callback(null, current_branch);
+}
+
+function git_tag(callback){
+	git.tag(new_version, 'Release' + new_version, {quiet:false}, function (err) {
+		if (err){
+			console.error( (err.message).red );
+			console.error( 'Reverting changes...'.yellow );
+			shell.sed( '-i', TAG_REGEX, '* Version: ' + current_version, BASE_FILE );
+			return callback(err)
+		}
+		else{
+			return callback(null, '--tags')
+		}
+	});
+}
+
+function git_push( branch, callback ){
+	git.push('origin', branch, function (err) {
+		if (err){
+			console.error( (err.message).red );
+			return callback(err);
+		}
+		else{
+			return callback(null);
+		}
+	});
+}
