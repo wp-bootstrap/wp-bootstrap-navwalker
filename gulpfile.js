@@ -141,6 +141,7 @@ function git_tag(callback){
 }
 
 function git_push( branch, callback ){
+	console.log(branch);
 	git.push('origin', branch, function (err) {
 		if (err){
 			console.error( (err.message).red );
