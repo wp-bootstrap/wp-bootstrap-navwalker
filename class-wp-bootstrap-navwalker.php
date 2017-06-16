@@ -90,7 +90,9 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$classes[] = 'menu-item-' . $item->ID;
 			// BSv4 classname - as of v4-alpha.
 			$classes[] = 'nav-item';
-			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
+			// reasign any filtered classes back to the $classes array.
+			$classes = apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args );
+			$class_names = join( ' ', $classes );
 			if ( $args->has_children ) {
 				$class_names .= ' dropdown';
 			}
