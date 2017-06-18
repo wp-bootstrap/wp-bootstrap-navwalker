@@ -2,6 +2,7 @@
 
 ## [3.0.2]
 
+- Remove `<span class="carat">` after parent dropdown items
 - Support `echo` arg in fallback menu.
 	- credit: @toddlevy
 - Add `.active` to parent when a child is current page.
