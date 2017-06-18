@@ -4,6 +4,8 @@
 
 - Support `echo` arg in fallback menu.
 	- credit: @toddlevy
+- Add `.active` to parent when a child is current page.
+	- credit: @zyberspace
 
 ## [3.0.1]
 
