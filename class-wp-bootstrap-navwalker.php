@@ -11,7 +11,7 @@
  * Plugin URI:  https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * Description: A custom WordPress nav walker class to implement the Bootstrap 3 navigation style in a custom theme using the WordPress built in menu manager.
  * Author: Edward McIntyre - @twittem, WP Bootstrap, William Patton - @pattonwebz
- * Version: 3
+ * Version: 3.0.
  * Author URI: https://github.com/wp-bootstrap
  * GitHub Plugin URI: https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * GitHub Branch: master
@@ -215,26 +215,38 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$menu_class = $args['menu_class'];
 				$menu_id = $args['menu_id'];
 
+				// initialize var to store fallback html.
+				$fallback_output = '';
+
 				if ( $container ) {
-					echo '<' . esc_attr( $container );
+					$fallback_output = '<' . esc_attr( $container );
 					if ( $container_id ) {
-						echo ' id="' . esc_attr( $container_id ) . '"';
+						$fallback_output = ' id="' . esc_attr( $container_id ) . '"';
 					}
 					if ( $container_class ) {
-						echo ' class="' . sanitize_html_class( $container_class ) . '"'; }
-					echo '>';
+						$fallback_output = ' class="' . sanitize_html_class( $container_class ) . '"';
+					}
+					$fallback_output = '>';
 				}
-				echo '<ul';
+				$fallback_output = '<ul';
 				if ( $menu_id ) {
-					echo ' id="' . esc_attr( $menu_id ) . '"'; }
+					$fallback_output = ' id="' . esc_attr( $menu_id ) . '"'; }
 				if ( $menu_class ) {
-					echo ' class="' . esc_attr( $menu_class ) . '"'; }
-				echo '>';
-				echo '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" title="">' . esc_attr( 'Add a menu', '' ) . '</a></li>';
-				echo '</ul>';
+					$fallback_output = ' class="' . esc_attr( $menu_class ) . '"'; }
+				$fallback_output = '>';
+				$fallback_output = '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" title="">' . esc_attr( 'Add a menu', '' ) . '</a></li>';
+				$fallback_output = '</ul>';
 				if ( $container ) {
-					echo '</' . esc_attr( $container ) . '>'; }
-			}
+					$fb_output = '</' . esc_attr( $container ) . '>';
+				}
+
+				// if $args has 'echo' key and it's true echo, otherwise return.
+				if ( array_key_exists( 'echo', $args ) && $args['echo'] ) {
+					echo $fallback_output; // WPCS: XSS OK.
+				} else {
+					return $fallback_output;
+				}
+			} // End if().
 		}
 	}
 } // End if().

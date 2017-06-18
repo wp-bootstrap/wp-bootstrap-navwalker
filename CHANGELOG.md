@@ -2,6 +2,11 @@
 
 ## [3.0.1]
 
+- Support `echo` arg in fallback menu.
+	- credit: @toddlevy
+
+## [3.0.1]
+
 - Fix to correct output of dropdown atts and styles when depth passed to wp_nav_menu is <= 1
 	- credit: @chrisgeary92
 - Move icon output to a local var instead of modifying and clearing a global object.
