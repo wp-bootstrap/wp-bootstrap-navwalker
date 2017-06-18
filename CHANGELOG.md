@@ -1,6 +1,6 @@
 #CHANGELOG
 
-## [3.0.1]
+## [3.0.2]
 
 - Support `echo` arg in fallback menu.
 	- credit: @toddlevy
