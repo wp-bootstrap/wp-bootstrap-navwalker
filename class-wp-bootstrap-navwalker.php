@@ -155,10 +155,10 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$icon_html = '';
 			if ( ! empty( $icon_class_string ) ) {
 				// append an <i> with the icon classes to what is output before links.
-				$icon_html = '<i class="' . esc_attr( $icon_class_string ) . '"></i> ';
+				$icon_html = '<i class="' . esc_attr( $icon_class_string ) . '" aria-hidden="true"></i> ';
 			}
 			$item_output .= $args->link_before . $icon_html . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-			$item_output .= ( $args->has_children && 0 === $depth && $args->depth > 1 ) ? ' <span class="caret"></span></a>' : '</a>';
+			$item_output .= ( $args->has_children && 0 === $depth && $args->depth > 1 ) ? ' <span class="caret" aria-hidden="true"></span></a>' : '</a>';
 			$item_output .= $args->after;
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 
