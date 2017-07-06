@@ -5,7 +5,7 @@
  * @package WP-Bootstrap-Navwalker
  */
 
-/*
+/**
  * Class Name: WP_Bootstrap_Navwalker
  * Plugin Name: WP Bootstrap Navwalker
  * Plugin URI:  https://github.com/wp-bootstrap/wp-bootstrap-navwalker
@@ -17,7 +17,7 @@
  * GitHub Branch: master
  * License: GPL-3.0+
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
-*/
+ */
 
 /* Check if Class Exists. */
 if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
@@ -63,13 +63,13 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
 			/**
-			* Dividers, Headers or Disabled
-			* =============================
-			* Determine whether the item is a Divider, Header, Disabled or regular
-			* menu item. To prevent errors we use the strcasecmp() function to so a
-			* comparison that is not case sensitive. The strcasecmp() function returns
-			* a 0 if the strings are equal.
-			*/
+			 * Dividers, Headers or Disabled
+			 * =============================
+			 * Determine whether the item is a Divider, Header, Disabled or regular
+			 * menu item. To prevent errors we use the strcasecmp() function to so a
+			 * comparison that is not case sensitive. The strcasecmp() function returns
+			 * a 0 if the strings are equal.
+			 */
 			if ( 0 === strcasecmp( $item->attr_title, 'divider' ) && 1 === $depth ) {
 				$output .= $indent . '<li role="presentation" class="divider">';
 			} elseif ( 0 === strcasecmp( $item->title, 'divider' ) && 1 === $depth ) {
@@ -102,14 +102,14 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					$atts['title'] = $item->attr_title;
 				}
 
-				$atts['target'] = ! empty( $item->target )	? $item->target	: '';
-				$atts['rel']    = ! empty( $item->xfn )		? $item->xfn	: '';
+				$atts['target'] = ! empty( $item->target ) ? $item->target : '';
+				$atts['rel']    = ! empty( $item->xfn )    ? $item->xfn    : '';
 				// If item has_children add atts to a.
 				if ( $args->has_children && 0 === $depth ) {
-					$atts['href']   		= '#';
-					$atts['data-toggle']	= 'dropdown';
-					$atts['class']			= 'dropdown-toggle';
-					$atts['aria-haspopup']	= 'true';
+					$atts['href']           = '#';
+					$atts['data-toggle']    = 'dropdown';
+					$atts['class']          = 'dropdown-toggle';
+					$atts['aria-haspopup']  = 'true';
 				} else {
 					$atts['href'] = ! empty( $item->url ) ? $item->url : '';
 				}
