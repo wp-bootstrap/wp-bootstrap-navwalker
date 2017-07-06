@@ -63,13 +63,13 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
 			/**
-			* Dividers, Headers or Disabled
-			* =============================
-			* Determine whether the item is a Divider, Header, Disabled or regular
-			* menu item. To prevent errors we use the strcasecmp() function to so a
-			* comparison that is not case sensitive. The strcasecmp() function returns
-			* a 0 if the strings are equal.
-			*/
+			 * Dividers, Headers or Disabled
+			 * =============================
+			 * Determine whether the item is a Divider, Header, Disabled or regular
+			 * menu item. To prevent errors we use the strcasecmp() function to so a
+			 * comparison that is not case sensitive. The strcasecmp() function returns
+			 * a 0 if the strings are equal.
+			 */
 			if ( 0 === strcasecmp( $item->attr_title, 'divider' ) && 1 === $depth ) {
 				$output .= $indent . '<li role="presentation" class="divider">';
 			} elseif ( 0 === strcasecmp( $item->title, 'divider' ) && 1 === $depth ) {
