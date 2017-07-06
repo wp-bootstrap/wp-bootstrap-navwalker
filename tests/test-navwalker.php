@@ -34,7 +34,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * @return void
 	 */
 	function test_navwalker_file_exists() {
-        $this->assertFileExists('wp-bootstrap-navwalker.php');
+        $this->assertFileExists( 'wp-bootstrap-navwalker.php' );
     }
 
 	/**
@@ -45,12 +45,12 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 */
 	function test_startlvl_function() {
 
-		$WP_Bootstrap_Navwalker = new WP_Bootstrap_Navwalker();
+		$pp_bootstrap_navwalker = new WP_Bootstrap_Navwalker();
 
 		$this->assertTrue(
-			method_exists($WP_Bootstrap_Navwalker, 'start_lvl'),
-				'Class does not have method start_lvl.'
-			);
+			method_exists( $wp_bootstrap_navwalker, 'start_lvl' ),
+			'Class does not have method start_lvl.'
+		);
 
 	}
 
@@ -62,12 +62,12 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 */
 	function test_start_el_function() {
 
-		$WP_Bootstrap_Navwalker = new WP_Bootstrap_Navwalker();
+		$wp_bootstrap_navwalker = new WP_Bootstrap_Navwalker();
 
 		$this->assertTrue(
-			method_exists($WP_Bootstrap_Navwalker, 'start_el'),
-				'Class does not have method start_el.'
-			);
+			method_exists( $wp_bootstrap_navwalker, 'start_el' ),
+			'Class does not have method start_el.'
+		);
 
 	}
 
@@ -79,12 +79,12 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 */
 	function test_display_element_function() {
 
-		$WP_Bootstrap_Navwalker = new WP_Bootstrap_Navwalker();
+		$wp_bootstrap_navwalker = new WP_Bootstrap_Navwalker();
 
 		$this->assertTrue(
-			method_exists($WP_Bootstrap_Navwalker, 'display_element'),
-				'Class does not have method display_element.'
-			);
+			method_exists( $wp_bootstrap_navwalker, 'display_element' ),
+			'Class does not have method display_element.'
+		);
 
 	}
 
@@ -96,12 +96,12 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 */
 	function test_fallback_function() {
 
-		$WP_Bootstrap_Navwalker = new WP_Bootstrap_Navwalker();
+		$wp_bootstrap_navwalker = new WP_Bootstrap_Navwalker();
 
 		$this->assertTrue(
-			method_exists($WP_Bootstrap_Navwalker, 'fallback'),
-				'Class does not have method fallback.'
-			);
+			method_exists( $wp_bootstrap_navwalker, 'fallback' ),
+			'Class does not have method fallback.'
+		);
 
 	}
 }
