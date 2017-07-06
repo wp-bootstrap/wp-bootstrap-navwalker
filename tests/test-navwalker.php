@@ -44,7 +44,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 */
 	function test_startlvl_function() {
 
-		$pp_bootstrap_navwalker = new WP_Bootstrap_Navwalker();
+		$wp_bootstrap_navwalker = new WP_Bootstrap_Navwalker();
 
 		$this->assertTrue(
 			method_exists( $wp_bootstrap_navwalker, 'start_lvl' ),
