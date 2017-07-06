@@ -5,7 +5,6 @@
  * @package Wp_Bootstrap_Navwalker
  */
 
-
 /**
  * Test_WP_Bootstrap_NavWalker class.
  *
@@ -14,7 +13,7 @@
 class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 
 	/**
-	 * setUp function.
+	 * The setUp function.
 	 *
 	 * @access public
 	 * @return void
@@ -34,8 +33,8 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * @return void
 	 */
 	function test_navwalker_file_exists() {
-        $this->assertFileExists( 'wp-bootstrap-navwalker.php' );
-    }
+		$this->assertFileExists( 'wp-bootstrap-navwalker.php' );
+	}
 
 	/**
 	 * Test Start LVL Function.
