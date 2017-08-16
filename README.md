@@ -20,7 +20,7 @@ Bootstrap 4 beta is available and is now the default branch offered at the GitHu
 
 Acording to @mdo & team:
 
-> Long story short, shipping a beta means we’re done breaking all your stuff until our next major version (v5).nan
+> Long story short, shipping a beta means we’re done breaking all your stuff until our next major version (v5).
 
 ## Installation
 
