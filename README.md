@@ -14,6 +14,14 @@ A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ naviga
 
 This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Bootstrap dropdown navigation, and does not include the required Bootstrap JS files. You will have to include them manually.
 
+### Bootstrap 4
+
+Bootstrap 4 beta is available and is now the default branch offered at the GitHub repo and on [GetBootstrap](https://getbootstrap.com). A working version of the walker for Bootstrap 4 can be found in the `v4` branch.
+
+Acording to @mdo & team:
+
+> Long story short, shipping a beta means we’re done breaking all your stuff until our next major version (v5).nan
+
 ## Installation
 
 Place **wp-bootstrap-navwalker.php** in your WordPress theme folder `/wp-content/your-theme/`
