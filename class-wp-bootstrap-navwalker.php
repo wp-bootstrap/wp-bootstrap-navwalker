@@ -237,7 +237,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$fallback_output = '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" title="">' . esc_attr( 'Add a menu', '' ) . '</a></li>';
 				$fallback_output = '</ul>';
 				if ( $container ) {
-					$fb_output = '</' . esc_attr( $container ) . '>';
+					$fallback_output = '</' . esc_attr( $container ) . '>';
 				}
 
 				// if $args has 'echo' key and it's true echo, otherwise return.
