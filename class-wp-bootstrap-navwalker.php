@@ -11,7 +11,7 @@
  * Plugin URI:  https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * Description: A custom WordPress nav walker class to implement the Bootstrap 3 navigation style in a custom theme using the WordPress built in menu manager.
  * Author: Edward McIntyre - @twittem, WP Bootstrap, William Patton - @pattonwebz
- * Version: 3.0.2
+ * Version: 3.0.3
  * Author URI: https://github.com/wp-bootstrap
  * GitHub Plugin URI: https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * GitHub Branch: master
@@ -49,6 +49,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				// build a string to use as aria-labelledby.
 				$labledby = 'aria-labelledby="' . end( $matches[2] ) . '"';
 			}
+
 			$output .= "\n$indent<ul role=\"menu\" class=\" dropdown-menu\" " . $labledby . ">\n";
 		}
 
@@ -130,7 +131,13 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$atts['id']				= 'menu-item-dropdown-' . $item->ID;
 			} else {
 				$atts['href'] 	= ! empty( $item->url ) ? $item->url : '';
-				$atts['class']	= 'nav-link';
+				// if we are in a dropdown then the the class .dropdown-item
+				// should be used instead of .nav-link.
+				if ( $depth > 0 ) {
+					$atts['class']	= 'dropdown-item';
+				} else {
+					$atts['class']	= 'nav-link';
+				}
 			}
 			// Loop through the array of extra link classes plucked from the
 			// parent <li>s classes array.

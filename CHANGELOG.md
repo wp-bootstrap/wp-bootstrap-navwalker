@@ -1,5 +1,9 @@
 #CHANGELOG
 
+## [3.0.3]
+- Added a labeled-by attribute to dropdowns for accessibility.
+- Links inside dropdown have `.dropdown-item` instead of `.nav-link`.
+
 ## [3.0.2]
 
 - Remove `<span class="carat">` after parent dropdown items
