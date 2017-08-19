@@ -11,7 +11,7 @@
  * Plugin URI:  https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * Description: A custom WordPress nav walker class to implement the Bootstrap 3 navigation style in a custom theme using the WordPress built in menu manager.
  * Author: Edward McIntyre - @twittem, WP Bootstrap, William Patton - @pattonwebz
- * Version: 3
+ * Version: 3.0.2
  * Author URI: https://github.com/wp-bootstrap
  * GitHub Plugin URI: https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * GitHub Branch: master
@@ -42,7 +42,14 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 */
 		public function start_lvl( &$output, $depth = 0, $args = array() ) {
 			$indent = str_repeat( "\t", $depth );
-			$output .= "\n$indent<ul role=\"menu\" class=\" dropdown-menu\" >\n";
+			// find all links with an id in the output.
+			preg_match_all( '/(<a.*?id=\"|\')(.*?)\"|\'.*?>/im', $output, $matches );
+			// with pointer at end of array check if we got an ID match.
+			if ( end( $matches[2] ) ) {
+				// build a string to use as aria-labelledby.
+				$labledby = 'aria-labelledby="' . end( $matches[2] ) . '"';
+			}
+			$output .= "\n$indent<ul role=\"menu\" class=\" dropdown-menu\" " . $labledby . ">\n";
 		}
 
 		/**
@@ -90,11 +97,13 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$classes[] = 'menu-item-' . $item->ID;
 			// BSv4 classname - as of v4-alpha.
 			$classes[] = 'nav-item';
-			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
+			// reasign any filtered classes back to the $classes array.
+			$classes = apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args );
+			$class_names = join( ' ', $classes );
 			if ( $args->has_children ) {
 				$class_names .= ' dropdown';
 			}
-			if ( in_array( 'current-menu-item', $classes, true ) ) {
+			if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) ) {
 				$class_names .= ' active';
 			}
 			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
@@ -112,12 +121,13 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$atts['target'] = ! empty( $item->target )	? $item->target	: '';
 			$atts['rel']    = ! empty( $item->xfn )		? $item->xfn	: '';
 			// If item has_children add atts to a.
-			if ( $args->has_children && 0 === $depth ) {
+			if ( $args->has_children && 0 === $depth && $args->depth > 1 ) {
 				$atts['href']   		= '#';
 				$atts['data-toggle']	= 'dropdown';
 				$atts['aria-haspopup']	= 'true';
 				$atts['aria-expanded']	= 'false';
 				$atts['class']			= 'dropdown-toggle nav-link';
+				$atts['id']				= 'menu-item-dropdown-' . $item->ID;
 			} else {
 				$atts['href'] 	= ! empty( $item->url ) ? $item->url : '';
 				$atts['class']	= 'nav-link';
@@ -148,13 +158,15 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 			$item_output = $args->before;
 			$item_output .= '<a' . $attributes . '>';
-			// if we have a string containing icon classes...
+
+			// initiate empty icon var then if we have a string containing icon classes...
+			$icon_html = '';
 			if ( ! empty( $icon_class_string ) ) {
 				// append an <i> with the icon classes to what is output before links.
-				$args->link_before = $args->link_before . '<i class="' . esc_attr( $icon_class_string ) . '"></i> ';
+				$icon_html = '<i class="' . esc_attr( $icon_class_string ) . '" aria-hidden="true"></i> ';
 			}
-			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-			$item_output .= ( $args->has_children && 0 === $depth ) ? ' <span class="caret"></span></a>' : '</a>';
+			$item_output .= $args->link_before . $icon_html . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
+			$item_output .= '</a>';
 			$item_output .= $args->after;
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 
@@ -211,26 +223,38 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$menu_class = $args['menu_class'];
 				$menu_id = $args['menu_id'];
 
+				// initialize var to store fallback html.
+				$fallback_output = '';
+
 				if ( $container ) {
-					echo '<' . esc_attr( $container );
+					$fallback_output = '<' . esc_attr( $container );
 					if ( $container_id ) {
-						echo ' id="' . esc_attr( $container_id ) . '"';
+						$fallback_output = ' id="' . esc_attr( $container_id ) . '"';
 					}
 					if ( $container_class ) {
-						echo ' class="' . sanitize_html_class( $container_class ) . '"'; }
-					echo '>';
+						$fallback_output = ' class="' . sanitize_html_class( $container_class ) . '"';
+					}
+					$fallback_output = '>';
 				}
-				echo '<ul';
+				$fallback_output = '<ul';
 				if ( $menu_id ) {
-					echo ' id="' . esc_attr( $menu_id ) . '"'; }
+					$fallback_output = ' id="' . esc_attr( $menu_id ) . '"'; }
 				if ( $menu_class ) {
-					echo ' class="' . esc_attr( $menu_class ) . '"'; }
-				echo '>';
-				echo '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" title="">' . esc_attr( 'Add a menu', '' ) . '</a></li>';
-				echo '</ul>';
+					$fallback_output = ' class="' . esc_attr( $menu_class ) . '"'; }
+				$fallback_output = '>';
+				$fallback_output = '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" title="">' . esc_attr( 'Add a menu', '' ) . '</a></li>';
+				$fallback_output = '</ul>';
 				if ( $container ) {
-					echo '</' . esc_attr( $container ) . '>'; }
-			}
+					$fallback_output = '</' . esc_attr( $container ) . '>';
+				}
+
+				// if $args has 'echo' key and it's true echo, otherwise return.
+				if ( array_key_exists( 'echo', $args ) && $args['echo'] ) {
+					echo $fallback_output; // WPCS: XSS OK.
+				} else {
+					return $fallback_output;
+				}
+			} // End if().
 		}
 	}
 } // End if().

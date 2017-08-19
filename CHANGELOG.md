@@ -1,5 +1,21 @@
 #CHANGELOG
 
+## [3.0.2]
+
+- Remove `<span class="carat">` after parent dropdown items
+- Support `echo` arg in fallback menu.
+	- credit: @toddlevy
+- Add `.active` to parent when a child is current page.
+	- credit: @zyberspace
+
+## [3.0.1]
+
+- Fix to correct output of dropdown atts and styles when depth passed to wp_nav_menu is <= 1
+	- credit: @chrisgeary92
+- Move icon output to a local var instead of modifying and clearing a global object.
+- Reassign filtered classes back to $classes array so that updated classes can be accessed later if needed.
+	- credit: @lf-jeremy
+
 ## [3.0.0]
 
 - Update to work with Bootstrap v4.
