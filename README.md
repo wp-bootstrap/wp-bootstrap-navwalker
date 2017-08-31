@@ -119,6 +119,20 @@ Review options in the Bootstrap docs for more information on [nav classes](https
 
 To display the menu you must associate your menu with your theme location. You can do this by selecting your theme location in the *Theme Locations* list wile editing a menu in the WordPress menu manager.
 
+### Making this Walker the Default Walker for Nav Manus
+
+There has been some interest in making this walker the default walker for all menus. That could result in some unexpected situations but it can be achieved by adding this function to your functions.php file.
+
+```php
+function prefix_modify_nav_menu_args( $args ) {
+    return array_merge( $args, array(
+        'walker' => WP_Bootstrap_Navwalker(),
+    ) );
+}
+add_filter( 'wp_nav_menu_args', 'prefix_modify_nav_menu_args' );
+```
+Simply updating the walker may not be enough to get menus working right, you may need to add wrappers or additional classes, you can do that via the above function as well.
+
 ### Extras
 
 This script included the ability to add Bootstrap dividers, dropdown headers, glyphicons and disables links to your menus through the WordPress menu UI.
