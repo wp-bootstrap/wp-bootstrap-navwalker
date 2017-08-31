@@ -14,6 +14,14 @@ A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ naviga
 
 This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Bootstrap dropdown navigation, and does not include the required Bootstrap JS files. You will have to include them manually.
 
+### Bootstrap 4
+
+Bootstrap 4 beta is available and is now the default branch offered at the GitHub repo and on [GetBootstrap](https://getbootstrap.com). A working version of the walker for Bootstrap 4 can be found in the `v4` branch.
+
+Acording to @mdo & team:
+
+> Long story short, shipping a beta means we’re done breaking all your stuff until our next major version (v5).
+
 ## Installation
 
 Place **wp-bootstrap-navwalker.php** in your WordPress theme folder `/wp-content/your-theme/`
@@ -22,7 +30,19 @@ Open your WordPress themes **functions.php** file  `/wp-content/your-theme/funct
 
 ```php
 // Register Custom Navigation Walker
-require_once('wp-bootstrap-navwalker.php');
+require_once get_template_directory() . 'wp-bootstrap-navwalker.php';
+```
+
+If you encounter errors with the above code use a check like this to return clean errors to help diagnose the problem.
+
+```php
+if ( ! file_exists( get_template_directory() . 'wp-bootstrap-navwalker.php' ) ) {
+	// file does not exist... return an error.
+	return new WP_Error( 'wp-bootstrap-navwalker-missing', __( 'It appears the wp-bootstrap-navwalker.php file may be missing.', 'wp-bootstrap-navwalker' ) );
+} else {
+	// file exists... require it.
+    require_once get_template_directory . 'wp-bootstrap-navwalker.php';
+}
 ```
 
 ## Usage
@@ -98,6 +118,20 @@ Review options in the Bootstrap docs for more information on [nav classes](https
 ### Displaying the Menu
 
 To display the menu you must associate your menu with your theme location. You can do this by selecting your theme location in the *Theme Locations* list wile editing a menu in the WordPress menu manager.
+
+### Making this Walker the Default Walker for Nav Manus
+
+There has been some interest in making this walker the default walker for all menus. That could result in some unexpected situations but it can be achieved by adding this function to your functions.php file.
+
+```php
+function prefix_modify_nav_menu_args( $args ) {
+    return array_merge( $args, array(
+        'walker' => WP_Bootstrap_Navwalker(),
+    ) );
+}
+add_filter( 'wp_nav_menu_args', 'prefix_modify_nav_menu_args' );
+```
+Simply updating the walker may not be enough to get menus working right, you may need to add wrappers or additional classes, you can do that via the above function as well.
 
 ### Extras
 
