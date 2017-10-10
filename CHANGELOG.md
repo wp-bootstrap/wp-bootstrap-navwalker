@@ -1,5 +1,9 @@
 #CHANGELOG
 
+## [3.0.0]
+
+- Changed composer package type to `library` from `wordpress-plugin`.
+
 ## [2.0.5] - 2016-011-15
 
 - Fixed all reported issues by WP Enforcer.
