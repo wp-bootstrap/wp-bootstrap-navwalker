@@ -41,7 +41,7 @@ if ( ! file_exists( get_template_directory() . '/wp-bootstrap-navwalker.php' ) )
 	return new WP_Error( 'wp-bootstrap-navwalker-missing', __( 'It appears the wp-bootstrap-navwalker.php file may be missing.', 'wp-bootstrap-navwalker' ) );
 } else {
 	// file exists... require it.
-    require_once get_template_directory . 'wp-bootstrap-navwalker.php';
+    require_once get_template_directory() . '/wp-bootstrap-navwalker.php';
 }
 ```
 
