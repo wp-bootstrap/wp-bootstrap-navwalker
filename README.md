@@ -153,6 +153,10 @@ Adding a dropdown header is very similar, add a new link with a **URL** of `#` a
 
 To set a disabled link simply set the **Title Attribute** to `disabled` and the class will do the rest.
 
+### Performance
+
+Navigation manu caching may greatly increase your site's performance. Nav menu HTML output can be cached in persistent object cache. For example see [Tiny navigation menu cache](https://github.com/szepeviktor/tiny-cache/blob/master/tiny-nav-menu-cache.php)
+
 ### Changelog
 
 Please see the [Changelog](https://github.com/wp-bootstrap/wp-bootstrap-navwalker/blob/master/CHANGELOG.md).
