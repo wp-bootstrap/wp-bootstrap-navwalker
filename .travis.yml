@@ -1,4 +1,5 @@
 language: php
+dist: trusty
 
 notifications:
   email:
@@ -19,7 +20,11 @@ env:
 
 matrix:
   include:
-    - php: 5.3
+    - dist: precise
+      php: 5.2
+      env: WP_VERSION=latest WP_MULTISITE=1
+    - dist: precise
+      php: 5.3
       env: WP_VERSION=latest WP_MULTISITE=1
 
 before_script:
