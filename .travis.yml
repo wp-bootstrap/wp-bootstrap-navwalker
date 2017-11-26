@@ -22,12 +22,6 @@ env:
 matrix:
   include:
     - dist: precise
-      php: 5.2
-      env: WP_VERSION=latest WP_MULTISITE=0
-    - dist: precise
-      php: 5.2
-      env: WP_VERSION=latest WP_MULTISITE=1
-    - dist: precise
       php: 5.3
       env: WP_VERSION=latest WP_MULTISITE=0
     - dist: precise
@@ -52,3 +46,7 @@ before_script:
 script:
   - phpcs --standard=phpcs.ruleset.xml $(find -name "*.php")
   - phpunit
+
+cache:
+  directories:
+    - $HOME/.composer/cache
