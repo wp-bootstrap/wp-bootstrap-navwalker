@@ -61,8 +61,8 @@ wp_nav_menu( array(
     'container_id'      => 'bs-example-navbar-collapse-1',
     'menu_class'        => 'nav navbar-nav',
     'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
-    'walker'            => new WP_Bootstrap_Navwalker())
-);
+    'walker'            => new WP_Bootstrap_Navwalker(),
+) );
 ```
 
 Your menu will now be formatted with the correct syntax and classes to implement Bootstrap dropdown navigation.
