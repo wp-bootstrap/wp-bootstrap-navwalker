@@ -204,7 +204,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 						echo ' id="' . esc_attr( $container_id ) . '"';
 					}
 					if ( $container_class ) {
-						echo ' class="' . sanitize_html_class( $container_class ) . '"'; }
+						echo ' class="' . esc_attr( $container_class ) . '"'; }
 					echo '>';
 				}
 				echo '<ul';
