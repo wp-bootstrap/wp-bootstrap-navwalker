@@ -19,10 +19,10 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "wp-enforcer"
+            "wp-enforcer --ruleset=phpcs.ruleset.xml"
         ],
         "post-update-cmd": [
-            "wp-enforcer"
+            "wp-enforcer --ruleset=phpcs.ruleset.xml"
         ]
     }
 }
