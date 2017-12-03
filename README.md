@@ -12,7 +12,7 @@ A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ naviga
 
 ## NOTES
 
-This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Bootstrap dropdown navigation. It does not include the required Bootstrap JS and CSS files. You will have to include those dependancies seporately.
+This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Bootstrap dropdown navigation. It does not include the required Bootstrap JS and CSS files. You will have to include those dependancies separately.
 
 ### Bootstrap 4
 
