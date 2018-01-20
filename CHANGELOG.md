@@ -1,33 +1,23 @@
 #CHANGELOG
 
-## [3.0.3]
+## [4.0.0]
 - Added a labeled-by attribute to dropdowns for accessibility.
 - Links inside dropdown have `.dropdown-item` instead of `.nav-link`.
-
-## [3.0.2]
-
 - Remove `<span class="carat">` after parent dropdown items
 - Support `echo` arg in fallback menu.
 	- credit: @toddlevy
 - Add `.active` to parent when a child is current page.
 	- credit: @zyberspace
-
-## [3.0.1]
-
 - Fix to correct output of dropdown atts and styles when depth passed to wp_nav_menu is <= 1
 	- credit: @chrisgeary92
 - Move icon output to a local var instead of modifying and clearing a global object.
 - Reassign filtered classes back to $classes array so that updated classes can be accessed later if needed.
 	- credit: @lf-jeremy
-
-## [3.0.0]
-
 - Update to work with Bootstrap v4.
 	- Added `.nav-item` and `.nav-link` to `<li>` and `<a>` respectively.
 - Dropped support for using title attribute to add link modifiers and icons.
 - Added support for link modifiers and icons through WP Menu Builder 'classes' input.
-	- Currently only 'disabled' link modifier is available.
-	- Icon support is for Font-Awesome and Glyphicons icons.
+	- Icon support is for Font Awesome 4 and Glyphicons icons.
 
 ## [2.0.5] - 2016-011-15
 

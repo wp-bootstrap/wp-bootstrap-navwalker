@@ -8,7 +8,7 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/badges/build.png?b=master)](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/build-status/master)
 
-A custom WordPress nav walker class to fully implement the Bootstrap 4.0+ navigation style in a custom theme using the WordPress built in menu manager.
+A custom WordPress nav walker class to fully implement the Bootstrap 4 navigation style in a custom theme using the WordPress built in menu manager.
 
 ## NOTES
 
