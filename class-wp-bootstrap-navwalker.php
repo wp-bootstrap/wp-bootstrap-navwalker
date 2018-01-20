@@ -78,9 +78,9 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$extra_link_classes = array();
 			$icon_class_string = '';
 			foreach ( $classes as $key => $class ) {
-				// test if this is a disabled link.
-				if ( 'disabled' === $class ) {
-					$extra_link_classes[] = 'disabled';
+				// test if this is a disabled link, a header or a divider.
+				if ( 'disabled' === $class || 'dropdown-header' === $class || 'dropdown-divider' === $class ) {
+					$extra_link_classes[] = $class;
 					unset( $classes[ $key ] );
 				}
 				// test for icon classes - Supports Font Awesome and Glyphicons.
@@ -139,6 +139,10 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					$atts['class']	= 'nav-link';
 				}
 			}
+
+			// Set this as an indetifier flag to ease identifying special item
+			// types later in the processing. Default will be '' or 'link'.
+			$type_flag = 'link';
 			// Loop through the array of extra link classes plucked from the
 			// parent <li>s classes array.
 			if ( ! empty( $extra_link_classes ) ) {
@@ -147,10 +151,17 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 						// update $atts with the extra class link.
 						$atts['class'] .= ' ' . esc_attr( $link_class );
 
-						// if the modification is a disabled class...
+						// check for special class types we need additional handling for.
 						if ( 'disabled' === $link_class ) {
+							// if the modification is a disabled class...
 							// then # the link so it doesn't point anywhere.
 							$atts['href'] = '#';
+						} elseif ( 'dropdown-header' === $link_class ) {
+							// this is a header and needs a special flag
+							$type_flag = 'dropdown-header';
+						} elseif ( 'dropdown-divider' === $link_class ) {
+							// this is a divider and needs a special flag
+							$type_flag = 'dropdown-divider';
 						}
 					}
 				}
@@ -164,16 +175,46 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				}
 			}
 			$item_output = $args->before;
-			$item_output .= '<a' . $attributes . '>';
 
-			// initiate empty icon var then if we have a string containing icon classes...
+			/*
+				TODO: We may actually want to drop most of the other markup in
+				the <li> above in addition to the changes below.
+			 */
+  			// This segmet is the opening segment, there is a closing one later.
+			// If $type_flag is not 'link' it needs some specific markup.
+			if ( 'dropdown-header' === $type_flag ) {
+				// For a header I'm using a span with the .h6 class instead of
+				// a real header tag so that it doesn't confuse screen readers.
+				$item_output .= '<span class="dropdown-header h6"' . $attributes . '>';
+			} elseif ( 'dropdown-divider' === $type_flag ) {
+				// this is a divider.
+				$item_output .= '<div class="dropdown-divider"' . $attributes . '>';
+			} else {
+				// It's most likely a link at this point.
+				$item_output .= '<a' . $attributes . '>';
+			}
+
+			// Initiate empty icon var, then if we have a string containing any
+			// icon classes prepend them at the start of the item...
 			$icon_html = '';
 			if ( ! empty( $icon_class_string ) ) {
 				// append an <i> with the icon classes to what is output before links.
 				$icon_html = '<i class="' . esc_attr( $icon_class_string ) . '" aria-hidden="true"></i> ';
 			}
 			$item_output .= $args->link_before . $icon_html . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-			$item_output .= '</a>';
+
+			// This is the closer segment for the above $type_flags condition.
+			if ( 'dropdown-header' === $type_flag ) {
+				// this is a header.
+				$item_output .= '</span>';
+			} elseif ( 'dropdown-divider' === $type_flag ) {
+				// this is a divider.
+				$item_output .= '</div>';
+			} else {
+				// it's most likely a link at this point.
+				$item_output .= '</a>';
+			}
+
 			$item_output .= $args->after;
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 
