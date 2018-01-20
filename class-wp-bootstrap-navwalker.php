@@ -73,28 +73,54 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$value = '';
 			$class_names = $value;
 			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
-			// Loop through the array and pick out any special classes that need
-			// to be added to an element other than the main <li>.
-			$extra_link_classes = array();
-			$icon_class_string = '';
-			foreach ( $classes as $key => $class ) {
-				// test if this is a disabled link, a header or a divider.
-				if ( 'disabled' === $class || 'dropdown-header' === $class || 'dropdown-divider' === $class ) {
-					$extra_link_classes[] = $class;
-					unset( $classes[ $key ] );
-				}
-				// test for icon classes - Supports Font Awesome and Glyphicons.
-				if ( 'fa' === $class || 'fa-' === substr( $class, 0, 3 ) ) {
-					// Because of the abiguity of just 'fa' at the start both
-					// 'fa' & 'fa-' are tested for with Font Awesome icons.
-					$icon_class_string .= $class . ' ';
-					unset( $classes[ $key ] );
-				} elseif ( 'glyphicons' === substr( $class, 0, 10 ) ) {
-					// This should be a glyphicon icon class.
-					$icon_class_string .= $class . ' ';
-					unset( $classes[ $key ] );
-				}
-			}
+
+			/**
+			 * The first item in the $classes array should hold a string with
+			 * any custom classes added in the menu editor. It may be an
+			 * empty string or it may contain 1 or more classnames.
+			 */
+			if ( '' !== $classes[0] ) {
+				// Since the string isn't empty custom classes must be present.
+				$extra_link_classes = array();
+				$icon_classes = array();
+				$icon_class_string = '';
+				// Convert the string to an array of classnames for looping.
+				$custom_classes = explode( ' ', $classes[0] );
+
+				// Loop and begin handling any special linkmod or icon classes.
+				foreach ( $custom_classes as $key => $class ) {
+					/**
+					 * Find any custom link mods or icons.
+					 * Supported linkmods: .disabled, .dropdown-header, .dropdown-divider
+					 * Supported iconsets: Font Awesome 4, Glypicons
+					 */
+					if ( preg_match( '/disabled/', $class ) ) {
+						// Test for .disabled.
+						// store our extra classes and remove them from the classes key.
+						$extra_link_classes[] = $class;
+						unset( $custom_classes[ $key ] );
+					} elseif ( preg_match( '/dropdown-header|dropdown-divider/', $class ) && $depth > 0 ) {
+						// Test for .dropdown-header, .dropdown-divider with a
+						// depth greater than 0 - IE inside a dropdown.
+						$extra_link_classes[] = $class;
+						unset( $custom_classes[ $key ] );
+					} elseif ( preg_match( '/fa(\s?)|fa-(\S)*/', $class ) ) {
+						// Font Awesome 4.
+						$icon_classes[] = $class;
+						unset( $custom_classes[ $key ] );
+					} elseif ( preg_match( '/glyphicons(\s?)|glyphicons-(\S)*/', $class ) ) {
+						// Glyphicons.
+						$icon_classes[] = $class;
+						unset( $custom_classes[ $key ] );
+					}
+				} // End foreach().
+				// Join any icon classes into a string.
+				$icon_class_string = join( ' ', $icon_classes );
+				// Rejoin the string into a maybe modified set of custom classes.
+				$classes[0] = join( ' ', $custom_classes );
+
+			} // End if().
+
 			$classes[] = 'menu-item-' . $item->ID;
 			// BSv4 classname - as of v4-alpha.
 			$classes[] = 'nav-item';
@@ -148,20 +174,27 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			if ( ! empty( $extra_link_classes ) ) {
 				foreach ( $extra_link_classes as $link_class ) {
 					if ( ! empty( $link_class ) ) {
-						// update $atts with the extra class link.
+						// update $atts with the extra classname.
 						$atts['class'] .= ' ' . esc_attr( $link_class );
 
 						// check for special class types we need additional handling for.
 						if ( 'disabled' === $link_class ) {
-							// if the modification is a disabled class...
-							// then # the link so it doesn't point anywhere.
+							// if the modification is a disabled class then #
+							// the link and unset any open targets.
 							$atts['href'] = '#';
+							unset( $atts['target'] );
 						} elseif ( 'dropdown-header' === $link_class ) {
-							// this is a header and needs a special flag
+							// This is a header - store a typeflag for the link
+							// and unset the href and open target.
 							$type_flag = 'dropdown-header';
+							unset( $atts['href'] );
+							unset( $atts['target'] );
 						} elseif ( 'dropdown-divider' === $link_class ) {
-							// this is a divider and needs a special flag
+							// This is a divider - store a typeflag for the link
+							// and unset the href and open target.
 							$type_flag = 'dropdown-divider';
+							unset( $atts['href'] );
+							unset( $atts['target'] );
 						}
 					}
 				}
@@ -172,16 +205,18 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				if ( ! empty( $value ) ) {
 					$value = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
 					$attributes .= ' ' . $attr . '="' . $value . '"';
+					error_log( $attr . '="' . $value . '"', 0 );
 				}
 			}
 			$item_output = $args->before;
 
-			/*
-				TODO: We may actually want to drop most of the other markup in
-				the <li> above in addition to the changes below.
+			/**
+			 * This section is the opening segment for output of link mods,
+			 * there is a closing section one later.
+			 *
+			 * If $type_flag is not default of 'link' then it needs some
+			 * specific markup in place that isn't an anchor.
 			 */
-  			// This segmet is the opening segment, there is a closing one later.
-			// If $type_flag is not 'link' it needs some specific markup.
 			if ( 'dropdown-header' === $type_flag ) {
 				// For a header I'm using a span with the .h6 class instead of
 				// a real header tag so that it doesn't confuse screen readers.
@@ -203,7 +238,13 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 			$item_output .= $args->link_before . $icon_html . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
 
-			// This is the closer segment for the above $type_flags condition.
+			/**
+			 * This section is the closer segment for output of link mods,
+			 * the opener is earlier in this function.
+			 *
+			 * If $type_flag is not default of 'link' then we need to close the
+			 * markup that wasn't an achor.
+			 */
 			if ( 'dropdown-header' === $type_flag ) {
 				// this is a header.
 				$item_output .= '</span>';
