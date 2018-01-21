@@ -20,6 +20,15 @@
 		<severity>0</severity>
 	</rule>
 
+	<!--
+		Allow us not call our main file class-*.php
+	-->
+	<rule ref="WordPress.Files.FileName">
+		<properties>
+			<property name="strict_class_file_names" value="false" />
+		</properties>
+	</rule>
+
 	<rule ref="WordPress-Extra" />
 	<rule ref="WordPress-Docs" />
 </ruleset>

@@ -6,8 +6,16 @@
     "authors": [
         {
             "name": "Brandon Hubbard"
-        }
+        },
+		{
+			"name": "William Patton",
+			"email": "will@pattonwebz.com"
+		}
     ],
+    "support": {
+        "issues": "https://github.com/wp-bootstrap/wp-bootstrap-navwalker/issues/",
+        "source": "https://github.com/wp-bootstrap/wp-bootstrap-navwalker/"
+    },
     "require": {
       "composer/installers": "~1.0"
     },

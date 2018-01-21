@@ -9,7 +9,7 @@
  * Class Name: WP_Bootstrap_Navwalker
  * Plugin Name: WP Bootstrap Navwalker
  * Plugin URI:  https://github.com/wp-bootstrap/wp-bootstrap-navwalker
- * Description: A custom WordPress nav walker class to implement the Bootstrap 3 navigation style in a custom theme using the WordPress built in menu manager.
+ * Description: A custom WordPress nav walker class to implement the Bootstrap 4 navigation style in a custom theme using the WordPress built in menu manager.
  * Author: Edward McIntyre - @twittem, WP Bootstrap, William Patton - @pattonwebz
  * Version: 4.0.0
  * Author URI: https://github.com/wp-bootstrap
@@ -125,7 +125,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			// BSv4 classname - as of v4-alpha.
 			$classes[] = 'nav-item';
 			// reasign any filtered classes back to the $classes array.
-			$classes = apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args );
+			$classes = apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth );
 			$class_names = join( ' ', $classes );
 			if ( $args->has_children ) {
 				$class_names .= ' dropdown';
@@ -321,7 +321,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 						$fallback_output = ' id="' . esc_attr( $container_id ) . '"';
 					}
 					if ( $container_class ) {
-						$fallback_output = ' class="' . sanitize_html_class( $container_class ) . '"';
+						$fallback_output = ' class="' . esc_attr( $container_class ) . '"';
 					}
 					$fallback_output = '>';
 				}
