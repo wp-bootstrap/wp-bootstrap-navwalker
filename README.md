@@ -14,14 +14,6 @@ A custom WordPress nav walker class to fully implement the Bootstrap 4 navigatio
 
 This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Bootstrap dropdown navigation, and does not include the required Bootstrap JS files. You will have to include them manually.
 
-### Bootstrap 4
-
-Bootstrap 4 beta is available and is now the default branch offered at the GitHub repo and on [GetBootstrap](https://getbootstrap.com). A working version of the walker for Bootstrap 4 can be found in the `v4` branch.
-
-Acording to @mdo & team:
-
-> Long story short, shipping a beta means we’re done breaking all your stuff until our next major version (v5).
-
 ## Installation
 
 Place **class-wp-bootstrap-navwalker.php** in your WordPress theme folder `/wp-content/your-theme/`
@@ -36,12 +28,12 @@ require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
 If you encounter errors with the above code use a check like this to return clean errors to help diagnose the problem.
 
 ```php
-if ( ! file_exists( get_template_directory() . '/wp-bootstrap-navwalker.php' ) ) {
+if ( ! file_exists( get_template_directory() . '/class-wp-bootstrap-navwalker.php' ) ) {
 	// file does not exist... return an error.
-	return new WP_Error( 'wp-bootstrap-navwalker-missing', __( 'It appears the wp-bootstrap-navwalker.php file may be missing.', 'wp-bootstrap-navwalker' ) );
+	return new WP_Error( 'class-wp-bootstrap-navwalker-missing', __( 'It appears the class-wp-bootstrap-navwalker.php file may be missing.', 'wp-bootstrap-navwalker' ) );
 } else {
 	// file exists... require it.
-    require_once get_template_directory . 'wp-bootstrap-navwalker.php';
+    require_once get_template_directory . 'class-wp-bootstrap-navwalker.php';
 }
 ```
 
@@ -53,7 +45,7 @@ Update your `wp_nav_menu()` function in `header.php` to use the new walker by ad
 <?php
 wp_nav_menu( array(
     'theme_location'	=> 'primary',
-    'depth'				=> 2,
+    'depth'				=> 1, // 1 = with dropdowns, 0 = no dropdowns.
 	'container'			=> 'div',
 	'container_class'	=> 'collapse navbar-collapse',
 	'container_id'		=> 'bs-example-navbar-collapse-1',
@@ -77,10 +69,10 @@ You will also want to declare your new menu in your `functions.php` file.
 Typically the menu is wrapped with additional markup, here is an example of a ` fixed-top` menu that collapse for responsive navigation at the md breakpoint.
 
 ```php
-<nav class="navbar fixed-top navbar-toggleable-md navbar-light bg-faded" role="navigation">
+<nav class="navbar navbar-expand-md navbar-light bg-light" role="navigation">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
-	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<a class="navbar-brand" href="#">Navbar</a>
@@ -125,15 +117,19 @@ Simply updating the walker may not be enough to get menus working right, you may
 
 ### Extras
 
-This script included the ability to use Bootstrap nav link mods in your menus through the WordPress menu UI. Currently only disabled links are supported. Additionally icon support is built-in for Glyphicons and font Awesome (note: you will need to include the icon stylesheets or assets separately)
+This script included the ability to use Bootstrap nav link mods in your menus through the WordPress menu UI. Disabled links, dropdown headers and dropdown dividers are supported. Additionally icon support is built-in for Glyphicons and Font Awesome (note: you will need to include the icon stylesheets or assets separately).
 
 #### Icons
 
-To add an Icon to your link simpley enter Glypicons or Font Awesome class names in the links **Classes** field in the Menu UI and the walker class will do the rest. IE `glyphicons glyphicons-bullhorn` or `fa fa-arrow-left`.
+To add an Icon to your link simpley enter Glypicons or Font Awesome class names in the links **CSS Classes** field in the Menu UI and the walker class will do the rest. IE `glyphicons glyphicons-bullhorn` or `fa fa-arrow-left` or `fas fa-arrow-left`.
 
 #### Disabled Links
 
-To set a disabled link simply add `disabled` to the **Classes** field in the Menu UI and the walker class will do the rest. Note: _In addition to adding the .disabled class this will change the link `href` to `#` as well so that it is not a followable link._
+To set a disabled link simply add `disabled` to the **CSS Classes** field in the Menu UI and the walker class will do the rest. _Note: In addition to adding the .disabled class this will change the link `href` to `#` as well so that it is not a followable link._
+
+#### Dropdown Headers & Dropdown Dividers
+
+Headers and dividers can be added within dropdowns by adding a Custom Link and adding either `dropdown-header` or `dropdown-divider` into the **CSS Classes** input. _Note: This will remove the `href` on the item and change it to either a `<span>` for headers or a `<div>` for dividers._
 
 ### Changelog
 
