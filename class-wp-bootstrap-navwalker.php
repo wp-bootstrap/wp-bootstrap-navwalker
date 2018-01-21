@@ -29,16 +29,15 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 	class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
 
 		/**
-		 * Start Level.
+		 * Starts the list before the elements are added.
 		 *
-		 * @see Walker::start_lvl()
 		 * @since WP 3.0.0
 		 *
-		 * @access public
-		 * @param mixed $output Passed by reference. Used to append additional content.
-		 * @param int   $depth (default: 0) Depth of page. Used for padding.
-		 * @param array $args (default: array()) Arguments.
-		 * @return void
+		 * @see Walker_Nav_Menu::start_lvl()
+		 *
+		 * @param string   $output Used to append additional content (passed by reference).
+		 * @param int      $depth  Depth of menu item. Used for padding.
+		 * @param stdClass $args   An object of wp_nav_menu() arguments.
 		 */
 		public function start_lvl( &$output, $depth = 0, $args = array() ) {
 			$indent = str_repeat( "\t", $depth );
@@ -54,18 +53,18 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		}
 
 		/**
-		 * Start El.
+		 * Starts the element output.
 		 *
-		 * @see Walker::start_el()
 		 * @since WP 3.0.0
+		 * @since WP 4.4.0 The {@see 'nav_menu_item_args'} filter was added.
 		 *
-		 * @access public
-		 * @param mixed $output Passed by reference. Used to append additional content.
-		 * @param mixed $item Menu item data object.
-		 * @param int   $depth (default: 0) Depth of menu item. Used for padding.
-		 * @param array $args (default: array()) Arguments.
-		 * @param int   $id (default: 0) Menu item ID.
-		 * @return void
+		 * @see Walker_Nav_Menu::start_el()
+		 *
+		 * @param string   $output Used to append additional content (passed by reference).
+		 * @param WP_Post  $item   Menu item data object.
+		 * @param int      $depth  Depth of menu item. Used for padding.
+		 * @param stdClass $args   An object of wp_nav_menu() arguments.
+		 * @param int      $id     Current item ID.
 		 */
 		public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 			$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
@@ -265,21 +264,21 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 *
 		 * Display one element if the element doesn't have any children otherwise,
 		 * display the element and its children. Will only traverse up to the max
-		 * depth and no ignore elements under that depth.
+		 * depth and no ignore elements under that depth. It is possible to set the
+		 * max depth to include all depths, see walk() method.
 		 *
-		 * This method shouldn't be called directly, use the walk() method instead.
+		 * This method should not be called directly, use the walk() method instead.
 		 *
-		 * @see Walker::start_el()
 		 * @since WP 2.5.0
 		 *
-		 * @access public
-		 * @param mixed $element Data object.
-		 * @param mixed $children_elements List of elements to continue traversing.
-		 * @param mixed $max_depth Max depth to traverse.
-		 * @param mixed $depth Depth of current element.
-		 * @param mixed $args Arguments.
-		 * @param mixed $output Passed by reference. Used to append additional content.
-		 * @return null Null on failure with no changes to parameters.
+		 * @see Walker::start_lvl()
+		 *
+		 * @param object $element           Data object.
+		 * @param array  $children_elements List of elements to continue traversing (passed by reference).
+		 * @param int    $max_depth         Max depth to traverse.
+		 * @param int    $depth             Depth of current element.
+		 * @param array  $args              An array of arguments.
+		 * @param string $output            Used to append additional content (passed by reference).
 		 */
 		public function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
 			if ( ! $element ) {
