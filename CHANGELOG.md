@@ -1,33 +1,34 @@
 #CHANGELOG
 
-## [3.0.3]
-- Added a labeled-by attribute to dropdowns for accessibility.
+## [4.0.0]
+- Added a prefix on @since tags to highlight when they refer to WP core instead of this class.
+- Rework of `start_lvl()` and `start_el()` based on latest `Walker_Nav_Menu` Class from WP core.
+	- Whitespace preservation method improvements.
+	- Added `nav_menu_item_args` filter and `nav_menu_item_title` brought in at WP 4.4.0
+	- Use `the_title` filter prior to `nav_menu_item_title`.
+- Added a labelled-by attribute to dropdowns for accessibility.
 - Links inside dropdown have `.dropdown-item` instead of `.nav-link`.
-
-## [3.0.2]
-
-- Remove `<span class="carat">` after parent dropdown items
-- Support `echo` arg in fallback menu.
-	- credit: @toddlevy
-- Add `.active` to parent when a child is current page.
-	- credit: @zyberspace
-
-## [3.0.1]
-
-- Fix to correct output of dropdown atts and styles when depth passed to wp_nav_menu is <= 1
-	- credit: @chrisgeary92
+- Remove `<span class="carat">` after parent dropdown items.
+- Support `echo` arg in fallback menu. props: @toddlevy
+- Add `.active` to parent when a child is current page. props: @zyberspace
+- Fix to correct output of dropdown atts and styles when depth passed to wp_nav_menu is <= 1. props: @chrisgeary92
 - Move icon output to a local var instead of modifying and clearing a global object.
-- Reassign filtered classes back to $classes array so that updated classes can be accessed later if needed.
-	- credit: @lf-jeremy
-
-## [3.0.0]
-
+- Reassign filtered classes back to $classes array so that updated classes can be accessed later if needed. props: @lf-jeremy
 - Update to work with Bootstrap v4.
 	- Added `.nav-item` and `.nav-link` to `<li>` and `<a>` respectively.
 - Dropped support for using title attribute to add link modifiers and icons.
 - Added support for link modifiers and icons through WP Menu Builder 'classes' input.
-	- Currently only 'disabled' link modifier is available.
-	- Icon support is for Font-Awesome and Glyphicons icons.
+	- Icon support is for Font Awesome 4/5 and Glyphicons icons.
+
+## [3.0.0]
+
+- Fix untranslated string in fallback.
+- Instruct screenreaders to ignore icons when present.
+- Added basic unit tests and travis config.
+- Swapped to IF statements with curly braces.
+- Adds `$depth` arg for nav_menu_css_class filter.
+- Fix sanitization function used for class output in fallback.
+- Changed composer package type to `library` from `wordpress-plugin`.
 
 ## [2.0.5] - 2016-011-15
 

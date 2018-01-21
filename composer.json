@@ -1,28 +1,36 @@
 {
     "name": "wp-bootstrap/wp-bootstrap-navwalker",
-    "description": "A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager.",
+    "description": "A custom WordPress nav walker class to fully implement the Bootstrap 4 navigation style in a custom theme using the WordPress built in menu manager.",
     "type": "wordpress-plugin",
     "license": "GPL-3.0+",
     "authors": [
         {
             "name": "Brandon Hubbard"
-        }
+        },
+		{
+			"name": "William Patton",
+			"email": "will@pattonwebz.com"
+		}
     ],
+    "support": {
+        "issues": "https://github.com/wp-bootstrap/wp-bootstrap-navwalker/issues/",
+        "source": "https://github.com/wp-bootstrap/wp-bootstrap-navwalker/"
+    },
     "require": {
       "composer/installers": "~1.0"
     },
     "require-dev": {
-        "stevegrunwell/wp-enforcer": "^0.4.1"
+        "stevegrunwell/wp-enforcer": "^0.5.0"
     },
     "archive": {
         "exclude": ["/.*", "/composer.lock"]
     },
     "scripts": {
         "post-install-cmd": [
-            "wp-enforcer"
+            "wp-enforcer --ruleset=phpcs.ruleset.xml"
         ],
         "post-update-cmd": [
-            "wp-enforcer"
+            "wp-enforcer --ruleset=phpcs.ruleset.xml"
         ]
     }
 }

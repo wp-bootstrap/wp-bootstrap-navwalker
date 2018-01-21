@@ -1,4 +1,5 @@
 language: php
+dist: trusty
 
 notifications:
   email:
@@ -10,23 +11,31 @@ branches:
     - master
 
 php:
-  - 5.3
   - 5.6
+  - 7.0
+  - nightly
 
 env:
   - WP_VERSION=latest WP_MULTISITE=0
+  - WP_VERSION=latest WP_MULTISITE=1
 
 matrix:
   include:
-    - php: 5.3
+    - dist: precise
+      php: 5.3
+      env: WP_VERSION=latest WP_MULTISITE=0
+    - dist: precise
+      php: 5.3
       env: WP_VERSION=latest WP_MULTISITE=1
+  allow_failures:
+    - php: nightly
 
 before_script:
-  - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+  - bash bin/install-wp-tests.sh wordpress_test root "" localhost $WP_VERSION
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - |
-    if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" ]]; then
-      composer global require "phpunit/phpunit=5.6.*"
+    if [[ ${TRAVIS_PHP_VERSION:0:1} == "7" ]]; then
+      composer global require "phpunit/phpunit=^5.6"
     else
       composer global require "phpunit/phpunit=4.8.*"
     fi
@@ -35,5 +44,9 @@ before_script:
     phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
 
 script:
-  - phpcs --standard=phpcs.ruleset.xml $(find . -name '*.php')
+  - phpcs --standard=phpcs.ruleset.xml $(find -name "*.php")
   - phpunit
+
+cache:
+  directories:
+    - $HOME/.composer/cache
