@@ -32,7 +32,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * Start Level.
 		 *
 		 * @see Walker::start_lvl()
-		 * @since 3.0.0
+		 * @since WP 3.0.0
 		 *
 		 * @access public
 		 * @param mixed $output Passed by reference. Used to append additional content.
@@ -57,7 +57,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * Start El.
 		 *
 		 * @see Walker::start_el()
-		 * @since 3.0.0
+		 * @since WP 3.0.0
 		 *
 		 * @access public
 		 * @param mixed $output Passed by reference. Used to append additional content.
