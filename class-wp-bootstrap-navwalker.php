@@ -205,7 +205,6 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				if ( ! empty( $value ) ) {
 					$value = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
 					$attributes .= ' ' . $attr . '="' . $value . '"';
-					error_log( $attr . '="' . $value . '"', 0 );
 				}
 			}
 			$item_output = $args->before;
@@ -271,7 +270,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * This method shouldn't be called directly, use the walk() method instead.
 		 *
 		 * @see Walker::start_el()
-		 * @since 2.5.0
+		 * @since WP 2.5.0
 		 *
 		 * @access public
 		 * @param mixed $element Data object.
