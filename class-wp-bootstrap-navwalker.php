@@ -108,7 +108,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				/**
 				 * Find any custom link mods or icons.
 				 * Supported linkmods: .disabled, .dropdown-header, .dropdown-divider
-				 * Supported iconsets: Font Awesome 4, Glypicons
+				 * Supported iconsets: Font Awesome 4/5, Glypicons
 				 */
 				if ( preg_match( '/disabled/', $class ) ) {
 					// Test for .disabled.
@@ -120,8 +120,8 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					// depth greater than 0 - IE inside a dropdown.
 					$extra_link_classes[] = $class;
 					unset( $classes[ $key ] );
-				} elseif ( preg_match( '/fa-(\S*)?|fa(\s?)|fa-home/', $class ) ) {
-					// Font Awesome 4.
+				} elseif ( preg_match( '/fa-(\S*)?|fa(\s?)|fas(\s?)/', $class ) ) {
+					// Font Awesome 4/5.
 					$icon_classes[] = $class;
 					unset( $classes[ $key ] );
 				} elseif ( preg_match( '/glyphicons(\s?)|glyphicons-(\S)*/', $class ) ) {
