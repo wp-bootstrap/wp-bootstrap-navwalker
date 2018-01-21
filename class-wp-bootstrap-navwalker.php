@@ -61,14 +61,21 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 */
 			$class_names = join( ' ', apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth ) );
 			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
+			/**
+			 * The `.dropdown-menu` container needs to have a labelledby
+			 * attribute which points to it's trigger link.
+			 *
+			 * Form a string for the labelledby attribute from the the latest
+			 * link with an id that was added to the $output.
+			 */
 			// find all links with an id in the output.
 			preg_match_all( '/(<a.*?id=\"|\')(.*?)\"|\'.*?>/im', $output, $matches );
 			// with pointer at end of array check if we got an ID match.
 			if ( end( $matches[2] ) ) {
 				// build a string to use as aria-labelledby.
-				$labledby = 'aria-labelledby="' . end( $matches[2] ) . '"';
+				$lablledby = 'aria-labelledby="' . end( $matches[2] ) . '"';
 			}
-			$output .= "{$n}{$indent}<ul$class_names $labledby role=\"menu\">{$n}";
+			$output .= "{$n}{$indent}<ul$class_names $lablledby role=\"menu\">{$n}";
 		}
 
 		/**
@@ -99,6 +106,8 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$class_names = $value;
 			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 
+			// Initialize some holder variables to store specially handled item
+			// wrappers and icons.
 			$extra_link_classes = array();
 			$icon_classes = array();
 			$icon_class_string = '';
@@ -106,13 +115,14 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			// Loop and begin handling any special linkmod or icon classes.
 			foreach ( $classes as $key => $class ) {
 				/**
-				 * Find any custom link mods or icons.
+				 * Find any custom link mods or icons, store in their holder
+				 * arrays and remove them from the classes array.
+				 *
 				 * Supported linkmods: .disabled, .dropdown-header, .dropdown-divider
 				 * Supported iconsets: Font Awesome 4/5, Glypicons
 				 */
 				if ( preg_match( '/disabled/', $class ) ) {
 					// Test for .disabled.
-					// store our extra classes and remove them from the classes key.
 					$extra_link_classes[] = $class;
 					unset( $classes[ $key ] );
 				} elseif ( preg_match( '/dropdown-header|dropdown-divider/', $class ) && $depth > 0 ) {
@@ -130,12 +140,10 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					unset( $classes[ $key ] );
 				}
 			} // End foreach().
-			// Join any icon classes into a string.
+
+			// Join any icon classes plucked from $classes into a string.
 			$icon_class_string = join( ' ', $icon_classes );
 
-			$classes[] = 'menu-item-' . $item->ID;
-			// BSv4 classname - as of v4-alpha.
-			$classes[] = 'nav-item';
 			/**
 			 * Filters the arguments for a single nav menu item.
 			 *
@@ -147,6 +155,9 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 */
 			$args = apply_filters( 'nav_menu_item_args', $args, $item, $depth );
 
+			$classes[] = 'menu-item-' . $item->ID;
+			$classes[] = 'nav-item';
+
 			// Add .dropdown or .active classes where they are needed.
 			if ( $args->has_children ) {
 				$classes[] = 'dropdown';
@@ -154,11 +165,14 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) ) {
 				$classes = 'active';
 			}
-			// reasign any filtered classes back to the $classes array.
-			$classes = apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth );
-			$class_names = join( ' ', $classes );
 
+			// Allow filtering the classes.
+			$classes = apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth );
+
+			// Form a string of classnames and wrap it in it's attribute.
+			$class_names = join( ' ', $classes );
 			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
+
 			/**
 			 * Filters the ID applied to a menu item's list item element.
 			 *
