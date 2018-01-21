@@ -21,6 +21,7 @@ Place **class-wp-bootstrap-navwalker.php** in your WordPress theme folder `/wp-c
 Open your WordPress themes **functions.php** file - `/wp-content/your-theme/functions.php` - and add the following code:
 
 ```php
+<?php
 // Register Custom Navigation Walker
 require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
 ```
@@ -33,7 +34,7 @@ if ( ! file_exists( get_template_directory() . '/class-wp-bootstrap-navwalker.ph
 	return new WP_Error( 'class-wp-bootstrap-navwalker-missing', __( 'It appears the class-wp-bootstrap-navwalker.php file may be missing.', 'wp-bootstrap-navwalker' ) );
 } else {
 	// file exists... require it.
-    require_once get_template_directory . 'class-wp-bootstrap-navwalker.php';
+    require_once get_template_directory . '/class-wp-bootstrap-navwalker.php';
 }
 ```
 You will also need to declare a new menu in your `functions.php` file if one doesn't already exist.
@@ -97,13 +98,14 @@ Review options in the Bootstrap docs for more information on [nav classes](https
 
 ### Displaying the Menu
 
-To display the menu you must associate your menu with your theme location. You can do this by selecting your theme location in the *Theme Locations* list wile editing a menu in the WordPress menu manager.
+To display the menu you must associate your menu with your theme location. You can do this by selecting your theme location in the *Theme Locations* list while editing a menu in the WordPress menu manager.
 
 ### Making this Walker the Default Walker for Nav Manus
 
 There has been some interest in making this walker the default walker for all menus. That could result in some unexpected situations but it can be achieved by adding this function to your functions.php file.
 
 ```php
+<?php
 function prefix_modify_nav_menu_args( $args ) {
     return array_merge( $args, array(
         'walker' => WP_Bootstrap_Navwalker(),
@@ -129,6 +131,6 @@ To set a disabled link simply add `disabled` to the **CSS Classes** field in the
 
 Headers and dividers can be added within dropdowns by adding a Custom Link and adding either `dropdown-header` or `dropdown-divider` into the **CSS Classes** input. _Note: This will remove the `href` on the item and change it to either a `<span>` for headers or a `<div>` for dividers._
 
-### Changelog
+## Changelog
 
 Please see the [Changelog](https://github.com/wp-bootstrap/wp-bootstrap-navwalker/blob/master/CHANGELOG.md).
