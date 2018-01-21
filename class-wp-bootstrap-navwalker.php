@@ -126,15 +126,15 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					$extra_link_classes[] = $class;
 					unset( $classes[ $key ] );
 				} elseif ( preg_match( '/dropdown-header|dropdown-divider/', $class ) && $depth > 0 ) {
-					// Test for .dropdown-header, .dropdown-divider with a
+					// Test for .dropdown-header or .dropdown-divider and a
 					// depth greater than 0 - IE inside a dropdown.
 					$extra_link_classes[] = $class;
 					unset( $classes[ $key ] );
-				} elseif ( preg_match( '/fa-(\S*)?|fa(\s?)|fas(\s?)/', $class ) ) {
-					// Font Awesome 4/5.
+				} elseif ( preg_match( '/fa-(\S*)?|fas(\s?)|fa(\s?)/', $class ) ) {
+					// Font Awesome.
 					$icon_classes[] = $class;
 					unset( $classes[ $key ] );
-				} elseif ( preg_match( '/glyphicons(\s?)|glyphicons-(\S)*/', $class ) ) {
+				} elseif ( preg_match( '/glyphicons-(\S*)?|glyphicons(\s?)/', $class ) ) {
 					// Glyphicons.
 					$icon_classes[] = $class;
 					unset( $classes[ $key ] );
@@ -169,7 +169,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			// Allow filtering the classes.
 			$classes = apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth );
 
-			// Form a string of classnames and wrap it in it's attribute.
+			// Form a string of classes in format: class="class_names".
 			$class_names = join( ' ', $classes );
 			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
@@ -192,8 +192,8 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			// initialize array for holding the $atts for the link item.
 			$atts = array();
 
-			// set title from item to the $atts array - if title is empty then
-			// set a default of the item title.
+			// Set title from item to the $atts array - if title is empty then
+			// default to item title.
 			if ( empty( $item->attr_title ) ) {
 				$atts['title']  = ! empty( $item->title ) ? strip_tags( $item->title ) : '';
 			} else {
@@ -202,7 +202,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 
 			$atts['target'] = ! empty( $item->target )	? $item->target	: '';
 			$atts['rel']    = ! empty( $item->xfn )		? $item->xfn	: '';
-			// If item has_children add atts to a.
+			// If item has_children add atts to <a>.
 			if ( $args->has_children && 0 === $depth && $args->depth > 1 ) {
 				$atts['href']   		= '#';
 				$atts['data-toggle']	= 'dropdown';
@@ -212,8 +212,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$atts['id']				= 'menu-item-dropdown-' . $item->ID;
 			} else {
 				$atts['href'] 	= ! empty( $item->url ) ? $item->url : '';
-				// if we are in a dropdown then the the class .dropdown-item
-				// should be used instead of .nav-link.
+				// Items in dropdowns use .dropdown-item instead of .nav-link.
 				if ( $depth > 0 ) {
 					$atts['class']	= 'dropdown-item';
 				} else {
@@ -234,19 +233,16 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 
 						// check for special class types we need additional handling for.
 						if ( 'disabled' === $link_class ) {
-							// if the modification is a disabled class then #
-							// the link and unset any open targets.
+							// Convert link to '#' and unset open targets.
 							$atts['href'] = '#';
 							unset( $atts['target'] );
 						} elseif ( 'dropdown-header' === $link_class ) {
-							// This is a header - store a typeflag for the link
-							// and unset the href and open target.
+							// Store a type flag and unset href and target.
 							$type_flag = 'dropdown-header';
 							unset( $atts['href'] );
 							unset( $atts['target'] );
 						} elseif ( 'dropdown-divider' === $link_class ) {
-							// This is a divider - store a typeflag for the link
-							// and unset the href and open target.
+							// Store a type flag and unset href and target.
 							$type_flag = 'dropdown-divider';
 							unset( $atts['href'] );
 							unset( $atts['target'] );
@@ -254,8 +250,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					}
 				}
 			}
+
+			// Allow filtering of the $atts array before using it.
 			$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args );
 
+			// Build a string of html containing all the atts for the item.
 			$attributes = '';
 			foreach ( $atts as $attr => $value ) {
 				if ( ! empty( $value ) ) {
@@ -264,29 +263,32 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				}
 			}
 
+			/**
+			 * START appending the internal item contents to the output.
+			 */
 			$item_output = $args->before;
 
 			/**
-			 * This section is the opening segment for output of link mods,
-			 * there is a closing section one later.
-			 *
-			 * If $type_flag is not default of 'link' then it needs some
-			 * specific markup in place that isn't an anchor.
+			 * This is the start of the internal nav item. Depending on what
+			 * kind of link mod we have we need different wrapper elements.
 			 */
 			if ( 'dropdown-header' === $type_flag ) {
-				// For a header I'm using a span with the .h6 class instead of
-				// a real header tag so that it doesn't confuse screen readers.
+				// For a header use a span with the .h6 class instead of a real
+				// header tag so that it doesn't confuse screen readers.
 				$item_output .= '<span class="dropdown-header h6"' . $attributes . '>';
 			} elseif ( 'dropdown-divider' === $type_flag ) {
 				// this is a divider.
 				$item_output .= '<div class="dropdown-divider"' . $attributes . '>';
 			} else {
-				// It's most likely a link at this point.
+				// With no link mod type set this must be a standard <a> tag.
 				$item_output .= '<a' . $attributes . '>';
 			}
 
-			// Initiate empty icon var, then if we have a string containing any
-			// icon classes prepend them at the start of the item...
+			/**
+			 * Initiate empty icon var, then if we have a string containing any
+			 * icon classes form the icon markup with an <i> element. This is
+			 * output inside of the item before the $title (the link text).
+			 */
 			$icon_html = '';
 			if ( ! empty( $icon_class_string ) ) {
 				// append an <i> with the icon classes to what is output before links.
@@ -306,14 +308,13 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 * @param int      $depth Depth of menu item. Used for padding.
 			 */
 			$title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
+
+			// Put the item contents into $output.
 			$item_output .= $args->link_before . $icon_html . $title . $args->link_after;
 
 			/**
-			 * This section is the closer segment for output of link mods,
-			 * the opener is earlier in this function.
-			 *
-			 * If $type_flag is not default of 'link' then we need to close the
-			 * markup that wasn't an achor.
+			 * This is the end of the internal nav item. We need to close the
+			 * correct element depending on the type of link or link mod.
 			 */
 			if ( 'dropdown-header' === $type_flag ) {
 				// this is a header.
@@ -327,6 +328,9 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 
 			$item_output .= $args->after;
+			/**
+			 * END appending the internal item contents to the output.
+			 */
 
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 
