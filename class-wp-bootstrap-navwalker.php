@@ -320,25 +320,25 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$fallback_output = '';
 
 				if ( $container ) {
-					$fallback_output = '<' . esc_attr( $container );
+					$fallback_output .= '<' . esc_attr( $container );
 					if ( $container_id ) {
-						$fallback_output = ' id="' . esc_attr( $container_id ) . '"';
+						$fallback_output .= ' id="' . esc_attr( $container_id ) . '"';
 					}
 					if ( $container_class ) {
-						$fallback_output = ' class="' . esc_attr( $container_class ) . '"';
+						$fallback_output .= ' class="' . esc_attr( $container_class ) . '"';
 					}
-					$fallback_output = '>';
+					$fallback_output .= '>';
 				}
-				$fallback_output = '<ul';
+				$fallback_output .= '<ul';
 				if ( $menu_id ) {
-					$fallback_output = ' id="' . esc_attr( $menu_id ) . '"'; }
+					$fallback_output .= ' id="' . esc_attr( $menu_id ) . '"'; }
 				if ( $menu_class ) {
-					$fallback_output = ' class="' . esc_attr( $menu_class ) . '"'; }
-				$fallback_output = '>';
-				$fallback_output = '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" title="">' . esc_attr( 'Add a menu', '' ) . '</a></li>';
-				$fallback_output = '</ul>';
+					$fallback_output .= ' class="' . esc_attr( $menu_class ) . '"'; }
+				$fallback_output .= '>';
+				$fallback_output .= '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" title="">' . esc_attr( 'Add a menu', '' ) . '</a></li>';
+				$fallback_output .= '</ul>';
 				if ( $container ) {
-					$fallback_output = '</' . esc_attr( $container ) . '>';
+					$fallback_output .= '</' . esc_attr( $container ) . '>';
 				}
 
 				// if $args has 'echo' key and it's true echo, otherwise return.
