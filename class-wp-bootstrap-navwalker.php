@@ -48,7 +48,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$n = "\n";
 			}
 			$indent = str_repeat( $t, $depth );
-			// Default class.
+			// Default class to add to the file.
 			$classes = array( 'dropdown-menu' );
 			/**
 			 * Filters the CSS class(es) applied to a menu list element.
@@ -102,15 +102,15 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 			$indent = ( $depth ) ? str_repeat( $t, $depth ) : '';
 
-			$value = '';
+			$value       = '';
 			$class_names = $value;
-			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
+			$classes     = empty( $item->classes ) ? array() : (array) $item->classes;
 
 			// Initialize some holder variables to store specially handled item
 			// wrappers and icons.
 			$extra_link_classes = array();
-			$icon_classes = array();
-			$icon_class_string = '';
+			$icon_classes       = array();
+			$icon_class_string  = '';
 
 			// Loop and begin handling any special linkmod or icon classes.
 			foreach ( $classes as $key => $class ) {
@@ -195,28 +195,28 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			// Set title from item to the $atts array - if title is empty then
 			// default to item title.
 			if ( empty( $item->attr_title ) ) {
-				$atts['title']  = ! empty( $item->title ) ? strip_tags( $item->title ) : '';
+				$atts['title'] = ! empty( $item->title ) ? strip_tags( $item->title ) : '';
 			} else {
 				$atts['title'] = $item->attr_title;
 			}
 
-			$atts['target'] = ! empty( $item->target )	? $item->target	: '';
-			$atts['rel']    = ! empty( $item->xfn )		? $item->xfn	: '';
+			$atts['target'] = ! empty( $item->target ) ? $item->target : '';
+			$atts['rel']    = ! empty( $item->xfn ) ? $item->xfn : '';
 			// If item has_children add atts to <a>.
 			if ( $args->has_children && 0 === $depth && $args->depth > 1 ) {
-				$atts['href']   		= '#';
-				$atts['data-toggle']	= 'dropdown';
-				$atts['aria-haspopup']	= 'true';
-				$atts['aria-expanded']	= 'false';
-				$atts['class']			= 'dropdown-toggle nav-link';
-				$atts['id']				= 'menu-item-dropdown-' . $item->ID;
+				$atts['href']          = '#';
+				$atts['data-toggle']   = 'dropdown';
+				$atts['aria-haspopup'] = 'true';
+				$atts['aria-expanded'] = 'false';
+				$atts['class']         = 'dropdown-toggle nav-link';
+				$atts['id']            = 'menu-item-dropdown-' . $item->ID;
 			} else {
-				$atts['href'] 	= ! empty( $item->url ) ? $item->url : '';
+				$atts['href'] = ! empty( $item->url ) ? $item->url : '';
 				// Items in dropdowns use .dropdown-item instead of .nav-link.
 				if ( $depth > 0 ) {
-					$atts['class']	= 'dropdown-item';
+					$atts['class'] = 'dropdown-item';
 				} else {
-					$atts['class']	= 'nav-link';
+					$atts['class'] = 'nav-link';
 				}
 			}
 
@@ -258,7 +258,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$attributes = '';
 			foreach ( $atts as $attr => $value ) {
 				if ( ! empty( $value ) ) {
-					$value = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
+					$value       = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
 					$attributes .= ' ' . $attr . '="' . $value . '"';
 				}
 			}
@@ -381,11 +381,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			if ( current_user_can( 'edit_theme_options' ) ) {
 
 				/* Get Arguments. */
-				$container = $args['container'];
-				$container_id = $args['container_id'];
+				$container       = $args['container'];
+				$container_id    = $args['container_id'];
 				$container_class = $args['container_class'];
-				$menu_class = $args['menu_class'];
-				$menu_id = $args['menu_id'];
+				$menu_class      = $args['menu_class'];
+				$menu_id         = $args['menu_id'];
 
 				// initialize var to store fallback html.
 				$fallback_output = '';
