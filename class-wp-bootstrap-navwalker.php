@@ -40,7 +40,27 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * @param stdClass $args   An object of wp_nav_menu() arguments.
 		 */
 		public function start_lvl( &$output, $depth = 0, $args = array() ) {
-			$indent = str_repeat( "\t", $depth );
+			if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
+				$t = '';
+				$n = '';
+			} else {
+				$t = "\t";
+				$n = "\n";
+			}
+			$indent = str_repeat( $t, $depth );
+			// Default class.
+			$classes = array( 'dropdown-menu' );
+			/**
+			 * Filters the CSS class(es) applied to a menu list element.
+			 *
+			 * @since WP 4.8.0
+			 *
+			 * @param array    $classes The CSS classes that are applied to the menu `<ul>` element.
+			 * @param stdClass $args    An object of `wp_nav_menu()` arguments.
+			 * @param int      $depth   Depth of menu item. Used for padding.
+			 */
+			$class_names = join( ' ', apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth ) );
+			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 			// find all links with an id in the output.
 			preg_match_all( '/(<a.*?id=\"|\')(.*?)\"|\'.*?>/im', $output, $matches );
 			// with pointer at end of array check if we got an ID match.
@@ -48,8 +68,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				// build a string to use as aria-labelledby.
 				$labledby = 'aria-labelledby="' . end( $matches[2] ) . '"';
 			}
-
-			$output .= "\n$indent<ul role=\"menu\" class=\" dropdown-menu\" " . $labledby . ">\n";
+			$output .= "{$n}{$indent}<ul$class_names $labledby role=\"menu\">{$n}";
 		}
 
 		/**
