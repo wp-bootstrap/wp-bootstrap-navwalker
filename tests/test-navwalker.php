@@ -33,7 +33,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * @return void
 	 */
 	function test_navwalker_file_exists() {
-		$this->assertFileExists( 'wp-bootstrap-navwalker.php' );
+		$this->assertFileExists( 'calss-wp-bootstrap-navwalker.php' );
 	}
 
 	/**
