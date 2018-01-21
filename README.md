@@ -8,17 +8,17 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/badges/build.png?b=master)](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/build-status/master)
 
-A custom WordPress nav walker class to fully implement the Bootstrap 4 navigation style in a custom theme using the WordPress built in menu manager.
+A custom WordPress Nav Walker Class to fully implement the Bootstrap 4 navigation style in a custom theme using the WordPress built in menu manager.
 
 ## NOTES
 
-This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Bootstrap dropdown navigation, and does not include the required Bootstrap JS files. You will have to include them manually.
+This is a utility class that is intended to format your WordPress theme menu with the correct syntax and CSS classes to utilize the Bootstrap dropdown navigation. It does not include the required Bootstrap JS and CSS files - you will have to include them manually.
 
 ## Installation
 
 Place **class-wp-bootstrap-navwalker.php** in your WordPress theme folder `/wp-content/your-theme/`
 
-Open your WordPress themes **functions.php** file  `/wp-content/your-theme/functions.php` and add the following code:
+Open your WordPress themes **functions.php** file - `/wp-content/your-theme/functions.php` - and add the following code:
 
 ```php
 // Register Custom Navigation Walker
@@ -36,10 +36,16 @@ if ( ! file_exists( get_template_directory() . '/class-wp-bootstrap-navwalker.ph
     require_once get_template_directory . 'class-wp-bootstrap-navwalker.php';
 }
 ```
+You will also need to declare a new menu in your `functions.php` file if one doesn't already exist.
 
+```php
+	register_nav_menus( array(
+    	'primary' => __( 'Primary Menu', 'THEMENAME' ),
+	) );
+```
 ## Usage
 
-Update your `wp_nav_menu()` function in `header.php` to use the new walker by adding a "walker" item to the wp_nav_menu array.
+Add or update any `wp_nav_menu()` functions in your theme (often found in `header.php`) to use the new walker by adding a `'walker'` item to the wp_nav_menu args array.
 
 ```php
 <?php
@@ -57,14 +63,6 @@ wp_nav_menu( array(
 ```
 
 Your menu will now be formatted with the correct syntax and classes to implement Bootstrap dropdown navigation.
-
-You will also want to declare your new menu in your `functions.php` file.
-
-```php
-	register_nav_menus( array(
-    	'primary' => __( 'Primary Menu', 'THEMENAME' ),
-	) );
-```
 
 Typically the menu is wrapped with additional markup, here is an example of a ` fixed-top` menu that collapse for responsive navigation at the md breakpoint.
 
@@ -121,7 +119,7 @@ This script included the ability to use Bootstrap nav link mods in your menus th
 
 #### Icons
 
-To add an Icon to your link simpley enter Glypicons or Font Awesome class names in the links **CSS Classes** field in the Menu UI and the walker class will do the rest. IE `glyphicons glyphicons-bullhorn` or `fa fa-arrow-left` or `fas fa-arrow-left`.
+To add an Icon to your link simply enter Glypicons or Font Awesome class names in the links **CSS Classes** field in the Menu UI and the walker class will do the rest. IE `glyphicons glyphicons-bullhorn` or `fa fa-arrow-left` or `fas fa-arrow-left`.
 
 #### Disabled Links
 
