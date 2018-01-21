@@ -92,52 +92,39 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$class_names = $value;
 			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 
-			/**
-			 * The first item in the $classes array should hold a string with
-			 * any custom classes added in the menu editor. It may be an
-			 * empty string or it may contain 1 or more classnames.
-			 */
-			if ( '' !== $classes[0] ) {
-				// Since the string isn't empty custom classes must be present.
-				$extra_link_classes = array();
-				$icon_classes = array();
-				$icon_class_string = '';
-				// Convert the string to an array of classnames for looping.
-				$custom_classes = explode( ' ', $classes[0] );
+			$extra_link_classes = array();
+			$icon_classes = array();
+			$icon_class_string = '';
 
-				// Loop and begin handling any special linkmod or icon classes.
-				foreach ( $custom_classes as $key => $class ) {
-					/**
-					 * Find any custom link mods or icons.
-					 * Supported linkmods: .disabled, .dropdown-header, .dropdown-divider
-					 * Supported iconsets: Font Awesome 4, Glypicons
-					 */
-					if ( preg_match( '/disabled/', $class ) ) {
-						// Test for .disabled.
-						// store our extra classes and remove them from the classes key.
-						$extra_link_classes[] = $class;
-						unset( $custom_classes[ $key ] );
-					} elseif ( preg_match( '/dropdown-header|dropdown-divider/', $class ) && $depth > 0 ) {
-						// Test for .dropdown-header, .dropdown-divider with a
-						// depth greater than 0 - IE inside a dropdown.
-						$extra_link_classes[] = $class;
-						unset( $custom_classes[ $key ] );
-					} elseif ( preg_match( '/fa(\s?)|fa-(\S)*/', $class ) ) {
-						// Font Awesome 4.
-						$icon_classes[] = $class;
-						unset( $custom_classes[ $key ] );
-					} elseif ( preg_match( '/glyphicons(\s?)|glyphicons-(\S)*/', $class ) ) {
-						// Glyphicons.
-						$icon_classes[] = $class;
-						unset( $custom_classes[ $key ] );
-					}
-				} // End foreach().
-				// Join any icon classes into a string.
-				$icon_class_string = join( ' ', $icon_classes );
-				// Rejoin the string into a maybe modified set of custom classes.
-				$classes[0] = join( ' ', $custom_classes );
-
-			} // End if().
+			// Loop and begin handling any special linkmod or icon classes.
+			foreach ( $classes as $key => $class ) {
+				/**
+				 * Find any custom link mods or icons.
+				 * Supported linkmods: .disabled, .dropdown-header, .dropdown-divider
+				 * Supported iconsets: Font Awesome 4, Glypicons
+				 */
+				if ( preg_match( '/disabled/', $class ) ) {
+					// Test for .disabled.
+					// store our extra classes and remove them from the classes key.
+					$extra_link_classes[] = $class;
+					unset( $classes[ $key ] );
+				} elseif ( preg_match( '/dropdown-header|dropdown-divider/', $class ) && $depth > 0 ) {
+					// Test for .dropdown-header, .dropdown-divider with a
+					// depth greater than 0 - IE inside a dropdown.
+					$extra_link_classes[] = $class;
+					unset( $classes[ $key ] );
+				} elseif ( preg_match( '/fa-(\S*)?|fa(\s?)|fa-home/', $class ) ) {
+					// Font Awesome 4.
+					$icon_classes[] = $class;
+					unset( $classes[ $key ] );
+				} elseif ( preg_match( '/glyphicons(\s?)|glyphicons-(\S)*/', $class ) ) {
+					// Glyphicons.
+					$icon_classes[] = $class;
+					unset( $classes[ $key ] );
+				}
+			} // End foreach().
+			// Join any icon classes into a string.
+			$icon_class_string = join( ' ', $icon_classes );
 
 			$classes[] = 'menu-item-' . $item->ID;
 			// BSv4 classname - as of v4-alpha.
