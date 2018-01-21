@@ -44,7 +44,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 */
 	function test_startlvl_function() {
 
-		$wp_bootstrap_navwalker = new WP_Bootstrap_Navwalker();
+		$wp_bootstrap_navwalker = $this->walker;
 
 		$this->assertTrue(
 			method_exists( $wp_bootstrap_navwalker, 'start_lvl' ),
@@ -61,7 +61,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 */
 	function test_start_el_function() {
 
-		$wp_bootstrap_navwalker = new WP_Bootstrap_Navwalker();
+		$wp_bootstrap_navwalker = $this->walker;
 
 		$this->assertTrue(
 			method_exists( $wp_bootstrap_navwalker, 'start_el' ),
@@ -78,7 +78,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 */
 	function test_display_element_function() {
 
-		$wp_bootstrap_navwalker = new WP_Bootstrap_Navwalker();
+		$wp_bootstrap_navwalker = $this->walker;
 
 		$this->assertTrue(
 			method_exists( $wp_bootstrap_navwalker, 'display_element' ),
@@ -95,7 +95,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 */
 	function test_fallback_function() {
 
-		$wp_bootstrap_navwalker = new WP_Bootstrap_Navwalker();
+		$wp_bootstrap_navwalker = $this->walker;
 
 		$this->assertTrue(
 			method_exists( $wp_bootstrap_navwalker, 'fallback' ),
