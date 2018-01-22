@@ -1,5 +1,15 @@
 #CHANGELOG
 
+## [3.0.0]
+
+- Fix untranslated string in fallback.
+- Instruct screenreaders to ignore icons when present.
+- Added basic unit tests and travis config.
+- Swapped to IF statements with curly braces.
+- Adds `$depth` arg for nav_menu_css_class filter.
+- Fix sanitization function used for class output in fallback.
+- Changed composer package type to `library` from `wordpress-plugin`.
+
 ## [2.0.5] - 2016-011-15
 
 - Fixed all reported issues by WP Enforcer.
