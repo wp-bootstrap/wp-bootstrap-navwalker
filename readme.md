@@ -8,19 +8,15 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/badges/build.png?b=master)](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/build-status/master)
 
-A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager.
+A custom WordPress nav walker class to fully implement the Bootstrap 3.0+ navigation style in a custom theme using the WordPress built in menu manager. A working version of the walker for Bootstrap 4.0.0 can be found in the [`v4` branch](https://github.com/wp-bootstrap/wp-bootstrap-navwalker/tree/v4)
 
 ## NOTES
 
-This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Bootstrap dropdown navigation. It does not include the required Bootstrap JS and CSS files. You will have to include those dependancies seporately.
+This is a utility class that is intended to format your WordPress theme menu with the correct syntax and classes to utilize the Bootstrap dropdown navigation. It does not include the required Bootstrap JS and CSS files. You will have to include those dependancies separately.
 
 ### Bootstrap 4
 
-Bootstrap 4 beta is available and is now the default branch offered at the GitHub repo and on [GetBootstrap](https://getbootstrap.com). A working version of the walker for Bootstrap 4 can be found in the `v4` branch.
-
-Acording to @mdo & team:
-
-> Long story short, shipping a beta means we’re done breaking all your stuff until our next major version (v5).
+Bootstrap 4.0.0 released January 2018 and is the default branch offered at the GitHub repo and on [GetBootstrap](https://getbootstrap.com).
 
 ## Installation
 
@@ -61,8 +57,8 @@ wp_nav_menu( array(
     'container_id'      => 'bs-example-navbar-collapse-1',
     'menu_class'        => 'nav navbar-nav',
     'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
-    'walker'            => new WP_Bootstrap_Navwalker())
-);
+    'walker'            => new WP_Bootstrap_Navwalker(),
+) );
 ```
 
 Your menu will now be formatted with the correct syntax and classes to implement Bootstrap dropdown navigation.
