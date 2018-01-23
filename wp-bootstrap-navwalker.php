@@ -114,11 +114,17 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					$atts['href'] = ! empty( $item->url ) ? $item->url : '';
 				}
 				$atts       = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args );
+				$icon_attributes = '';
 				$attributes = '';
 				foreach ( $atts as $attr => $value ) {
 					if ( ! empty( $value ) ) {
 						$value       = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
 						$attributes .= ' ' . $attr . '="' . $value . '"';
+						// if item has icon, we want all except title attributes because we
+						// want to avoid link title to be icon class
+						if ( 'title' != $attr ) {
+							$icon_attributes .= ' ' . $attr . '="' . $value . '"';
+						}
 					}
 				}
 				$item_output = $args->before;
@@ -133,9 +139,9 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				if ( ! empty( $item->attr_title ) ) {
 					$pos = strpos( esc_attr( $item->attr_title ), 'glyphicon' );
 					if ( false !== $pos ) {
-						$item_output .= '<a' . $attributes . '><span class="glyphicon ' . esc_attr( $item->attr_title ) . '" aria-hidden="true"></span>&nbsp;';
+						$item_output .= '<a' . $icon_attributes . ' title="' . esc_attr( $item->title ) . '"><span class="glyphicon ' . esc_attr( $item->attr_title ) . '" aria-hidden="true"></span>&nbsp;';
 					} else {
-						$item_output .= '<a' . $attributes . '><i class="fa ' . esc_attr( $item->attr_title ) . '" aria-hidden="true"></i>&nbsp;';
+						$item_output .= '<a' . $icon_attributes . ' title="' . esc_attr( $item->title ) . '"><i class="fa ' . esc_attr( $item->attr_title ) . '" aria-hidden="true"></i>&nbsp;';
 					}
 				} else {
 					$item_output .= '<a' . $attributes . '>';
