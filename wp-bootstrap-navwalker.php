@@ -113,15 +113,15 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				} else {
 					$atts['href'] = ! empty( $item->url ) ? $item->url : '';
 				}
-				$atts       = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args );
+				$atts            = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args );
 				$icon_attributes = '';
-				$attributes = '';
+				$attributes      = '';
 				foreach ( $atts as $attr => $value ) {
 					if ( ! empty( $value ) ) {
 						$value       = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
 						$attributes .= ' ' . $attr . '="' . $value . '"';
 						// if item has icon, we want all except title attributes because we
-						// want to avoid link title to be icon class
+						// want to avoid link title to be icon class.
 						if ( 'title' != $attr ) {
 							$icon_attributes .= ' ' . $attr . '="' . $value . '"';
 						}
