@@ -163,7 +163,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$classes[] = 'dropdown';
 			}
 			if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) ) {
-				$classes = 'active';
+				$classes[] = 'active';
 			}
 
 			// Allow filtering the classes.
