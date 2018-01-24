@@ -1,5 +1,9 @@
 #CHANGELOG
 
+## [3.0.1]
+
+- Made Titles on items with icons output item title instead of the icon class.
+
 ## [3.0.0]
 
 - Fix untranslated string in fallback.
