@@ -68,6 +68,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 * Form a string for the labelledby attribute from the the latest
 			 * link with an id that was added to the $output.
 			 */
+			$labelledby = '';
 			// find all links with an id in the output.
 			preg_match_all( '/(<a.*?id=\"|\')(.*?)\"|\'.*?>/im', $output, $matches );
 			// with pointer at end of array check if we got an ID match.
