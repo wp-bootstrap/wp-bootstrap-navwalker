@@ -103,9 +103,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 			$indent = ( $depth ) ? str_repeat( $t, $depth ) : '';
 
-			$value       = '';
-			$class_names = $value;
-			$classes     = empty( $item->classes ) ? array() : (array) $item->classes;
+			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 
 			// Initialize some holder variables to store specially handled item
 			// wrappers and icons.
@@ -188,7 +186,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$id = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args, $depth );
 			$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
 
-			$output .= $indent . '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement"' . $id . $value . $class_names . '>';
+			$output .= $indent . '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement"' . $id . $class_names . '>';
 
 			// initialize array for holding the $atts for the link item.
 			$atts = array();
