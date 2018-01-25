@@ -183,4 +183,89 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 		);
 	}
 
+	/**
+	 * Test seporate_linkmods_and_icons_from_classes Function exists.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	function test_seporate_linkmods_and_icons_from_classes_function_exists() {
+
+		$wp_bootstrap_navwalker = $this->walker;
+
+		$this->assertTrue(
+			method_exists( $wp_bootstrap_navwalker, 'seporate_linkmods_and_icons_from_classes' ),
+			'Class does not have method seporate_linkmods_and_icons_from_classes.'
+		);
+
+	}
+
+	/**
+	 * Test get_linkmod_type Function exists.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	function test_get_linkmod_type_function_exists() {
+
+		$wp_bootstrap_navwalker = $this->walker;
+
+		$this->assertTrue(
+			method_exists( $wp_bootstrap_navwalker, 'get_linkmod_type' ),
+			'Class does not have method get_linkmod_type.'
+		);
+
+	}
+
+	/**
+	 * Test update_atts_for_linkmod_type Function exists.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	function test_update_atts_for_linkmod_type_function_exists() {
+
+		$wp_bootstrap_navwalker = $this->walker;
+
+		$this->assertTrue(
+			method_exists( $wp_bootstrap_navwalker, 'update_atts_for_linkmod_type' ),
+			'Class does not have method update_atts_for_linkmod_type.'
+		);
+
+	}
+
+	/**
+	 * Test linkmod_element_open Function exists.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	function test_linkmod_element_open_function_exists() {
+
+		$wp_bootstrap_navwalker = $this->walker;
+
+		$this->assertTrue(
+			method_exists( $wp_bootstrap_navwalker, 'linkmod_element_open' ),
+			'Class does not have method linkmod_element_open.'
+		);
+
+	}
+
+	/**
+	 * Test linkmod_element_close Function exists.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	function test_linkmod_element_close_function_exists() {
+
+		$wp_bootstrap_navwalker = $this->walker;
+
+		$this->assertTrue(
+			method_exists( $wp_bootstrap_navwalker, 'linkmod_element_close' ),
+			'Class does not have method linkmod_element_close.'
+		);
+
+	}
+
 }
