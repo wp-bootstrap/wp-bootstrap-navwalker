@@ -25,13 +25,19 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 		$this->walker = new WP_Bootstrap_Navwalker();
 
 		// this is a test array of valid values that the fallback method will accept.
-		$this->sample_fallback_args = array(
+		$this->valid_sample_fallback_args = array(
 			'container'       => 'div',
 			'container_id'    => 'a_container_id',
 			'container_class' => 'a_container_class',
 			'menu_class'      => 'a_menu_class',
 			'menu_id'         => 'a_menu_id',
 			'echo'			  => true,
+		);
+
+		// array of the possible linkmods.
+		$this->valid_linkmod_typeflags = array(
+			'dropdown-header',
+			'dropdown-divider',
 		);
 	}
 
@@ -123,7 +129,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 
 		// default is to echo reults, buffer.
 		ob_start();
-		WP_Bootstrap_Navwalker::fallback( $this->sample_fallback_args );
+		WP_Bootstrap_Navwalker::fallback( $this->valid_sample_fallback_args );
 		$fallback_output_echo = ob_get_clean();
 
 		// empty string expected when not logged in.
@@ -133,7 +139,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 		);
 
 		// set 'echo' to false and request the markup returned.
-		$fallback_output_return = WP_Bootstrap_Navwalker::fallback( array_merge( $this->sample_fallback_args, array(
+		$fallback_output_return = WP_Bootstrap_Navwalker::fallback( array_merge( $this->valid_sample_fallback_args, array(
 			'echo' => false,
 		) ) );
 
@@ -159,7 +165,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 
 		// default is to echo results, buffer.
 		ob_start();
-		WP_Bootstrap_Navwalker::fallback( $this->sample_fallback_args );
+		WP_Bootstrap_Navwalker::fallback( $this->valid_sample_fallback_args );
 		$fallback_output_echo = ob_get_clean();
 
 		// rudimentary content test - confirm it opens a div with 2 expected
@@ -171,7 +177,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 		);
 
 		// set 'echo' to false and request the markup returned.
-		$fallback_output_return = WP_Bootstrap_Navwalker::fallback( array_merge( $this->sample_fallback_args, array(
+		$fallback_output_return = WP_Bootstrap_Navwalker::fallback( array_merge( $this->valid_sample_fallback_args, array(
 			'echo' => false,
 		) ) );
 
@@ -268,4 +274,50 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 
 	}
 
+	function test_linkmod_elements_open_and_close_successfully() {
+
+		$wp_bootstrap_navwalker = $this->walker;
+
+		// since we're working with private methods we need to use a reflector.
+		$reflector = new ReflectionClass( 'WP_Bootstrap_Navwalker' );
+
+		// get a reflected method for the opener function and set to public.
+		$method_open = $reflector->getMethod( 'linkmod_element_open' );
+		$method_open->setAccessible( true );
+
+		// test openers for headers and dividers.
+		$header_open = $method_open->invokeArgs( $wp_bootstrap_navwalker, array( $this->valid_linkmod_typeflags[0], 'stringOfAttributes' ) );
+		$this->assertNotEmpty( $header_open, 'Got empty string for opener of ' . $this->valid_linkmod_typeflags[0] );
+		$divider_open = $method_open->invokeArgs( $wp_bootstrap_navwalker, array( $this->valid_linkmod_typeflags[1], 'stringOfAttributes' ) );
+		$this->assertNotEmpty( $divider_open, 'Got empty string for opener of ' . $this->valid_linkmod_typeflags[1] );
+
+		// test that that an unknown linkmod type being passed results in no output.
+		$nonexistent_linkmod_type_open = $method_open->invokeArgs( $wp_bootstrap_navwalker, array( 'nonexistentlinkmodtype', 'stringOfAttributes' ) );
+		$this->assertEmpty( $nonexistent_linkmod_type_open, 'Expected empty string when using non-existent linkmod type.' );
+
+		// get a reflected method for the closer function and set to public.
+		$method_close = $reflector->getMethod( 'linkmod_element_close' );
+		$method_close->setAccessible( true );
+
+		$header_close = $method_close->invokeArgs( $wp_bootstrap_navwalker, array( $this->valid_linkmod_typeflags[0] ) );
+		$this->assertNotEmpty( $header_close, 'Got empty string for closer of ' . $this->valid_linkmod_typeflags[0] );
+		$divider_close = $method_close->invokeArgs( $wp_bootstrap_navwalker, array( $this->valid_linkmod_typeflags[1] ) );
+		$this->assertNotEmpty( $divider_close, 'Got empty string for closer of ' . $this->valid_linkmod_typeflags[1] );
+
+		// test that that an unknown linkmod type being passed results in no output.
+		$nonexistent_linkmod_type_close = $method_open->invokeArgs( $wp_bootstrap_navwalker, array( 'nonexistentlinkmodtype' ) );
+		$this->assertEmpty( $nonexistent_linkmod_type_close, 'Expected empty string when using non-existent linkmod type.' );
+
+		$this->assertRegExp(
+			'/^(<span(.*?)>)(.*?)(<\/span>)$/',
+			$header_open . $header_close,
+			'The opener and closer for ' . $this->valid_linkmod_typeflags[0] . ' does not seem to match expected elements.'
+		);
+
+		$this->assertRegExp(
+			'/^(<div(.*?)>)(.*?)(<\/div>)$/',
+			$divider_open . $divider_close,
+			'The opener and closer for ' . $this->valid_linkmod_typeflags[1] . ' linkmods does not seem to match expected elements.'
+		);
+	}
 }
