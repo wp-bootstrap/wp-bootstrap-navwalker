@@ -391,8 +391,8 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			foreach ( $classes as $key => $class ) {
 				// If any special classes are found, store the class in it's
 				// holder array and and unset the item from $classes.
-				if ( preg_match( '/disabled/', $class ) ) {
-					// Test for .disabled.
+				if ( preg_match( '/disabled|sr-only/', $class ) ) {
+					// Test for .disabled or .sr-only
 					$linkmod_classes[] = $class;
 					unset( $classes[ $key ] );
 				} elseif ( preg_match( '/dropdown-header|dropdown-divider/', $class ) && $depth > 0 ) {
@@ -400,7 +400,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					// depth greater than 0 - IE inside a dropdown.
 					$linkmod_classes[] = $class;
 					unset( $classes[ $key ] );
-				} elseif ( preg_match( '/fa-(\S*)?|fas(\s?)|fa(\s?)/', $class ) ) {
+				} elseif ( preg_match( '/fa-(\S*)?|fas(\s?)|far(\s?)|fal(\s?)|fab(\s?)|fa(\s?)/', $class ) ) {
 					// Font Awesome.
 					$icon_classes[] = $class;
 					unset( $classes[ $key ] );
