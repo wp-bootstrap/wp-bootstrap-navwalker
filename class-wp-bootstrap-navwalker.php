@@ -250,7 +250,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			/**
 			 * Filters a menu item's title.
 			 *
-			 * @since 4.4.0
+			 * @since WP 4.4.0
 			 *
 			 * @param string   $title The menu item's title.
 			 * @param WP_Post  $item  The current menu item.
