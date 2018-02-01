@@ -267,7 +267,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$title         = self::wrap_for_screen_reader( $title );
 				$keys_to_unset = array_keys( $linkmod_classes, 'sr-only' );
 				foreach ( $keys_to_unset as $k ) {
-				    unset( $linkmod_classes[ $k ] );
+					unset( $linkmod_classes[ $k ] );
 				}
 			}
 
@@ -499,7 +499,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * @return string      the string wrapped in a span with the class.
 		 */
 		private function wrap_for_screen_reader( $text = '' ) {
-			if ( $text ){
+			if ( $text ) {
 				$text = '<span class="sr-only">' . $text . '</span>';
 			}
 			return $text;
