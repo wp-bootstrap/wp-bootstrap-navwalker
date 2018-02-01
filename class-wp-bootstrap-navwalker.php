@@ -384,7 +384,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * Find any custom linkmod or icon classes and store in their holder
 		 * arrays then remove them from the main classes array.
 		 *
-		 * Supported linkmods: .disabled, .dropdown-header, .dropdown-divider
+		 * Supported linkmods: .disabled, .dropdown-header, .dropdown-divider, .sr-only
 		 * Supported iconsets: Font Awesome 4/5, Glypicons
 		 *
 		 * NOTE: This accepts the linkmod and icon arrays by reference.
