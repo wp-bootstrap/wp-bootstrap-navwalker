@@ -264,9 +264,9 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 * If the .sr-only class was set apply to the nav items text only.
 			 */
 			if ( in_array( 'sr-only', $linkmod_classes, true ) ) {
-				$title = self::wrap_for_screen_reader( $title );
+				$title         = self::wrap_for_screen_reader( $title );
 				$keys_to_unset = array_keys( $linkmod_classes, 'sr-only' );
-				foreach($keys_to_unset as $k) {
+				foreach ( $keys_to_unset as $k ) {
 				    unset( $linkmod_classes[ $k ] );
 				}
 			}
@@ -279,12 +279,12 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 * correct element depending on the type of link or link mod.
 			 */
 			if ( '' !== $linkmod_type ) {
- 				// is linkmod, output the required element opener.
- 				$item_output .= self::linkmod_element_close( $linkmod_type, $attributes );
- 			} else {
- 				// With no link mod type set this must be a standard <a> tag.
- 				$item_output .= '</a>';
- 			}
+				// is linkmod, output the required element opener.
+				$item_output .= self::linkmod_element_close( $linkmod_type, $attributes );
+			} else {
+				// With no link mod type set this must be a standard <a> tag.
+				$item_output .= '</a>';
+			}
 
 			$item_output .= $args->after;
 			/**
@@ -391,12 +391,12 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 *
 		 * @since 4.0.0
 		 *
-		 * @param array   $classes      an array of classes currently assigned to the item.
-		 * @param array   $link_classes an array to hold linkmod classes.
-		 * @param array   $icon_classes an array to hold icon classes.
-		 * @param integer $depth        an integer holding current depth level.
+		 * @param array   $classes         an array of classes currently assigned to the item.
+		 * @param array   $linkmod_classes an array to hold linkmod classes.
+		 * @param array   $icon_classes    an array to hold icon classes.
+		 * @param integer $depth           an integer holding current depth level.
 		 *
-		 * @return array  $classes      a maybe modified array of classnames.
+		 * @return array  $classes         a maybe modified array of classnames.
 		 */
 		private function seporate_linkmods_and_icons_from_classes( $classes, &$linkmod_classes, &$icon_classes, $depth ) {
 			// Loop through $classes array to find linkmod or icon classes.
@@ -404,7 +404,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				// If any special classes are found, store the class in it's
 				// holder array and and unset the item from $classes.
 				if ( preg_match( '/disabled|sr-only/', $class ) ) {
-					// Test for .disabled or .sr-only
+					// Test for .disabled or .sr-only classes.
 					$linkmod_classes[] = $class;
 					unset( $classes[ $key ] );
 				} elseif ( preg_match( '/dropdown-header|dropdown-divider/', $class ) && $depth > 0 ) {
@@ -460,9 +460,10 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 *
 		 * @since 4.0.0
 		 *
-		 * @param array $atts array of atts for the current link in nav item.
+		 * @param array $atts            array of atts for the current link in nav item.
+		 * @param array $linkmod_classes an array of classes that modify link or nav item behaviors or displays.
 		 *
-		 * @return array      maybe updated array of attributes for item.
+		 * @return array                 maybe updated array of attributes for item.
 		 */
 		private function update_atts_for_linkmod_type( $atts = array(), $linkmod_classes = array() ) {
 			if ( ! empty( $linkmod_classes ) ) {
@@ -470,7 +471,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					if ( ! empty( $link_class ) ) {
 						// update $atts with a space and the extra classname...
 						// so long as it's not a sr-only class.
-						if( 'sr-only' !== $link_class ) {
+						if ( 'sr-only' !== $link_class ) {
 							$atts['class'] .= ' ' . esc_attr( $link_class );
 						}
 						// check for special class types we need additional handling for.
@@ -497,7 +498,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * @param string $text the string of text to be wrapped in a screen reader class.
 		 * @return string      the string wrapped in a span with the class.
 		 */
-		private function wrap_for_screen_reader( $text = '') {
+		private function wrap_for_screen_reader( $text = '' ) {
 			if ( $text ){
 				$text = '<span class="sr-only">' . $text . '</span>';
 			}
@@ -515,7 +516,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * @return string              a string with the openign tag for the element with attribibutes added.
 		 */
 		private function linkmod_element_open( $linkmod_type, $attributes = '' ) {
- 			$output = '';
+			$output = '';
 			if ( 'dropdown-header' === $linkmod_type ) {
 				// For a header use a span with the .h6 class instead of a real
 				// header tag so that it doesn't confuse screen readers.
@@ -537,7 +538,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * @return string              a string with the closing tag for this linkmod type.
 		 */
 		private function linkmod_element_close( $linkmod_type ) {
- 			$output = '';
+			$output = '';
 			if ( 'dropdown-header' === $linkmod_type ) {
 				// For a header use a span with the .h6 class instead of a real
 				// header tag so that it doesn't confuse screen readers.
