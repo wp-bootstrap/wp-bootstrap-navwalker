@@ -247,6 +247,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 
 			/** This filter is documented in wp-includes/post-template.php */
 			$title = apply_filters( 'the_title', $item->title, $item->ID );
+
 			/**
 			 * Filters a menu item's title.
 			 *
@@ -258,6 +259,17 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 * @param int      $depth Depth of menu item. Used for padding.
 			 */
 			$title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
+
+			/**
+			 * If the .sr-only class was set apply to the nav items text only.
+			 */
+			if ( in_array( 'sr-only', $linkmod_classes, true ) ) {
+				$title = self::wrap_for_screen_reader( $title );
+				$keys_to_unset = array_keys( $linkmod_classes, 'sr-only' );
+				foreach($keys_to_unset as $k) {
+				    unset( $linkmod_classes[ $k ] );
+				}
+			}
 
 			// Put the item contents into $output.
 			$item_output .= $args->link_before . $icon_html . $title . $args->link_after;
@@ -456,9 +468,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			if ( ! empty( $linkmod_classes ) ) {
 				foreach ( $linkmod_classes as $link_class ) {
 					if ( ! empty( $link_class ) ) {
-						// update $atts with a space and the extra classname.
-						$atts['class'] .= ' ' . esc_attr( $link_class );
-
+						// update $atts with a space and the extra classname...
+						// so long as it's not a sr-only class.
+						if( 'sr-only' !== $link_class ) {
+							$atts['class'] .= ' ' . esc_attr( $link_class );
+						}
 						// check for special class types we need additional handling for.
 						if ( 'disabled' === $link_class ) {
 							// Convert link to '#' and unset open targets.
@@ -473,6 +487,21 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				}
 			}
 			return $atts;
+		}
+
+		/**
+		 * Wraps the passed text in a screen reader only class.
+		 *
+		 * @since 4.0.0
+		 *
+		 * @param string $text the string of text to be wrapped in a screen reader class.
+		 * @return string      the string wrapped in a span with the class.
+		 */
+		private function wrap_for_screen_reader( $text = '') {
+			if ( $text ){
+				$text = '<span class="sr-only">' . $text . '</span>';
+			}
+			return $text;
 		}
 
 		/**
