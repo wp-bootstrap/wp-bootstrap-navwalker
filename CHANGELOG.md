@@ -20,6 +20,7 @@
 - Added support for link modifiers and icons through WP Menu Builder 'classes' input.
 	- Icon support is for Font Awesome 4/5 and Glyphicons icons.
 - Added unit tests for the `fallback` method.
+- Added code to handle icon-only menus.
 
 ## [3.0.0]
 

@@ -123,6 +123,10 @@ This script included the ability to use Bootstrap nav link mods in your menus th
 
 To add an Icon to your link simply enter Glypicons or Font Awesome class names in the links **CSS Classes** field in the Menu UI and the walker class will do the rest. IE `glyphicons glyphicons-bullhorn` or `fa fa-arrow-left` or `fas fa-arrow-left`.
 
+#### Icon-Only Items
+
+To make an item appear with the icon only apply the bootstrap screen reader class `sr-only` to the item alongside any icon classnames. This will then hide only the text that would appear as the link text. 
+
 #### Disabled Links
 
 To set a disabled link simply add `disabled` to the **CSS Classes** field in the Menu UI and the walker class will do the rest. _Note: In addition to adding the .disabled class this will change the link `href` to `#` as well so that it is not a followable link._
