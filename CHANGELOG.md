@@ -1,5 +1,27 @@
 #CHANGELOG
 
+## [4.0.0]
+- Added a prefix on @since tags to highlight when they refer to WP core instead of this class.
+- Rework of `start_lvl()` and `start_el()` based on latest `Walker_Nav_Menu` Class from WP core.
+	- Whitespace preservation method improvements.
+	- Added `nav_menu_item_args` filter and `nav_menu_item_title` brought in at WP 4.4.0
+	- Use `the_title` filter prior to `nav_menu_item_title`.
+- Added a labelled-by attribute to dropdowns for accessibility.
+- Links inside dropdown have `.dropdown-item` instead of `.nav-link`.
+- Remove `<span class="carat">` after parent dropdown items.
+- Support `echo` arg in fallback menu. props: @toddlevy
+- Add `.active` to parent when a child is current page. props: @zyberspace
+- Fix to correct output of dropdown atts and styles when depth passed to wp_nav_menu is <= 1. props: @chrisgeary92
+- Move icon output to a local var instead of modifying and clearing a global object.
+- Reassign filtered classes back to $classes array so that updated classes can be accessed later if needed. props: @lf-jeremy
+- Update to work with Bootstrap v4.
+	- Added `.nav-item` and `.nav-link` to `<li>` and `<a>` respectively.
+- Dropped support for using title attribute to add link modifiers and icons.
+- Added support for link modifiers and icons through WP Menu Builder 'classes' input.
+	- Icon support is for Font Awesome 4/5 and Glyphicons icons.
+- Added unit tests for the `fallback` method.
+- Added code to handle icon-only menus.
+
 ## [3.0.0]
 
 - Fix untranslated string in fallback.
