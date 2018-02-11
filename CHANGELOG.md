@@ -1,5 +1,8 @@
 #CHANGELOG
 
+## [4.0.1]
+- Fix untranslated string in fallback (this was lost in transition between v3 and v4, fixed again).
+
 ## [4.0.0]
 - Added a prefix on @since tags to highlight when they refer to WP core instead of this class.
 - Rework of `start_lvl()` and `start_el()` based on latest `Walker_Nav_Menu` Class from WP core.
