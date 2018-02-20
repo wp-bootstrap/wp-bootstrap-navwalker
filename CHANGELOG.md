@@ -1,4 +1,6 @@
 #CHANGELOG
+## [4.0.2]
+- Fix dropdown opener having empty string for href value.
 
 ## [4.0.1]
 - Fix untranslated string in fallback (this was lost in transition between v3 and v4, fixed again).
