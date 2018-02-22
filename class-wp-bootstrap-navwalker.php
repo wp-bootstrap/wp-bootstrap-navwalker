@@ -403,20 +403,20 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			foreach ( $classes as $key => $class ) {
 				// If any special classes are found, store the class in it's
 				// holder array and and unset the item from $classes.
-				if ( preg_match( '/disabled|sr-only/', $class ) ) {
+				if ( preg_match( '/^disabled|^sr-only/', $class ) ) {
 					// Test for .disabled or .sr-only classes.
 					$linkmod_classes[] = $class;
 					unset( $classes[ $key ] );
-				} elseif ( preg_match( '/dropdown-header|dropdown-divider/', $class ) && $depth > 0 ) {
+				} elseif ( preg_match( '/^dropdown-header|^dropdown-divider/', $class ) && $depth > 0 ) {
 					// Test for .dropdown-header or .dropdown-divider and a
 					// depth greater than 0 - IE inside a dropdown.
 					$linkmod_classes[] = $class;
 					unset( $classes[ $key ] );
-				} elseif ( preg_match( '/fa-(\S*)?|fas(\s?)|far(\s?)|fal(\s?)|fab(\s?)|fa(\s?)/', $class ) ) {
+				} elseif ( preg_match( '/^fa-(\S*)?|^fa(s|r|l|b)?(\s?)?$/', $class ) ) {
 					// Font Awesome.
 					$icon_classes[] = $class;
 					unset( $classes[ $key ] );
-				} elseif ( preg_match( '/glyphicons-(\S*)?|glyphicons(\s?)/', $class ) ) {
+				} elseif ( preg_match( '/^glyphicon-(\S*)?|^glyphicon(\s?)$/', $class ) ) {
 					// Glyphicons.
 					$icon_classes[] = $class;
 					unset( $classes[ $key ] );
