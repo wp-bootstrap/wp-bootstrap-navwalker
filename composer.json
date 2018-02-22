@@ -1,7 +1,7 @@
 {
     "name": "wp-bootstrap/wp-bootstrap-navwalker",
     "description": "A custom WordPress nav walker class to fully implement the Bootstrap 4 navigation style in a custom theme using the WordPress built in menu manager.",
-    "type": "wordpress-plugin",
+    "type": "library",
     "license": "GPL-3.0+",
     "authors": [
         {
@@ -16,6 +16,9 @@
         "issues": "https://github.com/wp-bootstrap/wp-bootstrap-navwalker/issues/",
         "source": "https://github.com/wp-bootstrap/wp-bootstrap-navwalker/"
     },
+	"autoload": {
+		"files": ["class-wp-bootstrap-navwalker.php"]
+	},
     "require": {
       "composer/installers": "~1.0"
     },
