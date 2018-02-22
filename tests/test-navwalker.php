@@ -46,7 +46,8 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 			'sr-only',
 		) );
 
-		// array of valid font-awesome icon class starters plus some randomly chosen icon classes.
+		// array of valid font-awesome icon class starters plus some randomly
+		// chosen icon classes and some variations of upper/lower case letters.
 		$this->some_fontawesome_classes = array(
 			'fa',
 			'fas',
@@ -58,9 +59,13 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 			'fa-home',
 			'fa-bluetooth-b',
 			'fa-chess-rook',
+			'fA-home',
+			'Fa-HoMe',
+			'fa-HomE',
 		);
 
-		// array of valid glyphicon icon class starters plus some randomly chosen icon classes.
+		// array of valid glyphicon icon class starters plus some randomly
+		// chosen icon classes and some variations of upper/lower case letters.
 		$this->some_glyphicons_classes = array(
 			'glyphicon',
 			'glyphicon-asterisk',
@@ -70,6 +75,10 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 			'glyphicon-sd-video',
 			'glyphicon-subscript',
 			'glyphicon-grain',
+			'Glyphicon-file',
+			'Glyphicon-File',
+			'glyphicon-File',
+			'glYphiCon-fiLe',
 		);
 
 	}
