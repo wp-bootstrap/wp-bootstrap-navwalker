@@ -399,10 +399,10 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 		// icon_classes should be empty.
 		$this->assertTrue( empty( $icon_classes ) );
 
+		$num_of_items_left = count( $this->valid_linkmod_classes ) - count( $linkmod_classes ) - count( $this->valid_linkmod_typeflags );
 		// the number of items inside updated array should match [what we started with - minus the linkmods for inside dropdowns].
-		$this->assertTrue(
-			(bool) count( ( $this->valid_linkmod_classes ) === ( count( $linkmod_classes ) - count( $this->valid_linkmod_typeflags ) ) ),
-			"Seems that the linkmod classes are not catptured properly when outside of dropdowns... \nvalid: \n" . print_r( $this->valid_linkmod_classes, true  ) . "\nreturned: \n" . print_r( $linkmod_classes, true ) . "\n" . count( $this->valid_linkmod_classes ) . ' ' .  count( $linkmod_classes ) . ' ' . count( $this->valid_linkmod_typeflags ) );
+		$this->assertNotTrue( (bool) $num_of_items_left,
+			"Seems that the linkmod classes are not catptured properly when outside of dropdowns... \nvalid: \n" . print_r( $this->valid_linkmod_classes, true  ) . "\nreturned: \n" . print_r( $linkmod_classes, true ) );
 		// get the differences between the original classes and updated classes.
 		$linkmod_differences = array_diff( $this->valid_linkmod_classes, $linkmod_classes, $this->valid_linkmod_typeflags );
 
