@@ -3,6 +3,8 @@
  * Class SampleTest
  *
  * @package Wp_Bootstrap_Navwalker
+ *
+ * phpcs:disable WordPress.PHP.DevelopmentFunctions.error_log_print_r -- used for returned failure messages to give some details.
  */
 
 /**
@@ -11,14 +13,13 @@
  * @extends WP_UnitTestCase
  */
 class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
-
 	/**
 	 * The setUp function.
 	 *
 	 * @access public
 	 * @return void
 	 */
-	function setUp() {
+	public function setUp() {
 
 		parent::setUp();
 
@@ -89,7 +90,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * @access public
 	 * @return void
 	 */
-	function test_navwalker_file_exists() {
+	public function test_navwalker_file_exists() {
 		$this->assertFileExists( 'class-wp-bootstrap-navwalker.php' );
 	}
 
@@ -99,7 +100,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * @access public
 	 * @return void
 	 */
-	function test_startlvl_function_exists() {
+	public function test_startlvl_function_exists() {
 
 		$wp_bootstrap_navwalker = $this->walker;
 
@@ -116,7 +117,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * @access public
 	 * @return void
 	 */
-	function test_start_el_function_exists() {
+	public function test_start_el_function_exists() {
 
 		$wp_bootstrap_navwalker = $this->walker;
 
@@ -133,7 +134,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * @access public
 	 * @return void
 	 */
-	function test_display_element_function_exists() {
+	public function test_display_element_function_exists() {
 
 		$wp_bootstrap_navwalker = $this->walker;
 
@@ -145,12 +146,12 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Test Fallback Function exists.
+	 * Test Fallback function exists.
 	 *
 	 * @access public
 	 * @return void
 	 */
-	function test_fallback_function_exists() {
+	public function test_fallback_function_exists() {
 
 		$wp_bootstrap_navwalker = $this->walker;
 
@@ -167,10 +168,10 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * Expects that for logged out users both echo and return requests should
 	 * produce empty strings.
 	 *
- 	 * @access public
- 	 * @return void
+	 * @access public
+	 * @return void
 	 */
-	function test_fallback_function_output_loggedout() {
+	public function test_fallback_function_output_loggedout() {
 
 		// default is to echo reults, buffer.
 		ob_start();
@@ -203,9 +204,9 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * requesting either a return or defaulting to echo.
 	 *
 	 * @access public
- 	 * @return void
+	 * @return void
 	 */
-	function test_fallback_function_output_loggedin() {
+	public function test_fallback_function_output_loggedin() {
 
 		// make an admin user and set it to be the current user.
 		$user_id = $this->factory->user->create( array( 'role' => 'administrator' ) );
@@ -218,7 +219,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 
 		// rudimentary content test - confirm it opens a div with 2 expected
 		// values and ends by closing a div.
-		$match = ( preg_match('/^(<div id="a_container_id" class="a_container_class">)(.*?)(<\/div>)$/', $fallback_output_echo ) ) ? true : false;
+		$match = ( preg_match( '/^(<div id="a_container_id" class="a_container_class">)(.*?)(<\/div>)$/', $fallback_output_echo ) ) ? true : false;
 		$this->assertTrue(
 			$match,
 			'Fallback method seems to create unexpected html for logged in users in echo mode.'
@@ -243,7 +244,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * @access public
 	 * @return void
 	 */
-	function test_seporate_linkmods_and_icons_from_classes_function_exists() {
+	public function test_seporate_linkmods_and_icons_from_classes_function_exists() {
 
 		$wp_bootstrap_navwalker = $this->walker;
 
@@ -261,9 +262,9 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * @depends test_seporate_linkmods_and_icons_from_classes_function_exists
 	 *
 	 * @access public
- 	 * @return void
+	 * @return void
 	 */
-	function test_seporate_linkmods_and_icons_from_classes_fontawesome() {
+	public function test_seporate_linkmods_and_icons_from_classes_fontawesome() {
 
 		$wp_bootstrap_navwalker = $this->walker;
 		// since we're working with private methods we need to use a reflector.
@@ -299,7 +300,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 		// icon_classes should no longer be empty.
 		$this->assertNotTrue( empty( $icon_classes ) );
 		// the number of items inside updated $icon_classes should match number of valids we started with.
-		$this->assertTrue( count( $this->some_fontawesome_classes ) === count( $icon_classes ), "Seems that glyphicons classes are not catptured properly... \nvalid: \n" . print_r( $this->some_fontawesome_classes, true  ) . "\nreturned: \n" . print_r( $icon_classes, true  ) );
+		$this->assertTrue( count( $this->some_fontawesome_classes ) === count( $icon_classes ), "Seems that glyphicons classes are not catptured properly... \nvalid: \n" . print_r( $this->some_fontawesome_classes, true ) . "\nreturned: \n" . print_r( $icon_classes, true ) );
 		// get the differences between the original classes and updated classes.
 		$icon_differences = array_diff( $this->some_fontawesome_classes, $icon_classes );
 		// should be no differences thus empty array, this being TRUE also means
@@ -315,9 +316,9 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * @depends test_seporate_linkmods_and_icons_from_classes_function_exists
 	 *
 	 * @access public
- 	 * @return void
+	 * @return void
 	 */
-	function test_seporate_linkmods_and_icons_from_classes_glyphicons() {
+	public function test_seporate_linkmods_and_icons_from_classes_glyphicons() {
 
 		$wp_bootstrap_navwalker = $this->walker;
 		// since we're working with private methods we need to use a reflector.
@@ -353,7 +354,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 		// icon_classes should no longer be empty.
 		$this->assertNotTrue( empty( $icon_classes ) );
 		// the number of items inside updated $icon_classes should match number of valids we started with.
-		$this->assertTrue( count( $this->some_glyphicons_classes ) === count( $icon_classes ), "Seems that glyphicons classes are not catptured properly... \nvalid: \n" . print_r( $this->some_glyphicons_classes, true  ) . "\nreturned: \n" . print_r( $icon_classes, true  ) );
+		$this->assertTrue( count( $this->some_glyphicons_classes ) === count( $icon_classes ), "Seems that glyphicons classes are not catptured properly... \nvalid: \n" . print_r( $this->some_glyphicons_classes, true ) . "\nreturned: \n" . print_r( $icon_classes, true ) );
 		// get the differences between the original classes and updated classes.
 		$icon_differences = array_diff( $this->some_glyphicons_classes, $icon_classes );
 		// should be no differences thus empty array, this being TRUE also means
@@ -369,9 +370,9 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * @depends test_seporate_linkmods_and_icons_from_classes_function_exists
 	 *
 	 * @access public
- 	 * @return void
+	 * @return void
 	 */
-	function test_seporate_linkmods_and_icons_from_classes_linkmods() {
+	public function test_seporate_linkmods_and_icons_from_classes_linkmods() {
 
 		$wp_bootstrap_navwalker = $this->walker;
 		// since we're working with private methods we need to use a reflector.
@@ -410,8 +411,10 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 
 		$num_of_items_left = count( $this->valid_linkmod_classes ) - count( $linkmod_classes ) - count( $this->valid_linkmod_typeflags );
 		// the number of items inside updated array should match [what we started with - minus the linkmods for inside dropdowns].
-		$this->assertNotTrue( (bool) $num_of_items_left,
-			"Seems that the linkmod classes are not catptured properly when outside of dropdowns... \nvalid: \n" . print_r( $this->valid_linkmod_classes, true  ) . "\nreturned: \n" . print_r( $linkmod_classes, true ) );
+		$this->assertNotTrue(
+			(bool) $num_of_items_left,
+			"Seems that the linkmod classes are not catptured properly when outside of dropdowns... \nvalid: \n" . print_r( $this->valid_linkmod_classes, true ) . "\nreturned: \n" . print_r( $linkmod_classes, true )
+		);
 		// get the differences between the original classes and updated classes.
 		$linkmod_differences = array_diff( $this->valid_linkmod_classes, $linkmod_classes, $this->valid_linkmod_typeflags );
 
@@ -419,14 +422,13 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 		// that text was exact match in the updated array vs the original.
 		$this->assertTrue( empty( $linkmod_differences ) );
 
-
 		// repeat some of the above tests but this time with depth = 1 so that we catch classes intended for inside dropdowns.
-		$depth = 1;
+		$depth             = 1;
 		$linkmod_classes_d = array();
 		$icon_classes_d    = array();
-		$returned_array_d = $method_open->invokeArgs( $wp_bootstrap_navwalker, array( $linkmod_array, &$linkmod_classes_d, &$icon_classes_d, $depth ) );
+		$returned_array_d  = $method_open->invokeArgs( $wp_bootstrap_navwalker, array( $linkmod_array, &$linkmod_classes_d, &$icon_classes_d, $depth ) );
 
-		$this->assertTrue( count( $this->valid_linkmod_classes ) === count( $linkmod_classes_d ), "Seems that the linkmod classes are not catptured properly when inside dropdowns... \nvalid: \n" . print_r( $this->valid_linkmod_classes, true  ) . "\nreturned: \n" . print_r( $linkmod_classes, true  ) );
+		$this->assertTrue( count( $this->valid_linkmod_classes ) === count( $linkmod_classes_d ), "Seems that the linkmod classes are not catptured properly when inside dropdowns... \nvalid: \n" . print_r( $this->valid_linkmod_classes, true ) . "\nreturned: \n" . print_r( $linkmod_classes, true ) );
 		$linkmod_differences_d = array_diff( $this->valid_linkmod_classes, $linkmod_classes_d );
 		$this->assertTrue( empty( $linkmod_differences_d ), 'There are differences between the matched classnames and the valid classnames.' );
 
@@ -443,9 +445,9 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * @depends test_seporate_linkmods_and_icons_from_classes_linkmods
 	 *
 	 * @access public
- 	 * @return void
+	 * @return void
 	 */
-	function test_seporate_linkmods_and_icons_from_classes_fulltest() {
+	public function test_seporate_linkmods_and_icons_from_classes_fulltest() {
 
 		$wp_bootstrap_navwalker = $this->walker;
 		// since we're working with private methods we need to use a reflector.
@@ -476,21 +478,21 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 		shuffle( $classname_array );
 
 		// need a depth of 1 to ensure that our linkmods classes for inside dropdowns are also captured.
-		$depth = 1;
+		$depth          = 1;
 		$returned_array = $method_open->invokeArgs( $wp_bootstrap_navwalker, array( $classname_array, &$linkmod_classes, &$icon_classes, $depth ) );
 
 		// linkmod_classes NOT should be empty and returned_array should not.
-		$this->assertTrue( ( ! empty( $linkmod_classes ) && ! empty( $returned_array ) ), 'Either the linkmod array of the returned non matching classes array is empty when they shoud not be.' );
+		$this->assertTrue( ( ! empty( $linkmod_classes ) && ! empty( $returned_array ) ), 'Either the linkmod array or the returned non matching classes array is empty when they shoud not be.' );
 		// starting arrays should no longer be empty.
 		$this->assertNotTrue( empty( $icon_classes ), 'Did not catch any icons.' );
 		$this->assertNotTrue( empty( $linkmod_classes ), 'Did not catch any linkmods.' );
 
 		// icons compair.
-		$this->assertTrue( count( $icons_array ) === count( $icon_classes ), "Seems that icon classes are not catptured properly... valid: \n" . print_r( $icons_array, true  ) . "returned: \n" . print_r( $icon_classes, true  ) );
+		$this->assertTrue( count( $icons_array ) === count( $icon_classes ), "Seems that icon classes are not catptured properly... valid: \n" . print_r( $icons_array, true ) . "returned: \n" . print_r( $icon_classes, true ) );
 		$icon_differences = array_diff( $icons_array, $icon_classes );
 		$this->assertTrue( empty( $icon_differences ), 'Seems that we did not catch all of the icon classes.' );
 		// linkmod compair.
-		$this->assertTrue( count( $linkmod_array ) === count( $linkmod_classes ), "Seems that linkmod classes are not catptured properly... valid: \n" . print_r( $linkmod_array, true  ) . "returned: \n" . print_r( $linkmod_classes, true  ) );
+		$this->assertTrue( count( $linkmod_array ) === count( $linkmod_classes ), "Seems that linkmod classes are not catptured properly... valid: \n" . print_r( $linkmod_array, true ) . "returned: \n" . print_r( $linkmod_classes, true ) );
 		$linkmod_differences = array_diff( $icons_array, $icon_classes );
 		$this->assertTrue( empty( $linkmod_differences ), 'Seems that we did not catch all of the linkmod classes.' );
 		// extra classes string matches checks.
@@ -505,7 +507,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * @access public
 	 * @return void
 	 */
-	function test_get_linkmod_type_function_exists() {
+	public function test_get_linkmod_type_function_exists() {
 
 		$wp_bootstrap_navwalker = $this->walker;
 
@@ -522,7 +524,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * @access public
 	 * @return void
 	 */
-	function test_update_atts_for_linkmod_type_function_exists() {
+	public function test_update_atts_for_linkmod_type_function_exists() {
 
 		$wp_bootstrap_navwalker = $this->walker;
 
@@ -539,7 +541,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * @access public
 	 * @return void
 	 */
-	function test_linkmod_element_open_function_exists() {
+	public function test_linkmod_element_open_function_exists() {
 
 		$wp_bootstrap_navwalker = $this->walker;
 
@@ -556,7 +558,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * @access public
 	 * @return void
 	 */
-	function test_linkmod_element_close_function_exists() {
+	public function test_linkmod_element_close_function_exists() {
 
 		$wp_bootstrap_navwalker = $this->walker;
 
@@ -572,9 +574,9 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * some different linkmod types.
 	 *
 	 * @access public
- 	 * @return void
+	 * @return void
 	 */
-	function test_linkmod_elements_open_and_close_successfully() {
+	public function test_linkmod_elements_open_and_close_successfully() {
 
 		$wp_bootstrap_navwalker = $this->walker;
 
