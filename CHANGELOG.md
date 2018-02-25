@@ -1,4 +1,10 @@
 #CHANGELOG
+## [4.0.2]
+- Fix dropdown opener having empty string for href value.
+- More accurate regex matching of icon and linkmod classnames.
+- Changed composer package type to `library` from `wordpress-plugin` again.
+- Tests: Add unit tests for the function that separates classnames for the walker.
+- Fix case sensitive matching to now match mixes of upper and lower case.
 
 ## [4.0.1]
 - Fix untranslated string in fallback (this was lost in transition between v3 and v4, fixed again).

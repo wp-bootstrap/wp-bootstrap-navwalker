@@ -11,7 +11,7 @@
  * Plugin URI:  https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * Description: A custom WordPress nav walker class to implement the Bootstrap 4 navigation style in a custom theme using the WordPress built in menu manager.
  * Author: Edward McIntyre - @twittem, WP Bootstrap, William Patton - @pattonwebz
- * Version: 4.0.1
+ * Version: 4.0.2
  * Author URI: https://github.com/wp-bootstrap
  * GitHub Plugin URI: https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * GitHub Branch: master
@@ -189,7 +189,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$atts['class']         = 'dropdown-toggle nav-link';
 				$atts['id']            = 'menu-item-dropdown-' . $item->ID;
 			} else {
-				$atts['href'] = ! empty( $item->url ) ? $item->url : '';
+				$atts['href'] = ! empty( $item->url ) ? $item->url : '#';
 				// Items in dropdowns use .dropdown-item instead of .nav-link.
 				if ( $depth > 0 ) {
 					$atts['class'] = 'dropdown-item';
@@ -377,7 +377,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				} else {
 					return $fallback_output;
 				}
-			} // End if().
+			}
 		}
 
 		/**
@@ -403,20 +403,20 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			foreach ( $classes as $key => $class ) {
 				// If any special classes are found, store the class in it's
 				// holder array and and unset the item from $classes.
-				if ( preg_match( '/disabled|sr-only/', $class ) ) {
+				if ( preg_match( '/^disabled|^sr-only/i', $class ) ) {
 					// Test for .disabled or .sr-only classes.
 					$linkmod_classes[] = $class;
 					unset( $classes[ $key ] );
-				} elseif ( preg_match( '/dropdown-header|dropdown-divider/', $class ) && $depth > 0 ) {
+				} elseif ( preg_match( '/^dropdown-header|^dropdown-divider/i', $class ) && $depth > 0 ) {
 					// Test for .dropdown-header or .dropdown-divider and a
 					// depth greater than 0 - IE inside a dropdown.
 					$linkmod_classes[] = $class;
 					unset( $classes[ $key ] );
-				} elseif ( preg_match( '/fa-(\S*)?|fas(\s?)|far(\s?)|fal(\s?)|fab(\s?)|fa(\s?)/', $class ) ) {
+				} elseif ( preg_match( '/^fa-(\S*)?|^fa(s|r|l|b)?(\s?)?$/i', $class ) ) {
 					// Font Awesome.
 					$icon_classes[] = $class;
 					unset( $classes[ $key ] );
-				} elseif ( preg_match( '/glyphicons-(\S*)?|glyphicons(\s?)/', $class ) ) {
+				} elseif ( preg_match( '/^glyphicon-(\S*)?|^glyphicon(\s?)$/i', $class ) ) {
 					// Glyphicons.
 					$icon_classes[] = $class;
 					unset( $classes[ $key ] );
@@ -550,4 +550,4 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			return $output;
 		}
 	}
-} // End if().
+}
