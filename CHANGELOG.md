@@ -1,4 +1,7 @@
 #CHANGELOG
+## [3.0.2]
+
+- Autoload the main package file when installing through composer.
 
 ## [3.0.1]
 
