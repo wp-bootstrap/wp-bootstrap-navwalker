@@ -74,9 +74,9 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			// with pointer at end of array check if we got an ID match.
 			if ( end( $matches[2] ) ) {
 				// build a string to use as aria-labelledby.
-				$lablledby = 'aria-labelledby="' . end( $matches[2] ) . '"';
+				$labelledby = 'aria-labelledby="' . end( $matches[2] ) . '"';
 			}
-			$output .= "{$n}{$indent}<ul$class_names $lablledby role=\"menu\">{$n}";
+			$output .= "{$n}{$indent}<ul$class_names $labelledby role=\"menu\">{$n}";
 		}
 
 		/**
