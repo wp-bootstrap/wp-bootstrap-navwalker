@@ -17,7 +17,7 @@
         "source": "https://github.com/wp-bootstrap/wp-bootstrap-navwalker/"
     },
     "autoload": {
-    "files": ["class-wp-bootstrap-navwalker.php"]
+    "files": ["wp-bootstrap-navwalker.php"]
     },
     "require": {
       "composer/installers": "~1.0"
