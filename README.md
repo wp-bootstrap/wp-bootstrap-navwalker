@@ -47,7 +47,7 @@ if ( ! file_exists( get_template_directory() . '/class-wp-bootstrap-navwalker.ph
 	return new WP_Error( 'class-wp-bootstrap-navwalker-missing', __( 'It appears the class-wp-bootstrap-navwalker.php file may be missing.', 'wp-bootstrap-navwalker' ) );
 } else {
 	// file exists... require it.
-    require_once get_template_directory . '/class-wp-bootstrap-navwalker.php';
+    require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
 }
 ```
 You will also need to declare a new menu in your `functions.php` file if one doesn't already exist.
