@@ -16,9 +16,6 @@
         "issues": "https://github.com/wp-bootstrap/wp-bootstrap-navwalker/issues/",
         "source": "https://github.com/wp-bootstrap/wp-bootstrap-navwalker/"
     },
-    "autoload": {
-    "files": ["class-wp-bootstrap-navwalker.php"]
-    },
     "require": {
       "composer/installers": "~1.0"
     },
@@ -30,10 +27,10 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "wp-enforcer --ruleset=phpcs.ruleset.xml"
+            "wp-enforcer"
         ],
         "post-update-cmd": [
-            "wp-enforcer --ruleset=phpcs.ruleset.xml"
+            "wp-enforcer"
         ]
     }
 }
