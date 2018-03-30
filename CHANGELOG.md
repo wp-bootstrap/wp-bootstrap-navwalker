@@ -1,4 +1,9 @@
 #CHANGELOG
+
+## [3.0.3]
+
+- Revert composer autoload changes.
+
 ## [3.0.2]
 
 - Autoload the main package file when installing through composer.
