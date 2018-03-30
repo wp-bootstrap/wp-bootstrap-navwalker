@@ -40,6 +40,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * @param stdClass $args   An object of wp_nav_menu() arguments.
 		 */
 		public function start_lvl( &$output, $depth = 0, $args = array() ) {
+
 			if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
 				$t = '';
 				$n = '';
@@ -76,7 +77,10 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				// build a string to use as aria-labelledby.
 				$labelledby = 'aria-labelledby="' . end( $matches[2] ) . '"';
 			}
+
 			$output .= "{$n}{$indent}<ul$class_names $labelledby role=\"menu\">{$n}";
+
+
 		}
 
 		/**
@@ -94,6 +98,9 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * @param int      $id     Current item ID.
 		 */
 		public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+
+			if ( false === ( $item_output = wp_cache_get( 'wp_bootstrap_navwalker_item_output' ) ) ) {
+
 			if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
 				$t = '';
 				$n = '';
@@ -287,10 +294,15 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 
 			$item_output .= $args->after;
+
+			/* Set Cache for Item Output. */
+			wp_cache_set( 'wp_bootstrap_navwalker_item_output', $item_output, 'wp-bootstrap-navwalker', '86000' );
+
+			} // End Object Cache if
+
 			/**
 			 * END appending the internal item contents to the output.
 			 */
-
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 
 		}
@@ -337,6 +349,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * @param array $args passed from the wp_nav_menu function.
 		 */
 		public static function fallback( $args ) {
+
 			if ( current_user_can( 'edit_theme_options' ) ) {
 
 				/* Get Arguments. */
@@ -345,6 +358,9 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$container_class = $args['container_class'];
 				$menu_class      = $args['menu_class'];
 				$menu_id         = $args['menu_id'];
+
+				/* Check Object Cache for Fallback. */
+				if ( false === ( $fallback_output = wp_cache_get( 'wp_bootstrap_navwalker_fallback' ) ) ) {
 
 				// initialize var to store fallback html.
 				$fallback_output = '';
@@ -370,6 +386,12 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				if ( $container ) {
 					$fallback_output .= '</' . esc_attr( $container ) . '>';
 				}
+
+					/* Set Cache for Fallback. */
+					wp_cache_set( 'wp_bootstrap_navwalker_fallback', $fallback_output, 'wp-bootstrap-navwalker', '86000' );
+
+				} // End Object Cache if.
+
 
 				// if $args has 'echo' key and it's true echo, otherwise return.
 				if ( array_key_exists( 'echo', $args ) && $args['echo'] ) {
@@ -399,6 +421,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * @return array  $classes         a maybe modified array of classnames.
 		 */
 		private function seporate_linkmods_and_icons_from_classes( $classes, &$linkmod_classes, &$icon_classes, $depth ) {
+
 			// Loop through $classes array to find linkmod or icon classes.
 			foreach ( $classes as $key => $class ) {
 				// If any special classes are found, store the class in it's
@@ -424,6 +447,8 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 
 			return $classes;
+
+
 		}
 
 		/**
@@ -438,6 +463,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 */
 		private function get_linkmod_type( $linkmod_classes = array() ) {
 			$linkmod_type = '';
+
 			// Loop through array of linkmod classes to handle their $atts.
 			if ( ! empty( $linkmod_classes ) ) {
 				foreach ( $linkmod_classes as $link_class ) {
@@ -445,13 +471,29 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 
 						// check for special class types and set a flag for them.
 						if ( 'dropdown-header' === $link_class ) {
-							$linkmod_type = 'dropdown-header';
+
+							if ( false === ( $linkmod_type = wp_cache_get( 'wp_bootstrap_navwalker_linkmod_type' ) ) ) {
+
+								$linkmod_type = 'dropdown-header';
+
+								wp_cache_set( 'wp_bootstrap_navwalker_linkmod_type', $linkmod_type, 'wp-bootstrap-navwalker', '86000' );
+
+							} // End Object Cache if.
+
 						} elseif ( 'dropdown-divider' === $link_class ) {
-							$linkmod_type = 'dropdown-divider';
+
+							if ( false === ( $linkmod_type = wp_cache_get( 'wp_bootstrap_navwalker_linkmod_type' ) ) ) {
+
+								$linkmod_type = 'dropdown-divider';
+
+								wp_cache_set( 'wp_bootstrap_navwalker_linkmod_type', $linkmod_type, 'wp-bootstrap-navwalker', '86000' );
+
+							} // End Object Cache if.
 						}
 					}
 				}
 			}
+
 			return $linkmod_type;
 		}
 
@@ -466,6 +508,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * @return array                 maybe updated array of attributes for item.
 		 */
 		private function update_atts_for_linkmod_type( $atts = array(), $linkmod_classes = array() ) {
+
 			if ( ! empty( $linkmod_classes ) ) {
 				foreach ( $linkmod_classes as $link_class ) {
 					if ( ! empty( $link_class ) ) {
@@ -487,7 +530,10 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					}
 				}
 			}
+
 			return $atts;
+
+
 		}
 
 		/**
@@ -500,7 +546,15 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 */
 		private function wrap_for_screen_reader( $text = '' ) {
 			if ( $text ) {
+
+				if ( false === ( $text = wp_cache_get( 'wp_bootstrap_navwalker_sr_text' ) ) ) {
+
 				$text = '<span class="sr-only">' . $text . '</span>';
+
+				wp_cache_set( 'wp_bootstrap_navwalker_sr_text', $text, 'wp-bootstrap-navwalker', '86000' );
+
+				} // End Object Cache if
+
 			}
 			return $text;
 		}
@@ -516,7 +570,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * @return string              a string with the openign tag for the element with attribibutes added.
 		 */
 		private function linkmod_element_open( $linkmod_type, $attributes = '' ) {
+
 			$output = '';
+
+			if ( false === ( $output = wp_cache_get( 'wp_bootstrap_navwalker_eopen_output' ) ) ) {
+
 			if ( 'dropdown-header' === $linkmod_type ) {
 				// For a header use a span with the .h6 class instead of a real
 				// header tag so that it doesn't confuse screen readers.
@@ -525,6 +583,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				// this is a divider.
 				$output .= '<div class="dropdown-divider"' . $attributes . '>';
 			}
+
+			wp_cache_set( 'wp_bootstrap_navwalker_eopen_output', $output, 'wp-bootstrap-navwalker', '86000' );
+
+			} // End Object Cache if
+
 			return $output;
 		}
 
@@ -538,7 +601,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * @return string              a string with the closing tag for this linkmod type.
 		 */
 		private function linkmod_element_close( $linkmod_type ) {
+
 			$output = '';
+
+			if ( false === ( $output = wp_cache_get( 'wp_bootstrap_navwalker_eclose_output' ) ) ) {
+
 			if ( 'dropdown-header' === $linkmod_type ) {
 				// For a header use a span with the .h6 class instead of a real
 				// header tag so that it doesn't confuse screen readers.
@@ -547,6 +614,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				// this is a divider.
 				$output .= '</div>';
 			}
+
+			wp_cache_set( 'wp_bootstrap_navwalker_eclose_output', $output, 'wp-bootstrap-navwalker', '86000' );
+
+			} // End Object Cache if
+
 			return $output;
 		}
 	}
