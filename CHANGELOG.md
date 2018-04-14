@@ -1,4 +1,7 @@
 #CHANGELOG
+## [4.0.3]
+- Drop composer class autoload statement.
+
 ## [4.0.2]
 - Fix dropdown opener having empty string for href value.
 - More accurate regex matching of icon and linkmod classnames.

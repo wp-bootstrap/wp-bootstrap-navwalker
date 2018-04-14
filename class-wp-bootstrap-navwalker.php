@@ -11,7 +11,7 @@
  * Plugin URI:  https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * Description: A custom WordPress nav walker class to implement the Bootstrap 4 navigation style in a custom theme using the WordPress built in menu manager.
  * Author: Edward McIntyre - @twittem, WP Bootstrap, William Patton - @pattonwebz
- * Version: 4.0.2
+ * Version: 4.0.3
  * Author URI: https://github.com/wp-bootstrap
  * GitHub Plugin URI: https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * GitHub Branch: master
@@ -133,7 +133,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$args = apply_filters( 'nav_menu_item_args', $args, $item, $depth );
 
 			// Add .dropdown or .active classes where they are needed.
-			if ( $args->has_children ) {
+			if ( isset( $args->has_children ) && $args->has_children ) {
 				$classes[] = 'dropdown';
 			}
 			if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) ) {
@@ -181,7 +181,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$atts['target'] = ! empty( $item->target ) ? $item->target : '';
 			$atts['rel']    = ! empty( $item->xfn ) ? $item->xfn : '';
 			// If item has_children add atts to <a>.
-			if ( $args->has_children && 0 === $depth && $args->depth > 1 ) {
+			if ( isset( $args->has_children ) && $args->has_children && 0 === $depth && $args->depth > 1 ) {
 				$atts['href']          = '#';
 				$atts['data-toggle']   = 'dropdown';
 				$atts['aria-haspopup'] = 'true';
@@ -220,8 +220,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			/**
 			 * START appending the internal item contents to the output.
 			 */
-			$item_output = $args->before;
-
+			$item_output = isset( $args->before ) ? $args->before : '';
 			/**
 			 * This is the start of the internal nav item. Depending on what
 			 * kind of linkmod we have we may need different wrapper elements.
@@ -272,8 +271,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 
 			// Put the item contents into $output.
-			$item_output .= $args->link_before . $icon_html . $title . $args->link_after;
-
+			$item_output .= isset( $args->link_before ) ? $args->link_before . $icon_html . $title . $args->link_after : '';
 			/**
 			 * This is the end of the internal nav item. We need to close the
 			 * correct element depending on the type of link or link mod.
@@ -286,11 +284,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$item_output .= '</a>';
 			}
 
-			$item_output .= $args->after;
+			$item_output .= isset( $args->after ) ? $args->after : '';
+
 			/**
 			 * END appending the internal item contents to the output.
 			 */
-
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 
 		}
