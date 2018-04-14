@@ -39,6 +39,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 		$this->valid_linkmod_typeflags = array(
 			'dropdown-header',
 			'dropdown-divider',
+			'dropdown-item-text'
 		);
 
 		// array of all possible linkmods, including the valid typeflags.
@@ -592,6 +593,8 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 		$this->assertNotEmpty( $header_open, 'Got empty string for opener of ' . $this->valid_linkmod_typeflags[0] );
 		$divider_open = $method_open->invokeArgs( $wp_bootstrap_navwalker, array( $this->valid_linkmod_typeflags[1], 'stringOfAttributes' ) );
 		$this->assertNotEmpty( $divider_open, 'Got empty string for opener of ' . $this->valid_linkmod_typeflags[1] );
+		$text_open = $method_open->invokeArgs( $wp_bootstrap_navwalker, array( $this->valid_linkmod_typeflags[2], 'stringOfAttributes' ) );
+		$this->assertNotEmpty( $divider_open, 'Got empty string for opener of ' . $this->valid_linkmod_typeflags[2] );
 
 		// test that that an unknown linkmod type being passed results in no output.
 		$nonexistent_linkmod_type_open = $method_open->invokeArgs( $wp_bootstrap_navwalker, array( 'nonexistentlinkmodtype', 'stringOfAttributes' ) );
@@ -605,21 +608,30 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 		$this->assertNotEmpty( $header_close, 'Got empty string for closer of ' . $this->valid_linkmod_typeflags[0] );
 		$divider_close = $method_close->invokeArgs( $wp_bootstrap_navwalker, array( $this->valid_linkmod_typeflags[1] ) );
 		$this->assertNotEmpty( $divider_close, 'Got empty string for closer of ' . $this->valid_linkmod_typeflags[1] );
+		$text_close = $method_close->invokeArgs( $wp_bootstrap_navwalker, array( $this->valid_linkmod_typeflags[2] ) );
+		$this->assertNotEmpty( $divider_close, 'Got empty string for closer of ' . $this->valid_linkmod_typeflags[2] );
 
 		// test that that an unknown linkmod type being passed results in no output.
 		$nonexistent_linkmod_type_close = $method_open->invokeArgs( $wp_bootstrap_navwalker, array( 'nonexistentlinkmodtype' ) );
 		$this->assertEmpty( $nonexistent_linkmod_type_close, 'Expected empty string when using non-existent linkmod type.' );
 
+		// dropdown-header should be a span.
 		$this->assertRegExp(
 			'/^(<span(.*?)>)(.*?)(<\/span>)$/',
 			$header_open . $header_close,
 			'The opener and closer for ' . $this->valid_linkmod_typeflags[0] . ' does not seem to match expected elements.'
 		);
-
+		// dropdown-divider should be a div.
 		$this->assertRegExp(
 			'/^(<div(.*?)>)(.*?)(<\/div>)$/',
 			$divider_open . $divider_close,
-			'The opener and closer for ' . $this->valid_linkmod_typeflags[1] . ' linkmods does not seem to match expected elements.'
+			'The opener and closer for ' . $this->valid_linkmod_typeflags[1] . ' does not seem to match expected elements.'
+		);
+		// dropdown-item-text should be a span.
+		$this->assertRegExp(
+			'/^(<span(.*?)>)(.*?)(<\/span>)$/',
+			$text_open . $text_close,
+			'The opener and closer for ' . $this->valid_linkmod_typeflags[2] . ' does not seem to match expected elements.'
 		);
 	}
 }
