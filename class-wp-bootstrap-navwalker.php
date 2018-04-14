@@ -201,7 +201,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			// update atts of this item based on any custom linkmod classes.
 			$atts = self::update_atts_for_linkmod_type( $atts, $linkmod_classes );
 			// Allow filtering of the $atts array before using it.
-			$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args );
+			$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
 
 			// Build a string of html containing all the atts for the item.
 			$attributes = '';
