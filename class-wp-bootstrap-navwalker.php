@@ -11,7 +11,7 @@
  * Plugin URI:  https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * Description: A custom WordPress nav walker class to implement the Bootstrap 4 navigation style in a custom theme using the WordPress built in menu manager.
  * Author: Edward McIntyre - @twittem, WP Bootstrap, William Patton - @pattonwebz
- * Version: 4.0.3
+ * Version: 4.1.0
  * Author URI: https://github.com/wp-bootstrap
  * GitHub Plugin URI: https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * GitHub Branch: master
@@ -405,7 +405,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					// Test for .disabled or .sr-only classes.
 					$linkmod_classes[] = $class;
 					unset( $classes[ $key ] );
-				} elseif ( preg_match( '/^dropdown-header|^dropdown-divider/i', $class ) && $depth > 0 ) {
+				} elseif ( preg_match( '/^dropdown-header|^dropdown-divider|^dropdown-item-text/i', $class ) && $depth > 0 ) {
 					// Test for .dropdown-header or .dropdown-divider and a
 					// depth greater than 0 - IE inside a dropdown.
 					$linkmod_classes[] = $class;
@@ -446,6 +446,8 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 							$linkmod_type = 'dropdown-header';
 						} elseif ( 'dropdown-divider' === $link_class ) {
 							$linkmod_type = 'dropdown-divider';
+						} elseif ( 'dropdown-item-text' === $link_class ) {
+							$linkmod_type = 'dropdown-item-text';
 						}
 					}
 				}
@@ -477,7 +479,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 							// Convert link to '#' and unset open targets.
 							$atts['href'] = '#';
 							unset( $atts['target'] );
-						} elseif ( 'dropdown-header' === $link_class || 'dropdown-divider' === $link_class ) {
+						} elseif ( 'dropdown-header' === $link_class || 'dropdown-divider' === $link_class || 'dropdown-item-text' === $link_class ) {
 							// Store a type flag and unset href and target.
 							unset( $atts['href'] );
 							unset( $atts['target'] );
@@ -515,7 +517,9 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 */
 		private function linkmod_element_open( $linkmod_type, $attributes = '' ) {
 			$output = '';
-			if ( 'dropdown-header' === $linkmod_type ) {
+			if ( 'dropdown-item-text' === $linkmod_type ) {
+				$output .= '<span class="dropdown-item-text"' . $attributes . '>';
+			} elseif ( 'dropdown-header' === $linkmod_type ) {
 				// For a header use a span with the .h6 class instead of a real
 				// header tag so that it doesn't confuse screen readers.
 				$output .= '<span class="dropdown-header h6"' . $attributes . '>';
@@ -537,7 +541,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 */
 		private function linkmod_element_close( $linkmod_type ) {
 			$output = '';
-			if ( 'dropdown-header' === $linkmod_type ) {
+			if ( 'dropdown-header' === $linkmod_type || 'dropdown-item-text' === $linkmod_type ) {
 				// For a header use a span with the .h6 class instead of a real
 				// header tag so that it doesn't confuse screen readers.
 				$output .= '</span>';
