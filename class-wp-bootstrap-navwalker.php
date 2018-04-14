@@ -11,7 +11,7 @@
  * Plugin URI:  https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * Description: A custom WordPress nav walker class to implement the Bootstrap 4 navigation style in a custom theme using the WordPress built in menu manager.
  * Author: Edward McIntyre - @twittem, WP Bootstrap, William Patton - @pattonwebz
- * Version: 4.0.3
+ * Version: 4.1.0
  * Author URI: https://github.com/wp-bootstrap
  * GitHub Plugin URI: https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * GitHub Branch: master
@@ -133,7 +133,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$args = apply_filters( 'nav_menu_item_args', $args, $item, $depth );
 
 			// Add .dropdown or .active classes where they are needed.
-			if ( $args->has_children ) {
+			if ( isset( $args->has_children ) && $args->has_children ) {
 				$classes[] = 'dropdown';
 			}
 			if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) ) {
@@ -181,7 +181,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$atts['target'] = ! empty( $item->target ) ? $item->target : '';
 			$atts['rel']    = ! empty( $item->xfn ) ? $item->xfn : '';
 			// If item has_children add atts to <a>.
-			if ( $args->has_children && 0 === $depth && $args->depth > 1 ) {
+			if ( isset( $args->has_children ) && $args->has_children && 0 === $depth && $args->depth > 1 ) {
 				$atts['href']          = '#';
 				$atts['data-toggle']   = 'dropdown';
 				$atts['aria-haspopup'] = 'true';
@@ -201,7 +201,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			// update atts of this item based on any custom linkmod classes.
 			$atts = self::update_atts_for_linkmod_type( $atts, $linkmod_classes );
 			// Allow filtering of the $atts array before using it.
-			$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args );
+			$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
 
 			// Build a string of html containing all the atts for the item.
 			$attributes = '';
@@ -220,8 +220,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			/**
 			 * START appending the internal item contents to the output.
 			 */
-			$item_output = $args->before;
-
+			$item_output = isset( $args->before ) ? $args->before : '';
 			/**
 			 * This is the start of the internal nav item. Depending on what
 			 * kind of linkmod we have we may need different wrapper elements.
@@ -272,8 +271,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 
 			// Put the item contents into $output.
-			$item_output .= $args->link_before . $icon_html . $title . $args->link_after;
-
+			$item_output .= isset( $args->link_before ) ? $args->link_before . $icon_html . $title . $args->link_after : '';
 			/**
 			 * This is the end of the internal nav item. We need to close the
 			 * correct element depending on the type of link or link mod.
@@ -286,11 +284,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$item_output .= '</a>';
 			}
 
-			$item_output .= $args->after;
+			$item_output .= isset( $args->after ) ? $args->after : '';
+
 			/**
 			 * END appending the internal item contents to the output.
 			 */
-
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 
 		}
@@ -407,7 +405,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					// Test for .disabled or .sr-only classes.
 					$linkmod_classes[] = $class;
 					unset( $classes[ $key ] );
-				} elseif ( preg_match( '/^dropdown-header|^dropdown-divider/i', $class ) && $depth > 0 ) {
+				} elseif ( preg_match( '/^dropdown-header|^dropdown-divider|^dropdown-item-text/i', $class ) && $depth > 0 ) {
 					// Test for .dropdown-header or .dropdown-divider and a
 					// depth greater than 0 - IE inside a dropdown.
 					$linkmod_classes[] = $class;
@@ -448,6 +446,8 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 							$linkmod_type = 'dropdown-header';
 						} elseif ( 'dropdown-divider' === $link_class ) {
 							$linkmod_type = 'dropdown-divider';
+						} elseif ( 'dropdown-item-text' === $link_class ) {
+							$linkmod_type = 'dropdown-item-text';
 						}
 					}
 				}
@@ -479,7 +479,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 							// Convert link to '#' and unset open targets.
 							$atts['href'] = '#';
 							unset( $atts['target'] );
-						} elseif ( 'dropdown-header' === $link_class || 'dropdown-divider' === $link_class ) {
+						} elseif ( 'dropdown-header' === $link_class || 'dropdown-divider' === $link_class || 'dropdown-item-text' === $link_class ) {
 							// Store a type flag and unset href and target.
 							unset( $atts['href'] );
 							unset( $atts['target'] );
@@ -517,7 +517,9 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 */
 		private function linkmod_element_open( $linkmod_type, $attributes = '' ) {
 			$output = '';
-			if ( 'dropdown-header' === $linkmod_type ) {
+			if ( 'dropdown-item-text' === $linkmod_type ) {
+				$output .= '<span class="dropdown-item-text"' . $attributes . '>';
+			} elseif ( 'dropdown-header' === $linkmod_type ) {
 				// For a header use a span with the .h6 class instead of a real
 				// header tag so that it doesn't confuse screen readers.
 				$output .= '<span class="dropdown-header h6"' . $attributes . '>';
@@ -539,7 +541,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 */
 		private function linkmod_element_close( $linkmod_type ) {
 			$output = '';
-			if ( 'dropdown-header' === $linkmod_type ) {
+			if ( 'dropdown-header' === $linkmod_type || 'dropdown-item-text' === $linkmod_type ) {
 				// For a header use a span with the .h6 class instead of a real
 				// header tag so that it doesn't confuse screen readers.
 				$output .= '</span>';
