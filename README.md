@@ -14,6 +14,10 @@ A custom WordPress Nav Walker Class to fully implement the Bootstrap 4 navigatio
 
 This is a utility class that is intended to format your WordPress theme menu with the correct syntax and CSS classes to utilize the Bootstrap dropdown navigation. It does not include the required Bootstrap JS and CSS files - you will have to include them manually.
 
+### WordPress.org Theme Compliance
+
+*This walker is fully compliant with all Theme Review guidelines for wordpress.org theme submission.* It requires no modification to be compliant but you can optionally replace the `wp-bootstrap-navwalker` text domain (which appears twice in the `fallback` function) with the text domain of your theme.
+
 ### UPGRADE NOTES ###
 
 Between version 3 and version 4 of the walker there have been significant changes to the codebase. Version 4 of the walker is built to work with Bootstrap 4 and has not been tested for backwards compatibility with Bootstrap 3. A separate branch for Bootstrap 3 is maintained here: https://github.com/wp-bootstrap/wp-bootstrap-navwalker/tree/v3-branch
