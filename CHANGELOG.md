@@ -1,5 +1,11 @@
 #CHANGELOG
 
+## [3.1.0]
+
+- Backport 2 improvements from v4.x branch:
+	- Prevent error `trying to get property of non-object` when no menu is set to a location using the walker.
+	- Add `$depth` as 4th parameter passed to `nav_menu_link_attributes`.
+
 ## [3.0.3]
 
 - Revert composer autoload changes.

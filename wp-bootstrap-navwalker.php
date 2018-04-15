@@ -11,7 +11,7 @@
  * Plugin URI:  https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * Description: A custom WordPress nav walker class to implement the Bootstrap 3 navigation style in a custom theme using the WordPress built in menu manager.
  * Author: Edward McIntyre - @twittem, WP Bootstrap, William Patton - @pattonwebz
- * Version: 3.0.3
+ * Version: 3.1.0
  * Author URI: https://github.com/wp-bootstrap
  * GitHub Plugin URI: https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * GitHub Branch: master
@@ -84,7 +84,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$classes     = empty( $item->classes ) ? array() : (array) $item->classes;
 				$classes[]   = 'menu-item-' . $item->ID;
 				$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
-				if ( $args->has_children ) {
+				if ( isset( $args->has_children ) && $args->has_children ) {
 					$class_names .= ' dropdown';
 				}
 				if ( in_array( 'current-menu-item', $classes, true ) ) {
@@ -105,7 +105,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$atts['target'] = ! empty( $item->target ) ? $item->target : '';
 				$atts['rel']    = ! empty( $item->xfn ) ? $item->xfn : '';
 				// If item has_children add atts to a.
-				if ( $args->has_children && 0 === $depth ) {
+				if ( isset( $args->has_children ) && $args->has_children && 0 === $depth ) {
 					$atts['href']          = '#';
 					$atts['data-toggle']   = 'dropdown';
 					$atts['class']         = 'dropdown-toggle';
@@ -113,7 +113,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				} else {
 					$atts['href'] = ! empty( $item->url ) ? $item->url : '';
 				}
-				$atts            = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args );
+				$atts            = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
 				$icon_attributes = '';
 				$attributes      = '';
 				foreach ( $atts as $attr => $value ) {
@@ -127,7 +127,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 						}
 					}
 				}
-				$item_output = $args->before;
+				$item_output = isset( $args->before ) ? $args->before : '';
 
 				/*
 				 * Glyphicons/Font-Awesome
@@ -146,9 +146,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				} else {
 					$item_output .= '<a' . $attributes . '>';
 				}
-				$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-				$item_output .= ( $args->has_children && 0 === $depth ) ? ' <span class="caret"></span></a>' : '</a>';
-				$item_output .= $args->after;
+				$item_output .= isset( $args->link_before ) ? $args->link_before : ''
+				$item_output .= apply_filters( 'the_title', $item->title, $item->ID );
+				$item_output .= isset( $args->link_after ) ? $args->link_after: '';
+				$item_output .= ( isset( $args->has_children ) && $args->has_children && 0 === $depth ) ? ' <span class="caret"></span></a>' : '</a>';
+				$item_output .= isset( $args->after ) ? $args->after : '';
 				$output      .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 			} // End if().
 		}
