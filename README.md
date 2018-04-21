@@ -25,7 +25,7 @@ Between version 3 and version 4 of the walker there have been significant change
 Here is a list of the most notable changes:
 
 - The filename has been changed and prefixed with `class-` to better fit PHP coding standards naming conventions.
-    - New Name: `class-wp-bootstrap-navwalker.php`
+	- New Name: `class-wp-bootstrap-navwalker.php`
 	- Old Name: `wp-bootstrap-navwalker.php`
 - Icon and link modifier handling is now done through the `CSS Classes` menu item input instead of the `Title` input.
 - Icon only items are possible using icon classes in combination with the `sr-only` classname.
@@ -37,7 +37,6 @@ Place **class-wp-bootstrap-navwalker.php** in your WordPress theme folder `/wp-c
 Open your WordPress themes **functions.php** file - `/wp-content/your-theme/functions.php` - and add the following code:
 
 ```php
-<?php
 // Register Custom Navigation Walker
 require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
 ```
@@ -45,13 +44,12 @@ require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
 If you encounter errors with the above code use a check like this to return clean errors to help diagnose the problem.
 
 ```php
-<?php
 if ( ! file_exists( get_template_directory() . '/class-wp-bootstrap-navwalker.php' ) ) {
 	// file does not exist... return an error.
 	return new WP_Error( 'class-wp-bootstrap-navwalker-missing', __( 'It appears the class-wp-bootstrap-navwalker.php file may be missing.', 'wp-bootstrap-navwalker' ) );
 } else {
 	// file exists... require it.
-    require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
+	require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
 }
 ```
 You will also need to declare a new menu in your `functions.php` file if one doesn't already exist.
@@ -66,18 +64,16 @@ register_nav_menus( array(
 Add or update any `wp_nav_menu()` functions in your theme (often found in `header.php`) to use the new walker by adding a `'walker'` item to the wp_nav_menu args array.
 
 ```php
-<?php
 wp_nav_menu( array(
-    'theme_location'	=> 'primary',
-    'depth'				=> 1, // 1 = with dropdowns, 0 = no dropdowns.
-	'container'			=> 'div',
-	'container_class'	=> 'collapse navbar-collapse',
-	'container_id'		=> 'bs-example-navbar-collapse-1',
-	'menu_class'		=> 'navbar-nav mr-auto',
-    'fallback_cb'		=> 'WP_Bootstrap_Navwalker::fallback',
-    'walker'			=> new WP_Bootstrap_Navwalker()
+	'theme_location'  => 'primary',
+	'depth'	          => 2, // 1 = no dropdowns, 2 = with dropdowns.
+	'container'       => 'div',
+	'container_class' => 'collapse navbar-collapse',
+	'container_id'    => 'bs-example-navbar-collapse-1',
+	'menu_class'      => 'navbar-nav mr-auto',
+	'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
+	'walker'          => new WP_Bootstrap_Navwalker(),
 ) );
-?>
 ```
 
 Your menu will now be formatted with the correct syntax and classes to implement Bootstrap dropdown navigation.
@@ -87,24 +83,24 @@ Typically the menu is wrapped with additional markup, here is an example of a ` 
 ```php
 <nav class="navbar navbar-expand-md navbar-light bg-light" role="navigation">
   <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
+	<!-- Brand and toggle get grouped for better mobile display -->
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<a class="navbar-brand" href="#">Navbar</a>
-        <?php
-        wp_nav_menu( array(
-            'theme_location'    => 'primary',
-            'depth'             => 2,
-            'container'         => 'div',
-            'container_class'   => 'collapse navbar-collapse',
-            'container_id'      => 'bs-example-navbar-collapse-1',
-            'menu_class'        => 'nav navbar-nav',
-            'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
-            'walker'            => new WP_Bootstrap_Navwalker()
+		<?php
+		wp_nav_menu( array(
+			'theme_location'    => 'primary',
+			'depth'             => 2,
+			'container'         => 'div',
+			'container_class'   => 'collapse navbar-collapse',
+			'container_id'      => 'bs-example-navbar-collapse-1',
+			'menu_class'        => 'nav navbar-nav',
+			'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
+			'walker'            => new WP_Bootstrap_Navwalker(),
 		) );
-        ?>
-    </div>
+		?>
+	</div>
 </nav>
 ```
 
@@ -122,11 +118,10 @@ To display the menu you must associate your menu with your theme location. You c
 There has been some interest in making this walker the default walker for all menus. That could result in some unexpected situations but it can be achieved by adding this function to your functions.php file.
 
 ```php
-<?php
 function prefix_modify_nav_menu_args( $args ) {
-    return array_merge( $args, array(
-        'walker' => WP_Bootstrap_Navwalker(),
-    ) );
+	return array_merge( $args, array(
+		'walker' => WP_Bootstrap_Navwalker(),
+	) );
 }
 add_filter( 'wp_nav_menu_args', 'prefix_modify_nav_menu_args' );
 ```
@@ -162,9 +157,9 @@ To make an item appear with the icon only apply the bootstrap screen reader clas
 
 To set a disabled link simply add `disabled` to the **CSS Classes** field in the Menu UI and the walker class will do the rest. _Note: In addition to adding the .disabled class this will change the link `href` to `#` as well so that it is not a followable link._
 
-#### Dropdown Headers & Dropdown Dividers
+#### Dropdown Headers, Dropdown Dividers & Dropdown Item Text.
 
-Headers and dividers can be added within dropdowns by adding a Custom Link and adding either `dropdown-header` or `dropdown-divider` into the **CSS Classes** input. _Note: This will remove the `href` on the item and change it to either a `<span>` for headers or a `<div>` for dividers._
+Headers, dividers and text only items can be added within dropdowns by adding a Custom Link and adding either `dropdown-header`, `dropdown-divider` or `dropdown-item-text` into the **CSS Classes** input. _Note: This will remove the `href` on the item and change it to either a `<span>` for headers or a `<div>` for dividers._
 
 ## Changelog
 
