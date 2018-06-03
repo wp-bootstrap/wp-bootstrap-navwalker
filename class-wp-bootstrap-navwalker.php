@@ -28,24 +28,24 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 	 */
 	class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
 
-	    /**
-	     * Whether the items_wrap contains schema microdata or not.
-	     * 
-	     * @since 4.2.0
-	     * @var type bool
-	     */
-	    private $has_schema = false;
+		/**
+		 * Whether the items_wrap contains schema microdata or not.
+		 *
+		 * @since 4.2.0
+		 * @var type bool
+		 */
+		private $has_schema = false;
 
-	    /**
-	     * Ensure the items_wrap argument contains microdata.
-	     *
-	     * @since 4.2.0
-	     */
-	    public function __construct() {
-	        if ( ! has_filter( 'wp_nav_menu_args', [ $this, 'add_schema_to_navbar_ul' ] ) ) {
-	            add_filter( 'wp_nav_menu_args',  [ $this, 'add_schema_to_navbar_ul' ] );
-	        }
-	    }
+		/**
+		 * Ensure the items_wrap argument contains microdata.
+		 *
+		 * @since 4.2.0
+		 */
+		public function __construct() {
+			if ( ! has_filter( 'wp_nav_menu_args', [ $this, 'add_schema_to_navbar_ul' ] ) ) {
+				add_filter( 'wp_nav_menu_args',  [ $this, 'add_schema_to_navbar_ul' ] );
+			}
+		}
 
 		/**
 		 * Starts the list before the elements are added.
@@ -122,11 +122,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 			$indent = ( $depth ) ? str_repeat( $t, $depth ) : '';
 
-			if ( strpos( $args->items_wrap, 'itemscope' ) !== false && $this->has_schema === false ) {
-	            $this->has_schema = true;
-	            $args->link_before = '<span itemprop="name">' . $args->link_before;
-	            $args->link_after .= '</span>';
-	        }
+			if ( false !== strpos( $args->items_wrap, 'itemscope' ) && false === $this->has_schema ) {
+				$this->has_schema  = true;
+				$args->link_before = '<span itemprop="name">' . $args->link_before;
+				$args->link_after .= '</span>';
+			}
 
 			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 
@@ -215,8 +215,8 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$atts['id']            = 'menu-item-dropdown-' . $item->ID;
 			} else {
 				if ( $this->has_schema === true ) {
-	        		$atts['itemprop'] = 'url';
-	        	}
+					$atts['itemprop'] = 'url';
+				}
 
 				$atts['href'] = ! empty( $item->url ) ? $item->url : '#';
 				// Items in dropdowns use .dropdown-item instead of .nav-link.
@@ -409,21 +409,21 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		}
 
 		/**
-	     * Filter to ensure the items_Wrap argument contains microdata.
-	     *
-	     * @since 4.2.0
-	     *
-	     * @param  array $args The nav instance arguments.
-	     * @return array $args The altered nav instance arguments.
-	     */
-	    public function add_schema_to_navbar_ul( $args ) {
-	        $wrap = $args['items_wrap'];
-	        if ( strpos( $wrap, 'SiteNavigationElement' ) === false ) {
-	            $args['items_wrap'] = preg_replace( '/(>).*>?\%3\$s/', " itemscope itemtype=\"http://www.schema.org/SiteNavigationElement\"$0", $wrap );
-	        }
+		 * Filter to ensure the items_Wrap argument contains microdata.
+		 *
+		 * @since 4.2.0
+		 *
+		 * @param  array $args The nav instance arguments.
+		 * @return array $args The altered nav instance arguments.
+		 */
+		public function add_schema_to_navbar_ul( $args ) {
+			$wrap = $args['items_wrap'];
+			if ( strpos( $wrap, 'SiteNavigationElement' ) === false ) {
+				$args['items_wrap'] = preg_replace( '/(>).*>?\%3\$s/', ' itemscope itemtype="http://www.schema.org/SiteNavigationElement"'."$0", $wrap );
+			}
 
-	        return $args;
-	    }
+			return $args;
+		}
 
 		/**
 		 * Find any custom linkmod or icon classes and store in their holder
