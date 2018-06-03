@@ -32,7 +32,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * Whether the items_wrap contains schema microdata or not.
 		 *
 		 * @since 4.2.0
-		 * @var type bool
+		 * @var type boolean
 		 */
 		private $has_schema = false;
 
@@ -214,7 +214,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$atts['class']         = 'dropdown-toggle nav-link';
 				$atts['id']            = 'menu-item-dropdown-' . $item->ID;
 			} else {
-				if ( $this->has_schema === true ) {
+				if ( true === $this->has_schema ) {
 					$atts['itemprop'] = 'url';
 				}
 
