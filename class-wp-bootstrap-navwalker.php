@@ -43,7 +43,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 */
 		public function __construct() {
 			if ( ! has_filter( 'wp_nav_menu_args', [ $this, 'add_schema_to_navbar_ul' ] ) ) {
-				add_filter( 'wp_nav_menu_args',  [ $this, 'add_schema_to_navbar_ul' ] );
+				add_filter( 'wp_nav_menu_args', [ $this, 'add_schema_to_navbar_ul' ] );
 			}
 		}
 
@@ -419,7 +419,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		public function add_schema_to_navbar_ul( $args ) {
 			$wrap = $args['items_wrap'];
 			if ( strpos( $wrap, 'SiteNavigationElement' ) === false ) {
-				$args['items_wrap'] = preg_replace( '/(>).*>?\%3\$s/', ' itemscope itemtype="http://www.schema.org/SiteNavigationElement"'."$0", $wrap );
+				$args['items_wrap'] = preg_replace( '/(>).*>?\%3\$s/', ' itemscope itemtype="http://www.schema.org/SiteNavigationElement"$0', $wrap );
 			}
 
 			return $args;
