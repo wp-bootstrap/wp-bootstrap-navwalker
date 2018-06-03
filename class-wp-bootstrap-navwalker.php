@@ -32,7 +32,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * Whether the items_wrap contains schema microdata or not.
 		 *
 		 * @since 4.2.0
-		 * @var type boolean
+		 * @var boolean
 		 */
 		private $has_schema = false;
 
