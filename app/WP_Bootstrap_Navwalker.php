@@ -27,7 +27,7 @@ namespace WP_Bootstrap;
  *
  * @extends Walker_Nav_Menu
  */
-class WPBootstrapNavwalker extends \Walker_Nav_Menu
+class WP_Bootstrap_Navwalker extends \Walker_Nav_Menu
 {
 
 
