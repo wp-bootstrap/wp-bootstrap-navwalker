@@ -1,11 +1,11 @@
 <?php
 
-namespace WPBOOTSTRAP\WPBootstrapNavwalker;
+namespace WP_Bootstrap;
 
 /**
  * WP Bootstrap Navwalker
  *
- * @package WP-Bootstrap-Navwalker
+ * @package WP-Bootstrap-Navwaoh exlker
  */
 
 /*
@@ -22,15 +22,12 @@ namespace WPBOOTSTRAP\WPBootstrapNavwalker;
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 */
 
-/* Check if Class Exists. */
-if (class_exists('Walker_Nav_Menu')) {
-    if (! class_exists('WP_Bootstrap_Navwalker')) {
         /**
          * WP_Bootstrap_Navwalker class.
          *
          * @extends Walker_Nav_Menu
          */
-        class WP_Bootstrap_Navwalker extends Walker_Nav_Menu
+        class WPBootstrapNavwalker extends \Walker_Nav_Menu
         {
 
 
@@ -581,5 +578,3 @@ if (class_exists('Walker_Nav_Menu')) {
                 return $output;
             }
         }
-    }
-}

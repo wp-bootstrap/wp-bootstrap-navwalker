@@ -38,7 +38,7 @@
   },
   "autoload": {
     "psr-4": {
-      "WPBOOTSTRAP\\WPBootstrapNavwalker\\": "app/"
+      "WP_Bootstrap\\": "app/"
     }
   }
 }
