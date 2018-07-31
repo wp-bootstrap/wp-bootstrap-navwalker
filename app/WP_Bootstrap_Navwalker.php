@@ -5,7 +5,7 @@ namespace WP_Bootstrap;
 /**
  * WP Bootstrap Navwalker
  *
- * @package WP-Bootstrap-Navwaoh exlker
+ * @package WP-Bootstrap-Navwalker
  */
 
 /*
