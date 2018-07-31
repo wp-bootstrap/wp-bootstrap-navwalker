@@ -72,7 +72,7 @@ wp_nav_menu( array(
 	'container_id'    => 'bs-example-navbar-collapse-1',
 	'menu_class'      => 'navbar-nav mr-auto',
 	'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
-	'walker'          => new WP_Bootstrap_Navwalker(),
+	'walker'          => new \WP_Bootstrap\WP_Bootstrap_Navwalker(),
 ) );
 ```
 
@@ -97,7 +97,7 @@ Typically the menu is wrapped with additional markup, here is an example of a ` 
 			'container_id'      => 'bs-example-navbar-collapse-1',
 			'menu_class'        => 'nav navbar-nav',
 			'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
-			'walker'            => new WP_Bootstrap_Navwalker(),
+			'walker'            => new \WP_Bootstrap\WP_Bootstrap_Navwalker(),
 		) );
 		?>
 	</div>
@@ -120,7 +120,7 @@ There has been some interest in making this walker the default walker for all me
 ```php
 function prefix_modify_nav_menu_args( $args ) {
 	return array_merge( $args, array(
-		'walker' => WP_Bootstrap_Navwalker(),
+		'walker' => \WP_Bootstrap\WP_Bootstrap_Navwalker(),
 	) );
 }
 add_filter( 'wp_nav_menu_args', 'prefix_modify_nav_menu_args' );
