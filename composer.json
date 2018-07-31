@@ -32,5 +32,10 @@
         "post-update-cmd": [
             "wp-enforcer"
         ]
+    },
+    "autoload": {
+      "files": [
+        "class-wp-bootstrap-navwalker.php"
+      ]
     }
 }
