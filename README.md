@@ -37,8 +37,13 @@ Place **class-wp-bootstrap-navwalker.php** in your WordPress theme folder `/wp-c
 Open your WordPress themes **functions.php** file - `/wp-content/your-theme/functions.php` - and add the following code:
 
 ```php
-// Register Custom Navigation Walker
-require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
+/**
+ * Register Custom Navigation Walker
+ */
+function register_navwalker(){
+	require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
+}
+add_action( 'after_setup_theme', 'register_navwalker' );
 ```
 
 If you encounter errors with the above code use a check like this to return clean errors to help diagnose the problem.
