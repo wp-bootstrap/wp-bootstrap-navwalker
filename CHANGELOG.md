@@ -1,5 +1,8 @@
 #CHANGELOG
 
+## [4.2.0]
+- Fix typo in function name 'seporate'->'separate' (private function, no need to add back-compat).
+
 ## [4.1.0]
 - Prevent error `trying to get property of non-object` when no menu is set to a location using the walker.
 - Add `$depth` as 4th parameter passed to `nav_menu_link_attributes`.
