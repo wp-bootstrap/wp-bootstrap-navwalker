@@ -11,7 +11,7 @@
  * Plugin URI:  https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * Description: A custom WordPress nav walker class to implement the Bootstrap 4 navigation style in a custom theme using the WordPress built in menu manager.
  * Author: Edward McIntyre - @twittem, WP Bootstrap, William Patton - @pattonwebz
- * Version: 4.1.0
+ * Version: 4.2.0
  * Author URI: https://github.com/wp-bootstrap
  * GitHub Plugin URI: https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  * GitHub Branch: master
@@ -116,7 +116,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 * NOTE: linkmod and icon class arrays are passed by reference and
 			 * are maybe modified before being used later in this function.
 			 */
-			$classes = self::seporate_linkmods_and_icons_from_classes( $classes, $linkmod_classes, $icon_classes, $depth );
+			$classes = self::separate_linkmods_and_icons_from_classes( $classes, $linkmod_classes, $icon_classes, $depth );
 
 			// Join any icon classes plucked from $classes into a string.
 			$icon_class_string = join( ' ', $icon_classes );
@@ -264,7 +264,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 */
 			if ( in_array( 'sr-only', $linkmod_classes, true ) ) {
 				$title         = self::wrap_for_screen_reader( $title );
-				$keys_to_unset = array_keys( $linkmod_classes, 'sr-only' );
+				$keys_to_unset = array_keys( $linkmod_classes, 'sr-only' ); // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 				foreach ( $keys_to_unset as $k ) {
 					unset( $linkmod_classes[ $k ] );
 				}
@@ -376,52 +376,6 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					return $fallback_output;
 				}
 			}
-		}
-
-		/**
-		 * Find any custom linkmod or icon classes and store in their holder
-		 * arrays then remove them from the main classes array.
-		 *
-		 * Supported linkmods: .disabled, .dropdown-header, .dropdown-divider, .sr-only
-		 * Supported iconsets: Font Awesome 4/5, Glypicons
-		 *
-		 * NOTE: This accepts the linkmod and icon arrays by reference.
-		 *
-		 * @since 4.0.0
-		 *
-		 * @param array   $classes         an array of classes currently assigned to the item.
-		 * @param array   $linkmod_classes an array to hold linkmod classes.
-		 * @param array   $icon_classes    an array to hold icon classes.
-		 * @param integer $depth           an integer holding current depth level.
-		 *
-		 * @return array  $classes         a maybe modified array of classnames.
-		 */
-		private function seporate_linkmods_and_icons_from_classes( $classes, &$linkmod_classes, &$icon_classes, $depth ) {
-			// Loop through $classes array to find linkmod or icon classes.
-			foreach ( $classes as $key => $class ) {
-				// If any special classes are found, store the class in it's
-				// holder array and and unset the item from $classes.
-				if ( preg_match( '/^disabled|^sr-only/i', $class ) ) {
-					// Test for .disabled or .sr-only classes.
-					$linkmod_classes[] = $class;
-					unset( $classes[ $key ] );
-				} elseif ( preg_match( '/^dropdown-header|^dropdown-divider|^dropdown-item-text/i', $class ) && $depth > 0 ) {
-					// Test for .dropdown-header or .dropdown-divider and a
-					// depth greater than 0 - IE inside a dropdown.
-					$linkmod_classes[] = $class;
-					unset( $classes[ $key ] );
-				} elseif ( preg_match( '/^fa-(\S*)?|^fa(s|r|l|b)?(\s?)?$/i', $class ) ) {
-					// Font Awesome.
-					$icon_classes[] = $class;
-					unset( $classes[ $key ] );
-				} elseif ( preg_match( '/^glyphicon-(\S*)?|^glyphicon(\s?)$/i', $class ) ) {
-					// Glyphicons.
-					$icon_classes[] = $class;
-					unset( $classes[ $key ] );
-				}
-			}
-
-			return $classes;
 		}
 
 		/**
