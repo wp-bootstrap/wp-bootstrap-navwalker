@@ -240,18 +240,18 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Test seporate_linkmods_and_icons_from_classes Function exists.
+	 * Test separate_linkmods_and_icons_from_classes Function exists.
 	 *
 	 * @access public
 	 * @return void
 	 */
-	public function test_seporate_linkmods_and_icons_from_classes_function_exists() {
+	public function test_separate_linkmods_and_icons_from_classes_function_exists() {
 
 		$wp_bootstrap_navwalker = $this->walker;
 
 		$this->assertTrue(
-			method_exists( $wp_bootstrap_navwalker, 'seporate_linkmods_and_icons_from_classes' ),
-			'Class does not have method seporate_linkmods_and_icons_from_classes.'
+			method_exists( $wp_bootstrap_navwalker, 'separate_linkmods_and_icons_from_classes' ),
+			'Class does not have method separate_linkmods_and_icons_from_classes.'
 		);
 
 	}
@@ -260,19 +260,19 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * Test that the function catches a random assortment of glyphicon icon
 	 * classes mixed with with regular classnames.
 	 *
-	 * @depends test_seporate_linkmods_and_icons_from_classes_function_exists
+	 * @depends test_separate_linkmods_and_icons_from_classes_function_exists
 	 *
 	 * @access public
 	 * @return void
 	 */
-	public function test_seporate_linkmods_and_icons_from_classes_fontawesome() {
+	public function test_separate_linkmods_and_icons_from_classes_fontawesome() {
 
 		$wp_bootstrap_navwalker = $this->walker;
 		// since we're working with private methods we need to use a reflector.
 		$reflector = new ReflectionClass( 'WP_Bootstrap_Navwalker' );
 
 		// get a reflected method for the opener function and set to public.
-		$method_open = $reflector->getMethod( 'seporate_linkmods_and_icons_from_classes' );
+		$method_open = $reflector->getMethod( 'separate_linkmods_and_icons_from_classes' );
 		$method_open->setAccessible( true );
 
 		$icons_array     = $this->some_fontawesome_classes;
@@ -314,19 +314,19 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * Test that the function catches a random assortment of font awesome icon
 	 * classes mixed with with regular classnames.
 	 *
-	 * @depends test_seporate_linkmods_and_icons_from_classes_function_exists
+	 * @depends test_separate_linkmods_and_icons_from_classes_function_exists
 	 *
 	 * @access public
 	 * @return void
 	 */
-	public function test_seporate_linkmods_and_icons_from_classes_glyphicons() {
+	public function test_separate_linkmods_and_icons_from_classes_glyphicons() {
 
 		$wp_bootstrap_navwalker = $this->walker;
 		// since we're working with private methods we need to use a reflector.
 		$reflector = new ReflectionClass( 'WP_Bootstrap_Navwalker' );
 
 		// get a reflected method for the opener function and set to public.
-		$method_open = $reflector->getMethod( 'seporate_linkmods_and_icons_from_classes' );
+		$method_open = $reflector->getMethod( 'separate_linkmods_and_icons_from_classes' );
 		$method_open->setAccessible( true );
 
 		$icons_array     = $this->some_glyphicons_classes;
@@ -368,19 +368,19 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * Test that the function catches a random assortment of font awesome icon
 	 * classes mixed with with regular classnames.
 	 *
-	 * @depends test_seporate_linkmods_and_icons_from_classes_function_exists
+	 * @depends test_separate_linkmods_and_icons_from_classes_function_exists
 	 *
 	 * @access public
 	 * @return void
 	 */
-	public function test_seporate_linkmods_and_icons_from_classes_linkmods() {
+	public function test_separate_linkmods_and_icons_from_classes_linkmods() {
 
 		$wp_bootstrap_navwalker = $this->walker;
 		// since we're working with private methods we need to use a reflector.
 		$reflector = new ReflectionClass( 'WP_Bootstrap_Navwalker' );
 
 		// get a reflected method for the opener function and set to public.
-		$method_open = $reflector->getMethod( 'seporate_linkmods_and_icons_from_classes' );
+		$method_open = $reflector->getMethod( 'separate_linkmods_and_icons_from_classes' );
 		$method_open->setAccessible( true );
 
 		$valid_linkmods  = $this->valid_linkmod_classes;
@@ -439,23 +439,23 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 	 * Test that the function catches all possible linkmod classes, any icon
 	 * classes and leaves the other classes as-is on the array.
 	 *
-	 * @depends test_seporate_linkmods_and_icons_from_classes_function_exists
+	 * @depends test_separate_linkmods_and_icons_from_classes_function_exists
 	 *
-	 * @depends test_seporate_linkmods_and_icons_from_classes_fontawesome
-	 * @depends test_seporate_linkmods_and_icons_from_classes_glyphicons
-	 * @depends test_seporate_linkmods_and_icons_from_classes_linkmods
+	 * @depends test_separate_linkmods_and_icons_from_classes_fontawesome
+	 * @depends test_separate_linkmods_and_icons_from_classes_glyphicons
+	 * @depends test_separate_linkmods_and_icons_from_classes_linkmods
 	 *
 	 * @access public
 	 * @return void
 	 */
-	public function test_seporate_linkmods_and_icons_from_classes_fulltest() {
+	public function test_separate_linkmods_and_icons_from_classes_fulltest() {
 
 		$wp_bootstrap_navwalker = $this->walker;
 		// since we're working with private methods we need to use a reflector.
 		$reflector = new ReflectionClass( 'WP_Bootstrap_Navwalker' );
 
 		// get a reflected method for the opener function and set to public.
-		$method_open = $reflector->getMethod( 'seporate_linkmods_and_icons_from_classes' );
+		$method_open = $reflector->getMethod( 'separate_linkmods_and_icons_from_classes' );
 		$method_open->setAccessible( true );
 
 		$icons_array     = array_merge( $this->some_fontawesome_classes, $this->some_glyphicons_classes );
