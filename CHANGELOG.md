@@ -1,5 +1,9 @@
 #CHANGELOG
 
+## [3.1.1]
+
+- Fix missing semicolon.
+
 ## [3.1.0]
 
 - Backport 2 improvements from v4.x branch:
