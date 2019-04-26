@@ -161,8 +161,8 @@ To set a disabled link simply add `disabled` to the **CSS Classes** field in the
 
 Headers, dividers and text only items can be added within dropdowns by adding a Custom Link and adding either `dropdown-header`, `dropdown-divider` or `dropdown-item-text` into the **CSS Classes** input. _Note: This will remove the `href` on the item and change it to either a `<span>` for headers or a `<div>` for dividers._
 
-#### Description feild
-For use description feild you must enable the description feature in WordPress. Then create your own menu and style this `<small> with class .nav-description`
+#### Description field
+For use description field you must enable the description feature in WordPress. Then create your own menu and style this `<small> with class .nav-description`
 
 ## Changelog
 
