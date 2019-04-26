@@ -256,7 +256,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 
 
 				if( $description != '' && $depth == 0 ) {
-					$output .= '<small class="navbar-main-description">' . $description . '</small>';
+					$output .= '<small class="nav-description">' . $description . '</small>';
 				}
 			}
 			// Put the item contents into $output.
