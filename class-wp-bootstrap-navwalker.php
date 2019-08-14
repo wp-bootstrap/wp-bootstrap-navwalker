@@ -198,6 +198,8 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				}
 			}
 
+			$atts['aria-current'] = $item->current ? 'page' : '';
+
 			// update atts of this item based on any custom linkmod classes.
 			$atts = self::update_atts_for_linkmod_type( $atts, $linkmod_classes );
 			// Allow filtering of the $atts array before using it.
