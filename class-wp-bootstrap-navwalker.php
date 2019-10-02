@@ -277,8 +277,8 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 * correct element depending on the type of link or link mod.
 			 */
 			if ( '' !== $linkmod_type ) {
-				// is linkmod, output the required element opener.
-				$item_output .= self::linkmod_element_close( $linkmod_type, $attributes );
+				// is linkmod, output the required closing element.
+				$item_output .= self::linkmod_element_close( $linkmod_type );
 			} else {
 				// With no link mod type set this must be a standard <a> tag.
 				$item_output .= '</a>';
