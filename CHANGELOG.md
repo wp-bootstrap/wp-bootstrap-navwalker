@@ -1,5 +1,11 @@
 #CHANGELOG
 
+## [4.3.0]
+- Added an `aria-current` item.
+- Added `.nav-item` for the `<li>` and `.nav-link` for the `<a>` in fallback function.
+- Some escape improvements.
+- Don't pass `$attributes` to element closing function as it's ignored anyway.
+
 ## [4.2.0]
 - Fix typo in function name 'seporate'->'separate' (private function, no need to add back-compat).
 
