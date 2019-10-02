@@ -18,7 +18,7 @@
  */
 
 /* Check if Class Exists. */
-if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
+if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 	/**
 	 * WP_Bootstrap_Navwalker class.
 	 *
@@ -550,4 +550,4 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 			return $output;
 		}
 	}
-endif;
+}
