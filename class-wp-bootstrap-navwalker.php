@@ -74,7 +74,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			// with pointer at end of array check if we got an ID match.
 			if ( end( $matches[2] ) ) {
 				// build a string to use as aria-labelledby.
-				$labelledby = 'aria-labelledby="' . end( $matches[2] ) . '"';
+				$labelledby = 'aria-labelledby="' . esc_attr( end( $matches[2] ) ) . '"';
 			}
 			$output .= "{$n}{$indent}<ul$class_names $labelledby role=\"menu\">{$n}";
 		}
@@ -245,7 +245,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 
 			/** This filter is documented in wp-includes/post-template.php */
-			$title = apply_filters( 'the_title', $item->title, $item->ID );
+			$title = apply_filters( 'the_title', esc_html( $item->title ), $item->ID );
 
 			/**
 			 * Filters a menu item's title.
