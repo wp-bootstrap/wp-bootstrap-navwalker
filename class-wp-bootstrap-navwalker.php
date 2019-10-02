@@ -264,7 +264,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 */
 			if ( in_array( 'sr-only', $linkmod_classes, true ) ) {
 				$title         = self::wrap_for_screen_reader( $title );
-				$keys_to_unset = array_keys( $linkmod_classes, 'sr-only' );
+				$keys_to_unset = array_keys( $linkmod_classes, 'sr-only', true );
 				foreach ( $keys_to_unset as $k ) {
 					unset( $linkmod_classes[ $k ] );
 				}
