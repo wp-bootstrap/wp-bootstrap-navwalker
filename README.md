@@ -32,9 +32,9 @@ Here is a list of the most notable changes:
 
 ## Installation
 
-Place **class-wp-bootstrap-navwalker.php** in your WordPress theme folder `/wp-content/your-theme/`
+Place **class-wp-bootstrap-navwalker.php** in your WordPress theme folder `/wp-content/themes/your-theme/`
 
-Open your WordPress themes **functions.php** file - `/wp-content/your-theme/functions.php` - and add the following code:
+Open your WordPress themes **functions.php** file - `/wp-content/themes/your-theme/functions.php` - and add the following code:
 
 ```php
 /**
