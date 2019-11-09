@@ -333,6 +333,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * and will add a link to the WordPress menu manager if logged in as an admin.
 		 *
 		 * @param array $args passed from the wp_nav_menu function.
+		 * @return string|void String when echo is false.
 		 */
 		public static function fallback( $args ) {
 			if ( current_user_can( 'edit_theme_options' ) ) {
