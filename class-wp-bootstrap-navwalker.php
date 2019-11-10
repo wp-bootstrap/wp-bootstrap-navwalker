@@ -178,9 +178,9 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 
 			$atts['target'] = ! empty( $item->target ) ? $item->target : '';
 			if ( '_blank' === $item->target && empty( $item->xfn ) ) {
-            			$atts['rel'] = 'noopener noreferrer';
+				$atts['rel'] = 'noopener noreferrer';
         		} else {
-            			$atts['rel'] = $item->xfn;
+				$atts['rel'] = $item->xfn;
         		}
 			// If item has_children add atts to <a>.
 			if ( isset( $args->has_children ) && $args->has_children && 0 === $depth && $args->depth > 1 ) {
