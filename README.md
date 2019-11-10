@@ -123,7 +123,7 @@ To display the menu you must associate your menu with your theme location. You c
 
 By default this walker replaces an empty title attribute with the nav menu item's title. To disable this behaviour add this to your functions.php file.
 ```php
-add_filter( 'wp_bootstrap_navwalker_show_atts_title_default', __return_false() );
+add_filter( 'wp_bootstrap_navwalker_show_atts_title_default', '__return_false' );
 ```
 
 ### Making this Walker the Default Walker for Nav Menus
