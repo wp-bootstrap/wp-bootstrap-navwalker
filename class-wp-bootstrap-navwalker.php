@@ -163,7 +163,15 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$id = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args, $depth );
 			$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
 
-			$output .= $indent . '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement"' . $id . $class_names . '>';
+			/**
+			 * Filters whether to output schema markup.
+			 *
+			 * @param bool $show Whether to output the schmema markup.
+			 */
+			$show_schema = apply_filters( 'wp_bootstrap_navwalker_show_schema', $show = true );
+			$schema      = $show_schema ? ' itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement"' : '';
+
+			$output .= $indent . '<li' . $schema . $id . $class_names . '>';
 
 			// initialize array for holding the $atts for the link item.
 			$atts = array();
@@ -188,7 +196,9 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$atts['id']            = 'menu-item-dropdown-' . $item->ID;
 			} else {
 				$atts['href']     = ! empty( $item->url ) ? $item->url : '#';
-				$atts['itemprop'] = 'url';
+				if ( $show_schema ) {
+					$atts['itemprop'] = 'url';
+				}
 				// Items in dropdowns use .dropdown-item instead of .nav-link.
 				if ( $depth > 0 ) {
 					$atts['class'] = 'dropdown-item';
