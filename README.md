@@ -119,6 +119,12 @@ Review options in the Bootstrap docs for more information on [nav classes](https
 
 To display the menu you must associate your menu with your theme location. You can do this by selecting your theme location in the *Theme Locations* list while editing a menu in the WordPress menu manager.
 
+### Schema Markup
+
+By default this walker adds schema markup to the menu. To disable the schema markup add this to your `functions.php` file.
+```php
+add_filter( 'wp_bootstrap_navwalker_show_schema', __return_false() );
+```
 ### Making this Walker the Default Walker for Nav Manus
 
 There has been some interest in making this walker the default walker for all menus. That could result in some unexpected situations but it can be achieved by adding this function to your functions.php file.
