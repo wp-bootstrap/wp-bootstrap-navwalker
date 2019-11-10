@@ -32,9 +32,9 @@ Here is a list of the most notable changes:
 
 ## Installation
 
-Place **class-wp-bootstrap-navwalker.php** in your WordPress theme folder `/wp-content/your-theme/`
+Place **class-wp-bootstrap-navwalker.php** in your WordPress theme folder `/wp-content/themes/your-theme/`
 
-Open your WordPress themes **functions.php** file - `/wp-content/your-theme/functions.php` - and add the following code:
+Open your WordPress themes **functions.php** file - `/wp-content/themes/your-theme/functions.php` - and add the following code:
 
 ```php
 /**
@@ -125,7 +125,8 @@ By default this walker adds schema markup to the menu. To disable the schema mar
 ```php
 add_filter( 'wp_bootstrap_navwalker_show_schema', __return_false() );
 ```
-### Making this Walker the Default Walker for Nav Manus
+
+### Making this Walker the Default Walker for Nav Menus
 
 There has been some interest in making this walker the default walker for all menus. That could result in some unexpected situations but it can be achieved by adding this function to your functions.php file.
 
