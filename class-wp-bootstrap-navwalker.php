@@ -165,13 +165,24 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 
 			$output .= $indent . '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement"' . $id . $class_names . '>';
 
-			// initialize array for holding the $atts for the link item.
+			// Initialize array for holding the $atts for the link item.
 			$atts = array();
 
-			// Set title from item to the $atts array - if title is empty then
-			// default to item title.
+			/**
+			 * Filters whether to output a default title attribute if empty.
+			 *
+			 * @param bool $show Whether to output the default title attribute.
+			 */
+			$show_atts_title_default = apply_filters( 'wp_bootstrap_navwalker_show_atts_title_default', $show = true );
+
+			/*
+			 * Set title from item to the $atts array - if title is empty and the
+			 * default title attribute is turned on then default to the item title.
+			 */
 			if ( empty( $item->attr_title ) ) {
-				$atts['title'] = ! empty( $item->title ) ? strip_tags( $item->title ) : '';
+				if ( $show_atts_title_default ) {
+					$atts['title'] = ! empty( $item->title ) ? esc_attr( strip_tags( $item->title ) ) : '';
+				}
 			} else {
 				$atts['title'] = $item->attr_title;
 			}
