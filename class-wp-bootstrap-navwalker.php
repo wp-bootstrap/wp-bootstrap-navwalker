@@ -355,14 +355,14 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					$allowed_tags = apply_filters( 'wp_nav_menu_container_allowedtags', array( 'div', 'nav' ) );
 					if ( is_string( $args['container'] ) && in_array( $args['container'], $allowed_tags, true ) ) {
 						$show_container   = true;
-						$class            = $args['menu_class'] ? ' class="menu-fallback-menu ' . esc_attr( $args['menu_class'] ) . '"' : ' class="menu-fallback-menu"';
+						$class            = $args['container_class'] ? ' class="menu-fallback-container ' . esc_attr( $args['container_class'] ) . '"' : ' class="menu-fallback-container"';
 						$id               = $args['container_id'] ? ' id="' . esc_attr( $args['container_id'] ) . '"' : '';
 						$fallback_output .= '<' . $args['container'] . $id . $class . '>';
 					}
 				}
 
 				// The fallback menu.
-				$class            = $args['menu_class'] ? ' class="' . esc_attr( $args['menu_class'] ) . '"' : ' class="menu-fallback-menu"';
+				$class            = $args['menu_class'] ? ' class="menu-fallback-menu ' . esc_attr( $args['menu_class'] ) . '"' : ' class="menu-fallback-menu"';
 				$id               = $args['menu_id'] ? ' id="' . esc_attr( $args['menu_id'] ) . '"' : '';
 				$fallback_output .= '<ul' . $id . $class . '>';
 				$fallback_output .= '<li class="nav-item"><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" class="nav-link" title="' . esc_attr__( 'Add a menu', 'wp-bootstrap-navwalker' ) . '">' . esc_html__( 'Add a menu', 'wp-bootstrap-navwalker' ) . '</a></li>';
