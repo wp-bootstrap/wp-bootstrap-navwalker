@@ -131,7 +131,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$args = apply_filters( 'nav_menu_item_args', $args, $item, $depth );
 
 			// Add .dropdown or .active classes where they are needed.
-			if ( isset( $args->has_children ) && $args->has_children ) {
+			if ( $this->has_children ) {
 				$classes[] = 'dropdown';
 			}
 			if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) ) {
@@ -179,7 +179,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$atts['target'] = ! empty( $item->target ) ? $item->target : '';
 			$atts['rel']    = ! empty( $item->xfn ) ? $item->xfn : '';
 			// If item has_children add atts to <a>.
-			if ( isset( $args->has_children ) && $args->has_children && 0 === $depth && $args->depth > 1 ) {
+			if ( $this->has_children && 0 === $depth && $args->depth > 1 ) {
 				$atts['href']          = '#';
 				$atts['data-toggle']   = 'dropdown';
 				$atts['aria-haspopup'] = 'true';
@@ -291,37 +291,6 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 */
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 
-		}
-
-		/**
-		 * Traverse elements to create list from elements.
-		 *
-		 * Display one element if the element doesn't have any children otherwise,
-		 * display the element and its children. Will only traverse up to the max
-		 * depth and no ignore elements under that depth. It is possible to set the
-		 * max depth to include all depths, see walk() method.
-		 *
-		 * This method should not be called directly, use the walk() method instead.
-		 *
-		 * @since WP 2.5.0
-		 *
-		 * @see Walker::start_lvl()
-		 *
-		 * @param object $element           Data object.
-		 * @param array  $children_elements List of elements to continue traversing (passed by reference).
-		 * @param int    $max_depth         Max depth to traverse.
-		 * @param int    $depth             Depth of current element.
-		 * @param array  $args              An array of arguments.
-		 * @param string $output            Used to append additional content (passed by reference).
-		 */
-		public function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
-			if ( ! $element ) {
-				return; }
-			$id_field = $this->db_fields['id'];
-			// Display this element.
-			if ( is_object( $args[0] ) ) {
-				$args[0]->has_children = ! empty( $children_elements[ $element->$id_field ] ); }
-			parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
 		}
 
 		/**
