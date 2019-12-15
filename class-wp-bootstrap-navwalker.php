@@ -35,7 +35,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 		 * @param int              $depth  Depth of menu item. Used for padding.
 		 * @param WP_Nav_Menu_Args $args   An object of wp_nav_menu() arguments.
 		 */
-		public function start_lvl( &$output, $depth = 0, $args = null) {
+		public function start_lvl( &$output, $depth = 0, $args = null ) {
 			if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
 				$t = '';
 				$n = '';
@@ -84,11 +84,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 		 *
 		 * @see Walker_Nav_Menu::start_el()
 		 *
-		 * @param string            $output Used to append additional content (passed by reference).
-		 * @param WP_Nav_Menu_Item  $item   Menu item data object.
-		 * @param int               $depth  Depth of menu item. Used for padding.
-		 * @param WP_Nav_Menu_Args  $args   An object of wp_nav_menu() arguments.
-		 * @param int               $id     Current item ID.
+		 * @param string           $output Used to append additional content (passed by reference).
+		 * @param WP_Nav_Menu_Item $item   Menu item data object.
+		 * @param int              $depth  Depth of menu item. Used for padding.
+		 * @param WP_Nav_Menu_Args $args   An object of wp_nav_menu() arguments.
+		 * @param int              $id     Current item ID.
 		 */
 		public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
 			if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
