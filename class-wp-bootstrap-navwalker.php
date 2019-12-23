@@ -247,16 +247,16 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 
 			/** This filter is documented in wp-includes/post-template.php */
-			if ( $item -> type == "wpml_ls_menu_item" ) {
-				if ( strpos( $item -> title, 'wpml-ls-flag' ) > 0 ) {
-					$title = $item -> title;
+			if ($item->type === 'wpml_ls_menu_item') {
+				if (strpos($item->title, 'wpml-ls-flag') > 0) {
+					$title = $item->title;
 				} else {
-					$title = strip_tags( $item -> title );
+					$title = strip_tags($item->title);
 				}
 			} else {
-				$title = esc_html( $item -> title );
+				$title = esc_html($item->title);
 			}
-			$title = apply_filters( 'the_title', $title, $item -> ID );
+			$title = apply_filters('the_title', $title, $item->ID);
 
 			/**
 			 * Filters a menu item's title.
