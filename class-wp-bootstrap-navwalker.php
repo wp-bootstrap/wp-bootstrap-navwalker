@@ -247,7 +247,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 
 			/** This filter is documented in wp-includes/post-template.php */
-			$title = apply_filters( 'the_title', esc_html( $item->title ), $item->ID );
+			$title = apply_filters( 'the_title', $item->title, $item->ID );
 
 			/**
 			 * Filters a menu item's title.
