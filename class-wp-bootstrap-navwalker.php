@@ -421,6 +421,10 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					// Glyphicons.
 					$icon_classes[] = $class;
 					unset( $classes[ $key ] );
+				} elseif ( preg_match( '/^cm-icon-(\S*)?/i', $class ) ) {
+					// Custom icons.
+					$icon_classes[] = $class;
+					unset( $classes[ $key ] );
 				}
 			}
 
