@@ -246,8 +246,18 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$icon_html = '<i class="' . esc_attr( $icon_class_string ) . '" aria-hidden="true"></i> ';
 			}
 
-			/** This filter is documented in wp-includes/post-template.php */
-			$title = apply_filters( 'the_title', esc_html( $item->title ), $item->ID );
+			/**
+			 * Allows titles to be optionally escaped by setting 'escape_titles' => true/false in the wp_nav_menu() args.
+			 * wp_nav_menu(array( 'escape_titles'  => false, 'walker' => new WP_Bootstrap_Navwalker() ));
+			 *
+			 * Not having escape_titles set, or setting escape_titles to true will result in escaped titles.
+			 */
+			if (property_exists($args, 'escape_titles') && ! $args->escape_titles) {
+			    $title = apply_filters('the_title', $item->title, $item->ID);
+			} else {
+			    /** This filter is documented in wp-includes/post-template.php */
+			    $title = apply_filters('the_title', esc_attr($item->title), $item->ID);
+			}
 
 			/**
 			 * Filters a menu item's title.
