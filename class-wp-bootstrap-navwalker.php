@@ -252,7 +252,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 *
 			 * Not having escape_titles set, or setting escape_titles to true will result in escaped titles.
 			 */
-			if (property_exists($args, 'escape_titles') && false === $args->escape_titles) { // WPCS: loose comparison ok.
+			if (property_exists($args, 'escape_titles') && false === $args->escape_titles) {
 			    $title = apply_filters('the_title', $item->title, $item->ID);
 			} else {
 			    /** This filter is documented in wp-includes/post-template.php */
