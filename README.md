@@ -8,6 +8,8 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/badges/build.png?b=master)](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/build-status/master)
 
+**This code in the main repo branch is undergoing a big shakeup to bring it in line with recent standards and to merge and test the backlog of PRs I have left for too long. Please use the v4.3.0 tag for stable version while this process happens. https://github.com/wp-bootstrap/wp-bootstrap-navwalker/releases/tag/v4.3.0**
+
 A custom WordPress Nav Walker Class to fully implement the Bootstrap 4 navigation style in a custom theme using the WordPress built in menu manager.
 
 ## NOTES
