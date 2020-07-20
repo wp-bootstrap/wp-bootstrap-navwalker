@@ -126,7 +126,7 @@ There has been some interest in making this walker the default walker for all me
 ```php
 function prefix_modify_nav_menu_args( $args ) {
     return array_merge( $args, array(
-        'walker' => WP_Bootstrap_Navwalker(),
+        'walker' => new WP_Bootstrap_Navwalker(),
     ) );
 }
 add_filter( 'wp_nav_menu_args', 'prefix_modify_nav_menu_args' );
