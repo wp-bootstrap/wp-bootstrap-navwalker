@@ -212,7 +212,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 				$atts['rel'] = 'noopener noreferrer';
 			} else {
 				$atts['rel'] = ! empty( $item->xfn ) ? $item->xfn : '';
-      }
+			}
 
 			// If the item has_children add atts to <a>.
 			if ( $args->has_children && 0 === $depth && $args->depth > 1 ) {
