@@ -91,7 +91,7 @@ Typically the menu is wrapped with additional markup, here is an example of a `f
 <nav class="navbar navbar-expand-md navbar-light bg-light" role="navigation">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle navigation', 'your-theme-slug' ); ?>">
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="#">Navbar</a>
@@ -126,7 +126,7 @@ There has been some interest in making this walker the default walker for all me
 ```php
 function prefix_modify_nav_menu_args( $args ) {
     return array_merge( $args, array(
-        'walker' => WP_Bootstrap_Navwalker(),
+        'walker' => new WP_Bootstrap_Navwalker(),
     ) );
 }
 add_filter( 'wp_nav_menu_args', 'prefix_modify_nav_menu_args' );
