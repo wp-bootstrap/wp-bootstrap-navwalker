@@ -15,6 +15,7 @@ php:
   - 7.0
   - 7.1
   - 7.2
+  - 7.3
   - nightly
 
 env:
@@ -22,10 +23,6 @@ env:
   - WP_VERSION=latest WP_MULTISITE=1
 
 matrix:
-  include:
-    - dist: precise
-      php: 5.3
-      env: WP_VERSION=latest WP_MULTISITE=0
   allow_failures:
     - php: nightly
 
@@ -41,9 +38,17 @@ before_script:
   - |
     composer global require wp-coding-standards/wpcs
     phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
+  - |
+    if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.3" ]]; then
+      composer require "szepeviktor/phpstan-wordpress:^0.5.0"
+    fi
 
 script:
   - phpcs --standard=phpcs.ruleset.xml $(find -name "*.php")
+  - |
+    if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.3" ]]; then
+      vendor/bin/phpstan analyze
+    fi
   - phpunit
 
 cache:
