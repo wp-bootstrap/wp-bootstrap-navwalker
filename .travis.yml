@@ -38,9 +38,17 @@ before_script:
   - |
     composer global require wp-coding-standards/wpcs
     phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
+  - |
+    if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.3" ]]; then
+      composer require "szepeviktor/phpstan-wordpress:^0.5.0"
+    fi
 
 script:
   - phpcs --standard=phpcs.ruleset.xml $(find -name "*.php")
+  - |
+    if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.3" ]]; then
+      vendor/bin/phpstan analyze
+    fi
   - phpunit
 
 cache:
