@@ -317,60 +317,62 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 		}
 
 		/**
-		 * Menu Fallback
+		 * Menu fallback.
 		 *
 		 * If this function is assigned to the wp_nav_menu's fallback_cb variable
 		 * and a menu has not been assigned to the theme location in the WordPress
-		 * menu manager the function with display nothing to a non-logged in user,
+		 * menu manager the function will display nothing to a non-logged in user,
 		 * and will add a link to the WordPress menu manager if logged in as an admin.
 		 *
 		 * @param array $args passed from the wp_nav_menu function.
-		 * @return string|void
+		 * @return string|void String when echo is false.
 		 */
 		public static function fallback( $args ) {
 			if ( ! current_user_can( 'edit_theme_options' ) ) {
 				return;
 			}
 
-			// Get Arguments.
-			$container       = $args['container'];
-			$container_id    = $args['container_id'];
-			$container_class = $args['container_class'];
-			$menu_class      = $args['menu_class'];
-			$menu_id         = $args['menu_id'];
-
 			// Initialize var to store fallback html.
 			$fallback_output = '';
 
-			if ( $container ) {
-				$fallback_output .= '<' . esc_attr( $container );
-				if ( $container_id ) {
-					$fallback_output .= ' id="' . esc_attr( $container_id ) . '"';
+			// Menu container opening tag.
+			$show_container = false;
+			if ( $args['container'] ) {
+				/**
+				 * Filters the list of HTML tags that are valid for use as menu containers.
+				 *
+				 * @since WP 3.0.0
+				 *
+				 * @param array $tags The acceptable HTML tags for use as menu containers.
+				 *                    Default is array containing 'div' and 'nav'.
+				 */
+				$allowed_tags = apply_filters( 'wp_nav_menu_container_allowedtags', array( 'div', 'nav' ) );
+				if ( is_string( $args['container'] ) && in_array( $args['container'], $allowed_tags, true ) ) {
+					$show_container   = true;
+					$class            = $args['container_class'] ? ' class="menu-fallback-container ' . esc_attr( $args['container_class'] ) . '"' : ' class="menu-fallback-container"';
+					$id               = $args['container_id'] ? ' id="' . esc_attr( $args['container_id'] ) . '"' : '';
+					$fallback_output .= '<' . $args['container'] . $id . $class . '>';
 				}
-				if ( $container_class ) {
-					$fallback_output .= ' class="' . esc_attr( $container_class ) . '"';
-				}
-				$fallback_output .= '>';
 			}
-			$fallback_output .= '<ul';
-			if ( $menu_id ) {
-				$fallback_output .= ' id="' . esc_attr( $menu_id ) . '"'; }
-			if ( $menu_class ) {
-				$fallback_output .= ' class="' . esc_attr( $menu_class ) . '"'; }
-			$fallback_output .= '>';
+
+			// The fallback menu.
+			$class            = $args['menu_class'] ? ' class="menu-fallback-menu ' . esc_attr( $args['menu_class'] ) . '"' : ' class="menu-fallback-menu"';
+			$id               = $args['menu_id'] ? ' id="' . esc_attr( $args['menu_id'] ) . '"' : '';
+			$fallback_output .= '<ul' . $id . $class . '>';
 			$fallback_output .= '<li class="nav-item"><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" class="nav-link" title="' . esc_attr__( 'Add a menu', 'wp-bootstrap-navwalker' ) . '">' . esc_html__( 'Add a menu', 'wp-bootstrap-navwalker' ) . '</a></li>';
 			$fallback_output .= '</ul>';
-			if ( $container ) {
-				$fallback_output .= '</' . esc_attr( $container ) . '>';
+
+			// Menu container closing tag.
+			if ( $show_container ) {
+				$fallback_output .= '</' . $args['container'] . '>';
 			}
 
-			// If $args has 'echo' key and it's true echo, otherwise return.
+			// if $args has 'echo' key and it's true echo, otherwise return.
 			if ( array_key_exists( 'echo', $args ) && $args['echo'] ) {
 				echo $fallback_output; // WPCS: XSS OK.
-				return;
+			} else {
+				return $fallback_output;
 			}
-
-			return $fallback_output;
 		}
 
 		/**

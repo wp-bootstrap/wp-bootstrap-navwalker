@@ -220,7 +220,7 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 
 		// rudimentary content test - confirm it opens a div with 2 expected
 		// values and ends by closing a div.
-		$match = ( preg_match( '/^(<div id="a_container_id" class="a_container_class">)(.*?)(<\/div>)$/', $fallback_output_echo ) ) ? true : false;
+		$match = ( preg_match( '/^(<div id="a_container_id" class="menu-fallback-container a_container_class">)(.*?)(<\/div>)$/', $fallback_output_echo ) ) ? true : false;
 		$this->assertTrue(
 			$match,
 			'Fallback method seems to create unexpected html for logged in users in echo mode.'
