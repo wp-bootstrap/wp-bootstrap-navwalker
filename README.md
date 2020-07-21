@@ -8,6 +8,8 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/badges/build.png?b=master)](https://scrutinizer-ci.com/g/wp-bootstrap/wp-bootstrap-navwalker/build-status/master)
 
+**This code in the main repo branch is undergoing a big shakeup to bring it in line with recent standards and to merge and test the backlog of PRs I have left for too long. Please use the v4.3.0 tag for stable version while this process happens. https://github.com/wp-bootstrap/wp-bootstrap-navwalker/releases/tag/v4.3.0**
+
 A custom WordPress Nav Walker Class to fully implement the Bootstrap 4 navigation style in a custom theme using the WordPress built in menu manager.
 
 ## NOTES
@@ -32,9 +34,9 @@ Here is a list of the most notable changes:
 
 ## Installation
 
-Place **class-wp-bootstrap-navwalker.php** in your WordPress theme folder `/wp-content/your-theme/`
+Place **class-wp-bootstrap-navwalker.php** in your WordPress theme folder `/wp-content/themes/your-theme/`
 
-Open your WordPress themes **functions.php** file - `/wp-content/your-theme/functions.php` - and add the following code:
+Open your WordPress themes **functions.php** file - `/wp-content/themes/your-theme/functions.php` - and add the following code:
 
 ```php
 /**
@@ -91,7 +93,7 @@ Typically the menu is wrapped with additional markup, here is an example of a `f
 <nav class="navbar navbar-expand-md navbar-light bg-light" role="navigation">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle navigation', 'your-theme-slug' ); ?>">
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="#">Navbar</a>
@@ -119,14 +121,14 @@ Review options in the Bootstrap docs for more information on [nav classes](https
 
 To display the menu you must associate your menu with your theme location. You can do this by selecting your theme location in the *Theme Locations* list while editing a menu in the WordPress menu manager.
 
-### Making this Walker the Default Walker for Nav Manus
+### Making this Walker the Default Walker for Nav Menus
 
 There has been some interest in making this walker the default walker for all menus. That could result in some unexpected situations but it can be achieved by adding this function to your functions.php file.
 
 ```php
 function prefix_modify_nav_menu_args( $args ) {
     return array_merge( $args, array(
-        'walker' => WP_Bootstrap_Navwalker(),
+        'walker' => new WP_Bootstrap_Navwalker(),
     ) );
 }
 add_filter( 'wp_nav_menu_args', 'prefix_modify_nav_menu_args' );
