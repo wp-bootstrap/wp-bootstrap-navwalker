@@ -39,14 +39,17 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 		$this->valid_linkmod_typeflags = array(
 			'dropdown-header',
 			'dropdown-divider',
-			'dropdown-item-text'
+			'dropdown-item-text',
 		);
 
 		// array of all possible linkmods, including the valid typeflags.
-		$this->valid_linkmod_classes = array_merge( $this->valid_linkmod_typeflags, array(
-			'disabled',
-			'sr-only',
-		) );
+		$this->valid_linkmod_classes = array_merge(
+			$this->valid_linkmod_typeflags,
+			array(
+				'disabled',
+				'sr-only',
+			)
+		);
 
 		// array of valid font-awesome icon class starters plus some randomly
 		// chosen icon classes and some variations of upper/lower case letters.
@@ -186,9 +189,14 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 		);
 
 		// set 'echo' to false and request the markup returned.
-		$fallback_output_return = WP_Bootstrap_Navwalker::fallback( array_merge( $this->valid_sample_fallback_args, array(
-			'echo' => false,
-		) ) );
+		$fallback_output_return = WP_Bootstrap_Navwalker::fallback(
+			array_merge(
+				$this->valid_sample_fallback_args,
+				array(
+					'echo' => false,
+				)
+			)
+		);
 
 		// return and echo should result in the same values (both empty).
 		$this->assertEquals(
@@ -227,9 +235,14 @@ class Test_WP_Bootstrap_NavWalker extends WP_UnitTestCase {
 		);
 
 		// set 'echo' to false and request the markup returned.
-		$fallback_output_return = WP_Bootstrap_Navwalker::fallback( array_merge( $this->valid_sample_fallback_args, array(
-			'echo' => false,
-		) ) );
+		$fallback_output_return = WP_Bootstrap_Navwalker::fallback(
+			array_merge(
+				$this->valid_sample_fallback_args,
+				array(
+					'echo' => false,
+				)
+			)
+		);
 
 		// return and echo should both produce the same strings.
 		$this->assertEquals(
