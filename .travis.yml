@@ -1,56 +1,72 @@
 language: php
-dist: trusty
 
-notifications:
-  email:
-    on_success: never
-    on_failure: change
+os:
+  - linux
+
+dist: bionic
+
+php:
+  - 7.4
+  - 7.3
+  - 7.2
+  - 7.1
+  - nightly
+
+env:
+  - WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_VERSION="^5.6"
+  - WP_VERSION=latest WP_MULTISITE=1 PHPUNIT_VERSION="^5.6"
+
+services:
+  - mysql
+
+jobs:
+  include:
+    - php: 7.0
+      dist: xenial
+      env:
+        - WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_VERSION="^5.6"
+        - WP_VERSION=latest WP_MULTISITE=1 PHPUNIT_VERSION="^5.6"
+    - php: 5.6
+      dist: xenial
+      env:
+        - WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_VERSION="4.8.*"
+        - WP_VERSION=latest WP_MULTISITE=1 PHPUNIT_VERSION="4.8.*"
+    - name: "Coding Standars"
+      php: 7.4
+      install:
+        - composer require --dev wp-coding-standards/wpcs dealerdirect/phpcodesniffer-composer-installer
+      script:
+        - vendor/bin/phpcs
+    - name: "Static Analysis"
+      php: 7.4
+      install:
+        - composer require --dev szepeviktor/phpstan-wordpress
+      script:
+        - vendor/bin/phpstan analyze
+  allow_failures:
+    - php: nightly
 
 branches:
   only:
     - master
 
-php:
-  - 5.6
-  - 7.0
-  - 7.1
-  - 7.2
-  - 7.3
-  - nightly
-
-env:
-  - WP_VERSION=latest WP_MULTISITE=0
-  - WP_VERSION=latest WP_MULTISITE=1
-
-matrix:
-  allow_failures:
-    - php: nightly
-
-before_script:
-  - bash bin/install-wp-tests.sh wordpress_test root "" localhost $WP_VERSION
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - |
-    if [[ ${TRAVIS_PHP_VERSION:0:1} == "7" ]]; then
-      composer global require "phpunit/phpunit=^5.6"
-    else
-      composer global require "phpunit/phpunit=4.8.*"
-    fi
-  - |
-    composer global require wp-coding-standards/wpcs
-    phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
-  - |
-    if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.3" ]]; then
-      composer require "szepeviktor/phpstan-wordpress:^0.5.0"
-    fi
-
-script:
-  - phpcs --standard=phpcs.ruleset.xml $(find -name "*.php")
-  - |
-    if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.3" ]]; then
-      vendor/bin/phpstan analyze
-    fi
-  - phpunit
-
 cache:
   directories:
-    - $HOME/.composer/cache
+    - "${HOME}/.composer/cache"
+
+before_install:
+  - composer remove --dev stevegrunwell/wp-enforcer
+  # Shim Composer's post-install-cmd script
+  - install -T /dev/null vendor/bin/wp-enforcer
+
+install:
+  - bin/install-wp-tests.sh wordpress_test root "" localhost "${WP_VERSION}"
+  - composer global require --dev "phpunit/phpunit=${PHPUNIT_VERSION}"
+
+script:
+  - "${HOME}/.composer/vendor/bin/phpunit"
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
