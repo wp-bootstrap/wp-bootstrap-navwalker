@@ -194,12 +194,9 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 			$output .= $indent . '<li ' . $id . $class_names . '>';
 
 			// Initialize array for holding the $atts for the link item.
-			$atts = array();
-
+			$atts           = array();
 			$atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
-
 			$atts['target'] = ! empty( $item->target ) ? $item->target : '';
-
 			if ( '_blank' === $item->target && empty( $item->xfn ) ) {
 				$atts['rel'] = 'noopener noreferrer';
 			} else {
@@ -207,7 +204,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 			}
 
 			// If the item has_children add atts to <a>.
-			if ( $args->has_children && 0 === $depth && $args->depth > 1 ) {
+			if ( $this->has_children && 0 === $depth ) {
 				$atts['href']          = '#';
 				$atts['data-toggle']   = 'dropdown';
 				$atts['aria-haspopup'] = 'true';
