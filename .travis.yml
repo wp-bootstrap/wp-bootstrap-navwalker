@@ -41,6 +41,8 @@ jobs:
       php: 7.4
       install:
         - composer require --dev wp-coding-standards/wpcs dealerdirect/phpcodesniffer-composer-installer
+        # Counter wp-enforcer
+        - rm -f ./phpcs.xml
       script:
         - vendor/bin/phpcs
     - name: "Static Analysis"
