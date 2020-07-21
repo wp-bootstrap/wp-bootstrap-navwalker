@@ -25,16 +25,24 @@ jobs:
       dist: xenial
       env:
         - WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_VERSION="^5.6"
+    - php: 7.0
+      dist: xenial
+      env:
         - WP_VERSION=latest WP_MULTISITE=1 PHPUNIT_VERSION="^5.6"
     - php: 5.6
       dist: xenial
       env:
         - WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_VERSION="4.8.*"
+    - php: 5.6
+      dist: xenial
+      env:
         - WP_VERSION=latest WP_MULTISITE=1 PHPUNIT_VERSION="4.8.*"
     - name: "Coding Standars"
       php: 7.4
       install:
         - composer require --dev wp-coding-standards/wpcs dealerdirect/phpcodesniffer-composer-installer
+        # Counter wp-enforcer
+        - rm -f ./phpcs.xml
       script:
         - vendor/bin/phpcs
     - name: "Static Analysis"
@@ -53,11 +61,6 @@ branches:
 cache:
   directories:
     - "${HOME}/.composer/cache"
-
-before_install:
-  - composer remove --dev stevegrunwell/wp-enforcer
-  # Shim Composer's post-install-cmd script
-  - install -T /dev/null vendor/bin/wp-enforcer
 
 install:
   - bin/install-wp-tests.sh wordpress_test root "" localhost "${WP_VERSION}"
