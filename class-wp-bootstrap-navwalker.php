@@ -127,6 +127,13 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 
 			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 
+			// Updating the CSS classes of a menu item in the WordPress Customizer preview results in all classes defined
+			// in that particular input box to come in as one big class string.
+			$split_on_spaces = function ( $class ) {
+				return preg_split( '/\s+/', $class );
+			};
+			$classes         = flatten( array_map( $split_on_spaces, $classes ) );
+
 			/*
 			 * Initialize some holder variables to store specially handled item
 			 * wrappers and icons.
@@ -576,4 +583,25 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 			return $output;
 		}
 	}
+
+	/**
+	 * Flattens a multidimensional array to a simple array.
+	 *
+	 * @param array $array a multidimensional array.
+	 *
+	 * @return array a simple array
+	 */
+	public function flatten( $array ) {
+		$result = array();
+		foreach ( $array as $element ) {
+			if ( is_array( $element ) ) {
+				array_push( $result, ...flatten( $element ) );
+			} else {
+				$result[] = $element;
+			}
+		}
+		return $result;
+	}
+
 endif;
+
