@@ -92,7 +92,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 				// Build a string to use as aria-labelledby.
 				$labelledby = 'aria-labelledby="' . esc_attr( end( $matches[2] ) ) . '"';
 			}
-			$output .= "{$n}{$indent}<ul$class_names $labelledby role=\"menu\">{$n}";
+			$output .= "{$n}{$indent}<ul$class_names $labelledby>{$n}";
 		}
 
 		/**
@@ -197,9 +197,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 			$atts = array();
 
 			$atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
-
 			$atts['target'] = ! empty( $item->target ) ? $item->target : '';
-
 			if ( '_blank' === $item->target && empty( $item->xfn ) ) {
 				$atts['rel'] = 'noopener noreferrer';
 			} else {
