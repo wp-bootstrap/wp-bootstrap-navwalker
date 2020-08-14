@@ -28,11 +28,12 @@ plugins:
         enabled: false
       CleanCode/ElseExpression:
         enabled: false
+  shellcheck:
+    enabled: true
 exclude_patterns:
   - "**.dist"
   - "**.lock"
   - "**.json"
-  - "**.sh"
   - "**.txt"
   - "tests/*"
   - "vendor/**"
