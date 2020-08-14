@@ -40,7 +40,7 @@ ratings:
   - "**.md"
   - "**.py"
   - "**.rb"
-exclude_paths:
+exclude_patterns:
   - "**.png"
   - "**.jpg"
   - "**.gif"
