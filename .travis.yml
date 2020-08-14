@@ -13,8 +13,8 @@ php:
   - nightly
 
 env:
-  - WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_VERSION="^5.6"
-  - WP_VERSION=latest WP_MULTISITE=1 PHPUNIT_VERSION="^5.6"
+  - WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_VERSION="^5.7"
+  - WP_VERSION=latest WP_MULTISITE=1 PHPUNIT_VERSION="^5.7"
 
 services:
   - mysql
@@ -24,19 +24,19 @@ jobs:
     - php: 7.0
       dist: xenial
       env:
-        - WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_VERSION="^5.6"
+        - WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_VERSION="^5.7"
     - php: 7.0
       dist: xenial
       env:
-        - WP_VERSION=latest WP_MULTISITE=1 PHPUNIT_VERSION="^5.6"
+        - WP_VERSION=latest WP_MULTISITE=1 PHPUNIT_VERSION="^5.7"
     - php: 5.6
       dist: xenial
       env:
-        - WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_VERSION="4.8.*"
+        - WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_VERSION="^5.7"
     - php: 5.6
       dist: xenial
       env:
-        - WP_VERSION=latest WP_MULTISITE=1 PHPUNIT_VERSION="4.8.*"
+        - WP_VERSION=latest WP_MULTISITE=1 PHPUNIT_VERSION="^5.7"
     - name: "Coding Standars"
       php: 7.4
       install:
