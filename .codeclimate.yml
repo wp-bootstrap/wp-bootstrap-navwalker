@@ -28,18 +28,6 @@ plugins:
         enabled: false
   markdownlint:
     enabled: true
-ratings:
-  paths:
-  - "**.css"
-  - "**.scss"
-  - "**.inc"
-  - "**.js"
-  - "**.jsx"
-  - "**.module"
-  - "**.php"
-  - "**.md"
-  - "**.py"
-  - "**.rb"
 exclude_patterns:
   - "composer.lock"
   - "**.json"
