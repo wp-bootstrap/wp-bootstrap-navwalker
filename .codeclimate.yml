@@ -26,8 +26,6 @@ plugins:
         enabled: false
       CleanCode/ElseExpression:
         enabled: false
-  scss-lint:
-    enabled: true
   markdownlint:
     enabled: true
 ratings:
