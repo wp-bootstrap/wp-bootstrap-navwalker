@@ -56,3 +56,4 @@ exclude_patterns:
   - "**.sh"
   - "tests/*"
   - "dummy-data/*"
+  - "vendor/**"
