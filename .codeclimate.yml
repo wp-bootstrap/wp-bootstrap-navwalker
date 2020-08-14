@@ -9,6 +9,8 @@ plugins:
       - php
   fixme:
     enabled: true
+  markdownlint:
+    enabled: true
   phpcodesniffer:
     enabled: true
     config:
@@ -16,9 +18,9 @@ plugins:
   phpmd:
     enabled: true
     checks:
-      Controversial/CamelCaseParameterName:
-        enabled: false
       Controversial/CamelCaseMethodName:
+        enabled: false
+      Controversial/CamelCaseParameterName:
         enabled: false
       Controversial/CamelCasePropertyName:
         enabled: false
@@ -26,13 +28,11 @@ plugins:
         enabled: false
       CleanCode/ElseExpression:
         enabled: false
-  markdownlint:
-    enabled: true
 exclude_patterns:
-  - "composer.lock"
-  - "**.json"
-  - "**.txt"
   - "**.dist"
+  - "**.lock"
+  - "**.json"
   - "**.sh"
+  - "**.txt"
   - "tests/*"
   - "vendor/**"
