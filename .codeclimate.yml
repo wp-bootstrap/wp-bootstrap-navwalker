@@ -13,7 +13,8 @@ plugins:
   phpcodesniffer:
     enabled: true
     config:
-      standard: "WordPress-Core,WordPress-Docs,WordPress-Extra"
+      file_extensions: "php"
+      standard: "WordPress-Docs,WordPress-Extra"
   phpmd:
     enabled: true
     checks:
