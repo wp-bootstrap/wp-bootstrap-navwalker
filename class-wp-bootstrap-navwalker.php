@@ -392,11 +392,12 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 		 * @return array $args The altered nav instance arguments.
 		 */
 		public function add_schema_to_navbar_ul( $args ) {
-			$wrap = $args['items_wrap'];
-			if ( strpos( $wrap, 'SiteNavigationElement' ) === false ) {
-				$args['items_wrap'] = preg_replace( '/(>).*>?\%3\$s/', ' itemscope itemtype="http://www.schema.org/SiteNavigationElement"$0', $wrap );
+			if ( isset( $args['items_wrap'] ) ) {
+				$wrap = $args['items_wrap'];
+				if ( strpos( $wrap, 'SiteNavigationElement' ) === false ) {
+					$args['items_wrap'] = preg_replace( '/(>).*>?\%3\$s/', ' itemscope itemtype="http://www.schema.org/SiteNavigationElement"$0', $wrap );
+				}
 			}
-
 			return $args;
 		}
 
