@@ -1,0 +1,25 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Explicitly declare text files that will always be normalized and converted
+# to native line endings on checkout.
+.editorconfig   text
+.gitattributes  text
+.gitignore      text
+*.json          text
+*.md            text
+*.txt           text
+*.xml           text
+*.yml           text
+
+# Declare files that will always have LF line endings on checkout.
+*.php text eol=lf
+*.sh  text eol=lf
+
+# Exclude from export.
+.*                  export-ignore
+bin                 export-ignore
+test                export-ignore
+*.dist              export-ignore
+code_of_conduct.md  export-ignore
+composer.*          export-ignore
