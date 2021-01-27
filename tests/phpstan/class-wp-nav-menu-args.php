@@ -56,6 +56,14 @@ class WP_Nav_Menu_Args {
 	public $container_id;
 
 	/**
+	 * The aria-label attribute that is applied to the container
+	 * when it's a nav element. Default empty.
+	 *
+	 * @var string
+	 */
+	public $container_aria_label;
+
+	/**
 	 * If the menu doesn't exists, a callback function will fire.
 	 * Default is 'wp_page_menu'. Set to false for no fallback.
 	 *
