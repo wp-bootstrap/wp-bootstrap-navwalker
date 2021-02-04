@@ -6,6 +6,7 @@ os:
 dist: bionic
 
 php:
+  - 8.0
   - 7.4
   - 7.3
   - 7.2
@@ -13,8 +14,7 @@ php:
   - nightly
 
 env:
-  - WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_VERSION="^5.7"
-  - WP_VERSION=latest WP_MULTISITE=1 PHPUNIT_VERSION="^5.7"
+  - WP_VERSION=latest PHPUNIT_VERSION="^5.7"
 
 services:
   - mysql
@@ -23,21 +23,9 @@ jobs:
   include:
     - php: 7.0
       dist: xenial
-      env:
-        - WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_VERSION="^5.7"
-    - php: 7.0
-      dist: xenial
-      env:
-        - WP_VERSION=latest WP_MULTISITE=1 PHPUNIT_VERSION="^5.7"
     - php: 5.6
       dist: xenial
-      env:
-        - WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_VERSION="^5.7"
-    - php: 5.6
-      dist: xenial
-      env:
-        - WP_VERSION=latest WP_MULTISITE=1 PHPUNIT_VERSION="^5.7"
-    - name: "Coding Standars"
+    - name: "Coding Standards"
       php: 7.4
       install:
         - composer require --dev wp-coding-standards/wpcs dealerdirect/phpcodesniffer-composer-installer
