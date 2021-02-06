@@ -1,25 +1,26 @@
 ---
-engines:
-  csslint:
-    enabled: true
+version: "2"
+plugins:
   duplication:
     enabled: true
     config:
       languages:
-      - javascript
       - php
   fixme:
+    enabled: true
+  markdownlint:
     enabled: true
   phpcodesniffer:
     enabled: true
     config:
-      standard: "WordPress-Core,WordPress-Docs,WordPress-Extra"
+      file_extensions: "php"
+      standard: "WordPress-Docs,WordPress-Extra"
   phpmd:
     enabled: true
     checks:
-      Controversial/CamelCaseParameterName:
-        enabled: false
       Controversial/CamelCaseMethodName:
+        enabled: false
+      Controversial/CamelCaseParameterName:
         enabled: false
       Controversial/CamelCasePropertyName:
         enabled: false
@@ -27,37 +28,12 @@ engines:
         enabled: false
       CleanCode/ElseExpression:
         enabled: false
-  eslint:
+  shellcheck:
     enabled: true
-  scss-lint:
-    enabled: true
-  markdownlint:
-    enabled: true
-ratings:
-  paths:
-  - "**.css"
-  - "**.scss"
-  - "**.inc"
-  - "**.js"
-  - "**.jsx"
-  - "**.module"
-  - "**.php"
-  - "**.md"
-  - "**.py"
-  - "**.rb"
-exclude_paths:
-  - "**.png"
-  - "**.jpg"
-  - "**.gif"
-  - "gulpfile.js"
-  - "composer.lock"
-  - "phpcs.xml"
-  - "**.json"
-  - "**.pot"
-  - "**.txt"
-  - "**.min.js"
-  - "**.min.css"
+exclude_patterns:
   - "**.dist"
-  - "**.sh"
+  - "**.lock"
+  - "**.json"
+  - "**.txt"
   - "tests/*"
-  - "dummy-data/*"
+  - "vendor/**"
