@@ -1,0 +1,28 @@
+includes:
+    - phar://phpstan.phar/conf/bleedingEdge.neon
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+parameters:
+    level: 6
+    inferPrivatePropertyTypeFromConstructor: true
+    checkMissingIterableValueType: false
+    paths:
+        - class-wp-bootstrap-navwalker.php
+    scanFiles:
+        - tests/phpstan/class-wp-nav-menu-args.php
+        - tests/phpstan/class-wp-nav-menu-item.php
+        - class-wp-bootstrap-navwalker.php
+    ignoreErrors:
+        # Uses func_get_args()
+        - '#^Function apply_filters(_ref_array)? invoked with [34567] parameters, 2 required\.$#'
+        # False item type in core.
+        -
+            message: "#^Parameter \\#2 \\$item \\(WP_Nav_Menu_Item\\) of method WP_Bootstrap_Navwalker\\:\\:start_el\\(\\) should be compatible with parameter \\$item \\(WP_Post\\) of method Walker_Nav_Menu\\:\\:start_el\\(\\)$#"
+            path: class-wp-bootstrap-navwalker.php
+        # $output passed by reference.
+        -
+            message: '#^Method WP_Bootstrap_Navwalker::(start_lvl|start_el)\(\) has no return typehint specified\.$#'
+            path: class-wp-bootstrap-navwalker.php
+        # Uncertain properties.
+        -
+            message: '#^Property WP_Nav_Menu_Args::\$\S+ \(string\) in isset\(\) is not nullable\.$#'
+            path: class-wp-bootstrap-navwalker.php
