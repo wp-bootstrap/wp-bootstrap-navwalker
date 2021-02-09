@@ -1,0 +1,69 @@
+name: Test
+
+on: [push, pull_request]
+
+jobs:
+  phpunit:
+    runs-on: ${{ matrix.operating-system }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        operating-system: [ubuntu-latest]
+        php-version: ['7.1','7.2','7.3','7.4']
+        phpunit-version: ['7.5.20']
+        wp-version: ['latest']
+        include:
+        - operating-system: ubuntu-latest
+          php-version: '7.0'
+          phpunit-version: '6.5.14'
+          wp-version: 'latest'
+        - operating-system: ubuntu-latest
+          php-version: '5.6'
+          phpunit-version: '5.7.27'
+          wp-version: 'latest'
+
+    services:
+      database:
+        image: mysql:5.7.33
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
+
+    name: PHP ${{ matrix.php-version }} Test on ${{ matrix.operating-system }} with WP ${{ matrix.wp-version }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-version }}
+        tools: phpunit:${{ matrix.phpunit-version}}
+        extensions: mysql
+        coverage: ${{ matrix.php.version == '7.4' && 'xdebug' || 'none' }}
+
+    - name: Setup problem matchers for PHPUnit
+      run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+    - name: Check PHP Version
+      run: php -v
+
+    - name: Make file executable, might not be necessary
+      run: chmod +x "./bin/install-wp-tests.sh"
+
+    - name: Init DB and WP
+      run: ./bin/install-wp-tests.sh wordpress_test root root 127.0.0.1 ${{ matrix.wp-version }}
+      shell: bash
+
+    - name: Run tests with PHPUnit
+      run: phpunit ${{ matrix.php-version == '7.4' && '--coverage-clover=coverage.xml' || '' }}
+
+    - name: Send report to Codecov.io
+      if: matrix.php-version == '7.4'
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      run: bash <(curl -s https://codecov.io/bash) || true
