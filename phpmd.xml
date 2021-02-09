@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<ruleset name="PHPMD rule set"
+         xmlns="http://pmd.sf.net/ruleset/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0
+                     http://pmd.sf.net/ruleset_xml_schema.xsd"
+         xsi:noNamespaceSchemaLocation="
+                     http://pmd.sf.net/ruleset_xml_schema.xsd">
+    <description>
+        PHPMD rule set for WP Bootstrap Navwalker
+    </description>
+
+    <!-- Import the entire codesize rule set -->
+    <rule ref="rulesets/codesize.xml" />
+
+	<!-- Import the entire controversial rule set -->
+    <rule ref="rulesets/controversial.xml">
+		<exclude name="CamelCaseClassName" />
+		<exclude name="CamelCasePropertyName" />
+		<exclude name="CamelCaseMethodName" />
+		<exclude name="CamelCaseParameterName" />
+		<exclude name="CamelCaseVariableName" />
+	</rule>
+
+	<!-- Import the entire design rule set -->
+    <rule ref="rulesets/design.xml" />
+
+ 	<!-- Import entire naming rule set and exclude rules -->
+    <rule ref="rulesets/naming.xml">
+
+    </rule>
+
+	<!-- Import the entire unused code rule set -->
+    <rule ref="rulesets/unusedcode.xml" />
+
+	<!--
+		Use codeclimate threshold values
+		if they are different from phpmd default values.
+	-->
+ 	<rule ref="rulesets/codesize.xml/ExcessiveMethodLength">
+        <properties>
+			<property name="minimum" value="25"/>
+        </properties>
+    </rule>
+	 <rule ref="rulesets/codesize.xml/ExcessiveParameterList">
+        <properties>
+            <property name="minimum" value="4"/>
+        </properties>
+    </rule>
+
+	<!-- Allow unused variables in foreach statement -->
+	<rule ref="rulesets/unusedcode.xml/UnusedLocalVariable">
+		<properties>
+			<property name="allow-unused-foreach-variables" value="true" />
+		</properties>
+	</rule>
+
+</ruleset>
