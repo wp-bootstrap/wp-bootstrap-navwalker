@@ -1,0 +1,49 @@
+{
+	"name": "wp-bootstrap-navwalker",
+	"version": "5.0.0",
+	"description": "A custom WordPress nav walker class to implement the Bootstrap 4 navigation style in a custom theme using the WordPress built in menu manager.",
+	"main": "",
+	"engines": {
+		"node": ">=10.18",
+		"npm": "6.4.1"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@google/semantic-release-replace-plugin": "^1.0.2",
+		"@semantic-release/changelog": "^5.0.1",
+		"@semantic-release/commit-analyzer": "^8.0.1",
+		"@semantic-release/git": "^9.0.0",
+		"@semantic-release/npm": "^7.0.9",
+		"@semantic-release/release-notes-generator": "^9.0.1",
+		"conventional-changelog-conventionalcommits": "^4.5.0",
+		"semantic-release": "^17.3.1"
+	},
+	"scripts": {
+		"release": "semantic-release --no-ci",
+		"release-dry": "semantic-release --no-ci --dry-run"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/wp-bootstrap/wp-bootstrap-navwalker.git"
+	},
+	"keywords": [
+		"wordpress",
+		"plugin",
+		"theme",
+		"bootstrap",
+		"twitter-bootstrap",
+		"navigation",
+		"menus",
+		"nav",
+		"walker"
+	],
+	"author": {
+		"name": "WP Bootstrap",
+		"url": "https://wp-bootstrap.org/"
+	},
+	"license": "GPL-3.0-or-later",
+	"bugs": {
+		"url": "https://github.com/wp-bootstrap/wp-bootstrap-navwalker/issues"
+	},
+	"homepage": "https://github.com/wp-bootstrap/wp-bootstrap-navwalker#readme"
+}
