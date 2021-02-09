@@ -173,11 +173,11 @@ class Filters extends Plugin {
 			return $atts;
 		}
 
-		$toggle_attr  = Utils::shim( 'data-toggle-attr', $args->bs_version );
+		$toggle_attr = Utils::shim( 'data-toggle-attr', $args->bs_version );
 
 		if ( ! $item->has_clickable_link & $depth < $args->depth - 1 ) {
 			$atts['href']          = '#';
-			$atts[ $toggle_attr ]   = 'dropdown';
+			$atts[ $toggle_attr ]  = 'dropdown';
 			$atts['aria-haspopup'] = 'true';
 			$atts['aria-expanded'] = 'false';
 			$atts['class'][]       = 'dropdown-toggle';
@@ -252,9 +252,9 @@ class Filters extends Plugin {
 	 */
 	public function set_link_attributes_general( $atts, $item, $args ) {
 		if ( $item->is_disabled ) {
-			$atts['class'][] = 'disabled';
-			$atts['href'] = '#';
-			$atts['tabindex'] = -1;
+			$atts['class'][]       = 'disabled';
+			$atts['href']          = '#';
+			$atts['tabindex']      = -1;
 			$atts['aria-disabled'] = true;
 		}
 

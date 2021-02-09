@@ -87,7 +87,7 @@ class Setup_Items extends Plugin {
 	 * @return WP_Nav_Menu_Item
 	 */
 	private static function separate_classes( $item ) {
-		$match = preg_grep( '/^(menu-item-?|current-|current_)(\S*)$/i', $item->classes );
+		$match                = preg_grep( '/^(menu-item-?|current-|current_)(\S*)$/i', $item->classes );
 		$item->native_classes = $match;
 		$item->custom_classes = array_diff( $item->classes, $match );
 		return $item;
@@ -107,7 +107,7 @@ class Setup_Items extends Plugin {
 		$match = preg_grep( '/^class-anchor-(\S*)$/i', $classes_left );
 		if ( ! empty( $match ) ) {
 			$item->anchor_classes = array_map( array( __NAMESPACE__ . '\Utils', 'remove_anchor_class_prefix' ), $match );
-			$classes_left = array_diff( $classes_left, $match );
+			$classes_left         = array_diff( $classes_left, $match );
 		}
 		return $item;
 	}
@@ -133,7 +133,7 @@ class Setup_Items extends Plugin {
 
 			// Remove the prefix 'class-dropdown-menu-'.
 			$callable = __NAMESPACE__ . '\Utils::remove_dropdown_menu_class_prefix';
-			$classes = array_map( $callable, $classes );
+			$classes  = array_map( $callable, $classes );
 
 			// Set property.
 			$item->dropdown_menu_classes = $classes;
@@ -174,7 +174,7 @@ class Setup_Items extends Plugin {
 			return $item;
 		}
 		foreach ( $link_mod_classes as $key => $class ) {
-			$property = 'is_' . str_replace( '-', '_', $class );
+			$property          = 'is_' . str_replace( '-', '_', $class );
 			$item->{$property} = true;
 		}
 
@@ -210,7 +210,7 @@ class Setup_Items extends Plugin {
 
 		$match = preg_grep( $icon_regex, $classes_left );
 		if ( ! empty( $match ) ) {
-			$classes_left = array_diff( $classes_left, $match );
+			$classes_left       = array_diff( $classes_left, $match );
 			$item->icon_classes = $match;
 		}
 		if ( empty( $classes_left ) ) {

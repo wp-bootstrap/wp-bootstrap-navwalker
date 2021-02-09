@@ -26,12 +26,12 @@ class Utils extends Plugin {
 			'v4' => 'sr-only',
 			'v5' => 'visually-hidden',
 		),
-		'data-toggle-attr' => array(
+		'data-toggle-attr'    => array(
 			'v3' => 'data-toggle',
 			'v4' => 'data-toggle',
 			'v5' => 'data-bs-toggle',
 		),
-		'divider-class' => array(
+		'divider-class'       => array(
 			'v3' => 'divider',
 			'v4' => 'dropdown-divider',
 			'v5' => 'dropdown-divider',

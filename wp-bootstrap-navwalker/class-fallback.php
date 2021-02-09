@@ -41,10 +41,10 @@ class Fallback extends Plugin {
 			 */
 			$allowed_tags = apply_filters( 'wp_nav_menu_container_allowedtags', array( 'div', 'nav' ) );
 			if ( is_string( $args['container'] ) && in_array( $args['container'], $allowed_tags, true ) ) {
-				$container   = true;
-				$cont_class  = $args['container_class'] ? ' class="menu-fallback-container ' . esc_attr( $args['container_class'] ) . '"' : ' class="menu-fallback-container"';
-				$cont_id     = $args['container_id'] ? ' id="' . esc_attr( $args['container_id'] ) . '"' : '';
-				$output     .= '<' . $args['container'] . $cont_id . $cont_class . '>';
+				$container  = true;
+				$cont_class = $args['container_class'] ? ' class="menu-fallback-container ' . esc_attr( $args['container_class'] ) . '"' : ' class="menu-fallback-container"';
+				$cont_id    = $args['container_id'] ? ' id="' . esc_attr( $args['container_id'] ) . '"' : '';
+				$output    .= '<' . $args['container'] . $cont_id . $cont_class . '>';
 			}
 		}
 	}
@@ -59,11 +59,11 @@ class Fallback extends Plugin {
 	 */
 	private static function menu( $args, &$output ) {
 		// The fallback menu.
-		$menu_class  = $args['menu_class'] ? ' class="menu-fallback-menu ' . esc_attr( $args['menu_class'] ) . '"' : ' class="menu-fallback-menu"';
-		$menu_id     = $args['menu_id'] ? ' id="' . esc_attr( $args['menu_id'] ) . '"' : '';
-		$output     .= '<ul' . $menu_id . $menu_class . '>';
-		$output     .= '<li class="nav-item"><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" class="nav-link">' . esc_html__( 'Add a menu', 'wp-bootstrap-navwalker' ) . '</a></li>';
-		$output     .= '</ul>';
+		$menu_class = $args['menu_class'] ? ' class="menu-fallback-menu ' . esc_attr( $args['menu_class'] ) . '"' : ' class="menu-fallback-menu"';
+		$menu_id    = $args['menu_id'] ? ' id="' . esc_attr( $args['menu_id'] ) . '"' : '';
+		$output    .= '<ul' . $menu_id . $menu_class . '>';
+		$output    .= '<li class="nav-item"><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" class="nav-link">' . esc_html__( 'Add a menu', 'wp-bootstrap-navwalker' ) . '</a></li>';
+		$output    .= '</ul>';
 	}
 
 	/**
