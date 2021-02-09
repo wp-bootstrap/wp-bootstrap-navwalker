@@ -1,6 +1,10 @@
 name: Test
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ IanDelMar/v5-dev ]
+  pull_request:
+    branches: [ IanDelMar/v5-dev ]
 
 jobs:
   phpunit:

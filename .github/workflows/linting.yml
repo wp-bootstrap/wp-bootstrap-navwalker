@@ -1,6 +1,10 @@
 name: Lint
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ IanDelMar/v5-dev ]
+  pull_request:
+    branches: [ IanDelMar/v5-dev ]
 
 env:
   php-version: '7.4'
