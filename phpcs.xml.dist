@@ -2,9 +2,43 @@
 <ruleset name="WordPress Coding Standards for Plugins">
 	<description>Generally-applicable sniffs for WordPress plugins</description>
 
-	<rule ref="WordPress-Core"/>
-	<rule ref="WordPress-Docs"/>
+	<!-- Show colors in console -->
+	<arg name="colors"/>
 
+	<!-- Show sniff codes in all reports -->
+	<arg value="s"/>
+
+	<!-- Scan these files -->
 	<file>./class-wp-bootstrap-navwalker.php</file>
+	<file>./wp-bootstrap-navwalker/</file>
 	<file>./tests/</file>
+
+	<!-- Use the WordPress Ruleset -->
+	<rule ref="WordPress"/>
+
+	<!--
+		Allow mt_rand() in tests. For unit tests it's ok that mt_rand() is more
+		predictable than wp_rand().
+    -->
+	<rule ref="WordPress.WP.AlternativeFunctions.rand_mt_rand">
+		<exclude-pattern>./tests/*</exclude-pattern>
+	</rule>
+
+	<!--
+		Verify that the text_domain is set to the desired text-domain.
+		Multiple valid text domains can be provided as a comma-delimited list.
+	-->
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array" value="wp-bootstrap-navwalker"/>
+		</properties>
+	</rule>
+
+	<!--
+		Exclude checking of line endings when reporting errors, but fix them
+		when running phpcbf.
+	-->
+	<rule ref="Generic.Files.LineEndings">
+		<exclude phpcs-only="true" name="Generic.Files.LineEndings"/>
+	</rule>
 </ruleset>
