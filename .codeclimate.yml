@@ -10,11 +10,6 @@ plugins:
     enabled: true
   markdownlint:
     enabled: true
-  phpcodesniffer:
-    enabled: true
-    config:
-      file_extensions: "php"
-      standard: "WordPress-Docs,WordPress-Extra"
   phpmd:
     enabled: true
     checks:
