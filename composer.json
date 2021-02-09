@@ -1,37 +1,51 @@
 {
-    "name": "wp-bootstrap/wp-bootstrap-navwalker",
-    "description": "A custom WordPress nav walker class to fully implement the Bootstrap 4 navigation style in a custom theme using the WordPress built in menu manager.",
-    "type": "library",
-    "license": "GPL-3.0+",
-    "authors": [
-        {
-            "name": "Brandon Hubbard"
-        },
-        {
-            "name": "William Patton",
-            "email": "will@pattonwebz.com"
-        }
-    ],
-    "support": {
-        "issues": "https://github.com/wp-bootstrap/wp-bootstrap-navwalker/issues/",
-        "source": "https://github.com/wp-bootstrap/wp-bootstrap-navwalker/"
+  "name": "wp-bootstrap/wp-bootstrap-navwalker",
+  "description": "A custom WordPress nav walker class to fully implement the Bootstrap 4 navigation style in a custom theme using the WordPress built in menu manager.",
+  "type": "library",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Brandon Hubbard"
     },
-    "require": {
-      "composer/installers": "~1.0",
-      "php": "^5.5 || ^7.0"
-    },
-    "require-dev": {
-        "stevegrunwell/wp-enforcer": "^0.5.0"
-    },
-    "archive": {
-        "exclude": ["/.*", "/composer.lock"]
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "wp-enforcer"
-        ],
-        "post-update-cmd": [
-            "wp-enforcer"
-        ]
+    {
+      "name": "William Patton",
+      "email": "will@pattonwebz.com"
     }
+  ],
+  "support": {
+    "issues": "https://github.com/wp-bootstrap/wp-bootstrap-navwalker/issues/",
+    "source": "https://github.com/wp-bootstrap/wp-bootstrap-navwalker/"
+  },
+  "require": {
+    "php": "^5.6 || ^7.0"
+  },
+  "require-dev": {
+    "composer/installers": "^1.10",
+    "php-parallel-lint/php-parallel-lint": "^1.2",
+    "phpcompatibility/phpcompatibility-wp": "^2.1",
+    "phpmd/phpmd": "^2.9",
+    "phpstan/phpstan": "^0.12.71",
+    "squizlabs/php_codesniffer": "^3.5",
+    "szepeviktor/phpstan-wordpress": "^0.7.2",
+    "wp-coding-standards/wpcs": "^2.3"
+  },
+  "archive": {
+    "exclude": ["/.*", "/composer.lock"]
+  },
+  "scripts": {
+    "phpcs-compat-checkstyle": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs . --standard=PHPCompatibilityWP --runtime-set testVersion 5.6- --report=checkstyle --ignore=vendor",
+    "phpcs-check-checkstyle": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs --report=checkstyle",
+    "phpmd": "@php ./vendor/phpmd/phpmd/src/bin/phpmd . text phpmd.xml --exclude vendor",
+    "phpstan": "@php ./vendor/phpstan/phpstan/phpstan analyze",
+    "php-lint": "@php ./vendor/php-parallel-lint/php-parallel-lint/parallel-lint --exclude vendor .",
+    "phpcs-compat": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs . --standard=PHPCompatibilityWP --runtime-set testVersion 5.6- --ignore=vendor",
+    "phpcs-fix": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf",
+    "phpcs-check": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs",
+    "post-install-cmd": [
+      "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs --config-set installed_paths ../../phpcompatibility/php-compatibility,../../phpcompatibility/phpcompatibility-paragonie,../../phpcompatibility/phpcompatibility-wp,../../wp-coding-standards/wpcs"
+    ],
+    "post-update-cmd": [
+      "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs --config-set installed_paths ../../phpcompatibility/php-compatibility,../../phpcompatibility/phpcompatibility-paragonie,../../phpcompatibility/phpcompatibility-wp,../../wp-coding-standards/wpcs"
+    ]
+  }
 }
