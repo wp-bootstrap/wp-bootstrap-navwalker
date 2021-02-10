@@ -2,7 +2,7 @@
 /**
  * Class SampleTest
  *
- * @package Wp_Bootstrap_Navwalker
+ * @package WP-Bootstrap-Navwalker
  *
  * phpcs:disable WordPress.PHP.DevelopmentFunctions.error_log_print_r -- used for returned failure messages to give some details.
  */

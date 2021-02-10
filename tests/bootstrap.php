@@ -2,7 +2,7 @@
 /**
  * PHPUnit bootstrap file
  *
- * @package Wp_Bootstrap_Navwalker
+ * @package WP-Bootstrap-Navwalker
  */
 
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
