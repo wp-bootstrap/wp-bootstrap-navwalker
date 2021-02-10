@@ -15,7 +15,7 @@ parameters:
         - wp-bootstrap-navwalker/class-filters.php
         - wp-bootstrap-navwalker/class-setup-args.php
         - wp-bootstrap-navwalker/class-setup-items.php
-        - wp-bootstrap-navwalker/class-utis.php
+        - wp-bootstrap-navwalker/class-utils.php
         - wp-bootstrap-navwalker/class-walker.php
     ignoreErrors:
         # Uses func_get_args()
