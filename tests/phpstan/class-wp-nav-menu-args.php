@@ -136,4 +136,48 @@ class WP_Nav_Menu_Args {
 	 * @var string
 	 */
 	public $item_spacing;
+
+	/**
+	 * For which major Bootstrap version to run WP Bootstrap Navwalker.
+	 *
+	 * @var int
+	 */
+	public $bs_version;
+
+	/**
+	 * Whether to display all dropdown toggles as split buttons.
+	 *
+	 * @var bool
+	 */
+	public $clickable;
+
+	/**
+	 * Whether to drop all native WP classes from the HTML output.
+	 *
+	 * @var bool
+	 */
+	public $drop_wp_classes;
+
+	/**
+	 * Array of regular expressions used to find icon classes.
+	 *
+	 * @var array
+	 */
+	public $icon_regex;
+
+	/**
+	 * Whether to add the `.active` class to the ancestors of the current menu item.
+	 *
+	 * @var array
+	 */
+	public $ancestors_active;
+
+	/**
+	 * Array of classes to use on the menu item's dropdown menu ul tag.
+	 *
+	 * Custom WP Bootstrap Navwalker property.
+	 *
+	 * @var bool|array False if no icon classes are provided.
+	 */
+	public $dropdown_menu_classes;
 }

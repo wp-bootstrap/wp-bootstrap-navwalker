@@ -64,10 +64,10 @@ class Filters extends Plugin {
 	 *
 	 * @since 5.0.0
 	 *
-	 * @param WP_Nav_Menu_Args $args  An object of `wp_nav_menu()` arguments.
-	 * @param WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
-	 * @param int              $depth Depth of menu item.
-	 * @return WP_Nav_Menu_Args
+	 * @param \WP_Nav_Menu_Args $args  An object of `wp_nav_menu()` arguments.
+	 * @param \WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
+	 * @param int               $depth Depth of menu item.
+	 * @return \WP_Nav_Menu_Args
 	 */
 	public function set_item_description( $args, $item, $depth ) {
 		$args->link_after = '';
@@ -88,8 +88,8 @@ class Filters extends Plugin {
 	 *
 	 * @since 5.0.0
 	 *
-	 * @param string[]         $classes Array of the CSS classes that are applied to the menu <ul> element.
-	 * @param WP_Nav_Menu_Args $args    An object of `wp_nav_menu()` arguments.
+	 * @param string[]          $classes Array of the CSS classes that are applied to the menu <ul> element.
+	 * @param \WP_Nav_Menu_Args $args    An object of `wp_nav_menu()` arguments.
 	 * @return string[]
 	 */
 	public function set_submenu_css_class( $classes, $args ) {
@@ -107,10 +107,10 @@ class Filters extends Plugin {
 	 *
 	 * @since 5.0.0
 	 *
-	 * @param string[]         $classes Array of the CSS classes that are applied to the menu item's <li> element.
-	 * @param WP_Nav_Menu_Item $item    The current menu item (instance of `WP_Post`).
-	 * @param WP_Nav_Menu_Args $args    An object of `wp_nav_menu()` arguments.
-	 * @param int              $depth   Depth of menu item.
+	 * @param string[]          $classes Array of the CSS classes that are applied to the menu item's <li> element.
+	 * @param \WP_Nav_Menu_Item $item    The current menu item (instance of `WP_Post`).
+	 * @param \WP_Nav_Menu_Args $args    An object of `wp_nav_menu()` arguments.
+	 * @param int               $depth   Depth of menu item.
 	 * @return string[]
 	 */
 	public function set_menu_css_class( $classes, $item, $args, $depth ) {
@@ -154,8 +154,8 @@ class Filters extends Plugin {
 	 *
 	 * @uses Utils::shim()
 	 *
-	 * @param array            $atts {
-	 * The HTML attributes applied to the menu item's <a> element, empty strings are ignored.
+	 * @param array             $atts {
+	 *  The HTML attributes applied to the menu item's <a> element, empty strings are ignored.
 	 *
 	 *  @type string $title        The title attribute.
 	 *  @type string $target       The target attribute.
@@ -163,9 +163,9 @@ class Filters extends Plugin {
 	 *  @type string $href         The href attribute.
 	 *  @type string $aria_current The aria-current attribute.
 	 * }
-	 * @param WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
-	 * @param WP_Nav_Menu_Args $args  An object of `wp_nav_menu()` arguments.
-	 * @param int              $depth Depth of menu item.
+	 * @param \WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
+	 * @param \WP_Nav_Menu_Args $args  An object of `wp_nav_menu()` arguments.
+	 * @param int               $depth Depth of menu item.
 	 * @return array
 	 */
 	public function set_link_attributes_parent( $atts, $item, $args, $depth ) {
@@ -199,8 +199,8 @@ class Filters extends Plugin {
 	 *
 	 * @since 5.0.0
 	 *
-	 * @param array            $atts {
-	 * The HTML attributes applied to the menu item's <a> element, empty strings are ignored.
+	 * @param array             $atts {
+	 *  The HTML attributes applied to the menu item's <a> element, empty strings are ignored.
 	 *
 	 *  @type string $title        The title attribute.
 	 *  @type string $target       The target attribute.
@@ -208,9 +208,9 @@ class Filters extends Plugin {
 	 *  @type string $href         The href attribute.
 	 *  @type string $aria_current The aria-current attribute.
 	 * }
-	 * @param WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
-	 * @param WP_Nav_Menu_Args $args  An object of `wp_nav_menu()` arguments.
-	 * @param int              $depth Depth of menu item.
+	 * @param \WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
+	 * @param \WP_Nav_Menu_Args $args  An object of `wp_nav_menu()` arguments.
+	 * @param int               $depth Depth of menu item.
 	 * @return array
 	 */
 	public function set_link_attributes_childless( $atts, $item, $args, $depth ) {
@@ -237,8 +237,8 @@ class Filters extends Plugin {
 	 *
 	 * @uses Utils::shim()
 	 *
-	 * @param array            $atts {
-	 * The HTML attributes applied to the menu item's <a> element, empty strings are ignored.
+	 * @param array             $atts {
+	 *  The HTML attributes applied to the menu item's <a> element, empty strings are ignored.
 	 *
 	 *  @type string $title        The title attribute.
 	 *  @type string $target       The target attribute.
@@ -246,8 +246,8 @@ class Filters extends Plugin {
 	 *  @type string $href         The href attribute.
 	 *  @type string $aria_current The aria-current attribute.
 	 * }
-	 * @param WP_Nav_Menu_Item $item The current menu item (instance of `WP_Post`).
-	 * @param WP_Nav_Menu_Args $args An object of `wp_nav_menu()` arguments.
+	 * @param \WP_Nav_Menu_Item $item The current menu item (instance of `WP_Post`).
+	 * @param \WP_Nav_Menu_Args $args An object of `wp_nav_menu()` arguments.
 	 * @return array
 	 */
 	public function set_link_attributes_general( $atts, $item, $args ) {
@@ -288,10 +288,10 @@ class Filters extends Plugin {
 	 *
 	 * @since 5.0.0
 	 *
-	 * @param string           $item_output The menu item's starting HTML output.
-	 * @param WP_Nav_Menu_Item $item        The current menu item (instance of `WP_Post`).
-	 * @param int              $depth       Depth of menu item.
-	 * @param WP_Nav_Menu_Args $args        An object of `wp_nav_menu()` arguments.
+	 * @param string            $item_output The menu item's starting HTML output.
+	 * @param \WP_Nav_Menu_Item $item        The current menu item (instance of `WP_Post`).
+	 * @param int               $depth       Depth of menu item.
+	 * @param \WP_Nav_Menu_Args $args        An object of `wp_nav_menu()` arguments.
 	 * @return string
 	 */
 	public function set_dropdown_menu_content_output( $item_output, $item, $depth, $args ) {
@@ -337,10 +337,10 @@ class Filters extends Plugin {
 	 *
 	 * @uses Utils::shim()
 	 *
-	 * @param string           $item_output The menu item's starting HTML output.
-	 * @param WP_Nav_Menu_Item $item        The current menu item (instance of `WP_Post`).
-	 * @param int              $depth Depth of menu item.
-	 * @param WP_Nav_Menu_Args $args  An object of `wp_nav_menu()` arguments.
+	 * @param string            $item_output The menu item's starting HTML output.
+	 * @param \WP_Nav_Menu_Item $item        The current menu item (instance of `WP_Post`).
+	 * @param int               $depth Depth of menu item.
+	 * @param \WP_Nav_Menu_Args $args  An object of `wp_nav_menu()` arguments.
 	 * @return string
 	 */
 	public function append_split_button_toggle( $item_output, $item, $depth, $args ) {
@@ -403,9 +403,9 @@ class Filters extends Plugin {
 	 *
 	 * @uses Utils::shim()
 	 *
-	 * @param string           $title The menu item's title.
-	 * @param WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
-	 * @param WP_Nav_Menu_Args $args  An object of `wp_nav_menu()` arguments.
+	 * @param string            $title The menu item's title.
+	 * @param \WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
+	 * @param \WP_Nav_Menu_Args $args  An object of `wp_nav_menu()` arguments.
 	 * @return string
 	 */
 	public function set_item_title( $title, $item, $args ) {
@@ -438,8 +438,8 @@ class Filters extends Plugin {
 	 *
 	 * @since 5.0.0
 	 *
-	 * @param string           $title The menu item's title.
-	 * @param WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
+	 * @param string            $title The menu item's title.
+	 * @param \WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
 	 * @return string
 	 */
 	public function add_icon( $title, $item ) {
@@ -472,10 +472,10 @@ class Filters extends Plugin {
 	 *
 	 * @since 5.0.0
 	 *
-	 * @param string           $title The menu item's title.
-	 * @param WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
-	 * @param WP_Nav_Menu_Args $args  An object of `wp_nav_menu()` arguments.
-	 * @param int              $depth Depth of menu item.
+	 * @param string            $title The menu item's title.
+	 * @param \WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
+	 * @param \WP_Nav_Menu_Args $args  An object of `wp_nav_menu()` arguments.
+	 * @param int               $depth Depth of menu item.
 	 * @return string
 	 */
 	public function add_caret( $title, $item, $args, $depth ) {

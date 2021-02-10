@@ -23,11 +23,11 @@ class Setup_Items extends Plugin {
 	 *
 	 * @since 5.0.0
 	 *
-	 * @param WP_Nav_Menu_Item $item      The current menu item (instance of `WP_Post`).
-	 * @param array            $sub_items List of items to continue traversing.
-	 * @param int              $max_depth Max depth to traverse.
-	 * @param int              $depth     Depth of current element.
-	 * @param WP_Nav_Menu_Args $args      An object of `wp_nav_menu()` arguments.
+	 * @param \WP_Nav_Menu_Item $item      The current menu item (instance of `WP_Post`).
+	 * @param array             $sub_items List of items to continue traversing.
+	 * @param int               $max_depth Max depth to traverse.
+	 * @param int               $depth     Depth of current element.
+	 * @param \WP_Nav_Menu_Args $args      An object of `wp_nav_menu()` arguments.
 	 * @return object
 	 */
 	public static function setup_menu_item_properties( $item, $sub_items, $max_depth, $depth, $args ) {
@@ -83,8 +83,8 @@ class Setup_Items extends Plugin {
 	/**
 	 * Separate native WP classes from custom user-provided classes.
 	 *
-	 * @param WP_Nav_Menu_Item $item The current menu item (instance of `WP_Post`).
-	 * @return WP_Nav_Menu_Item
+	 * @param \WP_Nav_Menu_Item $item The current menu item (instance of `WP_Post`).
+	 * @return \WP_Nav_Menu_Item
 	 */
 	private static function separate_classes( $item ) {
 		$match                = preg_grep( '/^(menu-item-?|current-|current_)(\S*)$/i', $item->classes );
@@ -96,9 +96,9 @@ class Setup_Items extends Plugin {
 	/**
 	 * Set property for anchor classes.
 	 *
-	 * @param WP_Nav_Menu_Item $item         The current menu item (instance of `WP_Post`).
-	 * @param array            $classes_left Classes left to process (passed by reference).
-	 * @return WP_Nav_Menu_Item
+	 * @param \WP_Nav_Menu_Item $item         The current menu item (instance of `WP_Post`).
+	 * @param array             $classes_left Classes left to process (passed by reference).
+	 * @return \WP_Nav_Menu_Item
 	 */
 	private static function set_anchor_property( $item, $classes_left ) {
 		if ( empty( $classes_left ) ) {
@@ -115,9 +115,9 @@ class Setup_Items extends Plugin {
 	/**
 	 * Set property for dropdown menu classes.
 	 *
-	 * @param WP_Nav_Menu_Item $item         The current menu item (instance of `WP_Post`).
-	 * @param array            $classes_left Classes left to process (passed by reference).
-	 * @return WP_Nav_Menu_Item
+	 * @param \WP_Nav_Menu_Item $item         The current menu item (instance of `WP_Post`).
+	 * @param array             $classes_left Classes left to process (passed by reference).
+	 * @return \WP_Nav_Menu_Item
 	 */
 	private static function set_dropdown_menu_property( $item, $classes_left ) {
 		if ( empty( $classes_left ) ) {
@@ -147,10 +147,10 @@ class Setup_Items extends Plugin {
 	/**
 	 * Set item properties for link modifications.
 	 *
-	 * @param WP_Nav_Menu_Item $item         The current menu item (instance of `WP_Post`).
-	 * @param int              $depth        Depth of the current item.
-	 * @param WP_Nav_Menu_Args $args         An object of `wp_nav_menu()` arguments.
-	 * @param array            $classes_left Classes left to process (passed by reference).
+	 * @param \WP_Nav_Menu_Item $item         The current menu item (instance of `WP_Post`).
+	 * @param int               $depth        Depth of the current item.
+	 * @param \WP_Nav_Menu_Args $args         An object of `wp_nav_menu()` arguments.
+	 * @param array             $classes_left Classes left to process (passed by reference).
 	 * @return object
 	 */
 	private static function set_link_mod_properties( $item, $depth, $args, &$classes_left ) {
@@ -196,9 +196,9 @@ class Setup_Items extends Plugin {
 	/**
 	 * Set item properties for icons.
 	 *
-	 * @param WP_Nav_Menu_Item $item         The current menu item (instance of `WP_Post`).
-	 * @param array            $classes_left Classes left to process (passed by reference).
-	 * @param WP_Nav_Menu_Args $args         An object of `wp_nav_menu()` arguments.
+	 * @param \WP_Nav_Menu_Item $item         The current menu item (instance of `WP_Post`).
+	 * @param array             $classes_left Classes left to process (passed by reference).
+	 * @param \WP_Nav_Menu_Args $args         An object of `wp_nav_menu()` arguments.
 	 * @return object
 	 */
 	private static function set_icon_properties( $item, &$classes_left, $args ) {
@@ -232,8 +232,8 @@ class Setup_Items extends Plugin {
 	 *
 	 * @since 5.0.0
 	 *
-	 * @param WP_Nav_Menu_Item $item The current menu item (instance of `WP_Post`).
-	 * @return WP_Nav_Menu_Item
+	 * @param \WP_Nav_Menu_Item $item The current menu item (instance of `WP_Post`).
+	 * @return \WP_Nav_Menu_Item
 	 */
 	private static function init_item_properties( $item ) {
 		$item->has_children             = false;

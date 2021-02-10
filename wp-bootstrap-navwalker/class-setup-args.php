@@ -220,9 +220,9 @@ class Setup_Args extends Plugin {
 	 *
 	 * @since 5.0.0
 	 *
-	 * @param WP_Nav_Menu_Item $item The current menu item (instance of `WP_Post`).
-	 * @param array            $args An array of `wp_nav_menu()` arguments.
-	 * @return object
+	 * @param \WP_Nav_Menu_Item $item The current menu item (instance of `WP_Post`).
+	 * @param array             $args An array of `wp_nav_menu()` arguments.
+	 * @return array
 	 */
 	public static function add_dropdown_menu_classes( $item, $args ) {
 		// Reset dropdown menu classes argument for each item.

@@ -7,6 +7,7 @@ parameters:
     checkMissingIterableValueType: false
     paths:
         - class-wp-bootstrap-navwalker.php
+        - wp-bootstrap-navwalker
     scanFiles:
         - tests/phpstan/class-wp-nav-menu-args.php
         - tests/phpstan/class-wp-nav-menu-item.php
@@ -18,17 +19,16 @@ parameters:
         - wp-bootstrap-navwalker/class-utils.php
         - wp-bootstrap-navwalker/class-walker.php
     ignoreErrors:
-        # Uses func_get_args()
-        - '#^Function apply_filters(_ref_array)? invoked with [34567] parameters, 2 required\.$#'
-        # False item type in core.
+        # No return typehint
         -
-            message: "#^Parameter \\#2 \\$item \\(WP_Nav_Menu_Item\\) of method WP_Bootstrap_Navwalker\\:\\:start_el\\(\\) should be compatible with parameter \\$item \\(WP_Post\\) of method Walker_Nav_Menu\\:\\:start_el\\(\\)$#"
+            message: '#^Method WP_Bootstrap\\Navwalker\\Plugin::(includes|add_filters|add_inline_style_script)\(\) has no return typehint specified\.$#'
             path: class-wp-bootstrap-navwalker.php
-        # $output passed by reference.
         -
-            message: '#^Method WP_Bootstrap_Navwalker::(start_lvl|start_el)\(\) has no return typehint specified\.$#'
-            path: class-wp-bootstrap-navwalker.php
-        # Uncertain properties.
+            message: '#^Method WP_Bootstrap\\Navwalker\\Fallback::(start|end)\(\) has no return typehint specified\.$#'
+            path: wp-bootstrap-navwalker/class-fallback.php
         -
-            message: '#^Property WP_Nav_Menu_Args::\$\S+ \(string\) in isset\(\) is not nullable\.$#'
-            path: class-wp-bootstrap-navwalker.php
+            message: '#^Method WP_Bootstrap\\Navwalker\\Utils::(add_aria_labelledby|add_style|add_script)\(\) has no return typehint specified\.$#'
+            path: wp-bootstrap-navwalker/class-utils.php
+        -
+            message: '#^Method WP_Bootstrap\\Navwalker\\Walker::(start_lvl|display_element)\(\) has no return typehint specified\.$#'
+            path: wp-bootstrap-navwalker/class-walker.php

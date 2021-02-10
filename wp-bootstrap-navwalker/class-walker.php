@@ -29,9 +29,9 @@ class Walker extends \Walker_Nav_Menu {
 	 * @uses Utils::get_dropdown_trigger_link_id()
 	 * @uses Utils::get_aria_labelledby()
 	 *
-	 * @param string           $output Used to append additional content (passed by reference).
-	 * @param int              $depth  Depth of menu item. Used for padding.
-	 * @param WP_Nav_Menu_Args $args   An object of `wp_nav_menu()` arguments.
+	 * @param string            $output Used to append additional content (passed by reference).
+	 * @param int               $depth  Depth of menu item. Used for padding.
+	 * @param \WP_Nav_Menu_Args $args   An object of `wp_nav_menu()` arguments.
 	 */
 	public function start_lvl( &$output, $depth = 0, $args = null ) {
 		/*
@@ -67,12 +67,12 @@ class Walker extends \Walker_Nav_Menu {
 	 * @uses Utils::setup_menu_item_properties()
 	 * @uses Utils::setup_item_specific_args()
 	 *
-	 * @param WP_Nav_Menu_Item $item      The current menu item (instance of `WP_Post`).
-	 * @param array            $sub_items List of elements to continue traversing (passed by reference).
-	 * @param int              $max_depth Max depth to traverse.
-	 * @param int              $depth     Depth of current element.
-	 * @param array            $args      An array of `wp_nav_menu()` arguments.
-	 * @param string           $output    Used to append additional content (passed by reference).
+	 * @param \WP_Nav_Menu_Item $item      The current menu item (instance of `WP_Post`).
+	 * @param array             $sub_items List of elements to continue traversing (passed by reference).
+	 * @param int               $max_depth Max depth to traverse.
+	 * @param int               $depth     Depth of current element.
+	 * @param array             $args      An array of `wp_nav_menu()` arguments.
+	 * @param string            $output    Used to append additional content (passed by reference).
 	 */
 	public function display_element( $item, &$sub_items, $max_depth, $depth, $args, &$output ) {
 		if ( ! $item ) {

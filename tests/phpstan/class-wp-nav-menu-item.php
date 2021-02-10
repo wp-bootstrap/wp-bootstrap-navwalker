@@ -311,4 +311,144 @@ class WP_Nav_Menu_Item {
 	 * @var string
 	 */
 	public $filter;
+
+	/**
+	 * Whether the menu item has children.
+	 *
+	 * Custom WP Bootstrap Navwalker property.
+	 *
+	 * @var bool
+	 */
+	public $has_children;
+
+	/**
+	 * Whether the menu item is disabled.
+	 *
+	 * Custom WP Bootstrap Navwalker property.
+	 *
+	 * @var bool
+	 */
+	public $is_disabled;
+
+	/**
+	 * Whether to display the menu item's title to screen readers only.
+	 *
+	 * Custom WP Bootstrap Navwalker property.
+	 *
+	 * @var bool
+	 */
+	public $is_sr_only;
+
+	/**
+	 * Whether to display the menu item as a dropdown header.
+	 *
+	 * Custom WP Bootstrap Navwalker property.
+	 *
+	 * @var bool
+	 */
+	public $is_dropdown_header;
+
+	/**
+	 * Whether to display the menu item as a dropdown divider.
+	 *
+	 * Custom WP Bootstrap Navwalker property.
+	 *
+	 * @var bool
+	 */
+	public $is_dropdown_divider;
+
+	/**
+	 * Whether to display the menu item as text-onyl dropdown item.
+	 *
+	 * Custom WP Bootstrap Navwalker property.
+	 *
+	 * @var bool
+	 */
+	public $is_dropdown_item_text;
+
+	/**
+	 * Whether to display the menu item as dropdown header/divider
+	 * or text-onyl dropdown item.
+	 *
+	 * Custom WP Bootstrap Navwalker property.
+	 *
+	 * @var bool
+	 */
+	public $is_dropdown_menu_content;
+
+	/**
+	 * Whether to display the dropdown toggle as split button.
+	 * `$is_dropdown_toggle_split` is item-specific.
+	 *
+	 * Custom WP Bootstrap Navwalker property.
+	 *
+	 * @var bool
+	 */
+	public $is_dropdown_toggle_split;
+
+	/**
+	 * Whether to display the dropdown toggle as split button.
+	 *
+	 * Custom WP Bootstrap Navwalker property.
+	 *
+	 * Merges the item-specific `$is_dropdown_toggle_split` and the
+	 * `wp_nav_menu()` argument to display all dropdown toggles as split buttons.
+	 *
+	 * @var bool
+	 */
+	public $has_clickable_link;
+
+	/**
+	 * Array of icon classes to use on the menu item.
+	 *
+	 * Custom WP Bootstrap Navwalker property.
+	 *
+	 * @var bool|array False if no icon classes are provided.
+	 */
+	public $icon_classes;
+
+	/**
+	 * Array of classes to use on the menu item's anchor tag.
+	 *
+	 * Custom WP Bootstrap Navwalker property.
+	 *
+	 * @var bool|array False if no icon classes are provided.
+	 */
+	public $anchor_classes;
+
+	/**
+	 * Array of classes to use on the menu item's dropdown menu ul tag.
+	 *
+	 * Custom WP Bootstrap Navwalker property.
+	 *
+	 * @var bool|array False if no icon classes are provided.
+	 */
+	public $dropdown_menu_classes;
+
+	/**
+	 * Array of native WP classes to use on the menu item.
+	 *
+	 * Custom WP Bootstrap Navwalker property.
+	 *
+	 * @var false|array
+	 */
+	public $native_classes;
+
+	/**
+	 * Array of all custom classes provided by the user.
+	 *
+	 * Custom WP Bootstrap Navwalker property.
+	 *
+	 * @var bool|array False if no icon classes are provided.
+	 */
+	public $custom_classes;
+
+	/**
+	 * Whether to append the icon to the menu item's title.
+	 *
+	 * Custom WP Bootstrap Navwalker property.
+	 *
+	 * @var null|bool
+	 */
+	public $icon_append;
 }

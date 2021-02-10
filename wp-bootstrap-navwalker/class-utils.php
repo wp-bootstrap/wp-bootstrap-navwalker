@@ -69,9 +69,9 @@ class Utils extends Plugin {
 	 *
 	 * @since 5.0.0
 	 *
-	 * @param WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
-	 * @param int              $depth Depth of the current item.
-	 * @return WP_Nav_Menu_Item
+	 * @param \WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
+	 * @param int               $depth Depth of the current item.
+	 * @return \WP_Nav_Menu_Item
 	 */
 	public static function sanitize_dropdown_menu_content( $item, $depth ) {
 		if ( 0 === $depth || ( $item->has_children && ! $item->has_clickable_link ) ) {
@@ -98,8 +98,8 @@ class Utils extends Plugin {
 	 *
 	 * @since 5.0.0
 	 *
-	 * @param WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
-	 * @return WP_Nav_Menu_Item
+	 * @param \WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
+	 * @return \WP_Nav_Menu_Item
 	 */
 	public static function sanitize_is_disabled( $item ) {
 		if ( $item->is_dropdown_header
@@ -217,8 +217,8 @@ class Utils extends Plugin {
 	 *
 	 * @uses Utils::shim()
 	 *
-	 * @param WP_Nav_Menu_Item $item        The current menu item (instance of `WP_Post`).
-	 * @param WP_Nav_Menu_Args $args        An object of `wp_nav_menu()` arguments.
+	 * @param \WP_Nav_Menu_Item $item        The current menu item (instance of `WP_Post`).
+	 * @param \WP_Nav_Menu_Args $args        An object of `wp_nav_menu()` arguments.
 	 * @return string
 	 */
 	public static function get_dropdown_divider( $item, $args ) {
@@ -235,8 +235,8 @@ class Utils extends Plugin {
 	 *
 	 * @since 5.0.0
 	 *
-	 * @param WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
-	 * @param string           $title The post title.
+	 * @param \WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
+	 * @param string            $title The post title.
 	 * @return string
 	 */
 	public static function get_dropdown_header( $item, $title ) {
@@ -257,8 +257,8 @@ class Utils extends Plugin {
 	 *
 	 * @since 5.0.0
 	 *
-	 * @param WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
-	 * @param string           $title The post title.
+	 * @param \WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
+	 * @param string            $title The post title.
 	 * @return string
 	 */
 	public static function get_dropdown_item_text( $item, $title ) {
@@ -275,8 +275,8 @@ class Utils extends Plugin {
 	 *
 	 * @since 5.0.0
 	 *
-	 * @param string           $title The menu item's title.
-	 * @param WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
+	 * @param string            $title The menu item's title.
+	 * @param \WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
 	 * @return string
 	 */
 	public static function add_icon( $title, $item ) {
