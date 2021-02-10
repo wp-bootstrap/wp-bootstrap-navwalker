@@ -10,6 +10,10 @@
         PHPMD rule set for WP Bootstrap Navwalker
     </description>
 
+	<!-- Exclude directories -->
+	<exclude-pattern>vendor</exclude-pattern>
+	<exclude-pattern>tests</exclude-pattern>
+
     <!-- Import the entire codesize rule set -->
     <rule ref="rulesets/codesize.xml" />
 

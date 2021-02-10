@@ -35,7 +35,7 @@
   "scripts": {
     "phpcs-compat-checkstyle": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs . --standard=PHPCompatibilityWP --runtime-set testVersion 5.6- --report=checkstyle --ignore=vendor",
     "phpcs-check-checkstyle": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs --report=checkstyle",
-    "phpmd": "@php ./vendor/phpmd/phpmd/src/bin/phpmd . text phpmd.xml --exclude vendor",
+    "phpmd": "@php ./vendor/phpmd/phpmd/src/bin/phpmd . text phpmd.xml",
     "phpstan": "@php ./vendor/phpstan/phpstan/phpstan analyze",
     "php-lint": "@php ./vendor/php-parallel-lint/php-parallel-lint/parallel-lint --exclude vendor .",
     "phpcs-compat": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs . --standard=PHPCompatibilityWP --runtime-set testVersion 5.6- --ignore=vendor",
