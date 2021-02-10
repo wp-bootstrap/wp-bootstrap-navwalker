@@ -16,6 +16,11 @@
 	<!-- Use the WordPress Ruleset -->
 	<rule ref="WordPress"/>
 
+	<!-- Allow main class file to deviate from WP Coding Standards. -->
+	<rule ref="WordPress.Files.FileName.InvalidClassFileName">
+		<exclude-pattern>./class-wp-bootstrap-navwalker.php</exclude-pattern>
+	</rule>
+
 	<!--
 		Allow mt_rand() in tests. For unit tests it's ok that mt_rand() is more
 		predictable than wp_rand().
