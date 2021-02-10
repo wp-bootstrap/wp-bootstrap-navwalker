@@ -319,7 +319,7 @@ class Filters extends Plugin {
 		} elseif ( $item->is_dropdown_header ) {
 			$item_output = Utils::get_dropdown_header( $title );
 		} else {
-			$item_output = Utils::get_dropdown_item_text( $item, $title );
+			$item_output = Utils::get_dropdown_item_text( $title );
 		}
 
 		return $item_output;
