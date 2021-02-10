@@ -11,12 +11,12 @@ parameters:
         - tests/phpstan/class-wp-nav-menu-args.php
         - tests/phpstan/class-wp-nav-menu-item.php
         - class-wp-bootstrap-navwalker.php
-		- wp-bootstrap-navwalker/class-fallback.php
-		- wp-bootstrap-navwalker/class-filters.php
-		- wp-bootstrap-navwalker/class-setup-args.php
-		- wp-bootstrap-navwalker/class-setup-items.php
-		- wp-bootstrap-navwalker/class-utis.php
-		- wp-bootstrap-navwalker/class-walker.php
+        - wp-bootstrap-navwalker/class-fallback.php
+        - wp-bootstrap-navwalker/class-filters.php
+        - wp-bootstrap-navwalker/class-setup-args.php
+        - wp-bootstrap-navwalker/class-setup-items.php
+        - wp-bootstrap-navwalker/class-utis.php
+        - wp-bootstrap-navwalker/class-walker.php
     ignoreErrors:
         # Uses func_get_args()
         - '#^Function apply_filters(_ref_array)? invoked with [34567] parameters, 2 required\.$#'
