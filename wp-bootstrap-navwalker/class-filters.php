@@ -136,7 +136,7 @@ class Filters extends Plugin {
 				$classes[] = 'btn-group flex-wrap';
 			}
 		} elseif ( $item->is_dropdown_divider && 3 === $args->bs_version ) {
-			$classes['divider'];
+			$classes[] = 'divider';
 		}
 
 		return $classes;
