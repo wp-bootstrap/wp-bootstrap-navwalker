@@ -71,7 +71,7 @@ class Filters extends Plugin {
 	 */
 	public function set_item_description( $args, $item, $depth ) {
 		$args->link_after = '';
-		if ( 0 === $depth && isset( $item->description ) && $item->description ) {
+		if ( 0 === $depth && property_exists( $item, 'description' ) && $item->description ) {
 			$args->link_after = sprintf(
 				'<p class="menu-item-description" aria-labelledby="%s">%s</p>',
 				'menu-item-title-' . (int) $item->ID,
@@ -417,7 +417,7 @@ class Filters extends Plugin {
 		$sr_class = Utils::shim( 'screen-reader-class', $args->bs_version );
 
 		$item_title_id = '';
-		if ( isset( $item->description ) && $item->description ) {
+		if ( property_exists( $item, 'description' ) && $item->description ) {
 			$item_title_id = 'id="menu-item-title-' . $item->ID . '" ';
 		}
 
