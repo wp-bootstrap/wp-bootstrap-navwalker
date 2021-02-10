@@ -213,7 +213,7 @@ class Setup_Items extends Plugin {
 			$classes_left       = array_diff( $classes_left, $match );
 			$item->icon_classes = $match;
 		}
-		if ( empty( $classes_left ) ) {
+		if ( ! empty( $classes_left ) ) {
 			foreach ( $classes_left as $key => $class ) {
 				if ( 'icon-append' === $class ) {
 					$item->icon_append = true;
