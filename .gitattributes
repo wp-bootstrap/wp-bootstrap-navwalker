@@ -21,5 +21,7 @@
 bin                 export-ignore
 tests               export-ignore
 *.dist              export-ignore
+*.xml               export-ignore
 CODE_OF_CONDUCT.md  export-ignore
 composer.*          export-ignore
+package*.json       export-ignore
