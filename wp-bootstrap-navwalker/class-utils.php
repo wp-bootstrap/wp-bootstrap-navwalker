@@ -217,11 +217,10 @@ class Utils extends Plugin {
 	 *
 	 * @uses Utils::shim()
 	 *
-	 * @param \WP_Nav_Menu_Item $item        The current menu item (instance of `WP_Post`).
-	 * @param \WP_Nav_Menu_Args $args        An object of `wp_nav_menu()` arguments.
+	 * @param \WP_Nav_Menu_Args $args An object of `wp_nav_menu()` arguments.
 	 * @return string
 	 */
-	public static function get_dropdown_divider( $item, $args ) {
+	public static function get_dropdown_divider( $args ) {
 		return sprintf(
 			'<hr class="%s">',
 			self::shim( 'dropdown-divider', $args->bs_version )
@@ -235,11 +234,10 @@ class Utils extends Plugin {
 	 *
 	 * @since 5.0.0
 	 *
-	 * @param \WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
-	 * @param string            $title The post title.
+	 * @param string $title The post title.
 	 * @return string
 	 */
-	public static function get_dropdown_header( $item, $title ) {
+	public static function get_dropdown_header( $title ) {
 		/*
 		 * For a header use a span with the `.h6` class instead of a real
 		 * header tag so that it doesn't confuse screen readers.
@@ -257,11 +255,10 @@ class Utils extends Plugin {
 	 *
 	 * @since 5.0.0
 	 *
-	 * @param \WP_Nav_Menu_Item $item  The current menu item (instance of `WP_Post`).
-	 * @param string            $title The post title.
+	 * @param string $title The post title.
 	 * @return string
 	 */
-	public static function get_dropdown_item_text( $item, $title ) {
+	public static function get_dropdown_item_text( $title ) {
 		return sprintf(
 			'<span class="dropdown-item-text">%s</span>',
 			$title

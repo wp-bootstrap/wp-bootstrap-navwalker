@@ -315,9 +315,9 @@ class Filters extends Plugin {
 		}
 
 		if ( $item->is_dropdown_divider ) {
-			$item_output = Utils::get_dropdown_divider( $item, $args );
+			$item_output = Utils::get_dropdown_divider( $args );
 		} elseif ( $item->is_dropdown_header ) {
-			$item_output = Utils::get_dropdown_header( $item, $title );
+			$item_output = Utils::get_dropdown_header( $title );
 		} else {
 			$item_output = Utils::get_dropdown_item_text( $item, $title );
 		}
