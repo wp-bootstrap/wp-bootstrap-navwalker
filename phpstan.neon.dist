@@ -32,3 +32,5 @@ parameters:
         -
             message: '#^Method WP_Bootstrap\\Navwalker\\Walker::(start_lvl|display_element)\(\) has no return typehint specified\.$#'
             path: wp-bootstrap-navwalker/class-walker.php
+        # Uses func_get_args()
+        - '#^Function apply_filters(_ref_array)? invoked with [34567] parameters, 2 required\.$#'
