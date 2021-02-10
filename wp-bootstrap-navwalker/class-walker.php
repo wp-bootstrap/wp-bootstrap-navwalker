@@ -75,7 +75,7 @@ class Walker extends \Walker_Nav_Menu {
 	 * @param string            $output    Used to append additional content (passed by reference).
 	 */
 	public function display_element( $item, &$sub_items, $max_depth, $depth, $args, &$output ) {
-		if ( ! $item ) {
+		if ( ! is_object( $item ) ) {
 			return;
 		}
 
