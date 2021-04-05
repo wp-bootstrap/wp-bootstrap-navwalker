@@ -136,6 +136,39 @@ add_filter( 'wp_nav_menu_args', 'prefix_modify_nav_menu_args' );
 
 Simply updating the walker may not be enough to get menus working right, you may need to add wrappers or additional classes, you can do that via the above function as well.
 
+### Usage with Bootstrap 5
+
+Bootstrap 5 uses namespaced data attributes. All `data` attributes now include `bs` as an infix. The new attributes work just like the old ones. Here’s the menu toggle button from the example above with the renamed data attributes.
+
+```php
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle navigation', 'your-theme-slug' ); ?>">
+    <span class="navbar-toggler-icon"></span>
+</button>
+```
+
+The walker also adds a data attribute for dropdown toggles via the `start_el()` method. Paste this to your functions.php to make the walker use the infixed data attibute.
+
+```php
+add_filter( 'nav_menu_link_attributes', 'prefix_bs5_dropdown_data_attribute', 20, 3 );
+/**
+ * Use namespaced data attribute for Bootstrap's dropdown toggles.
+ *
+ * @param array    $atts HTML attributes applied to the item's `<a>` element.
+ * @param WP_Post  $item The current menu item.
+ * @param stdClass $args An object of wp_nav_menu() arguments.
+ * @return array
+ */
+function prefix_bs5_dropdown_data_attribute( $atts, $item, $args ) {
+    if ( is_a( $args->walker, 'WP_Bootstrap_Navwalker' ) ) {
+        if ( array_key_exists( 'data-toggle', $atts ) ) {
+            unset( $atts['data-toggle'] );
+            $atts['data-bs-toggle'] = 'dropdown';
+        }
+    }
+    return $atts;
+}
+```
+
 ### Menu Caching
 
 On some sites generating a large menu that rarely ever changes on every page request is an overhead that you may want to avoid. In those cases I can suggest you look at storing menu results in a transient.
