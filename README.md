@@ -204,6 +204,34 @@ To set a disabled link simply add `disabled` to the **CSS Classes** field in the
 
 Headers, dividers and text only items can be added within dropdowns by adding a Custom Link and adding either `dropdown-header`, `dropdown-divider` or `dropdown-item-text` into the **CSS Classes** input. _Note: This will remove the `href` on the item and change it to either a `<span>` for headers or a `<div>` for dividers._
 
+### Missing Edit Shortcut in Customizer Preview
+
+According to the documentation for [`wp_nav_menu()`](https://developer.wordpress.org/reference/functions/wp_nav_menu/) one has to provide an instance of the custom walker class in order to apply the custom walker to the menu. As the instance is not [JSON serializable](https://make.wordpress.org/core/2015/07/29/fast-previewing-changes-to-menus-in-the-customizer/) this will cause the menu edit shortcut to not appear in the Customizer preview. To fix this do the following:
+1. Provide the class name string instead of the class instance as value for the 'walker' key in the array of wp_nav_menu's arguments,
+```diff
+wp_nav_menu( array(
+    'theme_location'  => 'primary',
+    'depth'           => 2, // 1 = no dropdowns, 2 = with dropdowns.
+    'container'       => 'div',
+    'container_class' => 'collapse navbar-collapse',
+    'container_id'    => 'bs-example-navbar-collapse-1',
+    'menu_class'      => 'navbar-nav mr-auto',
+    'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
+-    'walker'          => new WP_Bootstrap_Navwalker(),
++    'walker'          => 'WP_Bootstrap_Navwalker',
+) );
+```
+2. re-add the class instance by adding this filter to your `functions.php`
+```php
+function slug_provide_walker_instance( $args ) {
+    if ( isset( $args['walker'] ) && is_string( $args['walker'] ) && class_exists( $args['walker'] ) ) {
+        $args['walker'] = new $args['walker'];
+    }
+    return $args;
+}
+add_filter( 'wp_nav_menu_args', 'slug_provide_walker_instance', 1001 );
+```
+
 ## Changelog
 
 Please see the [Changelog](https://github.com/wp-bootstrap/wp-bootstrap-navwalker/blob/master/CHANGELOG.md).
