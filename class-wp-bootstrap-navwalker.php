@@ -248,8 +248,9 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 				}
 
 				$atts['href'] = ! empty( $item->url ) ? $item->url : '#';
+
 				// For items in dropdowns use .dropdown-item instead of .nav-link.
-				if ( $depth > 0 ) {
+				if ( $is_dropdown_item ) {
 					$atts['class'] = 'dropdown-item';
 					$atts['class'] .= $is_active ? ' active' : '';
 				} else {
