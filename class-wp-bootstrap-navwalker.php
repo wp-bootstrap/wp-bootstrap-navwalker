@@ -156,7 +156,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 			$is_dropdown = false;
 			if ( $this->has_children && 1 !== $args->depth ) {
 				$is_dropdown = true;
-				if ( $depth >= $args->depth - 1 && $args->depth !== 0 ) {
+				if ( $depth >= $args->depth - 1 && 0 !== $args->depth ) {
 					$is_dropdown = false;
 				}
 			}
@@ -251,7 +251,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 
 				// For items in dropdowns use .dropdown-item instead of .nav-link.
 				if ( $is_dropdown_item ) {
-					$atts['class'] = 'dropdown-item';
+					$atts['class']  = 'dropdown-item';
 					$atts['class'] .= $is_active ? ' active' : '';
 				} else {
 					$atts['class'] = 'nav-link';
