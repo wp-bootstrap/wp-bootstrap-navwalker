@@ -152,6 +152,30 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 			// Join any icon classes plucked from $classes into a string.
 			$icon_class_string = join( ' ', $icon_classes );
 
+			// Whether the current item is a dropdown.
+			$is_dropdown = false;
+			if ( $this->has_children && 1 !== $args->depth ) {
+				$is_dropdown = true;
+				if ( $depth >= $args->depth - 1 && 0 !== $args->depth ) {
+					$is_dropdown = false;
+				}
+			}
+
+			// Whether the current item is a dropdown item.
+			$is_dropdown_item = false;
+			if ( ! ( $this->has_children && 0 === $depth ) && $depth > 0 ) {
+				$is_dropdown_item = true;
+			}
+
+			// Whether the current item is active or the item is an ancestor of
+			// an active item.
+			$is_active = false;
+			if ( $item->current || $item->current_item_ancestor ) {
+				if ( ! ( $item->current_item_ancestor && 1 === $args->depth ) ) {
+					$is_active = true;
+				}
+			}
+
 			/**
 			 * Filters the arguments for a single nav menu item.
 			 *
@@ -165,11 +189,12 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 			 */
 			$args = apply_filters( 'nav_menu_item_args', $args, $item, $depth );
 
-			// Add .dropdown or .active classes where they are needed.
-			if ( $this->has_children ) {
+			if ( $is_dropdown ) {
 				$classes[] = 'dropdown';
 			}
-			if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) ) {
+
+			if ( $is_active && ! $is_dropdown_item ) {
+				// For dropdown items the .active class is set on the a tag.
 				$classes[] = 'active';
 			}
 
@@ -211,7 +236,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 			}
 
 			// If the item has_children add atts to <a>.
-			if ( $this->has_children && 0 === $depth ) {
+			if ( $is_dropdown ) {
 				$atts['href']          = '#';
 				$atts['data-toggle']   = 'dropdown';
 				$atts['aria-expanded'] = 'false';
@@ -223,9 +248,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 				}
 
 				$atts['href'] = ! empty( $item->url ) ? $item->url : '#';
+
 				// For items in dropdowns use .dropdown-item instead of .nav-link.
-				if ( $depth > 0 ) {
-					$atts['class'] = 'dropdown-item';
+				if ( $is_dropdown_item ) {
+					$atts['class']  = 'dropdown-item';
+					$atts['class'] .= $is_active ? ' active' : '';
 				} else {
 					$atts['class'] = 'nav-link';
 				}
