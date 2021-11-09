@@ -168,7 +168,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 			}
 
 			// Whether the current item is active or the item is an ancestor of
-			// the current item.
+			// an active item.
 			$is_active = false;
 			if ( $item->current || $item->current_item_ancestor ) {
 				if ( ! ( $item->current_item_ancestor && 1 === $args->depth ) ) {
