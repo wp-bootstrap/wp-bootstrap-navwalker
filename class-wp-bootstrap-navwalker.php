@@ -259,11 +259,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 					$infix = '-bs';
 				}
 
-				$atts['href']              = '#';
-				$atts["data$infix-toggle"] = 'dropdown';
-				$atts['aria-expanded']     = 'false';
-				$atts['class']             = 'dropdown-toggle nav-link';
-				$atts['id']                = 'menu-item-dropdown-' . $item->ID;
+				$atts['href']                = '#';
+				$atts[ "data$infix-toggle" ] = 'dropdown';
+				$atts['aria-expanded']       = 'false';
+				$atts['class']               = 'dropdown-toggle nav-link';
+				$atts['id']                  = 'menu-item-dropdown-' . $item->ID;
 
 				$atts['class'] .= ( $is_active && 5 === $bs_version ) ? ' active' : '';
 			} else {
