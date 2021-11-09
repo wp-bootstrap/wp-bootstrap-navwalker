@@ -146,27 +146,20 @@ Bootstrap 5 uses namespaced data attributes. All `data` attributes now include `
 </button>
 ```
 
-The walker also adds a data attribute for dropdown toggles via the `start_el()` method. Paste this to your functions.php to make the walker use the infixed data attibute.
+To enable Bootstrap 5 support add a `bs_version` key to the array of arguments passed to the `wp_nav_menu()` function.
 
-```php
-add_filter( 'nav_menu_link_attributes', 'prefix_bs5_dropdown_data_attribute', 20, 3 );
-/**
- * Use namespaced data attribute for Bootstrap's dropdown toggles.
- *
- * @param array    $atts HTML attributes applied to the item's `<a>` element.
- * @param WP_Post  $item The current menu item.
- * @param stdClass $args An object of wp_nav_menu() arguments.
- * @return array
- */
-function prefix_bs5_dropdown_data_attribute( $atts, $item, $args ) {
-    if ( is_a( $args->walker, 'WP_Bootstrap_Navwalker' ) ) {
-        if ( array_key_exists( 'data-toggle', $atts ) ) {
-            unset( $atts['data-toggle'] );
-            $atts['data-bs-toggle'] = 'dropdown';
-        }
-    }
-    return $atts;
-}
+```diff
+wp_nav_menu( array(
+    'theme_location'  => 'primary',
+    'depth'           => 2, // 1 = no dropdowns, 2 = with dropdowns.
+    'container'       => 'div',
+    'container_class' => 'collapse navbar-collapse',
+    'container_id'    => 'bs-example-navbar-collapse-1',
+    'menu_class'      => 'navbar-nav mr-auto',
+    'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
+    'walker'          => new WP_Bootstrap_Navwalker(),
++    'bs_version'      => 5,
+) );
 ```
 
 ### Menu Caching
