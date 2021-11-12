@@ -90,12 +90,12 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
 		$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
 		/*
-			* The `.dropdown-menu` container needs to have a labelledby
-			* attribute which points to it's trigger link.
-			*
-			* Form a string for the labelledby attribute from the the latest
-			* link with an id that was added to the $output.
-			*/
+		 * The `.dropdown-menu` container needs to have a labelledby
+		 * attribute which points to it's trigger link.
+		 *
+		 * Form a string for the labelledby attribute from the the latest
+		 * link with an id that was added to the $output.
+		 */
 		$labelledby = '';
 		// Find all links with an id in the output.
 		preg_match_all( '/(<a.*?id=\"|\')(.*?)\"|\'.*?>/im', $output, $matches );
@@ -140,28 +140,28 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
 		$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 
 		/*
-			* Updating the CSS classes of a menu item in the WordPress
-			* Customizer preview results in all classes defined in that
-			* particular input box to come in as one big class string.
-			*/
+		 * Updating the CSS classes of a menu item in the WordPress
+		 * Customizer preview results in all classes defined in that
+		 * particular input box to come in as one big class string.
+		 */
 		$split_on_spaces = function ( $class ) {
 			return preg_split( '/\s+/', $class );
 		};
 		$classes         = $this->flatten( array_map( $split_on_spaces, $classes ) );
 
 		/*
-			* Initialize some holder variables to store specially handled item
-			* wrappers and icons.
-			*/
+		 * Initialize some holder variables to store specially handled item
+		 * wrappers and icons.
+		 */
 		$linkmod_classes = array();
 		$icon_classes    = array();
 
 		/*
-			* Get an updated $classes array without linkmod or icon classes.
-			*
-			* NOTE: linkmod and icon class arrays are passed by reference and
-			* are maybe modified before being used later in this function.
-			*/
+		 * Get an updated $classes array without linkmod or icon classes.
+		 *
+		 * NOTE: linkmod and icon class arrays are passed by reference and
+		 * are maybe modified before being used later in this function.
+		 */
 		$classes = $this->separate_linkmods_and_icons_from_classes( $classes, $linkmod_classes, $icon_classes, $depth );
 
 		// Join any icon classes plucked from $classes into a string.
@@ -186,9 +186,9 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
 		}
 
 		/*
-			* Whether the current item is active or the item is an ancestor of
-			* an active item.
-			*/
+		 * Whether the current item is active or the item is an ancestor of
+		 * an active item.
+		 */
 		$is_active = false;
 		if ( $item->current || $item->current_item_ancestor ) {
 			if ( ! ( $item->current_item_ancestor && 1 === $args->depth ) ) {
@@ -309,9 +309,9 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
 		$item_output = isset( $args->before ) ? $args->before : '';
 
 		/*
-			* This is the start of the internal nav item. Depending on what
-			* kind of linkmod we have we may need different wrapper elements.
-			*/
+		 * This is the start of the internal nav item. Depending on what
+		 * kind of linkmod we have we may need different wrapper elements.
+		 */
 		if ( '' !== $linkmod_type ) {
 			// Is linkmod, output the required element opener.
 			$item_output .= $this->linkmod_element_open( $linkmod_type, $attributes );
@@ -321,10 +321,10 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
 		}
 
 		/*
-			* Initiate empty icon var, then if we have a string containing any
-			* icon classes form the icon markup with an <i> element. This is
-			* output inside of the item before the $title (the link text).
-			*/
+		 * Initiate empty icon var, then if we have a string containing any
+		 * icon classes form the icon markup with an <i> element. This is
+		 * output inside of the item before the $title (the link text).
+		 */
 		$icon_html = '';
 		if ( ! empty( $icon_class_string ) ) {
 			// Append an <i> with the icon classes to what is output before links.
@@ -359,9 +359,9 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
 		$item_output .= isset( $args->link_before ) ? $args->link_before . $icon_html . $title . $args->link_after : '';
 
 		/*
-			* This is the end of the internal nav item. We need to close the
-			* correct element depending on the type of link or link mod.
-			*/
+		 * This is the end of the internal nav item. We need to close the
+		 * correct element depending on the type of link or link mod.
+		 */
 		if ( '' !== $linkmod_type ) {
 			// Is linkmod, output the required closing element.
 			$item_output .= $this->linkmod_element_close( $linkmod_type );
@@ -475,18 +475,18 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
 		// Loop through $classes array to find linkmod or icon classes.
 		foreach ( $classes as $key => $class ) {
 			/*
-				* If any special classes are found, store the class in it's
-				* holder array and and unset the item from $classes.
-				*/
+			 * If any special classes are found, store the class in it's
+			 * holder array and and unset the item from $classes.
+			 */
 			if ( preg_match( '/^disabled|^sr-only/i', $class ) ) {
 				// Test for .disabled or .sr-only classes.
 				$linkmod_classes[] = $class;
 				unset( $classes[ $key ] );
 			} elseif ( preg_match( '/^dropdown-header|^dropdown-divider|^dropdown-item-text/i', $class ) && $depth > 0 ) {
 				/*
-					* Test for .dropdown-header or .dropdown-divider and a
-					* depth greater than 0 - IE inside a dropdown.
-					*/
+				 * Test for .dropdown-header or .dropdown-divider and a
+				 * depth greater than 0 - IE inside a dropdown.
+				 */
 				$linkmod_classes[] = $class;
 				unset( $classes[ $key ] );
 			} elseif ( preg_match( '/^fa-(\S*)?|^fa(s|r|l|b)?(\s?)?$/i', $class ) ) {
@@ -547,9 +547,9 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
 			foreach ( $linkmod_classes as $link_class ) {
 				if ( ! empty( $link_class ) ) {
 					/*
-						* Update $atts with a space and the extra classname
-						* so long as it's not a sr-only class.
-						*/
+					 * Update $atts with a space and the extra classname
+					 * so long as it's not a sr-only class.
+					 */
 					if ( 'sr-only' !== $link_class ) {
 						$atts['class'] .= ' ' . esc_attr( $link_class );
 					}
@@ -599,9 +599,9 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
 			$output .= '<span class="dropdown-item-text"' . $attributes . '>';
 		} elseif ( 'dropdown-header' === $linkmod_type ) {
 			/*
-				* For a header use a span with the .h6 class instead of a real
-				* header tag so that it doesn't confuse screen readers.
-				*/
+			 * For a header use a span with the .h6 class instead of a real
+			 * header tag so that it doesn't confuse screen readers.
+			 */
 			$output .= '<span class="dropdown-header h6"' . $attributes . '>';
 		} elseif ( 'dropdown-divider' === $linkmod_type ) {
 			// This is a divider.
@@ -622,9 +622,9 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
 		$output = '';
 		if ( 'dropdown-header' === $linkmod_type || 'dropdown-item-text' === $linkmod_type ) {
 			/*
-				* For a header use a span with the .h6 class instead of a real
-				* header tag so that it doesn't confuse screen readers.
-				*/
+			 * For a header use a span with the .h6 class instead of a real
+			 * header tag so that it doesn't confuse screen readers.
+			 */
 			$output .= '</span>';
 		} elseif ( 'dropdown-divider' === $linkmod_type ) {
 			// This is a divider.
