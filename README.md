@@ -51,12 +51,18 @@ add_action( 'after_setup_theme', 'register_navwalker' );
 If you encounter errors with the above code use a check like this to return clean errors to help diagnose the problem.
 
 ```php
-if ( ! file_exists( get_template_directory() . '/class-wp-bootstrap-navwalker.php' ) ) {
-    // File does not exist... return an error.
-    return new WP_Error( 'class-wp-bootstrap-navwalker-missing', __( 'It appears the class-wp-bootstrap-navwalker.php file may be missing.', 'wp-bootstrap-navwalker' ) );
+if ( !file_exists( get_template_directory() . '/class-wp-bootstrap-navwalker.php' ) ) {
+	// file does not exist, return an error.
+	function our_error() {
+        	return new WP_Error( 'broke', __( 'class-wp-bootstrap-navwalker.php file may be missing', 'wp-bootstrap-navwalker' ) );
+    	}
+	$return = our_error();
+    if( is_wp_error( $return ) ) {
+        echo $return->get_error_message();
+    }
 } else {
-    // File exists... require it.
-    require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
+	// file exists, require it.
+	require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
 }
 ```
 
