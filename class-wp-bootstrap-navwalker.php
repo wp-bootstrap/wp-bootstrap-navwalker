@@ -204,7 +204,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 			$atts           = array();
 			$atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
 			$atts['target'] = ! empty( $item->target ) ? $item->target : '';
-			if ( '_blank' === $item->target && empty( $item->xfn ) ) {
+			if ( property_exists( $item, 'target' ) && '_blank' === $item->target && empty( $item->xfn ) ) {
 				$atts['rel'] = 'noopener noreferrer';
 			} else {
 				$atts['rel'] = ! empty( $item->xfn ) ? $item->xfn : '';
